@@ -655,8 +655,20 @@
     color: rgba(247,243,238,0.45);
   }
 
-  /* Mobile */
-  @media (max-width: 860px) {
+  /* ─────────── RESPONSIVE ─────────── */
+
+  /* Tablet landscape / small desktop */
+  @media (max-width: 1100px) {
+    .container { padding: 0 32px; }
+    .nav-links { gap: 22px; }
+    .product-card { gap: 40px; padding: 40px; }
+    .product-info h3 { font-size: 30px; }
+    .costs-summary { padding: 44px; }
+    .manifesto { padding: 44px; }
+  }
+
+  /* Tablet */
+  @media (max-width: 900px) {
     nav { padding: 12px 24px; }
     .nav-links { display: none; }
     .hamburger { display: flex; }
@@ -664,27 +676,132 @@
       display: flex;
       position: absolute;
       top: 100%; left: 0; right: 0;
-      background: var(--paper);
+      background: rgba(251,248,244,0.98);
+      backdrop-filter: blur(12px);
       flex-direction: column;
       gap: 0;
-      padding: 16px 24px 24px;
+      padding: 12px 24px 20px;
       border-bottom: 1px solid var(--border);
     }
-    .nav-links.open a { padding: 12px 0; border-bottom: 1px solid var(--border); }
-    .hero { padding: 70px 24px 60px; }
-    .container { padding: 0 24px; }
-    section { padding: 60px 0; }
-    .product-card { grid-template-columns: 1fr; padding: 28px; gap: 28px; }
-    .product-card.reverse .product-img { order: 0; }
+    .nav-links.open a { padding: 14px 0; border-bottom: 1px solid var(--border); font-size: 14px; }
+    .nav-links.open a:last-child { border-bottom: none; }
+
+    .hero { padding: 80px 28px 60px; }
+    .hero .sub { font-size: 16px; }
+    .container { padding: 0 28px; }
+    section { padding: 70px 0; }
+    .section-head { margin-bottom: 40px; }
+
+    .product-card,
+    .product-card.reverse {
+      grid-template-columns: 1fr;
+      padding: 32px;
+      gap: 28px;
+    }
+    .product-card.reverse .product-img,
+    .product-card.reverse .carousel { order: 0; }
     .product-card.reverse .product-info { order: 1; }
-    .info-grid { grid-template-columns: 1fr; }
-    .manifesto { padding: 36px 28px; }
-    .manifesto p { font-size: 20px; padding-left: 14px; }
-    .manifesto .quote-mark { font-size: 70px; left: 18px; top: 12px; }
-    .costs-summary { padding: 32px 24px; }
-    .cs-totales { grid-template-columns: 1fr 1fr; }
-    .cs-table th:nth-child(3), .cs-table td:nth-child(3) { display: none; }
-    .divider { margin: 0 24px; }
+
+    .info-grid { grid-template-columns: 1fr 1fr; gap: 14px; }
+    .manifesto { padding: 40px 32px; }
+    .manifesto p { font-size: 21px; padding-left: 18px; }
+    .manifesto .quote-mark { font-size: 80px; left: 22px; top: 16px; }
+
+    .costs-summary { padding: 36px 28px; }
+    .cs-totales { grid-template-columns: 1fr 1fr; gap: 12px; }
+    .cs-tot-card { padding: 18px; }
+    .cs-tot-card .num { font-size: 26px; }
+    .cs-table th, .cs-table td { padding: 12px 10px; font-size: 12px; }
+
+    .divider { margin: 0 28px; }
+    footer { padding: 56px 28px 32px; }
+    footer .f-logo { font-size: 40px; }
+  }
+
+  /* Mobile */
+  @media (max-width: 640px) {
+    body { font-size: 14px; }
+    nav { padding: 10px 18px; }
+    .logo { font-size: 19px; }
+
+    .hero { padding: 70px 20px 50px; margin-top: 54px; }
+    .hero .eyebrow { font-size: 10px; padding: 5px 12px; margin-bottom: 18px; letter-spacing: 0.18em; }
+    .hero h1 { font-size: 56px; margin-bottom: 14px; }
+    .hero .sub { font-size: 15px; margin-bottom: 22px; }
+    .pill { font-size: 11px; padding: 5px 11px; }
+
+    .container { padding: 0 20px; }
+    section { padding: 56px 0; }
+    .section-head { margin-bottom: 32px; }
+    .section-head h2 { font-size: 30px; }
+    .section-head .desc { font-size: 14px; }
+
+    .product-card,
+    .product-card.reverse {
+      padding: 20px;
+      gap: 22px;
+      border-radius: 14px;
+    }
+    .product-info h3 { font-size: 26px; line-height: 1.15; }
+    .product-info .desc { font-size: 14px; margin-bottom: 20px; }
+    .info-grid { grid-template-columns: 1fr; gap: 10px; margin-bottom: 20px; }
+
+    .price-table { padding: 16px; }
+    .price-table .pt-title { font-size: 10px; }
+    .pt-row { font-size: 12px; padding: 7px 0; }
+
+    .selka-price { padding: 16px 18px; flex-wrap: wrap; gap: 10px; }
+    .selka-price .value { font-size: 24px; }
+    .selka-price .margin { font-size: 10px; text-align: right; }
+    .selka-price .margin strong { font-size: 13px; }
+
+    .carousel-btn { width: 36px; height: 36px; font-size: 16px; }
+    .carousel-btn.prev { left: 10px; }
+    .carousel-btn.next { right: 10px; }
+    .carousel-counter { font-size: 10px; padding: 4px 9px; top: 10px; right: 10px; }
+    .carousel-slide { padding: 18px; }
+    .carousel-dots { bottom: 10px; }
+
+    .manifesto { padding: 32px 22px; border-radius: 14px; }
+    .manifesto p { font-size: 18px; padding-left: 10px; line-height: 1.45; }
+    .manifesto .quote-mark { font-size: 60px; left: 12px; top: 10px; }
+
+    .costs-summary { padding: 28px 20px; border-radius: 14px; }
+    .costs-summary h3 { font-size: 26px; }
+    .cs-totales { grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px; }
+    .cs-tot-card { padding: 14px; }
+    .cs-tot-card .lbl { font-size: 9px; }
+    .cs-tot-card .num { font-size: 22px; }
+    .cs-tot-card .sub { font-size: 10px; }
+
+    /* Tabla de costos: scroll horizontal */
+    .cs-table-wrap {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin: 0 -20px;
+      padding: 0 20px;
+    }
+    .cs-table { min-width: 560px; }
+    .cs-table th, .cs-table td { padding: 10px 8px; font-size: 11px; }
+
+    .bundle-card { padding: 22px; }
+    .bundle-card h4 { font-size: 20px; }
+    .bundle-card .b-new { font-size: 22px; }
+
+    .divider { margin: 0 20px; }
+    footer { padding: 48px 20px 28px; }
+    footer .f-logo { font-size: 34px; }
+    footer .f-tagline { font-size: 13px; margin-bottom: 28px; }
+    footer .f-meta { flex-direction: column; align-items: flex-start; gap: 6px; font-size: 11px; }
+  }
+
+  /* Pantallas chicas (iPhone SE / Mini) */
+  @media (max-width: 380px) {
+    .hero h1 { font-size: 46px; }
+    .section-head h2 { font-size: 26px; }
+    .product-info h3 { font-size: 22px; }
+    .selka-price { flex-direction: column; align-items: flex-start; }
+    .selka-price .margin { text-align: left; }
   }
 </style>
 </head>
@@ -1026,6 +1143,7 @@
     <h3>Lote 01 · <em>Análisis económico</em></h3>
     <p>Precios en USD basados en retail-import (sin volumen). Tipo de cambio referencial: $1.150 ARS / USD.</p>
 
+    <div class="cs-table-wrap">
     <table class="cs-table">
       <thead>
         <tr>
@@ -1072,6 +1190,7 @@
         </tr>
       </tbody>
     </table>
+    </div>
 
     <div class="cs-totales">
       <div class="cs-tot-card">
