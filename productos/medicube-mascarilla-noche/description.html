@@ -404,7 +404,19 @@
     if (productTitle && !document.querySelector('.selka-social-proof')) {
       var proof = document.createElement('div');
       proof.className = 'selka-social-proof';
-      proof.innerHTML = '<span class="selka-proof-stars">★★★★<span class="selka-half-star">★</span></span><span class="selka-proof-text">195 Reseñas</span>';
+      proof.innerHTML = '<span class="selka-proof-stars">' +
+        '<svg class="selka-star-svg" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>' +
+        '<svg class="selka-star-svg" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>' +
+        '<svg class="selka-star-svg" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>' +
+        '<svg class="selka-star-svg" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>' +
+        '<svg class="selka-star-svg" viewBox="0 0 24 24"><defs><linearGradient id="selka-star-grad-pdp"><stop offset="80%" stop-color="#ffcf2a"></stop><stop offset="80%" stop-color="#dcdcdc"></stop></linearGradient></defs><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" fill="url(#selka-star-grad-pdp)"/></svg>' +
+        '</span><span class="selka-proof-text">195 Reseñas</span>';
+      proof.addEventListener('click', function() {
+        var revSection = document.getElementById('selka-reviews-section');
+        if (revSection) {
+          revSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
       productTitle.parentNode.insertBefore(proof, productTitle);
     }
     
@@ -1109,6 +1121,250 @@
       <p style="font-size:0.84rem;line-height:1.7;color:#555555;padding-bottom:18px;margin:0;"><strong style="color:#000000;">CABA y GBA:</strong> 24&ndash;48 hs. <strong style="color:#000000;">Interior:</strong> 3&ndash;5 días hábiles. Envío gratis superando los $119.000.</p>
     </details>
   </div>
+
+  <!-- Client Reviews Section -->
+  <div style="border:none;border-top:1px solid #ede5e5;margin:44px 0;">&nbsp;</div>
+
+  <div id="selka-reviews-section" style="margin-bottom:40px; font-family:'Inter','Helvetica Neue',Helvetica,Arial,sans-serif;">
+    <h3 style="font-size:1.45rem;font-weight:900;color:#000000;margin:0 0 24px;line-height:1.2;">Opiniones de clientes <span style="color:#000000;">&rarr;</span></h3>
+    
+    <div style="display:flex; gap:24px; padding:28px 24px; border:1px solid #ede5e5; border-radius:16px; background:#fafafa; margin-bottom:28px; align-items:center; flex-wrap:wrap; box-sizing:border-box;">
+      <!-- Avg rating -->
+      <div style="text-align:center; flex:1; min-width:140px;">
+        <div style="font-size:3.2rem; font-weight:900; color:#111; line-height:1;">4.8</div>
+        <div style="margin:8px 0 4px; display:inline-flex; gap:3px;">
+          <svg class="selka-star-svg" viewBox="0 0 24 24" style="width:16px; height:16px;"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+          <svg class="selka-star-svg" viewBox="0 0 24 24" style="width:16px; height:16px;"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+          <svg class="selka-star-svg" viewBox="0 0 24 24" style="width:16px; height:16px;"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+          <svg class="selka-star-svg" viewBox="0 0 24 24" style="width:16px; height:16px;"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+          <svg class="selka-star-svg" viewBox="0 0 24 24" style="width:16px; height:16px;"><defs><linearGradient id="selka-star-grad-widget"><stop offset="80%" stop-color="#ffcf2a"></stop><stop offset="80%" stop-color="#dcdcdc"></stop></linearGradient></defs><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" fill="url(#selka-star-grad-widget)"/></svg>
+        </div>
+        <div style="font-size:12.5px; color:#555; font-weight:600;">195 opiniones</div>
+      </div>
+      
+      <!-- Progress Bars -->
+      <div style="flex:2; min-width:240px; display:flex; flex-direction:column; gap:6px;">
+        <div style="display:flex; align-items:center; gap:8px; font-size:11.5px; color:#555;">
+          <span style="width:70px; text-align:right; font-weight:600;">5 estrellas</span>
+          <div style="flex:1; height:6px; background:#e0e0e0; border-radius:3px; overflow:hidden;">
+            <div style="width:85%; height:100%; background:#ffcf2a; border-radius:3px;"></div>
+          </div>
+          <span style="width:30px; font-weight:600;">85%</span>
+        </div>
+        <div style="display:flex; align-items:center; gap:8px; font-size:11.5px; color:#555;">
+          <span style="width:70px; text-align:right; font-weight:600;">4 estrellas</span>
+          <div style="flex:1; height:6px; background:#e0e0e0; border-radius:3px; overflow:hidden;">
+            <div style="width:11%; height:100%; background:#ffcf2a; border-radius:3px;"></div>
+          </div>
+          <span style="width:30px; font-weight:600;">11%</span>
+        </div>
+        <div style="display:flex; align-items:center; gap:8px; font-size:11.5px; color:#555;">
+          <span style="width:70px; text-align:right; font-weight:600;">3 estrellas</span>
+          <div style="flex:1; height:6px; background:#e0e0e0; border-radius:3px; overflow:hidden;">
+            <div style="width:2%; height:100%; background:#ffcf2a; border-radius:3px;"></div>
+          </div>
+          <span style="width:30px; font-weight:600;">2%</span>
+        </div>
+        <div style="display:flex; align-items:center; gap:8px; font-size:11.5px; color:#555;">
+          <span style="width:70px; text-align:right; font-weight:600;">2 estrellas</span>
+          <div style="flex:1; height:6px; background:#e0e0e0; border-radius:3px; overflow:hidden;">
+            <div style="width:1%; height:100%; background:#ffcf2a; border-radius:3px;"></div>
+          </div>
+          <span style="width:30px; font-weight:600;">1%</span>
+        </div>
+        <div style="display:flex; align-items:center; gap:8px; font-size:11.5px; color:#555;">
+          <span style="width:70px; text-align:right; font-weight:600;">1 estrella</span>
+          <div style="flex:1; height:6px; background:#e0e0e0; border-radius:3px; overflow:hidden;">
+            <div style="width:1%; height:100%; background:#ffcf2a; border-radius:3px;"></div>
+          </div>
+          <span style="width:30px; font-weight:600;">1%</span>
+        </div>
+      </div>
+      
+      <!-- Action Button -->
+      <div style="flex:1; min-width:140px; text-align:center;">
+        <button onclick="toggleSelkaReviewForm()" style="background:#000; color:#fff; border:none; font-weight:700; font-size:0.82rem; letter-spacing:0.5px; padding:12px 20px; border-radius:999px; cursor:pointer; width:100%; max-width:180px;">Escribir opinión</button>
+      </div>
+    </div>
+    
+    <!-- Review Form (hidden by default) -->
+    <div id="selka-review-form-container" style="display:none; border:1px solid #ede5e5; border-radius:16px; padding:24px; background:#fff; margin-bottom:24px; box-sizing:border-box;">
+      <h4 style="font-size:1.05rem; font-weight:800; color:#111; margin:0 0 16px;">Dejanos tu reseña</h4>
+      <form onsubmit="submitSelkaReview(event)">
+        <div style="margin-bottom:16px;">
+          <label style="display:block; font-size:12.5px; font-weight:700; color:#111; margin-bottom:6px;">Calificación:</label>
+          <div style="display:flex; gap:6px;">
+            <svg onclick="setFormRating(1)" class="selka-form-star-svg" viewBox="0 0 24 24" width="28" height="28" style="fill:#ffcf2a; cursor:pointer; transition:fill 0.2s;"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            <svg onclick="setFormRating(2)" class="selka-form-star-svg" viewBox="0 0 24 24" width="28" height="28" style="fill:#ffcf2a; cursor:pointer; transition:fill 0.2s;"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            <svg onclick="setFormRating(3)" class="selka-form-star-svg" viewBox="0 0 24 24" width="28" height="28" style="fill:#ffcf2a; cursor:pointer; transition:fill 0.2s;"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            <svg onclick="setFormRating(4)" class="selka-form-star-svg" viewBox="0 0 24 24" width="28" height="28" style="fill:#ffcf2a; cursor:pointer; transition:fill 0.2s;"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            <svg onclick="setFormRating(5)" class="selka-form-star-svg" viewBox="0 0 24 24" width="28" height="28" style="fill:#ffcf2a; cursor:pointer; transition:fill 0.2s;"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+          </div>
+          <input type="hidden" id="selka-form-rating-val" value="5">
+        </div>
+        
+        <div style="margin-bottom:16px;">
+          <label for="selka-review-name" style="display:block; font-size:12.5px; font-weight:700; color:#111; margin-bottom:6px;">Nombre:</label>
+          <input type="text" id="selka-review-name" required placeholder="Ej: Florencia M." style="width:100%; border:1.5px solid #ede5e5; border-radius:8px; padding:10px 12px; font-size:13px; box-sizing:border-box; font-family:inherit;">
+        </div>
+        
+        <div style="margin-bottom:20px;">
+          <label for="selka-review-text" style="display:block; font-size:12.5px; font-weight:700; color:#111; margin-bottom:6px;">Opinión:</label>
+          <textarea id="selka-review-text" required placeholder="¿Qué te pareció la mascarilla? Contanos tu experiencia..." style="width:100%; height:90px; border:1.5px solid #ede5e5; border-radius:8px; padding:10px 12px; font-size:13px; box-sizing:border-box; font-family:inherit; resize:vertical;"></textarea>
+        </div>
+        
+        <div style="display:flex; gap:12px;">
+          <button type="submit" style="background:#000; color:#fff; border:none; font-weight:700; font-size:0.82rem; padding:11px 24px; border-radius:999px; cursor:pointer;">Enviar opinión</button>
+          <button type="button" onclick="toggleSelkaReviewForm()" style="background:transparent; color:#555; border:1.5px solid #ede5e5; font-weight:700; font-size:0.82rem; padding:10px 20px; border-radius:999px; cursor:pointer;">Cancelar</button>
+        </div>
+      </form>
+    </div>
+    
+    <!-- Success Notification -->
+    <div id="selka-review-success-msg" style="display:none; border:1.5px solid #c3e6cb; background:#d4edda; color:#155724; border-radius:16px; padding:20px; margin-bottom:24px; text-align:center; box-sizing:border-box;">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin:0 auto 10px; color:#28a745;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+      <h4 style="font-weight:800; font-size:1.05rem; margin:0 0 6px; color:#155724;">¡Reseña enviada con éxito!</h4>
+      <p style="margin:0; font-size:13px; line-height:1.5; color:#155724;">Muchas gracias por tu comentario. Tu opinión está siendo procesada por moderación para verificar la compra y aparecerá activa en el sitio a la brevedad.</p>
+    </div>
+    
+    <!-- Review List -->
+    <div id="selka-reviews-list" style="display:flex; flex-direction:column; gap:20px;">
+      <!-- Static Reviews -->
+      <div style="border-bottom:1px solid #ede5e5; padding-bottom:18px;">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:6px; flex-wrap:wrap; gap:8px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <span style="font-weight:700; font-size:13px; color:#111;">Mariela V.</span>
+            <span style="display:inline-flex; align-items:center; gap:4px; font-size:9.5px; font-weight:700; color:#2e7d32; background:#e8f5e9; padding:2px 8px; border-radius:10px;"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Compra verificada</span>
+          </div>
+          <span style="font-size:11px; color:#888;">Hace 2 semanas</span>
+        </div>
+        <div style="display:flex; gap:2px; margin-bottom:8px;">
+          <svg class="selka-star-svg" viewBox="0 0 24 24" style="width:13px; height:13px;"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+          <svg class="selka-star-svg" viewBox="0 0 24 24" style="width:13px; height:13px;"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+          <svg class="selka-star-svg" viewBox="0 0 24 24" style="width:13px; height:13px;"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+          <svg class="selka-star-svg" viewBox="0 0 24 24" style="width:13px; height:13px;"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+          <svg class="selka-star-svg" viewBox="0 0 24 24" style="width:13px; height:13px;"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+        </div>
+        <p style="font-size:13px; font-weight:700; color:#111; margin:0 0 6px;">¡Increíble la piel al día siguiente!</p>
+        <p style="font-size:12.5px; line-height:1.6; color:#444; margin:0;">Te levantás con la cara súper suave y con un glow re lindo, como si te hubieras hecho una limpieza facial profesional. Me encanta el efecto film que hace.</p>
+      </div>
+      
+      <div style="border-bottom:1px solid #ede5e5; padding-bottom:18px;">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:6px; flex-wrap:wrap; gap:8px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <span style="font-weight:700; font-size:13px; color:#111;">Florencia F.</span>
+            <span style="display:inline-flex; align-items:center; gap:4px; font-size:9.5px; font-weight:700; color:#2e7d32; background:#e8f5e9; padding:2px 8px; border-radius:10px;"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Compra verificada</span>
+          </div>
+          <span style="font-size:11px; color:#888;">Hace 1 mes</span>
+        </div>
+        <div style="display:flex; gap:2px; margin-bottom:8px;">
+          <svg class="selka-star-svg" viewBox="0 0 24 24" style="width:13px; height:13px;"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+          <svg class="selka-star-svg" viewBox="0 0 24 24" style="width:13px; height:13px;"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+          <svg class="selka-star-svg" viewBox="0 0 24 24" style="width:13px; height:13px;"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+          <svg class="selka-star-svg" viewBox="0 0 24 24" style="width:13px; height:13px;"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+          <svg class="selka-star-svg" viewBox="0 0 24 24" style="width:13px; height:13px;"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+        </div>
+        <p style="font-size:13px; font-weight:700; color:#111; margin:0 0 6px;">Súper fácil de retirar y no ensucia la almohada</p>
+        <p style="font-size:12.5px; line-height:1.6; color:#444; margin:0;">La uso dos veces por semana y noto mi piel mucho más hidratada y luminosa. Se siente súper elástica y es re práctica porque se seca rápido y no ensucia la almohada.</p>
+      </div>
+      
+      <div style="border-bottom:1px solid #ede5e5; padding-bottom:18px;">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:6px; flex-wrap:wrap; gap:8px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <span style="font-weight:700; font-size:13px; color:#111;">Bautista T.</span>
+            <span style="display:inline-flex; align-items:center; gap:4px; font-size:9.5px; font-weight:700; color:#2e7d32; background:#e8f5e9; padding:2px 8px; border-radius:10px;"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Compra verificada</span>
+          </div>
+          <span style="font-size:11px; color:#888;">Hace 1 mes</span>
+        </div>
+        <div style="display:flex; gap:2px; margin-bottom:8px;">
+          <svg class="selka-star-svg" viewBox="0 0 24 24" style="width:13px; height:13px;"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+          <svg class="selka-star-svg" viewBox="0 0 24 24" style="width:13px; height:13px;"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+          <svg class="selka-star-svg" viewBox="0 0 24 24" style="width:13px; height:13px;"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+          <svg class="selka-star-svg" viewBox="0 0 24 24" style="width:13px; height:13px;"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+          <svg class="selka-star-svg" viewBox="0 0 24 24" style="width:13px; height:13px;"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+        </div>
+        <p style="font-size:13px; font-weight:700; color:#111; margin:0 0 6px;">Reduce líneas de expresión</p>
+        <p style="font-size:12.5px; line-height:1.6; color:#444; margin:0;">La compré para mi madre y está re contenta. Dice que le reduce un montón las líneas de expresión y le deja la piel tersa desde la primera aplicación.</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  function toggleSelkaReviewForm() {
+    var container = document.getElementById('selka-review-form-container');
+    if (container) {
+      if (container.style.display === 'none') {
+        container.style.display = 'block';
+        container.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      } else {
+        container.style.display = 'none';
+      }
+    }
+  }
+
+  function setFormRating(rating) {
+    document.getElementById('selka-form-rating-val').value = rating;
+    var starSvgs = document.querySelectorAll('.selka-form-star-svg');
+    starSvgs.forEach(function(svg, idx) {
+      if (idx < rating) {
+        svg.style.fill = '#ffcf2a';
+      } else {
+        svg.style.fill = '#dcdcdc';
+      }
+    });
+  }
+
+  function submitSelkaReview(e) {
+    e.preventDefault();
+    var btn = e.target.querySelector('button[type="submit"]');
+    var name = document.getElementById('selka-review-name').value;
+    var text = document.getElementById('selka-review-text').value;
+    var rating = parseInt(document.getElementById('selka-form-rating-val').value, 10);
+    
+    if (btn) {
+      btn.disabled = true;
+      btn.textContent = 'Enviando...';
+    }
+    
+    setTimeout(function() {
+      var formContainer = document.getElementById('selka-review-form-container');
+      if (formContainer) formContainer.style.display = 'none';
+      
+      var successMsg = document.getElementById('selka-review-success-msg');
+      if (successMsg) successMsg.style.display = 'block';
+      
+      var list = document.getElementById('selka-reviews-list');
+      if (list) {
+        var newReview = document.createElement('div');
+        newReview.style.cssText = 'border-bottom: 1px solid #ede5e5; padding-bottom: 18px; background: #fffbfb; padding: 16px; border-radius: 12px; margin-bottom: 12px; transition: all 0.3s; border: 1.5px solid #d99a96;';
+        
+        var starsHtml = '';
+        for (var i = 0; i < 5; i++) {
+          var color = i < rating ? '#ffcf2a' : '#dcdcdc';
+          starsHtml += '<svg class="selka-star-svg" viewBox="0 0 24 24" style="width:13px; height:13px; fill:' + color + ';"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>';
+        }
+        
+        newReview.innerHTML = [
+          '<div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 6px; flex-wrap: wrap; gap: 8px;">',
+          '  <div style="display: flex; align-items: center; gap: 8px;">',
+          '    <span style="font-weight: 700; font-size: 13px; color: #111;">' + name + '</span>',
+          '    <span style="display: inline-flex; align-items: center; gap: 4px; font-size: 9.5px; font-weight: 700; color: #b86258; background: #fff0f4; padding: 2px 8px; border-radius: 10px;">Pendiente de moderación</span>',
+          '  </div>',
+          '  <span style="font-size: 11px; color: #888;">Reciente</span>',
+          '</div>',
+          '<div style="display: flex; gap: 2px; margin-bottom: 8px;">' + starsHtml + '</div>',
+          '<p style="font-size: 12.5px; line-height: 1.6; color: #444; margin: 0;">' + text + '</p>'
+        ].join('');
+        
+        list.insertBefore(newReview, list.firstChild);
+      }
+      
+      if (successMsg) {
+        successMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }, 1000);
+  }
+  </script>
 
   <div style="margin-bottom:8px;">
     <div style="background:#000000;border-radius:16px;padding:52px 36px 44px;text-align:center;box-sizing:border-box;">
