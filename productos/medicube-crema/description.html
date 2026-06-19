@@ -104,9 +104,9 @@ body.pdp-pink-collagen-cream .selka-quick-benefits li strong {
       var benefits = document.createElement('ul');
       benefits.className = 'selka-quick-benefits';
       benefits.innerHTML = [
-        '<li>✨ <strong>Glow instantáneo:</strong> Sentí tu piel con una luminosidad rosada natural desde la primera aplicación.</li>',
-        '<li>💗 <strong>Elasticidad profunda:</strong> Recuperá la firmeza y juventud estimulando el colágeno natural.</li>',
-        '<li>💧 <strong>Nutrición sin esfuerzo:</strong> Volví a disfrutar de un rostro completamente hidratado, suave y radiante.</li>'
+        '<li>✨ <strong>Glow instantáneo:</strong> Luminosidad natural desde la primera aplicación.</li>',
+        '<li>💗 <strong>Elasticidad profunda:</strong> Firmeza restaurada estimulando el colágeno.</li>',
+        '<li>💧 <strong>Nutrición intensa:</strong> Rostro hidratado, suave y radiante.</li>'
       ].join('');
       discountContainer.parentNode.insertBefore(benefits, discountContainer.nextSibling);
     }
@@ -181,7 +181,8 @@ body.pdp-pink-collagen-cream .selka-quick-benefits li strong {
             customBadge.style.display = 'inline-block';
             customBadge.innerHTML = '¡Últimas ' + window.selkaCurrentStock + ' unidades!';
           } else {
-            customBadge.style.display = 'none';
+            customBadge.style.display = 'inline-block';
+            customBadge.innerHTML = '¡Sin stock disponible!';
           }
         }
         return;
@@ -216,8 +217,20 @@ body.pdp-pink-collagen-cream .selka-quick-benefits li strong {
           customBadge.innerHTML = '¡Últimas ' + window.selkaCurrentStock + ' unidades!';
         }
       } else {
+        if (!customBadge) {
+          var quantityContainer = document.querySelector('.js-quantity') || document.querySelector('[data-component="product.quantity"]');
+          if (quantityContainer) {
+            var parentRow = quantityContainer.closest('.form-row') || quantityContainer.parentElement;
+            if (parentRow) {
+              customBadge = document.createElement('div');
+              customBadge.className = 'selka-stock-badge';
+              parentRow.parentNode.insertBefore(customBadge, parentRow);
+            }
+          }
+        }
         if (customBadge) {
-          customBadge.style.display = 'none';
+          customBadge.style.display = 'inline-block';
+          customBadge.innerHTML = '¡Sin stock disponible!';
         }
       }
     }
@@ -247,7 +260,7 @@ body.pdp-pink-collagen-cream .selka-quick-benefits li strong {
             if (window.selkaCurrentStock > 0) {
               customBadge.innerHTML = '¡Últimas ' + window.selkaCurrentStock + ' unidades!';
             } else {
-              customBadge.style.display = 'none';
+              customBadge.innerHTML = '¡Sin stock disponible!';
             }
           }
         }

@@ -89,7 +89,8 @@
             customBadge.style.display = 'inline-block';
             customBadge.innerHTML = '¡Últimas ' + window.selkaCurrentStock + ' unidades!';
           } else {
-            customBadge.style.display = 'none';
+            customBadge.style.display = 'inline-block';
+            customBadge.innerHTML = '¡Sin stock disponible!';
           }
         }
         return;
@@ -124,8 +125,20 @@
           customBadge.innerHTML = '¡Últimas ' + window.selkaCurrentStock + ' unidades!';
         }
       } else {
+        if (!customBadge) {
+          var quantityContainer = document.querySelector('.js-quantity') || document.querySelector('[data-component="product.quantity"]');
+          if (quantityContainer) {
+            var parentRow = quantityContainer.closest('.form-row') || quantityContainer.parentElement;
+            if (parentRow) {
+              customBadge = document.createElement('div');
+              customBadge.className = 'selka-stock-badge';
+              parentRow.parentNode.insertBefore(customBadge, parentRow);
+            }
+          }
+        }
         if (customBadge) {
-          customBadge.style.display = 'none';
+          customBadge.style.display = 'inline-block';
+          customBadge.innerHTML = '¡Sin stock disponible!';
         }
       }
     }
@@ -155,7 +168,7 @@
             if (window.selkaCurrentStock > 0) {
               customBadge.innerHTML = '¡Últimas ' + window.selkaCurrentStock + ' unidades!';
             } else {
-              customBadge.style.display = 'none';
+              customBadge.innerHTML = '¡Sin stock disponible!';
             }
           }
         }
