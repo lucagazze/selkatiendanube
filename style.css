@@ -220,3 +220,37 @@ html,body,.template-home,.template-category,.template-product,.template-page{mar
 .template-product .js-accordion-container {
   display: none !important;
 }
+
+/* Quitar fondo y borde del descuento con transferencia en producto individual */
+.template-product .js-payment-discount-price-product-container,
+.template-product .payment-discount-price-product-container {
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  margin-top: 8px !important;
+  color: #555 !important;
+  box-shadow: none !important;
+}
+.template-product .js-payment-discount-price-product {
+  color: #b86258 !important; /* brand pink/red accent color */
+  font-weight: 800 !important;
+}
+
+/* Reducir espacio debajo del stock badge en computadora */
+@media (min-width: 768px) {
+  .template-product .selka-stock-badge {
+    margin-bottom: 2px !important;
+  }
+  
+  /* Iconos y textos de confianza más grandes en computadora */
+  #selka-pack-selector .selka-trust-icon {
+    width: 32px !important;
+    height: 32px !important;
+    margin-bottom: 8px !important;
+  }
+  #selka-pack-selector .selka-trust-label {
+    font-size: 11px !important;
+    letter-spacing: 0.5px !important;
+  }
+}
+
