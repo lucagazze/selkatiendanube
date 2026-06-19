@@ -687,12 +687,56 @@ body.pdp-pink-collagen-cream .selka-proof-stars {
       pb.addEventListener('mouseenter', function() { this.style.background = '#c78a86'; });
       pb.addEventListener('mouseleave', function() { this.style.background = '#d99a95'; });
       pb.addEventListener('click', function() {
+        var self = this;
+        self.disabled = true;
+        self.style.opacity = '0.7';
+
+        // Update native quantity input
         if (qi) {
           qi.value = selectedQty;
           ['input','change'].forEach(function(ev) { qi.dispatchEvent(new Event(ev, {bubbles:true})); });
         }
-        var rb = document.querySelector('[data-store="product-buy-button"]');
-        if (rb) rb.click();
+
+        // Find the product form
+        var submitBtn = document.querySelector('[data-store="product-buy-button"]');
+        var form = submitBtn ? submitBtn.closest('form') : null;
+
+        function afterAdd() {
+          self.style.opacity = '1';
+          self.disabled = false;
+          // Open cart widget/modal
+          var cartTrigger = document.querySelector('[data-store="header-cart"] button, .js-cart-widget, .js-open-cart, [data-toggle="modal"][data-target="#modal-cart"]');
+          if (cartTrigger) cartTrigger.click();
+          // Dispatch cart updated events for TN theme
+          ['cart:updated','nuvemshop:cart:updated','cart-item:added'].forEach(function(name) {
+            try { document.dispatchEvent(new CustomEvent(name, {bubbles:true})); } catch(e) {}
+            try { window.dispatchEvent(new CustomEvent(name, {bubbles:true})); } catch(e) {}
+          });
+        }
+
+        if (form && window.fetch) {
+          var fd = new FormData(form);
+          fd.set('quantity', selectedQty);
+          fetch(form.getAttribute('action') || '/carrito/agregar', {
+            method: 'POST',
+            body: fd,
+            headers: {'X-Requested-With': 'XMLHttpRequest'}
+          }).then(function(r) {
+            return r.ok ? r.json().catch(function(){ return {}; }) : Promise.reject(r.status);
+          }).then(function(data) {
+            try { if (window.LS && data) LS.cart = data; } catch(e) {}
+            afterAdd();
+          }).catch(function() {
+            // Fallback: native click (may redirect, but at least it works)
+            if (submitBtn) submitBtn.click();
+            self.style.opacity = '1';
+            self.disabled = false;
+          });
+        } else if (submitBtn) {
+          submitBtn.click();
+          self.style.opacity = '1';
+          self.disabled = false;
+        }
       });
     }
   }
