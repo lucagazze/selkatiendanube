@@ -97,14 +97,3 @@ html,body,.template-home,.template-category,.template-product,.template-page{mar
 .btn-primary.cart {
   text-transform: capitalize !important;
 }
-
-/* --- Botón Agregar al carrito en página de producto: fondo marca --- */
-.template-product .js-addtocart,
-.template-product .js-prod-submit-form,
-.template-product [data-store="product-buy-button"] {
-  background-color: #d99a95 !important;
-  background: #d99a95 !important;
-  border-color: #d99a95 !important;
-  color: #ffffff !important;
-  text-transform: uppercase !important;
-}
