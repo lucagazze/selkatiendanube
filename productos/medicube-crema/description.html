@@ -19,23 +19,48 @@
       productTitle.parentNode.insertBefore(proof, productTitle);
     }
     
-    // Inject and update stock badge dynamically (reads real stock and discounts on add to cart)
+    // Inject and update stock badge dynamically (reads real stock, syncs with cart, handles variants)
+    function getQuantityInCart() {
+      var cartModal = document.getElementById('modal-cart') || document.querySelector('.js-ajax-cart-panel') || document.body;
+      var productTitle = document.querySelector('h1') || document.querySelector('.js-product-name');
+      if (!productTitle) return 0;
+      var targetName = productTitle.textContent.trim().toLowerCase();
+      var cartItems = cartModal.querySelectorAll('.js-cart-item, .cart-item, .cart-row');
+      var qty = 0;
+      cartItems.forEach(function(item) {
+        var nameEl = item.querySelector('.cart-item-name, a, h3, .js-cart-item-name');
+        if (nameEl && nameEl.textContent.trim().toLowerCase().includes(targetName)) {
+          var qtyInput = item.querySelector('input[type="number"], .js-cart-quantity-input, .cart-item-quantity, .js-cart-item-quantity');
+          if (qtyInput) {
+            var val = qtyInput.tagName === 'INPUT' ? parseInt(qtyInput.value, 10) : parseInt(qtyInput.textContent, 10);
+            qty += val || 0;
+          }
+        }
+      });
+      return qty;
+    }
+
     function updateStockBadge() {
       var nativeStockEl = document.querySelector('.js-stock-label') || document.querySelector('.js-stock-label-private') || document.querySelector('[data-store*="label-stock"]');
       var customBadge = document.querySelector('.selka-stock-badge');
       
-      if (window.selkaInitialStock === undefined) {
-        if (nativeStockEl) {
-          var match = nativeStockEl.textContent.match(/\d+/);
-          if (match) {
-            window.selkaInitialStock = parseInt(match[0], 10);
-            window.selkaCurrentStock = window.selkaInitialStock;
+      if (nativeStockEl) {
+        var match = nativeStockEl.textContent.match(/\d+/);
+        if (match) {
+          var nativeStockVal = parseInt(match[0], 10);
+          if (window.selkaInitialStock !== nativeStockVal) {
+            window.selkaInitialStock = nativeStockVal;
+            window.selkaCurrentStock = Math.max(0, window.selkaInitialStock - getQuantityInCart());
           }
         }
       }
       
-      if (window.selkaInitialStock === undefined) {
-        window.selkaInitialStock = 4;
+      var cartQty = getQuantityInCart();
+      if (window.selkaInitialStock !== undefined) {
+        window.selkaCurrentStock = Math.max(0, window.selkaInitialStock - cartQty);
+      }
+      
+      if (window.selkaCurrentStock === undefined) {
         window.selkaCurrentStock = 4;
       }
       
@@ -61,21 +86,11 @@
         }
       }
     }
-    
+
     updateStockBadge();
     
-    var nativeStockEl = document.querySelector('.js-stock-label') || document.querySelector('.js-stock-label-private') || document.querySelector('[data-store*="label-stock"]');
-    if (nativeStockEl && !window.selkaStockObserverActive) {
-      window.selkaStockObserverActive = true;
-      var observer = new MutationObserver(function() {
-        var match = nativeStockEl.textContent.match(/\d+/);
-        if (match) {
-          window.selkaInitialStock = parseInt(match[0], 10);
-          window.selkaCurrentStock = window.selkaInitialStock;
-          updateStockBadge();
-        }
-      });
-      observer.observe(nativeStockEl, { childList: true, characterData: true, subtree: true });
+    if (!window.selkaStockInterval) {
+      window.selkaStockInterval = setInterval(updateStockBadge, 1000);
     }
     
     var addToCartBtn = document.querySelector('.js-addtocart') || document.querySelector('[data-component="product.add-to-cart"]');
@@ -87,7 +102,14 @@
         if (isNaN(qty) || qty < 1) qty = 1;
         if (window.selkaCurrentStock !== undefined) {
           window.selkaCurrentStock = Math.max(0, window.selkaCurrentStock - qty);
-          updateStockBadge();
+          var customBadge = document.querySelector('.selka-stock-badge');
+          if (customBadge) {
+            if (window.selkaCurrentStock > 0) {
+              customBadge.innerHTML = '¡Últimas ' + window.selkaCurrentStock + ' unidades!';
+            } else {
+              customBadge.style.display = 'none';
+            }
+          }
         }
       });
     }
