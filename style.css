@@ -90,3 +90,10 @@ html,body,.template-home,.template-category,.template-product,.template-page{mar
     text-align: left !important;
   }
 }
+
+/* --- Botones de compra: primera letra mayúscula --- */
+.js-addtocart,
+.js-prod-submit-form,
+.btn-primary.cart {
+  text-transform: capitalize !important;
+}
