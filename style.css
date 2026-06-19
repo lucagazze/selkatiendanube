@@ -77,6 +77,8 @@ html,body,.template-home,.template-category,.template-product,.template-page{mar
     border-radius: 5px !important;
     display: inline-flex !important;
     flex-direction: row !important;
+    justify-content: flex-start !important;
+    text-align: left !important;
   }
   .js-item-product .js-payment-discount-price-product {
     font-size: 10.5px !important;
@@ -85,6 +87,6 @@ html,body,.template-home,.template-category,.template-product,.template-page{mar
     font-size: 9.5px !important;
     flex-basis: 100% !important;
     width: 100% !important;
-    text-align: center !important;
+    text-align: left !important;
   }
 }
