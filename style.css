@@ -119,7 +119,6 @@ html,body,.template-home,.template-category,.template-product,.template-page{mar
 .template-product .payment-discount-price-product-container,
 .template-product .js-payment-discount-price-product-container {
   font-size: 12px !important;
-  line-height: 1.4 !important;
 }
 .template-product .js-payment-discount-price-product {
   font-size: 13px !important;
@@ -209,5 +208,10 @@ html,body,.template-home,.template-category,.template-product,.template-page{mar
 /* Ocultar info de descuentos por cantidad (manejado por pack selector) */
 [data-store="product-promotion-info"],
 .js-product-promo-container {
+  display: none !important;
+}
+
+/* Ocultar header "Medios de pago" con ícono de tarjeta */
+.template-product [data-store="product-payment-methods"] {
   display: none !important;
 }
