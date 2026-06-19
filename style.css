@@ -102,9 +102,9 @@ html,body,.template-home,.template-category,.template-product,.template-page{mar
 .template-product .js-addtocart,
 .template-product .js-prod-submit-form,
 .template-product [data-store="product-buy-button"] {
-  background-color: #d99a96 !important;
-  background: #d99a96 !important;
-  border-color: #d99a96 !important;
-  color: #ffffff !important;
+  background-color: #000000 !important;
+  background: #000000 !important;
+  border-color: #000000 !important;
+  color: #f8e8e8 !important;
   text-transform: uppercase !important;
 }
