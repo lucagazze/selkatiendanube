@@ -106,4 +106,5 @@ html,body,.template-home,.template-category,.template-product,.template-page{mar
   background: #d99a96 !important;
   border-color: #d99a96 !important;
   color: #ffffff !important;
+  text-transform: uppercase !important;
 }
