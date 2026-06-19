@@ -97,3 +97,10 @@ html,body,.template-home,.template-category,.template-product,.template-page{mar
 .btn-primary.cart {
   text-transform: capitalize !important;
 }
+
+/* --- Botón Agregar al carrito en página individual: mayúsculas --- */
+.template-product .js-addtocart,
+.template-product [data-store="product-buy-button"] {
+  text-transform: uppercase !important;
+}
+
