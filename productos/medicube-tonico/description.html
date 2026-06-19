@@ -40,29 +40,55 @@
       return qty;
     }
 
-    function updateStockBadge() {
+    function getRealStock() {
+      var variants = (typeof LS !== 'undefined') ? (LS.variants || (LS.product && LS.product.variants)) : null;
+      if (variants) {
+        var variantIdEl = document.querySelector('input[name="variant_id"]') || document.querySelector('.js-variant-id') || document.querySelector('[name="variant"]');
+        var variantId = variantIdEl ? parseInt(variantIdEl.value, 10) : null;
+        if (variantId) {
+          var variant = variants.find(function(v) { return v.id === variantId; });
+          if (variant && variant.stock !== undefined && variant.stock !== null) {
+            return variant.stock;
+          }
+        } else if (variants.length === 1) {
+          return variants[0].stock;
+        }
+      }
       var nativeStockEl = document.querySelector('.js-stock-label') || document.querySelector('.js-stock-label-private') || document.querySelector('[data-store*="label-stock"]');
-      var customBadge = document.querySelector('.selka-stock-badge');
-      
       if (nativeStockEl) {
         var match = nativeStockEl.textContent.match(/\d+/);
         if (match) {
-          var nativeStockVal = parseInt(match[0], 10);
-          if (window.selkaInitialStock !== nativeStockVal) {
-            window.selkaInitialStock = nativeStockVal;
-            window.selkaCurrentStock = Math.max(0, window.selkaInitialStock - getQuantityInCart());
+          return parseInt(match[0], 10);
+        }
+      }
+      return null;
+    }
+
+    function updateStockBadge() {
+      var customBadge = document.querySelector('.selka-stock-badge');
+      if (window.selkaIgnoreCartUpdate) {
+        if (customBadge) {
+          if (window.selkaCurrentStock > 0) {
+            customBadge.style.display = 'inline-block';
+            customBadge.innerHTML = '¡Últimas ' + window.selkaCurrentStock + ' unidades!';
+          } else {
+            customBadge.style.display = 'none';
           }
         }
+        return;
+      }
+      
+      var realStock = getRealStock();
+      if (realStock !== null) {
+        window.selkaInitialStock = realStock;
+      }
+      
+      if (window.selkaInitialStock === undefined) {
+        window.selkaInitialStock = 4;
       }
       
       var cartQty = getQuantityInCart();
-      if (window.selkaInitialStock !== undefined) {
-        window.selkaCurrentStock = Math.max(0, window.selkaInitialStock - cartQty);
-      }
-      
-      if (window.selkaCurrentStock === undefined) {
-        window.selkaCurrentStock = 4;
-      }
+      window.selkaCurrentStock = Math.max(0, window.selkaInitialStock - cartQty);
       
       if (window.selkaCurrentStock > 0) {
         if (!customBadge) {
@@ -102,6 +128,11 @@
         if (isNaN(qty) || qty < 1) qty = 1;
         if (window.selkaCurrentStock !== undefined) {
           window.selkaCurrentStock = Math.max(0, window.selkaCurrentStock - qty);
+          window.selkaIgnoreCartUpdate = true;
+          if (window.selkaCooldownTimeout) clearTimeout(window.selkaCooldownTimeout);
+          window.selkaCooldownTimeout = setTimeout(function() {
+            window.selkaIgnoreCartUpdate = false;
+          }, 4000);
           var customBadge = document.querySelector('.selka-stock-badge');
           if (customBadge) {
             if (window.selkaCurrentStock > 0) {
