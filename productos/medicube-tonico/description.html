@@ -1,0 +1,353 @@
+<script>
+(function(){
+  function adjustPDP() {
+    if (!document.body.classList.contains('template-product')) return;
+    
+    var desc = document.querySelector('[data-store^="product-description"]');
+    var section = document.querySelector('#single-product .row') || document.querySelector('.section-single-product');
+    if (desc && section && desc.parentElement !== section) {
+      desc.classList.add('col-12');
+      section.appendChild(desc);
+    }
+    
+    var lastThumb = document.querySelector('.js-product-thumb-modal');
+    if (lastThumb && !lastThumb.dataset.fixedClick) {
+      lastThumb.dataset.fixedClick = "true";
+      lastThumb.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var index = parseInt(this.getAttribute('data-thumb-loop'), 10);
+        var swiperEl = document.querySelector('.js-swiper-product');
+        if (swiperEl && swiperEl.swiper) {
+          swiperEl.swiper.slideTo(index);
+        }
+      });
+    }
+  }
+  
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', adjustPDP);
+  } else {
+    adjustPDP();
+  }
+  window.addEventListener('load', adjustPDP);
+  setTimeout(adjustPDP, 300);
+  setTimeout(adjustPDP, 1000);
+  setTimeout(adjustPDP, 2500);
+ })();
+</script>
+<div class="sk-product">
+  <p style="font-size:10px;font-weight:700;letter-spacing:3.5px;text-transform:uppercase;text-align:center;color:#000000;margin:0 0 8px;">RESULTADOS REALES</p>
+  <h2 style="font-size:1.55rem;font-weight:900;text-align:center;color:#000000;margin:0 0 10px;line-height:1.2;">Antes y después de la Capsule Cream</h2>
+  <p style="text-align:center;font-size:0.82rem;color:#555555;margin:0 0 24px;line-height:1.6;">Fotografías de clientas de Selka &mdash; sin filtros ni edición.</p>
+  
+  <div class="sk-grid-2" style="margin-bottom:14px;">
+    <div style="border-radius:12px;overflow:hidden;position:relative;background:#f8e8e8;aspect-ratio:4/5;display:flex;align-items:center;justify-content:center;">
+      <img src="[URL_ANTES_1]" alt="Antes" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.style.display='none'">
+      <div style="position:absolute;bottom:0;left:0;right:0;padding:10px 14px;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#fff;background:rgba(0,0,0,0.55);">Antes</div>
+    </div>
+    <div style="border-radius:12px;overflow:hidden;position:relative;background:#f8e8e8;aspect-ratio:4/5;display:flex;align-items:center;justify-content:center;">
+      <img src="[URL_DESPUES_1]" alt="Después 2 semanas" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.style.display='none'">
+      <div style="position:absolute;bottom:0;left:0;right:0;padding:10px 14px;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#fff;background:rgba(0,0,0,0.72);">2 semanas después</div>
+    </div>
+  </div>
+  
+  <p style="font-size:0.7rem;color:#888888;text-align:center;margin:14px 0 0;">* Resultados individuales pueden variar.</p>
+
+  <div style="border:none;border-top:1px solid #ede5e5;margin:44px 0;">&nbsp;</div>
+
+  <div style="background:#f8e8e8;padding:48px 32px;margin-bottom:40px;border-radius:16px;box-sizing:border-box;">
+    <p style="font-size:10px;font-weight:700;letter-spacing:3.5px;text-transform:uppercase;text-align:center;color:#000000;margin:0 0 8px;">RESPALDO CLÍNICO</p>
+    <h2 style="font-size:1.55rem;font-weight:900;text-align:center;color:#000000;margin:0 0 32px;line-height:1.2;">Lo que hace en tu piel</h2>
+    <div class="sk-grid-3">
+      <div style="background:#fff;border:1.5px solid #ede5e5;border-radius:14px;padding:28px 20px;text-align:center;">
+        <div style="font-size:2.3rem;font-weight:900;color:#000000;line-height:1;margin-bottom:10px;">+102%</div>
+        <div style="height:2px;width:36px;background:#C8B59B;margin:0 auto 12px;">&nbsp;</div>
+        <p style="font-size:0.82rem;line-height:1.6;color:#000000;margin:0;"><strong>Hidratación instantánea</strong><br>desde la primera aplicación</p>
+      </div>
+      <div style="background:#fff;border:1.5px solid #ede5e5;border-radius:14px;padding:28px 20px;text-align:center;">
+        <div style="font-size:2.3rem;font-weight:900;color:#000000;line-height:1;margin-bottom:10px;">+33%</div>
+        <div style="height:2px;width:36px;background:#C8B59B;margin:0 auto 12px;">&nbsp;</div>
+        <p style="font-size:0.82rem;line-height:1.6;color:#000000;margin:0;"><strong>Elasticidad mejorada</strong><br>en 2 semanas de uso</p>
+      </div>
+      <div style="background:#fff;border:1.5px solid #ede5e5;border-radius:14px;padding:28px 20px;text-align:center;">
+        <div style="font-size:2.3rem;font-weight:900;color:#000000;line-height:1;margin-bottom:10px;">-19%</div>
+        <div style="height:2px;width:36px;background:#C8B59B;margin:0 auto 12px;">&nbsp;</div>
+        <p style="font-size:0.82rem;line-height:1.6;color:#000000;margin:0;"><strong>Menos manchas</strong><br>tono más parejo y luminoso</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="sk-flex-banner" style="background:#000000;margin-bottom:40px;">
+    <div style="width:180px;flex-shrink:0;border-radius:12px;overflow:hidden;">
+      <img src="[URL_IMAGEN_PRODUCTO]" alt="Capsule Cream PDRN Medicube" style="width:100%;display:block;" onerror="this.parentElement.style.display='none'">
+    </div>
+    <div>
+      <p style="font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#C8B59B;margin:0 0 12px;">POR QUÉ FUNCIONA</p>
+      <h2 style="font-size:1.65rem;font-weight:900;color:#fff;margin:0 0 16px;line-height:1.2;">La tecnología de las cápsulas.</h2>
+      <p style="font-size:0.85rem;line-height:1.8;color:rgba(248,232,232,0.85);margin:0 0 12px;">Al mezclar el gel con las cápsulas en la palma, el <strong style="color:#C8B59B;">PDRN encapsulado</strong> se libera fresco &mdash; sin oxidarse. Ingredientes recién activados en cada uso.</p>
+      <p style="font-size:0.85rem;line-height:1.8;color:rgba(248,232,232,0.85);margin:0 0 20px;">Combinado con <strong style="color:#C8B59B;">colágeno + 5% niacinamida</strong> y hialurónico multicapa: hidratación profunda, firmeza y glow todo el día.</p>
+      <a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;" style="display:inline-block;background:#f8e8e8;color:#000000;font-weight:700;font-size:0.83rem;letter-spacing:0.5px;padding:13px 36px;border-radius:999px;text-decoration:none;border:2px solid #f8e8e8;">Quiero el mío &rarr;</a>
+    </div>
+  </div>
+
+  <div style="border:none;border-top:1px solid #ede5e5;margin:44px 0;">&nbsp;</div>
+
+  <div style="margin-bottom:40px;">
+    <p style="font-size:10px;font-weight:700;letter-spacing:3.5px;text-transform:uppercase;text-align:center;color:#000000;margin:0 0 8px;">LO QUE DICEN NUESTRAS CLIENTAS</p>
+    <h2 style="font-size:1.55rem;font-weight:900;text-align:center;color:#000000;margin:0 0 24px;line-height:1.2;">Reviews verificadas</h2>
+    <div class="sk-grid-3">
+      <div style="border:1.5px solid #ede5e5;border-radius:14px;padding:20px;background:#fff;">
+        <div style="width:100%;aspect-ratio:1/1;background:#f8e8e8;border-radius:10px;margin-bottom:14px;overflow:hidden;display:flex;align-items:center;justify-content:center;border:1.5px dashed #C8B59B;">
+          <img src="[URL_FOTO_TESTIMONIO_1]" alt="Resultado Valentina" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.style.display='none'">
+        </div>
+        <div style="font-size:13px;letter-spacing:2px;margin-bottom:10px;color:#C8B59B;">★★★★★</div>
+        <p style="font-size:12px;line-height:1.75;margin:0 0 14px;font-style:italic;color:#555555;">&ldquo;Nunca había probado una crema con cápsulas. Se siente increíble al mezclarla y mi piel quedó con un glow que duró todo el día.&rdquo;</p>
+        <p style="font-size:10.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#000000;margin:0;">Valentina M.</p>
+        <p style="font-size:10px;color:#888888;margin:3px 0 0;">Compra verificada &middot; Mayo 2025</p>
+      </div>
+      <div style="border:1.5px solid #ede5e5;border-radius:14px;padding:20px;background:#fff;">
+        <div style="width:100%;aspect-ratio:1/1;background:#f8e8e8;border-radius:10px;margin-bottom:14px;overflow:hidden;display:flex;align-items:center;justify-content:center;border:1.5px dashed #C8B59B;">
+          <img src="[URL_FOTO_TESTIMONIO_2]" alt="Resultado Camila" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.style.display='none'">
+        </div>
+        <div style="font-size:13px;letter-spacing:2px;margin-bottom:10px;color:#C8B59B;">★★★★★</div>
+        <p style="font-size:12px;line-height:1.75;margin:0 0 14px;font-style:italic;color:#555555;">&ldquo;Tengo piel mixta y nunca encontraba algo que hidrate sin tapar poros. Las cápsulas son mágicas, en serio.&rdquo;</p>
+        <p style="font-size:10.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#000000;margin:0;">Camila R.</p>
+        <p style="font-size:10px;color:#888888;margin:3px 0 0;">Compra verificada &middot; Abril 2025</p>
+      </div>
+      <div style="border:1.5px solid #ede5e5;border-radius:14px;padding:20px;background:#fff;">
+        <div style="width:100%;aspect-ratio:1/1;background:#f8e8e8;border-radius:10px;margin-bottom:14px;overflow:hidden;display:flex;align-items:center;justify-content:center;border:1.5px dashed #C8B59B;">
+          <img src="[URL_FOTO_TESTIMONIO_3]" alt="Resultado Lucía" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.style.display='none'">
+        </div>
+        <div style="font-size:13px;letter-spacing:2px;margin-bottom:10px;color:#C8B59B;">★★★★★</div>
+        <p style="font-size:12px;line-height:1.75;margin:0 0 14px;font-style:italic;color:#555555;">&ldquo;En una semana noté mi piel más firme. El tono quedó más parejo sin necesitar corrector.&rdquo;</p>
+        <p style="font-size:10.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#000000;margin:0;">Lucía G.</p>
+        <p style="font-size:10px;color:#888888;margin:3px 0 0;">Compra verificada &middot; Junio 2025</p>
+      </div>
+    </div>
+  </div>
+
+  <div style="border:none;border-top:1px solid #ede5e5;margin:44px 0;">&nbsp;</div>
+
+  <div style="margin-bottom:40px;">
+    <p style="font-size:10px;font-weight:700;letter-spacing:3.5px;text-transform:uppercase;text-align:center;color:#000000;margin:0 0 8px;">FORMULACIÓN</p>
+    <h2 style="font-size:1.55rem;font-weight:900;text-align:center;color:#000000;margin:0 0 24px;line-height:1.2;">Los activos que transforman tu piel</h2>
+    <div class="sk-grid-2">
+      <div style="border:1.5px solid #ede5e5;border-radius:14px;padding:22px 18px;background:#fff;display:flex;gap:14px;align-items:flex-start;">
+        <div>
+          <span style="display:inline-block;font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;background:#f8e8e8;color:#000000;padding:2px 8px;border-radius:10px;margin-bottom:8px;">Activo estrella</span>
+          <h4 style="font-size:13px;font-weight:700;color:#000000;margin:0 0 6px;">PDRN &mdash; ADN de salmón</h4>
+          <p style="font-size:11.5px;color:#555555;line-height:1.6;margin:0;">Revitaliza y mejora la firmeza. Encapsulado para máxima frescura al momento del uso.</p>
+        </div>
+      </div>
+      <div style="border:1.5px solid #ede5e5;border-radius:14px;padding:22px 18px;background:#fff;display:flex;gap:14px;align-items:flex-start;">
+        <div>
+          <span style="display:inline-block;font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;background:#f8e8e8;color:#000000;padding:2px 8px;border-radius:10px;margin-bottom:8px;">Rellena &amp; reafirma</span>
+          <h4 style="font-size:13px;font-weight:700;color:#000000;margin:0 0 6px;">Colágeno ultrahidrolizado</h4>
+          <p style="font-size:11.5px;color:#555555;line-height:1.6;margin:0;">Rellena líneas finas y reafirma la estructura de la piel desde adentro.</p>
+        </div>
+      </div>
+      <div style="border:1.5px solid #ede5e5;border-radius:14px;padding:22px 18px;background:#fff;display:flex;gap:14px;align-items:flex-start;">
+        <div>
+          <span style="display:inline-block;font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;background:#f8e8e8;color:#000000;padding:2px 8px;border-radius:10px;margin-bottom:8px;">5% concentración</span>
+          <h4 style="font-size:13px;font-weight:700;color:#000000;margin:0 0 6px;">Niacinamida</h4>
+          <p style="font-size:11.5px;color:#555555;line-height:1.6;margin:0;">Ilumina, empareja el tono y reduce manchas hasta un 19.4%. Gentil con la piel sensible.</p>
+        </div>
+      </div>
+      <div style="border:1.5px solid #ede5e5;border-radius:14px;padding:22px 18px;background:#fff;display:flex;gap:14px;align-items:flex-start;">
+        <div>
+          <span style="display:inline-block;font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;background:#f8e8e8;color:#000000;padding:2px 8px;border-radius:10px;margin-bottom:8px;">Hidratación profunda</span>
+          <h4 style="font-size:13px;font-weight:700;color:#000000;margin:0 0 6px;">Complejo hialurónico</h4>
+          <p style="font-size:11.5px;color:#555555;line-height:1.6;margin:0;">Múltiples pesos moleculares: hidratación en superficie y en profundidad a la vez.</p>
+        </div>
+      </div>
+      <div style="border:1.5px solid #ede5e5;border-radius:14px;padding:22px 18px;background:#fff;display:flex;gap:14px;align-items:flex-start;">
+        <div>
+          <span style="display:inline-block;font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;background:#f8e8e8;color:#000000;padding:2px 8px;border-radius:10px;margin-bottom:8px;">Antiedad</span>
+          <h4 style="font-size:13px;font-weight:700;color:#000000;margin:0 0 6px;">Péptidos de última generación</h4>
+          <p style="font-size:11.5px;color:#555555;line-height:1.6;margin:0;">Acetyl Hexapeptide-8, Copper Tripeptide-1, Palmitoyl Pentapeptide-4/12.</p>
+        </div>
+      </div>
+      <div style="border:1.5px solid #ede5e5;border-radius:14px;padding:22px 18px;background:#fff;display:flex;gap:14px;align-items:flex-start;">
+        <div>
+          <span style="display:inline-block;font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;background:#f8e8e8;color:#000000;padding:2px 8px;border-radius:10px;margin-bottom:8px;">Nutrición &amp; defensa</span>
+          <h4 style="font-size:13px;font-weight:700;color:#000000;margin:0 0 6px;">Vitaminas B12, C, E + Cerámida NP</h4>
+          <p style="font-size:11.5px;color:#555555;line-height:1.6;margin:0;">Protegen la barrera cutánea y potencian el efecto glow a largo plazo.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="border:none;border-top:1px solid #ede5e5;margin:44px 0;">&nbsp;</div>
+
+  <div style="margin-bottom:40px;">
+    <p style="font-size:10px;font-weight:700;letter-spacing:3.5px;text-transform:uppercase;text-align:center;color:#000000;margin:0 0 8px;">COMPARATIVA</p>
+    <h2 style="font-size:1.55rem;font-weight:900;text-align:center;color:#000000;margin:0 0 24px;line-height:1.2;">Por qué no es una crema cualquiera</h2>
+    <div class="zl-comp2-wrap" style="border-color: #ede5e5;">
+      <table class="zl-comp2-table">
+        <thead>
+          <tr>
+            <td class="zl-comp2-feature-head">&nbsp;</td>
+            <td class="zl-comp2-zane-head" style="border-bottom-color: #000000; background: #f8e8e8; color: #000000;">CAPSULE CREAM<br />MEDICUBE</td>
+            <td class="zl-comp2-otros-head" style="border-bottom-color: #ede5e5; background: #fafafa; color: #888888;">CREMA COMÚN</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="zl-comp2-feat" style="background: #fff; color: #000000;">PDRN encapsulado fresco</td>
+            <td class="zl-comp2-check" style="background: #f8e8e8; color: #000000;">✓</td>
+            <td class="zl-comp2-cross" style="color: #bbb; background: #fafafa;">✕</td>
+          </tr>
+          <tr>
+            <td class="zl-comp2-feat" style="background: #fff; color: #000000;">Colágeno + 5% Niacinamida activa</td>
+            <td class="zl-comp2-check" style="background: #f8e8e8; color: #000000;">✓</td>
+            <td class="zl-comp2-cross" style="color: #bbb; background: #fafafa;">✕</td>
+          </tr>
+          <tr>
+            <td class="zl-comp2-feat" style="background: #fff; color: #000000;">Ácido hialurónico multicapa</td>
+            <td class="zl-comp2-check" style="background: #f8e8e8; color: #000000;">✓</td>
+            <td class="zl-comp2-cross" style="color: #bbb; background: #fafafa;">✕</td>
+          </tr>
+          <tr>
+            <td class="zl-comp2-feat" style="background: #fff; color: #000000;">Cápsulas activadas al momento</td>
+            <td class="zl-comp2-check" style="background: #f8e8e8; color: #000000;">✓</td>
+            <td class="zl-comp2-cross" style="color: #bbb; background: #fafafa;">✕</td>
+          </tr>
+          <tr>
+            <td class="zl-comp2-feat" style="background: #fff; color: #000000;">Sin oxidación de activos</td>
+            <td class="zl-comp2-check" style="background: #f8e8e8; color: #000000;">✓</td>
+            <td class="zl-comp2-cross" style="color: #bbb; background: #fafafa;">✕</td>
+          </tr>
+          <tr>
+            <td class="zl-comp2-feat" style="background: #fff; color: #000000;">Apto piel sensible</td>
+            <td class="zl-comp2-check" style="background: #f8e8e8; color: #000000;">✓</td>
+            <td class="zl-comp2-cross" style="color: #bbb; background: #fafafa;">✕</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div style="border:none;border-top:1px solid #ede5e5;margin:44px 0;">&nbsp;</div>
+
+  <div style="margin-bottom:40px;">
+    <p style="font-size:10px;font-weight:700;letter-spacing:3.5px;text-transform:uppercase;text-align:center;color:#000000;margin:0 0 8px;">RESPALDO DERMATOLÓGICO</p>
+    <h2 style="font-size:1.55rem;font-weight:900;text-align:center;color:#000000;margin:0 0 24px;line-height:1.2;">Qué se observa en estudios de los activos</h2>
+    <div class="zl-circ-list" style="border-color: #ede5e5;">
+      <div class="zl-circ-row">
+        <div class="zl-circ-wrap" style="background: conic-gradient(#000000 94%, #f8e8e8 0%);">
+          <span class="zl-circ-num" style="color: #fff;">94%</span>
+        </div>
+        <p class="zl-circ-text" style="color: #000000;">de mejora en la <strong>firmeza y elasticidad</strong> de la piel con PDRN encapsulado</p>
+      </div>
+      <div class="zl-circ-row">
+        <div class="zl-circ-wrap" style="background: conic-gradient(#000000 92%, #f8e8e8 0%);">
+          <span class="zl-circ-num" style="color: #fff;">92%</span>
+        </div>
+        <p class="zl-circ-text" style="color: #000000;">de reducción de <strong>manchas e hiperpigmentación</strong> (Niacinamida 5%)</p>
+      </div>
+      <div class="zl-circ-row">
+        <div class="zl-circ-wrap" style="background: conic-gradient(#000000 89%, #f8e8e8 0%);">
+          <span class="zl-circ-num" style="color: #fff;">89%</span>
+        </div>
+        <p class="zl-circ-text" style="color: #000000;">de reducción de <strong>líneas de expresión</strong> con colágeno y péptidos</p>
+      </div>
+      <div class="zl-circ-row" style="border-bottom: none;">
+        <div class="zl-circ-wrap" style="background: conic-gradient(#000000 100%, #f8e8e8 0%);">
+          <span class="zl-circ-num" style="color: #fff;">100%</span>
+        </div>
+        <p class="zl-circ-text" style="color: #000000;">de aumento en la <strong>hidratación profunda</strong> y duradera</p>
+      </div>
+      <p class="zl-circ-footnote" style="background: #f8e8e8; color: #000000; font-family:'Inter','Helvetica Neue',Helvetica,Arial,sans-serif !important;">✦ Datos de estudios dermatológicos sobre los ingredientes activos</p>
+    </div>
+  </div>
+
+  <div style="border:none;border-top:1px solid #ede5e5;margin:44px 0;">&nbsp;</div>
+
+
+  <div style="margin-bottom:40px;">
+    <h3 style="font-size:1.45rem;font-weight:900;color:#000000;margin:0 0 24px;line-height:1.2;">Cómo usarla <span style="color:#000000;">&rarr;</span></h3>
+    <div style="background:#f8e8e8;border-radius:16px;padding:36px 32px;box-sizing:border-box;">
+      <div class="sk-steps-flex">
+        <div style="text-align:center;flex:1;">
+          <div style="width:52px;height:52px;background:#000000;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#f8e8e8;font-weight:800;font-size:1.1rem;margin:0 auto;">1</div>
+          <p style="font-weight:700;font-size:0.88rem;display:block;margin:12px 0 4px;color:#000000;">Tomá la crema</p>
+          <p style="font-size:0.78rem;line-height:1.5;margin:0;color:#000000;">Sacá gel + cápsulas en la palma</p>
+        </div>
+        <span class="sk-step-arrow" style="font-size:1.3rem;padding-top:20px;flex-shrink:0;color:#000000;">&rarr;</span>
+        <div style="text-align:center;flex:1;">
+          <div style="width:52px;height:52px;background:#000000;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#f8e8e8;font-weight:800;font-size:1.1rem;margin:0 auto;">2</div>
+          <p style="font-weight:700;font-size:0.88rem;display:block;margin:12px 0 4px;color:#000000;">Mezclá</p>
+          <p style="font-size:0.78rem;line-height:1.5;margin:0;color:#000000;">Frotá las palmas &mdash; las cápsulas se activan</p>
+        </div>
+        <span class="sk-step-arrow" style="font-size:1.3rem;padding-top:20px;flex-shrink:0;color:#000000;">&rarr;</span>
+        <div style="text-align:center;flex:1;">
+          <div style="width:52px;height:52px;background:#000000;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#f8e8e8;font-weight:800;font-size:1.1rem;margin:0 auto;">3</div>
+          <p style="font-weight:700;font-size:0.88rem;display:block;margin:12px 0 4px;color:#000000;">Aplicá</p>
+          <p style="font-size:0.78rem;line-height:1.5;margin:0;color:#000000;">Palmea en rostro y cuello</p>
+        </div>
+      </div>
+      <div style="border-top:1.5px solid rgba(0,0,0,0.1);margin:28px 0 0;padding-top:20px;display:flex;gap:16px;flex-wrap:wrap;justify-content:center;">
+        <div style="text-align:center;">
+          <p style="color:#000000;font-size:0.75rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin:0 0 4px;">Piel grasa</p>
+          <p style="color:#000000;font-size:0.75rem;margin:0;opacity:0.75;">Más gel &rarr; textura ultraliviana</p>
+        </div>
+        <div style="width:1px;background:rgba(0,0,0,0.1);flex-shrink:0;">&nbsp;</div>
+        <div style="text-align:center;">
+          <p style="color:#000000;font-size:0.75rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin:0 0 4px;">Piel seca / sensible</p>
+          <p style="color:#000000;font-size:0.75rem;margin:0;opacity:0.75;">Más cápsulas &rarr; máxima nutrición</p>
+        </div>
+        <div style="width:1px;background:rgba(0,0,0,0.1);flex-shrink:0;">&nbsp;</div>
+        <div style="text-align:center;">
+          <p style="color:#000000;font-size:0.75rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin:0 0 4px;">Frecuencia</p>
+          <p style="color:#000000;font-size:0.75rem;margin:0;"><strong>Mañana y noche</strong> &middot; 2+ meses</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="border:none;border-top:1px solid #ede5e5;margin:44px 0;">&nbsp;</div>
+
+  <div style="margin-bottom:40px;">
+    <h3 style="font-size:1.45rem;font-weight:900;color:#000000;margin:0 0 8px;line-height:1.2;">Preguntas frecuentes <span style="color:#000000;">&rarr;</span></h3>
+    <details style="border-bottom:1px solid #ede5e5;">
+      <summary style="padding:18px 0;font-weight:600;font-size:0.88rem;cursor:pointer;list-style:none;color:#000000;">¿Es compatible con vitamina C, retinol o ácidos?</summary>
+      <p style="font-size:0.84rem;line-height:1.7;color:#555555;padding-bottom:18px;margin:0;">Sí. La niacinamida y el PDRN son activos gentiles. Si ya usás retinol o exfoliantes potentes, empezá de a poco.</p>
+    </details>
+    <details style="border-bottom:1px solid #ede5e5;">
+      <summary style="padding:18px 0;font-weight:600;font-size:0.88rem;cursor:pointer;list-style:none;color:#000000;">¿Se usa sola o necesita otros productos?</summary>
+      <p style="font-size:0.84rem;line-height:1.7;color:#555555;padding-bottom:18px;margin:0;">Funciona sola como hidratante final. No necesitás agregar otra crema encima &mdash; hace el trabajo completo.</p>
+    </details>
+    <details style="border-bottom:1px solid #ede5e5;">
+      <summary style="padding:18px 0;font-weight:600;font-size:0.88rem;cursor:pointer;list-style:none;color:#000000;">¿En cuánto tiempo se ven resultados?</summary>
+      <p style="font-size:0.84rem;line-height:1.7;color:#555555;padding-bottom:18px;margin:0;">El glow se nota desde la <strong style="color:#000000;">primera aplicación</strong>. La elasticidad mejora en <strong style="color:#000000;">2 semanas</strong>. Para manchas: 4&ndash;8 semanas.</p>
+    </details>
+    <details style="border-bottom:1px solid #ede5e5;">
+      <summary style="padding:18px 0;font-weight:600;font-size:0.88rem;cursor:pointer;list-style:none;color:#000000;">¿Cuánto dura el frasco de 55 g?</summary>
+      <p style="font-size:0.84rem;line-height:1.7;color:#555555;padding-bottom:18px;margin:0;">Mañana y noche: <strong style="color:#000000;">2 a 2.5 meses</strong>. Solo de noche: hasta 3 meses.</p>
+    </details>
+    <details style="border-bottom:1px solid #ede5e5;">
+      <summary style="padding:18px 0;font-weight:600;font-size:0.88rem;cursor:pointer;list-style:none;color:#000000;">¿El color rosado es de colorantes artificiales?</summary>
+      <p style="font-size:0.84rem;line-height:1.7;color:#555555;padding-bottom:18px;margin:0;">No. El color proviene de los activos naturales (extracto de salmón + PDRN). Sin colorantes ni fragancias artificiales.</p>
+    </details>
+    <details style="border-bottom:1px solid #ede5e5;">
+      <summary style="padding:18px 0;font-weight:600;font-size:0.88rem;cursor:pointer;list-style:none;color:#000000;">¿Cuánto tarda el envío?</summary>
+      <p style="font-size:0.84rem;line-height:1.7;color:#555555;padding-bottom:18px;margin:0;"><strong style="color:#000000;">CABA y GBA:</strong> 24&ndash;48 hs. <strong style="color:#000000;">Interior:</strong> 3&ndash;5 días hábiles. Envío gratis superando los $119.000.</p>
+    </details>
+  </div>
+
+  <div style="margin-bottom:8px;">
+    <div style="background:#000000;border-radius:16px;padding:52px 36px 44px;text-align:center;box-sizing:border-box;">
+      <p style="font-size:0.62rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#f8e8e8;margin:0 0 14px;opacity:0.8;">Coreano. Curado. Real.</p>
+      <p style="color:#fff;font-size:2rem;font-weight:900;line-height:1.15;letter-spacing:-0.5px;margin:0 0 8px;">Una crema.<br>Tu piel cambia.</p>
+      <div style="width:36px;height:2px;background:#f8e8e8;border-radius:2px;margin:20px auto;opacity:0.3;">&nbsp;</div>
+      <div style="display:flex;justify-content:center;gap:24px;flex-wrap:wrap;margin-bottom:32px;">
+        <span style="color:rgba(248,232,232,0.85);font-size:0.73rem;font-weight:600;">PDRN + Colágeno + Niacinamida</span>
+        <span style="color:rgba(248,232,232,0.85);font-size:0.73rem;font-weight:600;">Apto piel sensible</span>
+        <span style="color:rgba(248,232,232,0.85);font-size:0.73rem;font-weight:600;">Original Medicube Korea</span>
+      </div>
+      <a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;" style="display:inline-block;background:#f8e8e8;border:2px solid #f8e8e8;color:#000000;font-weight:700;font-size:0.85rem;letter-spacing:0.5px;padding:16px 52px;border-radius:999px;text-decoration:none;">Comprá ahora &rarr;</a>
+      <p style="color:rgba(248,232,232,0.45);font-size:0.62rem;margin:18px 0 0;letter-spacing:1px;text-transform:uppercase;">Stock disponible &middot; Envío a todo el país &middot; Factura A/B</p>
+    </div>
+  </div>
+</div>

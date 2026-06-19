@@ -1,1 +1,8 @@
 .vercel
+.vscode/
+preview_modules_home.js
+style.backup.css
+style.merged.css
+style.optimized.css
+style.test.css
+
