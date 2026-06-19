@@ -205,3 +205,9 @@ html,body,.template-home,.template-category,.template-product,.template-page{mar
     max-width: 360px !important;
   }
 }
+
+/* Ocultar info de descuentos por cantidad (manejado por pack selector) */
+[data-store="product-promotion-info"],
+.js-product-promo-container {
+  display: none !important;
+}
