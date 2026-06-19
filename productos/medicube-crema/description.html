@@ -177,6 +177,58 @@ body.pdp-pink-collagen-cream .selka-benefit-item strong {
       return null;
     }
 
+    function setAddToCartDisabled(disabled) {
+      var buttons = document.querySelectorAll('.js-addtocart, [data-component="product.add-to-cart"], .js-prod-submit-form, input[type="submit"].cart');
+      buttons.forEach(function(btn) {
+        if (disabled) {
+          btn.disabled = true;
+          btn.classList.add('disabled');
+          if (btn.tagName === 'INPUT') {
+            if (!btn.dataset.origValue) btn.dataset.origValue = btn.value;
+            btn.value = 'Sin stock';
+          } else {
+            if (!btn.dataset.origText) btn.dataset.origText = btn.innerHTML;
+            btn.innerHTML = 'Sin stock';
+          }
+        } else {
+          btn.disabled = false;
+          btn.classList.remove('disabled');
+          if (btn.tagName === 'INPUT') {
+            if (btn.dataset.origValue) btn.value = btn.dataset.origValue;
+          } else {
+            if (btn.dataset.origText) btn.innerHTML = btn.dataset.origText;
+          }
+        }
+      });
+    }
+
+    function validateQuantity() {
+      var qtyInput = document.querySelector('.js-quantity-input') || document.querySelector('[data-component="adding-amount.value"]');
+      if (!qtyInput) return;
+      var maxStock = window.selkaCurrentStock;
+      if (maxStock === undefined || maxStock === null) return;
+
+      var val = parseInt(qtyInput.value, 10);
+      if (isNaN(val) || val < 1) {
+        val = 1;
+      }
+
+      if (maxStock <= 0) {
+        qtyInput.value = 1;
+        qtyInput.disabled = true;
+        setAddToCartDisabled(true);
+        return;
+      } else {
+        qtyInput.disabled = false;
+        setAddToCartDisabled(false);
+      }
+
+      if (val > maxStock) {
+        qtyInput.value = maxStock;
+      }
+      qtyInput.setAttribute('max', maxStock);
+    }
+
     function updateStockBadge() {
       var customBadge = document.querySelector('.selka-stock-badge');
       if (window.selkaIgnoreCartUpdate) {
@@ -189,6 +241,7 @@ body.pdp-pink-collagen-cream .selka-benefit-item strong {
             customBadge.innerHTML = '¡Sin stock disponible!';
           }
         }
+        validateQuantity();
         return;
       }
       
@@ -237,20 +290,45 @@ body.pdp-pink-collagen-cream .selka-benefit-item strong {
           customBadge.innerHTML = '¡Sin stock disponible!';
         }
       }
+      validateQuantity();
     }
 
     updateStockBadge();
     
     if (!window.selkaStockInterval) {
-      window.selkaStockInterval = setInterval(updateStockBadge, 1000);
+      window.selkaStockInterval = setInterval(updateStockBadge, 500);
+    }
+    
+    var qtyInput = document.querySelector('.js-quantity-input') || document.querySelector('[data-component="adding-amount.value"]');
+    if (qtyInput && !qtyInput.dataset.selkaListener) {
+      qtyInput.dataset.selkaListener = "true";
+      ['input', 'change', 'keyup', 'blur'].forEach(function(evName) {
+        qtyInput.addEventListener(evName, validateQuantity);
+      });
+    }
+    
+    var qtyUp = document.querySelector('.js-quantity-up') || document.querySelector('[data-component="product.quantity.plus"]');
+    if (qtyUp && !qtyUp.dataset.selkaListener) {
+      qtyUp.dataset.selkaListener = "true";
+      qtyUp.addEventListener('click', function() {
+        setTimeout(validateQuantity, 50);
+      });
+    }
+    
+    var qtyDown = document.querySelector('.js-quantity-down') || document.querySelector('[data-component="product.quantity.minus"]');
+    if (qtyDown && !qtyDown.dataset.selkaListener) {
+      qtyDown.dataset.selkaListener = "true";
+      qtyDown.addEventListener('click', function() {
+        setTimeout(validateQuantity, 50);
+      });
     }
     
     var addToCartBtn = document.querySelector('.js-addtocart') || document.querySelector('[data-component="product.add-to-cart"]');
     if (addToCartBtn && !addToCartBtn.dataset.stockListener) {
       addToCartBtn.dataset.stockListener = "true";
       addToCartBtn.addEventListener('click', function() {
-        var qtyInput = document.querySelector('.js-quantity-input') || document.querySelector('[data-component="adding-amount.value"]');
-        var qty = qtyInput ? parseInt(qtyInput.value, 10) : 1;
+        var qi = document.querySelector('.js-quantity-input') || document.querySelector('[data-component="adding-amount.value"]');
+        var qty = qi ? parseInt(qi.value, 10) : 1;
         if (isNaN(qty) || qty < 1) qty = 1;
         if (window.selkaCurrentStock !== undefined) {
           window.selkaCurrentStock = Math.max(0, window.selkaCurrentStock - qty);
@@ -258,7 +336,8 @@ body.pdp-pink-collagen-cream .selka-benefit-item strong {
           if (window.selkaCooldownTimeout) clearTimeout(window.selkaCooldownTimeout);
           window.selkaCooldownTimeout = setTimeout(function() {
             window.selkaIgnoreCartUpdate = false;
-          }, 4000);
+            updateStockBadge();
+          }, 1500);
           var customBadge = document.querySelector('.selka-stock-badge');
           if (customBadge) {
             if (window.selkaCurrentStock > 0) {
@@ -267,6 +346,7 @@ body.pdp-pink-collagen-cream .selka-benefit-item strong {
               customBadge.innerHTML = '¡Sin stock disponible!';
             }
           }
+          validateQuantity();
         }
       });
     }
