@@ -12,3 +12,69 @@ html,body,.template-home,.template-category,.template-product,.template-page{mar
     font-size: 20px !important;
   }
 }
+
+/* --- Ocultar sección de productos destacados del Home (Destacados) --- */
+.section-featured-home,
+[data-store="home-products-featured"] {
+  display: none !important;
+}
+
+/* --- Estilo de la sección de bienvenida del Home (Solemne & Simétrica) --- */
+.section-welcome-home,
+[data-store="home-welcome-message"] {
+  padding: 55px 0 !important;
+  margin-top: 30px !important;
+  margin-bottom: 30px !important;
+  background-color: #000000 !important;
+}
+
+/* Remover margen superior de las secciones que siguen a la de bienvenida para mantener simetría */
+.section-new-home,
+.section-sale-home,
+[data-store="home-products-new"],
+[data-store="home-products-sale"] {
+  margin-top: 0 !important;
+}
+
+/* --- Estilo destacado de descuento con Transferencia/depósito en tarjetas de producto --- */
+.js-item-product .js-payment-discount-price-product-container {
+  display: inline-flex !important;
+  margin-top: 8px !important;
+  padding: 6px 12px !important;
+  background: #f8e8e8 !important;
+  border: 1px solid #d697a8 !important;
+  border-radius: 8px !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex-wrap: wrap !important;
+  gap: 4px !important;
+  font-size: 0.78rem !important;
+  color: rgba(17, 17, 17, 0.75) !important;
+  font-weight: 600 !important;
+  line-height: 1.3 !important;
+  width: auto !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.js-item-product .js-payment-discount-price-product {
+  font-weight: 800 !important;
+  color: #111111 !important;
+  font-size: 0.88rem !important;
+}
+
+.js-item-product .js-payment-discount-name-product {
+  font-weight: 700 !important;
+  color: #111111 !important;
+}
+
+@media (max-width: 767px) {
+  .js-item-product .js-payment-discount-price-product-container {
+    padding: 4px 8px !important;
+    font-size: 0.72rem !important;
+    gap: 3px !important;
+  }
+  .js-item-product .js-payment-discount-price-product {
+    font-size: 0.8rem !important;
+  }
+}
