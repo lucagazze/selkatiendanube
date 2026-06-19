@@ -54,25 +54,29 @@ body.pdp-pink-collagen-cream [data-component="product.add-to-cart"]:hover {
 }
 /* Quick benefits bullet list styling */
 body.pdp-pink-collagen-cream .selka-quick-benefits {
-  list-style: none !important;
   padding: 0 !important;
   margin: 18px 0 !important;
   display: flex !important;
   flex-direction: column !important;
-  gap: 10px !important;
-}
-body.pdp-pink-collagen-cream .selka-quick-benefits li {
-  font-size: 13.5px !important;
-  line-height: 1.55 !important;
-  color: #1a1410 !important;
-  display: flex !important;
-  align-items: flex-start !important;
   gap: 8px !important;
-  margin: 0 !important;
 }
-body.pdp-pink-collagen-cream .selka-quick-benefits li strong {
+body.pdp-pink-collagen-cream .selka-benefit-item {
+  font-size: 13px !important;
+  line-height: 1.5 !important;
+  color: #333333 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  list-style: none !important;
+  list-style-type: none !important;
+}
+body.pdp-pink-collagen-cream .selka-benefit-item strong {
   font-weight: 700 !important;
   color: #111111 !important;
+}
+@media (min-width: 768px) {
+  body.pdp-pink-collagen-cream [data-store^="product-info"] {
+    padding-left: 48px !important;
+  }
 }
 </style>
 <script>
@@ -101,12 +105,12 @@ body.pdp-pink-collagen-cream .selka-quick-benefits li strong {
     // Inject short description benefits below transfer discount container
     var discountContainer = document.querySelector('.js-payment-discount-price-product-container') || document.querySelector('.payment-discount-price-product-container') || document.querySelector('.price-container');
     if (discountContainer && !document.querySelector('.selka-quick-benefits')) {
-      var benefits = document.createElement('ul');
+      var benefits = document.createElement('div');
       benefits.className = 'selka-quick-benefits';
       benefits.innerHTML = [
-        '<li>✨ <strong>Glow instantáneo:</strong> Luminosidad natural desde la primera aplicación.</li>',
-        '<li>💗 <strong>Elasticidad profunda:</strong> Firmeza restaurada estimulando el colágeno.</li>',
-        '<li>💧 <strong>Nutrición intensa:</strong> Rostro hidratado, suave y radiante.</li>'
+        '<div class="selka-benefit-item"><strong>Glow instantáneo:</strong> Luminosidad natural desde la primera aplicación.</div>',
+        '<div class="selka-benefit-item"><strong>Elasticidad profunda:</strong> Firmeza restaurada estimulando el colágeno.</div>',
+        '<div class="selka-benefit-item"><strong>Nutrición intensa:</strong> Rostro hidratado, suave y radiante.</div>'
       ].join('');
       discountContainer.parentNode.insertBefore(benefits, discountContainer.nextSibling);
     }
