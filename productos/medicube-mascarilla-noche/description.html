@@ -3,12 +3,7 @@
   // Inject style overrides for social proof and landing page components
   var style = document.createElement('style');
   style.type = 'text/css';
-  style.appendChild(document.createTextNode(`.selka-proof-stars { color: #ffb100 !important; font-size: 14px !important; }
-.selka-proof-text { font-size: 11px !important; }
-@media (min-width: 768px) {
-  .selka-proof-text { font-size: 12.5px !important; }
-  .selka-proof-stars { font-size: 16px !important; }
-}
+  style.appendChild(document.createTextNode(`
 
 .selka-stock-badge{display:inline-block !important;font-size:12.5px !important;font-weight:700 !important;letter-spacing:1.2px !important;text-transform:uppercase !important;padding:6px 14px !important;border-radius:6px !important;margin-top:6px !important;margin-bottom:14px !important;line-height:1.2 !important;position:relative !important;background-color:#fff0f2 !important;color:#111111 !important;border:1.5px solid #d99a96 !important}
 
@@ -409,7 +404,7 @@
     if (productTitle && !document.querySelector('.selka-social-proof')) {
       var proof = document.createElement('div');
       proof.className = 'selka-social-proof';
-      proof.innerHTML = '<span class="selka-proof-stars">★★★★★</span><span class="selka-proof-text">+150 clientes contentos</span>';
+      proof.innerHTML = '<span class="selka-proof-stars">★★★★<span class="selka-half-star">★</span></span><span class="selka-proof-text">195 Reseñas</span>';
       productTitle.parentNode.insertBefore(proof, productTitle);
     }
     

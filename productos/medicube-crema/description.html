@@ -74,13 +74,7 @@ body.pdp-pink-collagen-cream .selka-benefit-item strong {
   font-weight: 700 !important;
   color: #111111 !important;
 }
-body.pdp-pink-collagen-cream .selka-proof-stars {
-  color: #ffb100 !important;
-  font-size: 14px !important;
-}
-body.pdp-pink-collagen-cream .selka-proof-text {
-  font-size: 11px !important;
-}
+
 @media (min-width: 768px) {
   body.pdp-pink-collagen-cream [data-store^="product-info"] {
     padding-left: 48px !important;
@@ -88,12 +82,7 @@ body.pdp-pink-collagen-cream .selka-proof-text {
   body.pdp-pink-collagen-cream .selka-benefit-item {
     font-size: 15px !important;
   }
-  body.pdp-pink-collagen-cream .selka-proof-text {
-    font-size: 12.5px !important;
-  }
-  body.pdp-pink-collagen-cream .selka-proof-stars {
-    font-size: 16px !important;
-  }
+  
 }
 </style>
 <script>
@@ -172,13 +161,7 @@ body.pdp-pink-collagen-cream .selka-benefit-item strong {
   font-weight: 700 !important;
   color: #111111 !important;
 }
-body.pdp-pink-collagen-cream .selka-proof-stars {
-  color: #ffb100 !important;
-  font-size: 14px !important;
-}
-body.pdp-pink-collagen-cream .selka-proof-text {
-  font-size: 11px !important;
-}
+
 @media (min-width: 768px) {
   body.pdp-pink-collagen-cream [data-store^="product-info"] {
     padding-left: 48px !important;
@@ -186,12 +169,7 @@ body.pdp-pink-collagen-cream .selka-proof-text {
   body.pdp-pink-collagen-cream .selka-benefit-item {
     font-size: 15px !important;
   }
-  body.pdp-pink-collagen-cream .selka-proof-text {
-    font-size: 12.5px !important;
-  }
-  body.pdp-pink-collagen-cream .selka-proof-stars {
-    font-size: 16px !important;
-  }
+  
 }
 
 .selka-stock-badge{display:inline-block !important;font-size:12.5px !important;font-weight:700 !important;letter-spacing:1.2px !important;text-transform:uppercase !important;padding:6px 14px !important;border-radius:6px !important;margin-top:6px !important;margin-bottom:14px !important;line-height:1.2 !important;position:relative !important;background-color:#fff0f2 !important;color:#111111 !important;border:1.5px solid #d99a96 !important}
@@ -598,7 +576,7 @@ body.pdp-pink-collagen-cream .selka-proof-text {
     if (productTitle && !document.querySelector('.selka-social-proof')) {
       var proof = document.createElement('div');
       proof.className = 'selka-social-proof';
-      proof.innerHTML = '<span class="selka-proof-stars">★★★★★</span><span class="selka-proof-text">+150 clientes contentos</span>';
+      proof.innerHTML = '<span class="selka-proof-stars">★★★★<span class="selka-half-star">★</span></span><span class="selka-proof-text">324 Reseñas</span>';
       productTitle.parentNode.insertBefore(proof, productTitle);
     }
     
