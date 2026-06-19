@@ -233,7 +233,34 @@ body.pdp-pink-collagen-cream .selka-proof-stars {
       var productTitle = document.querySelector('h1') || document.querySelector('.js-product-name');
       var targetName = productTitle ? productTitle.textContent.trim().toLowerCase() : '';
 
-      // Primary: Use global LS.cart object
+      // Check the DOM first because it's updated dynamically via AJAX!
+      var cartModal = document.getElementById('modal-cart') || document.querySelector('.js-ajax-cart-panel') || document.querySelector('.ajax-cart-container');
+      if (cartModal) {
+        var cartItems = cartModal.querySelectorAll('.js-cart-item, .cart-item, .cart-row');
+        var isEmptyIndicator = cartModal.querySelector('.js-cart-empty, .cart-empty, .js-ajax-cart-empty') || 
+                               cartModal.textContent.toLowerCase().indexOf('vacío') !== -1 || 
+                               cartModal.textContent.toLowerCase().indexOf('vacio') !== -1;
+        
+        if (cartItems.length > 0 || isEmptyIndicator) {
+          var qty = 0;
+          cartItems.forEach(function(item) {
+            if (item.style.display === 'none' || item.classList.contains('opacity-0') || item.style.opacity === '0') {
+              return;
+            }
+            var nameEl = item.querySelector('.cart-item-name, a, h3, .js-cart-item-name');
+            if (nameEl && nameEl.textContent.trim().toLowerCase().includes(targetName)) {
+              var qtyInput = item.querySelector('input[type="number"], .js-cart-quantity-input, .cart-item-quantity, .js-cart-item-quantity');
+              if (qtyInput) {
+                var val = qtyInput.tagName === 'INPUT' ? parseInt(qtyInput.value, 10) : parseInt(qtyInput.textContent, 10);
+                qty += val || 0;
+              }
+            }
+          });
+          return qty;
+        }
+      }
+
+      // Fallback only if DOM is not initialized/loaded yet
       if (typeof LS !== 'undefined' && LS.cart && LS.cart.items) {
         var qty = 0;
         LS.cart.items.forEach(function(item) {
@@ -246,22 +273,7 @@ body.pdp-pink-collagen-cream .selka-proof-stars {
         return qty;
       }
       
-      // Fallback: Use DOM-based scanning of cart modal
-      var cartModal = document.getElementById('modal-cart') || document.querySelector('.js-ajax-cart-panel') || document.body;
-      if (!targetName) return 0;
-      var cartItems = cartModal.querySelectorAll('.js-cart-item, .cart-item, .cart-row');
-      var qty = 0;
-      cartItems.forEach(function(item) {
-        var nameEl = item.querySelector('.cart-item-name, a, h3, .js-cart-item-name');
-        if (nameEl && nameEl.textContent.trim().toLowerCase().includes(targetName)) {
-          var qtyInput = item.querySelector('input[type="number"], .js-cart-quantity-input, .cart-item-quantity, .js-cart-item-quantity');
-          if (qtyInput) {
-            var val = qtyInput.tagName === 'INPUT' ? parseInt(qtyInput.value, 10) : parseInt(qtyInput.textContent, 10);
-            qty += val || 0;
-          }
-        }
-      });
-      return qty;
+      return 0;
     }
 
     function getRealStock() {
@@ -425,18 +437,42 @@ body.pdp-pink-collagen-cream .selka-proof-stars {
       
       var origOpen = XMLHttpRequest.prototype.open;
       XMLHttpRequest.prototype.open = function() {
+        var self = this;
         this.addEventListener('load', function() {
+          try {
+            var url = self.selkaRequestUrl || '';
+            if (typeof url === 'string' && url.indexOf('/cart') !== -1) {
+              var responseData = JSON.parse(self.responseText);
+              if (responseData && responseData.items && typeof LS !== 'undefined') {
+                LS.cart = responseData;
+              }
+            }
+          } catch(e) {}
           setTimeout(updateStockBadge, 50);
           setTimeout(updateStockBadge, 250);
           setTimeout(updateStockBadge, 600);
         });
+        // Save the URL to read it on load
+        this.selkaRequestUrl = arguments[1];
         return origOpen.apply(this, arguments);
       };
       
       if (window.fetch) {
         var origFetch = window.fetch;
         window.fetch = function() {
+          var url = arguments[0] || '';
           return origFetch.apply(this, arguments).then(function(response) {
+            try {
+              if (typeof url === 'string' && url.indexOf('/cart') !== -1) {
+                response.clone().json().then(function(data) {
+                  if (data && data.items && typeof LS !== 'undefined') {
+                    LS.cart = data;
+                  }
+                  setTimeout(updateStockBadge, 50);
+                  setTimeout(updateStockBadge, 250);
+                }).catch(function(){});
+              }
+            } catch(e) {}
             setTimeout(updateStockBadge, 50);
             setTimeout(updateStockBadge, 250);
             setTimeout(updateStockBadge, 600);
