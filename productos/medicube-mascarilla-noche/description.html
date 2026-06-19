@@ -21,10 +21,27 @@
     
     // Inject and update stock badge dynamically (reads real stock, syncs with cart, handles variants)
     function getQuantityInCart() {
-      var cartModal = document.getElementById('modal-cart') || document.querySelector('.js-ajax-cart-panel') || document.body;
+      var variantIdEl = document.querySelector('input[name="variant_id"]') || document.querySelector('.js-variant-id') || document.querySelector('[name="variant"]');
+      var selectedVariantId = variantIdEl ? parseInt(variantIdEl.value, 10) : null;
       var productTitle = document.querySelector('h1') || document.querySelector('.js-product-name');
-      if (!productTitle) return 0;
-      var targetName = productTitle.textContent.trim().toLowerCase();
+      var targetName = productTitle ? productTitle.textContent.trim().toLowerCase() : '';
+
+      // Primary: Use global LS.cart object
+      if (typeof LS !== 'undefined' && LS.cart && LS.cart.items) {
+        var qty = 0;
+        LS.cart.items.forEach(function(item) {
+          if (selectedVariantId && item.variant_id === selectedVariantId) {
+            qty += parseInt(item.quantity, 10) || 0;
+          } else if (!selectedVariantId && targetName && item.name && item.name.toLowerCase().includes(targetName)) {
+            qty += parseInt(item.quantity, 10) || 0;
+          }
+        });
+        return qty;
+      }
+      
+      // Fallback: Use DOM-based scanning of cart modal
+      var cartModal = document.getElementById('modal-cart') || document.querySelector('.js-ajax-cart-panel') || document.body;
+      if (!targetName) return 0;
       var cartItems = cartModal.querySelectorAll('.js-cart-item, .cart-item, .cart-row');
       var qty = 0;
       cartItems.forEach(function(item) {
