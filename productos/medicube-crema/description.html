@@ -560,8 +560,137 @@ body.pdp-pink-collagen-cream .selka-proof-stars {
         }
       });
     }
+
+    // === PACK SELECTOR ===
+    initPackSelector();
   }
-  
+
+  function initPackSelector() {
+    if (document.getElementById('selka-pack-selector')) return;
+
+    var DISC = [0, 0.10, 0.20];
+    var TAGS = ['', 'MAS POPULAR', 'MEJOR VALOR'];
+    var TAG_BG = ['', '#d99a95', '#111111'];
+
+    var basePrice = 0;
+    try { if (window.LS && LS.product && LS.product.price) basePrice = Number(LS.product.price); } catch(e) {}
+    if (!basePrice) {
+      var pm = document.querySelector('[property="tiendanube:price"]');
+      if (pm) basePrice = parseInt(pm.getAttribute('content'), 10);
+    }
+    if (!basePrice) {
+      var pd = document.querySelector('[data-priceraw]');
+      if (pd) basePrice = parseInt(pd.getAttribute('data-priceraw'), 10);
+    }
+    if (!basePrice) return;
+
+    var qtyFormGroup = document.querySelector('.js-quantity.form-quantity-product');
+    var nativeRow = qtyFormGroup ? qtyFormGroup.closest('.form-row') : null;
+    if (!nativeRow) {
+      var bb = document.querySelector('[data-store="product-buy-button"]');
+      if (bb) nativeRow = bb.closest('.form-row');
+    }
+    if (!nativeRow) return;
+
+    var qi = document.querySelector('[data-component="product.adding-amount"] input')
+      || document.querySelector('.js-quantity-input')
+      || document.querySelector('input[name="quantity"]');
+
+    function fmt(n) {
+      return '$\u00a0' + Math.round(n).toLocaleString('es-AR');
+    }
+
+    var html = '<div id="selka-pack-selector" style="margin:18px 0 6px;">';
+    html += '<p style="font-size:9px;font-weight:800;letter-spacing:3px;text-transform:uppercase;text-align:center;color:#aaa;margin:0 0 12px;padding-bottom:12px;border-bottom:1px solid #f0f0f0;">COMPRA UN PACK Y AHORRA</p>';
+
+    for (var i = 0; i < 3; i++) {
+      var qty = i + 1;
+      var disc = DISC[i];
+      var total = Math.round(basePrice * qty * (1 - disc));
+      var orig = basePrice * qty;
+      var saving = orig - total;
+      var isSel = i === 0;
+      var border = isSel ? '2px solid #d99a95' : '1.5px solid #e0e0e0';
+      var bg = isSel ? '#fffbfb' : '#ffffff';
+      var rBg = isSel ? '#d99a95' : '#ffffff';
+      var rBd = isSel ? '#d99a95' : '#c0c0c0';
+
+      html += '<div class="selka-pack-card" data-qty="'+qty+'" style="position:relative;display:flex;align-items:center;gap:12px;padding:13px 14px;border:'+border+';border-radius:12px;background:'+bg+';margin-bottom:9px;cursor:pointer;user-select:none;">';
+
+      if (TAGS[i]) {
+        html += '<span style="position:absolute;top:-10px;right:10px;background:'+TAG_BG[i]+';color:#fff;font-size:8.5px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:3px 9px;border-radius:20px;">'+TAGS[i]+'</span>';
+      }
+
+      html += '<div class="sp-radio" style="width:19px;height:19px;border-radius:50%;border:2px solid '+rBd+';background:'+rBg+';flex-shrink:0;display:flex;align-items:center;justify-content:center;">';
+      if (isSel) html += '<div style="width:7px;height:7px;border-radius:50%;background:#fff;pointer-events:none;"></div>';
+      html += '</div>';
+
+      html += '<div style="flex:1;min-width:0;">';
+      html += '<div style="display:flex;align-items:center;gap:7px;flex-wrap:wrap;">';
+      html += '<span style="font-size:14px;font-weight:800;color:#111;">Compr\u00e1 '+qty+'</span>';
+      if (disc > 0) html += '<span style="font-size:10px;font-weight:700;background:#f2fcf2;color:#2a7a2a;padding:2px 8px;border-radius:20px;">Ahorr\u00e1s '+(disc*100|0)+'%</span>';
+      html += '</div>';
+      if (saving > 0) html += '<div style="font-size:10.5px;color:#bbb;margin-top:2px;">Ahorr\u00e1s '+fmt(saving)+' en total</div>';
+      html += '</div>';
+
+      html += '<div style="text-align:right;flex-shrink:0;">';
+      html += '<div style="font-size:15px;font-weight:800;color:#111;">'+fmt(total)+'</div>';
+      if (disc > 0) html += '<div style="font-size:11px;color:#ccc;text-decoration:line-through;">'+fmt(orig)+'</div>';
+      html += '</div>';
+
+      html += '</div>';
+    }
+
+    html += '<button id="selka-pack-btn" style="display:block;width:100%;margin-top:10px;padding:14px 20px;background:#d99a95;color:#fff;font-family:\'Inter\',sans-serif;font-size:12.5px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;border:none;border-radius:10px;cursor:pointer;">AGREGAR AL CARRITO</button>';
+    html += '</div>';
+
+    nativeRow.insertAdjacentHTML('beforebegin', html);
+    nativeRow.style.cssText = 'position:absolute!important;visibility:hidden!important;pointer-events:none!important;height:1px!important;overflow:hidden!important;';
+
+    var selectedQty = 1;
+    var cards = document.querySelectorAll('.selka-pack-card');
+
+    cards.forEach(function(card) {
+      card.addEventListener('click', function() {
+        selectedQty = parseInt(this.getAttribute('data-qty'), 10);
+        cards.forEach(function(c) {
+          var active = c === card;
+          var radio = c.querySelector('.sp-radio');
+          var dot = radio ? radio.querySelector('div') : null;
+          if (active) {
+            c.style.border = '2px solid #d99a95';
+            c.style.background = '#fffbfb';
+            if (radio) { radio.style.background = '#d99a95'; radio.style.borderColor = '#d99a95'; }
+            if (!dot) {
+              var nd = document.createElement('div');
+              nd.style.cssText = 'width:7px;height:7px;border-radius:50%;background:#fff;pointer-events:none;';
+              if (radio) radio.appendChild(nd);
+            }
+          } else {
+            c.style.border = '1.5px solid #e0e0e0';
+            c.style.background = '#fff';
+            if (radio) { radio.style.background = '#fff'; radio.style.borderColor = '#c0c0c0'; }
+            if (dot) dot.parentNode.removeChild(dot);
+          }
+        });
+      });
+    });
+
+    var pb = document.getElementById('selka-pack-btn');
+    if (pb) {
+      pb.addEventListener('mouseenter', function() { this.style.background = '#c78a86'; });
+      pb.addEventListener('mouseleave', function() { this.style.background = '#d99a95'; });
+      pb.addEventListener('click', function() {
+        if (qi) {
+          qi.value = selectedQty;
+          ['input','change'].forEach(function(ev) { qi.dispatchEvent(new Event(ev, {bubbles:true})); });
+        }
+        var rb = document.querySelector('[data-store="product-buy-button"]');
+        if (rb) rb.click();
+      });
+    }
+  }
+
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', adjustPDP);
   } else {
@@ -571,6 +700,9 @@ body.pdp-pink-collagen-cream .selka-proof-stars {
   setTimeout(adjustPDP, 300);
   setTimeout(adjustPDP, 1000);
   setTimeout(adjustPDP, 2500);
+  setTimeout(initPackSelector, 500);
+  setTimeout(initPackSelector, 1500);
+  setTimeout(initPackSelector, 3000);
  })();
 </script>
 <div class="sk-product">
