@@ -10,7 +10,16 @@
       section.appendChild(desc);
     }
     
-        // Inject and update stock badge dynamically (reads real stock and discounts on add to cart)
+            // Inject social proof badge above the product name
+    var productTitle = document.querySelector('h1') || document.querySelector('.js-product-name');
+    if (productTitle && !document.querySelector('.selka-social-proof')) {
+      var proof = document.createElement('div');
+      proof.className = 'selka-social-proof';
+      proof.innerHTML = '<span class="selka-proof-stars">★★★★★</span><span class="selka-proof-text">+150 clientes contentos</span>';
+      productTitle.parentNode.insertBefore(proof, productTitle);
+    }
+    
+    // Inject and update stock badge dynamically (reads real stock and discounts on add to cart)
     function updateStockBadge() {
       var nativeStockEl = document.querySelector('.js-stock-label') || document.querySelector('.js-stock-label-private') || document.querySelector('[data-store*="label-stock"]');
       var customBadge = document.querySelector('.selka-stock-badge');
