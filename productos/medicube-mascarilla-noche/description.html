@@ -214,6 +214,55 @@
     if (!window.selkaStockInterval) {
       window.selkaStockInterval = setInterval(updateStockBadge, 500);
     }
+
+    // Intercept cart updates (AJAX complete & clicks on cart elements) to sync stock badge instantly
+    if (typeof jQuery !== 'undefined' && !window.selkaAjaxListenerAttached) {
+      window.selkaAjaxListenerAttached = true;
+      jQuery(document).ajaxComplete(function() {
+        setTimeout(updateStockBadge, 50);
+        setTimeout(updateStockBadge, 250);
+        setTimeout(updateStockBadge, 600);
+      });
+    }
+
+    if (!window.selkaNativeAjaxListenerAttached) {
+      window.selkaNativeAjaxListenerAttached = true;
+      
+      var origOpen = XMLHttpRequest.prototype.open;
+      XMLHttpRequest.prototype.open = function() {
+        this.addEventListener('load', function() {
+          setTimeout(updateStockBadge, 50);
+          setTimeout(updateStockBadge, 250);
+          setTimeout(updateStockBadge, 600);
+        });
+        return origOpen.apply(this, arguments);
+      };
+      
+      if (window.fetch) {
+        var origFetch = window.fetch;
+        window.fetch = function() {
+          return origFetch.apply(this, arguments).then(function(response) {
+            setTimeout(updateStockBadge, 50);
+            setTimeout(updateStockBadge, 250);
+            setTimeout(updateStockBadge, 600);
+            return response;
+          });
+        };
+      }
+    }
+
+    if (!window.selkaCartClickListenerAttached) {
+      window.selkaCartClickListenerAttached = true;
+      document.addEventListener('click', function(e) {
+        var target = e.target;
+        if (target.closest('#modal-cart') || target.closest('.js-ajax-cart-panel') || target.closest('[class*="cart"]') || target.closest('[id*="cart"]')) {
+          setTimeout(updateStockBadge, 100);
+          setTimeout(updateStockBadge, 300);
+          setTimeout(updateStockBadge, 600);
+          setTimeout(updateStockBadge, 1200);
+        }
+      });
+    }
     
     var qtyInput = document.querySelector('.js-quantity-input') || document.querySelector('[data-component="adding-amount.value"]');
     if (qtyInput && !qtyInput.dataset.selkaListener) {
