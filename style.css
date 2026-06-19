@@ -114,3 +114,29 @@ html,body,.template-home,.template-category,.template-product,.template-page{mar
     text-align: center !important;
   }
 }
+
+/* --- Descuento transferencia: texto más pequeño en producto individual --- */
+.template-product .payment-discount-price-product-container,
+.template-product .js-payment-discount-price-product-container {
+  font-size: 12px !important;
+  line-height: 1.4 !important;
+}
+.template-product .js-payment-discount-price-product {
+  font-size: 13px !important;
+  font-weight: 700 !important;
+}
+.template-product .js-payment-discount-name-product {
+  font-size: 11.5px !important;
+}
+@media (max-width: 767px) {
+  .template-product .payment-discount-price-product-container,
+  .template-product .js-payment-discount-price-product-container {
+    font-size: 11px !important;
+  }
+  .template-product .js-payment-discount-price-product {
+    font-size: 12px !important;
+  }
+  .template-product .js-payment-discount-name-product {
+    font-size: 10.5px !important;
+  }
+}
