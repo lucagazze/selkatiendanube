@@ -10,16 +10,77 @@
       section.appendChild(desc);
     }
     
-        // Inject stock badge above the quantity selector row
-    var quantityContainer = document.querySelector('.js-quantity') || document.querySelector('[data-component="product.quantity"]');
-    if (quantityContainer) {
-      var parentRow = quantityContainer.closest('.form-row') || quantityContainer.parentElement;
-      if (parentRow && !document.querySelector('.selka-stock-badge')) {
-        var badge = document.createElement('div');
-        badge.className = 'selka-stock-badge';
-        badge.innerHTML = '¡Últimas 4 unidades!';
-        parentRow.parentNode.insertBefore(badge, parentRow);
+        // Inject and update stock badge dynamically (reads real stock and discounts on add to cart)
+    function updateStockBadge() {
+      var nativeStockEl = document.querySelector('.js-stock-label') || document.querySelector('.js-stock-label-private') || document.querySelector('[data-store*="label-stock"]');
+      var customBadge = document.querySelector('.selka-stock-badge');
+      
+      if (window.selkaInitialStock === undefined) {
+        if (nativeStockEl) {
+          var match = nativeStockEl.textContent.match(/\d+/);
+          if (match) {
+            window.selkaInitialStock = parseInt(match[0], 10);
+            window.selkaCurrentStock = window.selkaInitialStock;
+          }
+        }
       }
+      
+      if (window.selkaInitialStock === undefined) {
+        window.selkaInitialStock = 4;
+        window.selkaCurrentStock = 4;
+      }
+      
+      if (window.selkaCurrentStock > 0) {
+        if (!customBadge) {
+          var quantityContainer = document.querySelector('.js-quantity') || document.querySelector('[data-component="product.quantity"]');
+          if (quantityContainer) {
+            var parentRow = quantityContainer.closest('.form-row') || quantityContainer.parentElement;
+            if (parentRow) {
+              customBadge = document.createElement('div');
+              customBadge.className = 'selka-stock-badge';
+              parentRow.parentNode.insertBefore(customBadge, parentRow);
+            }
+          }
+        }
+        if (customBadge) {
+          customBadge.style.display = 'inline-block';
+          customBadge.innerHTML = '¡Últimas ' + window.selkaCurrentStock + ' unidades!';
+        }
+      } else {
+        if (customBadge) {
+          customBadge.style.display = 'none';
+        }
+      }
+    }
+    
+    updateStockBadge();
+    
+    var nativeStockEl = document.querySelector('.js-stock-label') || document.querySelector('.js-stock-label-private') || document.querySelector('[data-store*="label-stock"]');
+    if (nativeStockEl && !window.selkaStockObserverActive) {
+      window.selkaStockObserverActive = true;
+      var observer = new MutationObserver(function() {
+        var match = nativeStockEl.textContent.match(/\d+/);
+        if (match) {
+          window.selkaInitialStock = parseInt(match[0], 10);
+          window.selkaCurrentStock = window.selkaInitialStock;
+          updateStockBadge();
+        }
+      });
+      observer.observe(nativeStockEl, { childList: true, characterData: true, subtree: true });
+    }
+    
+    var addToCartBtn = document.querySelector('.js-addtocart') || document.querySelector('[data-component="product.add-to-cart"]');
+    if (addToCartBtn && !addToCartBtn.dataset.stockListener) {
+      addToCartBtn.dataset.stockListener = "true";
+      addToCartBtn.addEventListener('click', function() {
+        var qtyInput = document.querySelector('.js-quantity-input') || document.querySelector('[data-component="adding-amount.value"]');
+        var qty = qtyInput ? parseInt(qtyInput.value, 10) : 1;
+        if (isNaN(qty) || qty < 1) qty = 1;
+        if (window.selkaCurrentStock !== undefined) {
+          window.selkaCurrentStock = Math.max(0, window.selkaCurrentStock - qty);
+          updateStockBadge();
+        }
+      });
     }
     
     var lastThumb = document.querySelector('.js-product-thumb-modal');
