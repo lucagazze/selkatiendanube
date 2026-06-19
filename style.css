@@ -104,13 +104,11 @@ html,body,.template-home,.template-category,.template-product,.template-page{mar
   text-transform: uppercase !important;
 }
 
-/* --- Stock badge centrado en desktop --- */
-@media (min-width: 768px) {
-  .template-product .selka-stock-badge {
-    display: block !important;
-    width: fit-content !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
-    text-align: center !important;
-  }
+/* --- Stock badge centrado en todas las pantallas --- */
+.template-product .selka-stock-badge {
+  display: block !important;
+  width: fit-content !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  text-align: center !important;
 }
