@@ -1,5 +1,17 @@
 <script>
 (function(){
+  // Inject style overrides for social proof
+  var style = document.createElement('style');
+  style.type = 'text/css';
+  style.appendChild(document.createTextNode([
+    '.selka-proof-stars { color: #ffb100 !important; }',
+    '@media (min-width: 768px) {',
+    '  .selka-proof-text { font-size: 15px !important; }',
+    '  .selka-proof-stars { font-size: 20px !important; }',
+    '}'
+  ].join('\n')));
+  document.head.appendChild(style);
+
   function adjustPDP() {
     if (!document.body.classList.contains('template-product')) return;
     
