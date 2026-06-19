@@ -215,3 +215,8 @@ html,body,.template-home,.template-category,.template-product,.template-page{mar
 .template-product [data-store="product-payment-methods"] {
   display: none !important;
 }
+
+/* Ocultar el contenedor nativo de cantidad + agregar al carrito (reemplazado por pack selector) */
+.template-product .js-accordion-container {
+  display: none !important;
+}
