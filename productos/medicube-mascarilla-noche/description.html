@@ -10,6 +10,18 @@
       section.appendChild(desc);
     }
     
+        // Inject stock badge above the quantity selector row
+    var quantityContainer = document.querySelector('.js-quantity') || document.querySelector('[data-component="product.quantity"]');
+    if (quantityContainer) {
+      var parentRow = quantityContainer.closest('.form-row') || quantityContainer.parentElement;
+      if (parentRow && !document.querySelector('.selka-stock-badge')) {
+        var badge = document.createElement('div');
+        badge.className = 'selka-stock-badge';
+        badge.innerHTML = '¡Últimas 4 unidades!';
+        parentRow.parentNode.insertBefore(badge, parentRow);
+      }
+    }
+    
     var lastThumb = document.querySelector('.js-product-thumb-modal');
     if (lastThumb && !lastThumb.dataset.fixedClick) {
       lastThumb.dataset.fixedClick = "true";
