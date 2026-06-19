@@ -55,19 +55,20 @@ body.pdp-pink-collagen-cream [data-component="product.add-to-cart"]:hover {
 /* Quick benefits bullet list styling */
 body.pdp-pink-collagen-cream .selka-quick-benefits {
   padding: 0 !important;
-  margin: 18px 0 !important;
+  margin: 16px 0 !important;
   display: flex !important;
   flex-direction: column !important;
-  gap: 8px !important;
+  gap: 12px !important;
 }
 body.pdp-pink-collagen-cream .selka-benefit-item {
-  font-size: 13px !important;
-  line-height: 1.5 !important;
-  color: #333333 !important;
+  font-size: 13.5px !important;
+  line-height: 1.6 !important;
+  color: #444444 !important;
+  display: flex !important;
+  align-items: flex-start !important;
+  gap: 10px !important;
   margin: 0 !important;
   padding: 0 !important;
-  list-style: none !important;
-  list-style-type: none !important;
 }
 body.pdp-pink-collagen-cream .selka-benefit-item strong {
   font-weight: 700 !important;
@@ -81,6 +82,92 @@ body.pdp-pink-collagen-cream .selka-benefit-item strong {
 </style>
 <script>
 (function(){
+  // Dynamically inject pink theme and alignment styles to prevent them from being stripped by Tienda Nube's HTML sanitizer
+  var css = [
+    'body.pdp-pink-collagen-cream {',
+    '  background: linear-gradient(180deg, #fffafd 0%, #fdf0f3 100%) !important;',
+    '  background-attachment: fixed !important;',
+    '}',
+    'body.pdp-pink-collagen-cream .js-product-detail,',
+    'body.pdp-pink-collagen-cream #single-product,',
+    'body.pdp-pink-collagen-cream .section-single-product,',
+    'body.pdp-pink-collagen-cream .js-product-container,',
+    'body.pdp-pink-collagen-cream [data-store="product-detail"] {',
+    '  background: transparent !important;',
+    '}',
+    'body.pdp-pink-collagen-cream nav {',
+    '  background: rgba(255, 250, 253, 0.94) !important;',
+    '  border-bottom: 1px solid rgba(214, 151, 168, 0.15) !important;',
+    '}',
+    'body.pdp-pink-collagen-cream footer,',
+    'body.pdp-pink-collagen-cream .section-footer {',
+    '  background: #fdf0f3 !important;',
+    '  border-top: 1px solid rgba(214, 151, 168, 0.15) !important;',
+    '}',
+    'body.pdp-pink-collagen-cream details {',
+    '  border-bottom: 1px solid rgba(214, 151, 168, 0.25) !important;',
+    '}',
+    'body.pdp-pink-collagen-cream details[open] {',
+    '  border-bottom: 1.5px solid #d697a8 !important;',
+    '}',
+    'body.pdp-pink-collagen-cream details summary {',
+    '  color: #1a1410 !important;',
+    '}',
+    'body.pdp-pink-collagen-cream details summary::after {',
+    '  color: #d697a8 !important;',
+    '}',
+    'body.pdp-pink-collagen-cream details[open] summary {',
+    '  color: #d697a8 !important;',
+    '}',
+    'body.pdp-pink-collagen-cream details summary:hover {',
+    '  color: #d697a8 !important;',
+    '}',
+    'body.pdp-pink-collagen-cream .js-addtocart,',
+    'body.pdp-pink-collagen-cream [data-component="product.add-to-cart"] {',
+    '  background-color: #d697a8 !important;',
+    '  border: 1px solid #c28293 !important;',
+    '  color: #ffffff !important;',
+    '  transition: all 0.3s ease !important;',
+    '  box-shadow: 0 4px 15px rgba(214, 151, 168, 0.2) !important;',
+    '}',
+    'body.pdp-pink-collagen-cream .js-addtocart:hover,',
+    'body.pdp-pink-collagen-cream [data-component="product.add-to-cart"]:hover {',
+    '  background-color: #c28293 !important;',
+    '  transform: translateY(-1px) !important;',
+    '  box-shadow: 0 6px 20px rgba(214, 151, 168, 0.35) !important;',
+    '}',
+    'body.pdp-pink-collagen-cream .selka-quick-benefits {',
+    '  padding: 0 !important;',
+    '  margin: 16px 0 !important;',
+    '  display: flex !important;',
+    '  flex-direction: column !important;',
+    '  gap: 12px !important;',
+    '}',
+    'body.pdp-pink-collagen-cream .selka-benefit-item {',
+    '  font-size: 13.5px !important;',
+    '  line-height: 1.6 !important;',
+    '  color: #444444 !important;',
+    '  display: flex !important;',
+    '  align-items: flex-start !important;',
+    '  gap: 10px !important;',
+    '  margin: 0 !important;',
+    '  padding: 0 !important;',
+    '}',
+    'body.pdp-pink-collagen-cream .selka-benefit-item strong {',
+    '  font-weight: 700 !important;',
+    '  color: #111111 !important;',
+    '}',
+    '@media (min-width: 768px) {',
+    '  body.pdp-pink-collagen-cream [data-store^="product-info"] {',
+    '    padding-left: 48px !important;',
+    '  }',
+    '}'
+  ].join('\n');
+  var style = document.createElement('style');
+  style.type = 'text/css';
+  style.appendChild(document.createTextNode(css));
+  document.head.appendChild(style);
+
   function adjustPDP() {
     if (!document.body.classList.contains('template-product')) return;
     
@@ -108,9 +195,9 @@ body.pdp-pink-collagen-cream .selka-benefit-item strong {
       var benefits = document.createElement('div');
       benefits.className = 'selka-quick-benefits';
       benefits.innerHTML = [
-        '<div class="selka-benefit-item"><strong>Glow instantáneo:</strong> Luminosidad natural desde la primera aplicación.</div>',
-        '<div class="selka-benefit-item"><strong>Elasticidad profunda:</strong> Firmeza restaurada estimulando el colágeno.</div>',
-        '<div class="selka-benefit-item"><strong>Nutrición intensa:</strong> Rostro hidratado, suave y radiante.</div>'
+        '<div class="selka-benefit-item"><span>✨</span><span><strong>Glow instantáneo:</strong> Luminosidad natural desde la primera aplicación.</span></div>',
+        '<div class="selka-benefit-item"><span>💗</span><span><strong>Elasticidad profunda:</strong> Firmeza restaurada estimulando el colágeno.</span></div>',
+        '<div class="selka-benefit-item"><span>💧</span><span><strong>Nutrición intensa:</strong> Rostro hidratado, suave y radiante.</span></div>'
       ].join('');
       discountContainer.parentNode.insertBefore(benefits, discountContainer.nextSibling);
     }
