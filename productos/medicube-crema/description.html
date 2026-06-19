@@ -416,19 +416,74 @@ body.pdp-pink-collagen-cream .selka-proof-stars {
       validateQuantity();
     }
 
-    updateStockBadge();
+    function parseArgentinePrice(priceStr) {
+      var cleaned = priceStr.replace(/[^0-9,.-]/g, '');
+      if (cleaned.indexOf(',') !== -1) {
+        cleaned = cleaned.replace(/\./g, '').replace(/,/g, '.');
+      } else {
+        cleaned = cleaned.replace(/\./g, '');
+      }
+      return parseFloat(cleaned) || 0;
+    }
+
+    function updateCartTransferPrice() {
+      var cartModal = document.getElementById('modal-cart') || document.querySelector('.js-ajax-cart-panel') || document.querySelector('.ajax-cart-container');
+      if (!cartModal) return;
+      
+      var totalEl = cartModal.querySelector('.js-cart-total');
+      if (!totalEl) return;
+      
+      var totalContainer = totalEl.closest('.js-cart-total-container') || totalEl.parentElement;
+      if (!totalContainer) return;
+      
+      var totalPrice = parseArgentinePrice(totalEl.textContent.trim());
+      if (totalPrice <= 0) {
+        var existing = cartModal.querySelector('.selka-cart-transfer-container');
+        if (existing) existing.parentNode.removeChild(existing);
+        return;
+      }
+      
+      var transferPrice = totalPrice * 0.90;
+      var formattedTransfer = '$\u00a0' + Math.round(transferPrice).toLocaleString('es-AR');
+      
+      var customContainer = cartModal.querySelector('.selka-cart-transfer-container');
+      if (!customContainer) {
+        customContainer = document.createElement('div');
+        customContainer.className = 'selka-cart-transfer-container';
+        customContainer.style.cssText = 'margin-top: 12px; padding: 12px 16px; background: #fff8f8; border: 1.5px solid #d99a96; border-radius: 12px; display: flex; align-items: center; justify-content: space-between; clear: both;';
+        totalContainer.parentNode.insertBefore(customContainer, totalContainer.nextSibling);
+      }
+      
+      customContainer.innerHTML = [
+        '<div style="display: flex; align-items: center; gap: 8px;">',
+        '  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#d99a96" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0;"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>',
+        '  <span style="font-size: 12px; font-weight: 700; color: #111; letter-spacing: 0.2px;">Transferencia bancaria</span>',
+        '</div>',
+        '<div style="text-align: right;">',
+        '  <div style="font-size: 14.5px; font-weight: 800; color: #b86258;">' + formattedTransfer + '</div>',
+        '  <div style="font-size: 10px; font-weight: 700; color: #b86258; letter-spacing: 0.5px; text-transform: uppercase; margin-top: 1px;">10% de descuento</div>',
+        '</div>'
+      ].join('');
+    }
+
+    function updateCartAndStock() {
+      updateStockBadge();
+      updateCartTransferPrice();
+    }
+
+    updateCartAndStock();
     
     if (!window.selkaStockInterval) {
-      window.selkaStockInterval = setInterval(updateStockBadge, 500);
+      window.selkaStockInterval = setInterval(updateCartAndStock, 500);
     }
 
     // Intercept cart updates (AJAX complete & clicks on cart elements) to sync stock badge instantly
     if (typeof jQuery !== 'undefined' && !window.selkaAjaxListenerAttached) {
       window.selkaAjaxListenerAttached = true;
       jQuery(document).ajaxComplete(function() {
-        setTimeout(updateStockBadge, 50);
-        setTimeout(updateStockBadge, 250);
-        setTimeout(updateStockBadge, 600);
+        setTimeout(updateCartAndStock, 50);
+        setTimeout(updateCartAndStock, 250);
+        setTimeout(updateCartAndStock, 600);
       });
     }
 
@@ -448,9 +503,9 @@ body.pdp-pink-collagen-cream .selka-proof-stars {
               }
             }
           } catch(e) {}
-          setTimeout(updateStockBadge, 50);
-          setTimeout(updateStockBadge, 250);
-          setTimeout(updateStockBadge, 600);
+          setTimeout(updateCartAndStock, 50);
+          setTimeout(updateCartAndStock, 250);
+          setTimeout(updateCartAndStock, 600);
         });
         // Save the URL to read it on load
         this.selkaRequestUrl = arguments[1];
@@ -468,14 +523,14 @@ body.pdp-pink-collagen-cream .selka-proof-stars {
                   if (data && data.items && typeof LS !== 'undefined') {
                     LS.cart = data;
                   }
-                  setTimeout(updateStockBadge, 50);
-                  setTimeout(updateStockBadge, 250);
+                  setTimeout(updateCartAndStock, 50);
+                  setTimeout(updateCartAndStock, 250);
                 }).catch(function(){});
               }
             } catch(e) {}
-            setTimeout(updateStockBadge, 50);
-            setTimeout(updateStockBadge, 250);
-            setTimeout(updateStockBadge, 600);
+            setTimeout(updateCartAndStock, 50);
+            setTimeout(updateCartAndStock, 250);
+            setTimeout(updateCartAndStock, 600);
             return response;
           });
         };
@@ -487,10 +542,10 @@ body.pdp-pink-collagen-cream .selka-proof-stars {
       document.addEventListener('click', function(e) {
         var target = e.target;
         if (target.closest('#modal-cart') || target.closest('.js-ajax-cart-panel') || target.closest('[class*="cart"]') || target.closest('[id*="cart"]')) {
-          setTimeout(updateStockBadge, 100);
-          setTimeout(updateStockBadge, 300);
-          setTimeout(updateStockBadge, 600);
-          setTimeout(updateStockBadge, 1200);
+          setTimeout(updateCartAndStock, 100);
+          setTimeout(updateCartAndStock, 300);
+          setTimeout(updateCartAndStock, 600);
+          setTimeout(updateCartAndStock, 1200);
         }
       });
     }
@@ -532,7 +587,7 @@ body.pdp-pink-collagen-cream .selka-proof-stars {
           if (window.selkaCooldownTimeout) clearTimeout(window.selkaCooldownTimeout);
           window.selkaCooldownTimeout = setTimeout(function() {
             window.selkaIgnoreCartUpdate = false;
-            updateStockBadge();
+            updateCartAndStock();
           }, 1500);
           var customBadge = document.querySelector('.selka-stock-badge');
           if (customBadge) {
