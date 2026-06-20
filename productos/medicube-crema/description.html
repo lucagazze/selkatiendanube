@@ -1174,20 +1174,16 @@ body.pdp-pink-collagen-cream .selka-benefit-item strong {
     }
     if (!nativeRow) return;
 
-    var qi = getProductQtyInput();
-
     function fmt(n) {
       return '$\u00a0' + Math.round(n).toLocaleString('es-AR');
     }
 
     var html = '<div id="selka-pack-selector" style="margin:20px 0 20px;">';
 
-
     for (var i = 0; i < 3; i++) {
       var qty = i + 1;
       var disc = DISC[i];
       var total = Math.round(basePrice * qty * (1 - disc));
-      var orig = basePrice * qty;
       var isSel = i === 0;
       var border = isSel ? '2px solid #d99a95' : '1.5px solid #e8e8e8';
       var bg = isSel ? '#fffbfb' : '#fafafa';
@@ -1237,38 +1233,42 @@ body.pdp-pink-collagen-cream .selka-benefit-item strong {
     html += '</div>';
     html += '</div>';
 
-
     nativeRow.insertAdjacentHTML('beforebegin', html);
     nativeRow.style.cssText = 'position:absolute!important;visibility:hidden!important;pointer-events:none!important;height:1px!important;overflow:hidden!important;';
 
-    var selectedQty = 1;
     var cards = document.querySelectorAll('.selka-pack-card');
 
     cards.forEach(function(card) {
       card.addEventListener('click', function() {
-        selectedQty = parseInt(this.getAttribute('data-qty'), 10);
+        // Marcamos la tarjeta activa con una clase temporal para identificarla de forma inequívoca
         cards.forEach(function(c) {
-          var active = c === card;
+          c.classList.remove('selka-active-card');
           var radio = c.querySelector('.sp-radio');
           var dot = radio ? radio.querySelector('div') : null;
-          if (active) {
-            c.style.border = '2px solid #d99a95';
-            c.style.background = '#fffbfb';
-            if (radio) { radio.style.background = '#d99a95'; radio.style.borderColor = '#d99a95'; }
-            if (!dot) {
-              var nd = document.createElement('div');
-              nd.style.cssText = 'width:7px;height:7px;border-radius:50%;background:#fff;pointer-events:none;';
-              if (radio) radio.appendChild(nd);
-            }
-          } else {
-            c.style.border = '1.5px solid #e0e0e0';
-            c.style.background = '#fff';
-            if (radio) { radio.style.background = '#fff'; radio.style.borderColor = '#c0c0c0'; }
-            if (dot) dot.parentNode.removeChild(dot);
-          }
+          c.style.border = '1.5px solid #e0e0e0';
+          c.style.background = '#fff';
+          if (radio) { radio.style.background = '#fff'; radio.style.borderColor = '#c0c0c0'; }
+          if (dot) dot.parentNode.removeChild(dot);
         });
+
+        this.classList.add('selka-active-card');
+        this.style.border = '2px solid #d99a95';
+        this.style.background = '#fffbfb';
+        var radio = this.querySelector('.sp-radio');
+        if (radio) { 
+          radio.style.background = '#d99a95'; 
+          radio.style.borderColor = '#d99a95'; 
+          var nd = document.createElement('div');
+          nd.style.cssText = 'width:7px;height:7px;border-radius:50%;background:#fff;pointer-events:none;';
+          radio.appendChild(nd);
+        }
       });
     });
+
+    // Forzar que la primera tarjeta tenga la clase activa por defecto en el inicio
+    if(cards.length > 0) {
+      cards[0].classList.add('selka-active-card');
+    }
 
     var pb = document.getElementById('selka-pack-btn');
     if (pb) {
@@ -1279,6 +1279,11 @@ body.pdp-pink-collagen-cream .selka-benefit-item strong {
         e.stopPropagation();
         
         var self = this;
+
+        // Capturar la cantidad exacta leyendo directamente la tarjeta marcada en este instante
+        var activeCard = document.querySelector('.selka-active-card');
+        var finalQty = activeCard ? parseInt(activeCard.getAttribute('data-qty'), 10) : 1;
+
         self.disabled = true;
         self.style.opacity = '0.7';
         self.innerText = 'AGREGANDO...';
@@ -1293,14 +1298,13 @@ body.pdp-pink-collagen-cream .selka-benefit-item strong {
                    document.querySelector('#product_form') || 
                    document.querySelector('form[action*="/carrito/agregar"]');
 
-        // 2. Si tenemos la variante y el formulario, enviamos directamente por AJAX puro simulando la petición nativa
         if (variantId && form) {
           var actionUrl = form.getAttribute('action') || '/carrito/agregar';
           
-          // Creamos los parámetros exactos para Tienda Nube
+          // Construimos la petición nativa en crudo evitando los inputs rotos de la plantilla
           var params = new URLSearchParams();
           params.append('variant_id', variantId);
-          params.append('quantity', selectedQty);
+          params.append('quantity', finalQty);
 
           window.fetch(actionUrl, {
             method: 'POST',
@@ -1313,7 +1317,7 @@ body.pdp-pink-collagen-cream .selka-benefit-item strong {
           .then(function(response) {
             // Sincronizar nuestro Stock Badge visual
             if (window.selkaCurrentStock !== undefined) {
-              window.selkaCurrentStock = Math.max(0, window.selkaCurrentStock - selectedQty);
+              window.selkaCurrentStock = Math.max(0, window.selkaCurrentStock - finalQty);
               window.selkaIgnoreCartUpdate = true;
               if (window.selkaCooldownTimeout) clearTimeout(window.selkaCooldownTimeout);
               window.selkaCooldownTimeout = setTimeout(function() {
@@ -1328,16 +1332,14 @@ body.pdp-pink-collagen-cream .selka-benefit-item strong {
               }
             }
 
-            // ¡LA CLAVE! Forzamos a la plantilla de Tienda Nube a refrescar y abrir el carrito dinámico
+            // Llamar a la función nativa de actualización del minicart
             if (typeof refreshCartUI === 'function') {
               refreshCartUI();
             } else {
-              // Si tu plantilla usa otra función alternativa para refrescar el minicart por AJAX:
               var cartTrigger = document.querySelector('#cart-icon-bubble, [data-store="header-cart"] button, .js-cart-widget, .js-open-cart, [data-toggle="modal"][data-target="#modal-cart"]');
               if (cartTrigger) {
                 cartTrigger.click();
               }
-              // Lanzamos un trigger global por si la plantilla escucha cambios en el documento
               if (typeof jQuery !== 'undefined') {
                 jQuery(document).trigger('ajaxComplete');
               }
@@ -1345,11 +1347,9 @@ body.pdp-pink-collagen-cream .selka-benefit-item strong {
           })
           .catch(function(err) {
             console.error(err);
-            // Fallback: si falla el fetch, enviamos el form de manera tradicional
             form.submit();
           })
           .finally(function() {
-            // Restaurar el botón personalizado
             setTimeout(function() {
               self.style.opacity = '1';
               self.disabled = false;
@@ -1358,7 +1358,6 @@ body.pdp-pink-collagen-cream .selka-benefit-item strong {
           });
 
         } else {
-          // Fallback absoluto si no encuentra la estructura básica
           self.style.opacity = '1';
           self.disabled = false;
           self.innerText = 'CONTINUAR';
