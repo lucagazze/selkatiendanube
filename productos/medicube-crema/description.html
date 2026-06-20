@@ -1276,110 +1276,93 @@ body.pdp-pink-collagen-cream .selka-benefit-item strong {
       pb.addEventListener('mouseleave', function() { this.style.background = '#d99a95'; });
       pb.addEventListener('click', function(e) {
         e.preventDefault();
+        e.stopPropagation();
         
         var self = this;
-        
-        // --- VALIDACIÓN DE STOCK REAL ---
-        // Si el usuario elige 3 pero el stock disponible actual es menor, limitamos la compra al máximo real
-        var stockDisponible = window.selkaCurrentStock !== undefined ? window.selkaCurrentStock : 99;
-        var cantidadAEnviar = selectedQty;
-        
-        if (stockDisponible < cantidadAEnviar) {
-          cantidadAEnviar = stockDisponible;
-          if (cantidadAEnviar <= 0) {
-            alert('Lo sentimos, no queda stock disponible de este producto.');
-            return;
-          } else {
-            alert('¡Solo quedan ' + stockDisponible + ' unidades disponibles! Agregaremos esa cantidad a tu carrito.');
-          }
-        }
-
         self.disabled = true;
         self.style.opacity = '0.7';
         self.innerText = 'AGREGANDO...';
 
+        // 1. Obtener el ID de la variante actual
+        var variantIdEl = document.querySelector('input[name="variant_id"]') || 
+                          document.querySelector('.js-variant-id') || 
+                          document.querySelector('[name="variant"]');
+        var variantId = variantIdEl ? variantIdEl.value : null;
+
         var form = document.querySelector('.js-product-form') || 
                    document.querySelector('#product_form') || 
-                   document.querySelector('form[action*="/carrito/agregar"]') || 
-                   document.querySelector('[data-component="product.form"]');
+                   document.querySelector('form[action*="/carrito/agregar"]');
 
-        if (form) {
-          // Interceptor de submit para clavarle la cantidad máxima real calculada
-          var injectQuantity = function(event) {
-            var inputs = form.querySelectorAll('input[name="quantity"]');
-            inputs.forEach(function(input) {
-              input.value = cantidadAEnviar;
-              input.setAttribute('value', cantidadAEnviar);
-            });
-
-            if (event.formData) {
-              event.formData.set('quantity', cantidadAEnviar);
-            }
-          };
-
-          form.addEventListener('submit', injectQuantity, { capture: true });
+        // 2. Si tenemos la variante y el formulario, enviamos directamente por AJAX puro simulando la petición nativa
+        if (variantId && form) {
+          var actionUrl = form.getAttribute('action') || '/carrito/agregar';
           
-          if (typeof jQuery !== 'undefined') {
-            jQuery(form).on('submit', function() {
-              jQuery(form).find('input[name="quantity"]').val(cantidadAEnviar);
-            });
-          }
+          // Creamos los parámetros exactos para Tienda Nube
+          var params = new URLSearchParams();
+          params.append('variant_id', variantId);
+          params.append('quantity', selectedQty);
 
-          // Forzamos los inputs de la plantilla
-          var qi = getProductQtyInput();
-          if (qi) {
-            qi.removeAttribute('max'); // Removemos temporalmente el tope para que no bloquee el click nativo
-            qi.value = cantidadAEnviar;
-            qi.setAttribute('value', cantidadAEnviar);
-            if (typeof jQuery !== 'undefined') {
-              jQuery(qi).val(cantidadAEnviar).trigger('change');
+          window.fetch(actionUrl, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded',
+              'X-Requested-With': 'XMLHttpRequest'
+            },
+            body: params.toString()
+          })
+          .then(function(response) {
+            // Sincronizar nuestro Stock Badge visual
+            if (window.selkaCurrentStock !== undefined) {
+              window.selkaCurrentStock = Math.max(0, window.selkaCurrentStock - selectedQty);
+              window.selkaIgnoreCartUpdate = true;
+              if (window.selkaCooldownTimeout) clearTimeout(window.selkaCooldownTimeout);
+              window.selkaCooldownTimeout = setTimeout(function() {
+                window.selkaIgnoreCartUpdate = false;
+                updateCartAndStock();
+              }, 2000);
+              var customBadge = document.querySelector('.selka-stock-badge');
+              if (customBadge) {
+                customBadge.innerHTML = window.selkaCurrentStock > 0
+                  ? '¡Últimas ' + window.selkaCurrentStock + ' unidades!'
+                  : '¡Sin stock disponible!';
+              }
             }
-          }
 
-          // Ejecutamos la acción nativa de compra
-          var nativeSubmitBtn = document.querySelector('.js-addtocart') || 
-                                document.querySelector('[data-component="product.add-to-cart"]') || 
-                                document.querySelector('.js-prod-submit-form') ||
-                                document.querySelector('input[type="submit"].cart');
-
-          if (nativeSubmitBtn) {
-            nativeSubmitBtn.click();
-          } else {
+            // ¡LA CLAVE! Forzamos a la plantilla de Tienda Nube a refrescar y abrir el carrito dinámico
+            if (typeof refreshCartUI === 'function') {
+              refreshCartUI();
+            } else {
+              // Si tu plantilla usa otra función alternativa para refrescar el minicart por AJAX:
+              var cartTrigger = document.querySelector('#cart-icon-bubble, [data-store="header-cart"] button, .js-cart-widget, .js-open-cart, [data-toggle="modal"][data-target="#modal-cart"]');
+              if (cartTrigger) {
+                cartTrigger.click();
+              }
+              // Lanzamos un trigger global por si la plantilla escucha cambios en el documento
+              if (typeof jQuery !== 'undefined') {
+                jQuery(document).trigger('ajaxComplete');
+              }
+            }
+          })
+          .catch(function(err) {
+            console.error(err);
+            // Fallback: si falla el fetch, enviamos el form de manera tradicional
             form.submit();
-          }
-
-          // Limpieza y restauración del entorno
-          setTimeout(function() {
-            form.removeEventListener('submit', injectQuantity, { capture: true });
-            self.style.opacity = '1';
-            self.disabled = false;
-            self.innerText = 'CONTINUAR';
-          }, 1200);
+          })
+          .finally(function() {
+            // Restaurar el botón personalizado
+            setTimeout(function() {
+              self.style.opacity = '1';
+              self.disabled = false;
+              self.innerText = 'CONTINUAR';
+            }, 800);
+          });
 
         } else {
+          // Fallback absoluto si no encuentra la estructura básica
           self.style.opacity = '1';
           self.disabled = false;
           self.innerText = 'CONTINUAR';
         }
-
-        // Actualización del badge de stock propio basado en lo que realmente se mandó
-        if (window.selkaCurrentStock !== undefined) {
-          window.selkaCurrentStock = Math.max(0, window.selkaCurrentStock - cantidadAEnviar);
-          window.selkaIgnoreCartUpdate = true;
-          if (window.selkaCooldownTimeout) clearTimeout(window.selkaCooldownTimeout);
-          window.selkaCooldownTimeout = setTimeout(function() {
-            window.selkaIgnoreCartUpdate = false;
-            updateCartAndStock();
-          }, 2000);
-          var customBadge = document.querySelector('.selka-stock-badge');
-          if (customBadge) {
-            customBadge.innerHTML = window.selkaCurrentStock > 0
-              ? '¡Últimas ' + window.selkaCurrentStock + ' unidades!'
-              : '¡Sin stock disponible!';
-          }
-        }
-      });
-    }
   }
 
   if (document.readyState === 'loading') {
