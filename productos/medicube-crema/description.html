@@ -1278,53 +1278,65 @@ body.pdp-pink-collagen-cream .selka-benefit-item strong {
         e.preventDefault();
         
         var self = this;
+        
+        // --- VALIDACIÓN DE STOCK REAL ---
+        // Si el usuario elige 3 pero el stock disponible actual es menor, limitamos la compra al máximo real
+        var stockDisponible = window.selkaCurrentStock !== undefined ? window.selkaCurrentStock : 99;
+        var cantidadAEnviar = selectedQty;
+        
+        if (stockDisponible < cantidadAEnviar) {
+          cantidadAEnviar = stockDisponible;
+          if (cantidadAEnviar <= 0) {
+            alert('Lo sentimos, no queda stock disponible de este producto.');
+            return;
+          } else {
+            alert('¡Solo quedan ' + stockDisponible + ' unidades disponibles! Agregaremos esa cantidad a tu carrito.');
+          }
+        }
+
         self.disabled = true;
         self.style.opacity = '0.7';
         self.innerText = 'AGREGANDO...';
 
-        // 1. Ubicar el formulario de compra nativo
         var form = document.querySelector('.js-product-form') || 
                    document.querySelector('#product_form') || 
                    document.querySelector('form[action*="/carrito/agregar"]') || 
                    document.querySelector('[data-component="product.form"]');
 
         if (form) {
-          // 2. INYECTOR DEFINITIVO: Interceptamos el envío nativo justo antes de que viaje por AJAX
+          // Interceptor de submit para clavarle la cantidad máxima real calculada
           var injectQuantity = function(event) {
-            // Buscamos cualquier input de cantidad dentro de este formulario y le clavamos el valor real
             var inputs = form.querySelectorAll('input[name="quantity"]');
             inputs.forEach(function(input) {
-              input.value = selectedQty;
-              input.setAttribute('value', selectedQty);
+              input.value = cantidadAEnviar;
+              input.setAttribute('value', cantidadAEnviar);
             });
 
-            // Si la plantilla usa FormData nativo en su AJAX, modificamos el objeto si es accesible
             if (event.formData) {
-              event.formData.set('quantity', selectedQty);
+              event.formData.set('quantity', cantidadAEnviar);
             }
           };
 
-          // Escuchamos el submit en una fase ultra-temprana (capture: true)
           form.addEventListener('submit', injectQuantity, { capture: true });
           
-          // También escuchamos el evento nativo de Tienda Nube si usa jQuery de fondo
           if (typeof jQuery !== 'undefined') {
             jQuery(form).on('submit', function() {
-              jQuery(form).find('input[name="quantity"]').val(selectedQty);
+              jQuery(form).find('input[name="quantity"]').val(cantidadAEnviar);
             });
           }
 
-          // 3. Modificar los inputs visibles por las dudas
+          // Forzamos los inputs de la plantilla
           var qi = getProductQtyInput();
           if (qi) {
-            qi.value = selectedQty;
-            qi.setAttribute('value', selectedQty);
+            qi.removeAttribute('max'); // Removemos temporalmente el tope para que no bloquee el click nativo
+            qi.value = cantidadAEnviar;
+            qi.setAttribute('value', cantidadAEnviar);
             if (typeof jQuery !== 'undefined') {
-              jQuery(qi).val(selectedQty).trigger('change');
+              jQuery(qi).val(cantidadAEnviar).trigger('change');
             }
           }
 
-          // 4. Hacerle click al botón nativo oculto para disparar el proceso original de Tienda Nube
+          // Ejecutamos la acción nativa de compra
           var nativeSubmitBtn = document.querySelector('.js-addtocart') || 
                                 document.querySelector('[data-component="product.add-to-cart"]') || 
                                 document.querySelector('.js-prod-submit-form') ||
@@ -1333,11 +1345,10 @@ body.pdp-pink-collagen-cream .selka-benefit-item strong {
           if (nativeSubmitBtn) {
             nativeSubmitBtn.click();
           } else {
-            // Si el botón oculto no responde, forzamos el submit del formulario
             form.submit();
           }
 
-          // 5. Limpieza: Removemos el interceptor después de un segundo para que no ensucie futuros clicks
+          // Limpieza y restauración del entorno
           setTimeout(function() {
             form.removeEventListener('submit', injectQuantity, { capture: true });
             self.style.opacity = '1';
@@ -1346,15 +1357,14 @@ body.pdp-pink-collagen-cream .selka-benefit-item strong {
           }, 1200);
 
         } else {
-          // Fallback absoluto por si no detecta ningún contenedor de formulario
           self.style.opacity = '1';
           self.disabled = false;
           self.innerText = 'CONTINUAR';
         }
 
-        // 6. Actualización puramente visual de tu badge de stock (Tu lógica actual)
+        // Actualización del badge de stock propio basado en lo que realmente se mandó
         if (window.selkaCurrentStock !== undefined) {
-          window.selkaCurrentStock = Math.max(0, window.selkaCurrentStock - selectedQty);
+          window.selkaCurrentStock = Math.max(0, window.selkaCurrentStock - cantidadAEnviar);
           window.selkaIgnoreCartUpdate = true;
           if (window.selkaCooldownTimeout) clearTimeout(window.selkaCooldownTimeout);
           window.selkaCooldownTimeout = setTimeout(function() {
