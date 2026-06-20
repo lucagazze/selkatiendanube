@@ -1282,27 +1282,77 @@ body.pdp-pink-collagen-cream .selka-benefit-item strong {
         self.style.opacity = '0.7';
         self.innerText = 'AGREGANDO...';
 
-        // 1. Buscamos el input de cantidad nativo de tu plantilla de Tienda Nube
-        var qi = getProductQtyInput() || 
-                 document.querySelector('.js-product-quantity') || 
-                 document.querySelector('input[name="quantity"]');
+        // 1. Ubicar el formulario de compra nativo
+        var form = document.querySelector('.js-product-form') || 
+                   document.querySelector('#product_form') || 
+                   document.querySelector('form[action*="/carrito/agregar"]') || 
+                   document.querySelector('[data-component="product.form"]');
 
-        if (qi) {
-          // Le asignamos la cantidad elegida (2 o 3)
-          qi.value = selectedQty;
-          qi.setAttribute('value', selectedQty);
+        if (form) {
+          // 2. INYECTOR DEFINITIVO: Interceptamos el envío nativo justo antes de que viaje por AJAX
+          var injectQuantity = function(event) {
+            // Buscamos cualquier input de cantidad dentro de este formulario y le clavamos el valor real
+            var inputs = form.querySelectorAll('input[name="quantity"]');
+            inputs.forEach(function(input) {
+              input.value = selectedQty;
+              input.setAttribute('value', selectedQty);
+            });
 
-          // ¡CLAVE! Tienda Nube usa jQuery para guardar el estado del formulario.
-          // Si no gatillamos el evento change a través de jQuery, la plantilla sigue creyendo que es 1.
+            // Si la plantilla usa FormData nativo en su AJAX, modificamos el objeto si es accesible
+            if (event.formData) {
+              event.formData.set('quantity', selectedQty);
+            }
+          };
+
+          // Escuchamos el submit en una fase ultra-temprana (capture: true)
+          form.addEventListener('submit', injectQuantity, { capture: true });
+          
+          // También escuchamos el evento nativo de Tienda Nube si usa jQuery de fondo
           if (typeof jQuery !== 'undefined') {
-            jQuery(qi).val(selectedQty).trigger('change');
-          } else {
-            qi.dispatchEvent(new Event('change', { bubbles: true }));
-            qi.dispatchEvent(new Event('input', { bubbles: true }));
+            jQuery(form).on('submit', function() {
+              jQuery(form).find('input[name="quantity"]').val(selectedQty);
+            });
           }
+
+          // 3. Modificar los inputs visibles por las dudas
+          var qi = getProductQtyInput();
+          if (qi) {
+            qi.value = selectedQty;
+            qi.setAttribute('value', selectedQty);
+            if (typeof jQuery !== 'undefined') {
+              jQuery(qi).val(selectedQty).trigger('change');
+            }
+          }
+
+          // 4. Hacerle click al botón nativo oculto para disparar el proceso original de Tienda Nube
+          var nativeSubmitBtn = document.querySelector('.js-addtocart') || 
+                                document.querySelector('[data-component="product.add-to-cart"]') || 
+                                document.querySelector('.js-prod-submit-form') ||
+                                document.querySelector('input[type="submit"].cart');
+
+          if (nativeSubmitBtn) {
+            nativeSubmitBtn.click();
+          } else {
+            // Si el botón oculto no responde, forzamos el submit del formulario
+            form.submit();
+          }
+
+          // 5. Limpieza: Removemos el interceptor después de un segundo para que no ensucie futuros clicks
+          setTimeout(function() {
+            form.removeEventListener('submit', injectQuantity, { capture: true });
+            self.style.opacity = '1';
+            self.disabled = false;
+            self.innerText = 'CONTINUAR';
+          }, 1200);
+
+        } else {
+          // Fallback absoluto por si no detecta ningún contenedor de formulario
+          self.style.opacity = '1';
+          self.disabled = false;
+          self.innerText = 'CONTINUAR';
         }
 
-        // 2. Actualización de tu Stock Badge visual
+        // 6. Actualización puramente visual de tu badge de stock (Tu lógica actual)
         if (window.selkaCurrentStock !== undefined) {
           window.selkaCurrentStock = Math.max(0, window.selkaCurrentStock - selectedQty);
           window.selkaIgnoreCartUpdate = true;
@@ -1318,31 +1368,6 @@ body.pdp-pink-collagen-cream .selka-benefit-item strong {
               : '¡Sin stock disponible!';
           }
         }
-
-        // 3. Dejar pasar un milisegundo para que la plantilla asimile el cambio de cantidad y hacer click nativo
-        setTimeout(function() {
-          var nativeSubmitBtn = document.querySelector('.js-addtocart') || 
-                                document.querySelector('[data-component="product.add-to-cart"]') || 
-                                document.querySelector('.js-prod-submit-form') ||
-                                document.querySelector('input[type="submit"].cart');
-
-          if (nativeSubmitBtn) {
-            // Simulamos el click real. Esto va a disparar el AJAX nativo de la plantilla
-            // que agrega las 2/3 unidades y abre el modal/drawer al instante.
-            nativeSubmitBtn.click();
-          } else {
-            // Si no encuentra el botón por alguna razón rara, envía el form
-            var form = document.querySelector('.js-product-form') || document.querySelector('#product_form');
-            if (form) form.submit();
-          }
-
-          // Restauramos el botón de los packs
-          setTimeout(function() {
-            self.style.opacity = '1';
-            self.disabled = false;
-            self.innerText = 'CONTINUAR';
-          }, 1000);
-        }, 100); // Pequeña pausa técnica para asegurar la sincronización
       });
     }
   }
