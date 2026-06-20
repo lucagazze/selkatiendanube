@@ -559,9 +559,35 @@ body.pdp-pink-collagen-cream .selka-benefit-item strong {
   style.appendChild(document.createTextNode(css));
   document.head.appendChild(style);
 
+  function getProductQtyInput() {
+    var form = document.querySelector('.js-product-form') || document.querySelector('#product_form') || document.querySelector('.js-prod-submit-form') || document.querySelector('form[action*="/carrito/agregar"]') || document.querySelector('form[action*="/comprar"]') || document.querySelector('[data-component="product.form"]');
+    var input = form ? (form.querySelector('.js-quantity-input') || form.querySelector('input[name="quantity"]') || form.querySelector('[data-component="adding-amount.value"]') || form.querySelector('input[type="number"]')) : null;
+    return input || document.querySelector('.js-quantity-input') || document.querySelector('[data-component="adding-amount.value"]') || document.querySelector('input[name="quantity"]');
+  }
+
   function adjustPDP() {
     if (!document.body.classList.contains('template-product')) return;
     
+    function syncLSCart() {
+      if (typeof LS !== 'undefined' && LS.cart) {
+        var products = null;
+        if (LS.cart.products) {
+          products = LS.cart.products;
+        } else if (LS.cart.cart && LS.cart.cart.products) {
+          products = LS.cart.cart.products;
+        } else if (LS.cart.items) {
+          products = LS.cart.items;
+        }
+        if (products && Array.isArray(products)) {
+          LS.cart.items = products.map(function(p) {
+            return Object.assign({}, p, { item_id: p.item_id || p.id });
+          });
+          if (!LS.cart.products) LS.cart.products = products;
+          if (LS.cart.cart && !LS.cart.cart.products) LS.cart.cart.products = products;
+        }
+      }
+    }
+
     document.body.classList.add('pdp-pink-collagen-cream');
     
     var desc = document.querySelector('[data-store^="product-description"]');
@@ -612,46 +638,62 @@ body.pdp-pink-collagen-cream .selka-benefit-item strong {
       var productTitle = document.querySelector('h1') || document.querySelector('.js-product-name');
       var targetName = productTitle ? productTitle.textContent.trim().toLowerCase() : '';
 
-      // Check the DOM first because it's updated dynamically via AJAX!
+      // 1. Try to read from LS.cart first (source of truth in JS)
+      if (typeof LS !== 'undefined' && LS.cart) {
+        var items = null;
+        if (LS.cart.items) {
+          items = LS.cart.items;
+        } else if (LS.cart.cart && LS.cart.cart.products) {
+          items = LS.cart.cart.products;
+        } else if (LS.cart.products) {
+          items = LS.cart.products;
+        }
+        
+        if (items && items.length > 0) {
+          var qty = 0;
+          var found = false;
+          items.forEach(function(item) {
+            var itemId = item.variant_id || item.id;
+            if (selectedVariantId && itemId === selectedVariantId) {
+              qty += parseInt(item.quantity, 10) || 0;
+              found = true;
+            } else if (targetName && item.name && item.name.toLowerCase().includes(targetName)) {
+              qty += parseInt(item.quantity, 10) || 0;
+              found = true;
+            }
+          });
+          if (found) {
+            return qty;
+          }
+        }
+      }
+
+      // 2. Fallback to DOM parsing of the cart modal
       var cartModal = document.getElementById('modal-cart') || document.querySelector('.js-ajax-cart-panel') || document.querySelector('.ajax-cart-container');
       if (cartModal) {
         var cartItems = cartModal.querySelectorAll('.js-cart-item, .cart-item, .cart-row');
-        var isEmptyIndicator = cartModal.querySelector('.js-cart-empty, .cart-empty, .js-ajax-cart-empty') || 
-                               cartModal.textContent.toLowerCase().indexOf('vacío') !== -1 || 
-                               cartModal.textContent.toLowerCase().indexOf('vacio') !== -1;
-        
-        if (cartItems.length > 0 || isEmptyIndicator) {
-          var qty = 0;
+        if (cartItems.length > 0) {
+          var domQty = 0;
+          var foundInDOM = false;
           cartItems.forEach(function(item) {
             if (item.style.display === 'none' || item.classList.contains('opacity-0') || item.style.opacity === '0') {
               return;
             }
-            var nameEl = item.querySelector('.cart-item-name, a, h3, .js-cart-item-name');
+            var nameEl = item.querySelector('.cart-item-name, .js-cart-item-name, h3');
             if (nameEl && nameEl.textContent.trim().toLowerCase().includes(targetName)) {
               var qtyInput = item.querySelector('input[type="number"], .js-cart-quantity-input, .cart-item-quantity, .js-cart-item-quantity');
               if (qtyInput) {
                 var val = qtyInput.tagName === 'INPUT' ? parseInt(qtyInput.value, 10) : parseInt(qtyInput.textContent, 10);
-                qty += val || 0;
+                domQty += val || 0;
+                foundInDOM = true;
               }
             }
           });
-          return qty;
+          if (foundInDOM) {
+            return domQty;
+          }
         }
       }
-
-      // Fallback only if DOM is not initialized/loaded yet
-      if (typeof LS !== 'undefined' && LS.cart && LS.cart.items) {
-        var qty = 0;
-        LS.cart.items.forEach(function(item) {
-          if (selectedVariantId && item.variant_id === selectedVariantId) {
-            qty += parseInt(item.quantity, 10) || 0;
-          } else if (!selectedVariantId && targetName && item.name && item.name.toLowerCase().includes(targetName)) {
-            qty += parseInt(item.quantity, 10) || 0;
-          }
-        });
-        return qty;
-      }
-      
       return 0;
     }
 
@@ -705,7 +747,7 @@ body.pdp-pink-collagen-cream .selka-benefit-item strong {
     }
 
     function validateQuantity() {
-      var qtyInput = document.querySelector('.js-quantity-input') || document.querySelector('[data-component="adding-amount.value"]');
+      var qtyInput = getProductQtyInput();
       if (!qtyInput) return;
       var maxStock = window.selkaCurrentStock;
       if (maxStock === undefined || maxStock === null) return;
@@ -846,6 +888,7 @@ body.pdp-pink-collagen-cream .selka-benefit-item strong {
     }
 
     function updateCartAndStock() {
+      syncLSCart();
       updateStockBadge();
       updateCartTransferPrice();
     }
@@ -866,6 +909,28 @@ body.pdp-pink-collagen-cream .selka-benefit-item strong {
       });
     }
 
+    function openCartModal() {
+      var modal = document.getElementById('modal-cart');
+      var isOpen = modal && (modal.classList.contains('show') || modal.classList.contains('in') || window.getComputedStyle(modal).display !== 'none');
+      if (isOpen) {
+        return; // already open, do nothing!
+      }
+      
+      // Try using jQuery Bootstrap modal show if available
+      if (typeof jQuery !== 'undefined' && jQuery('#modal-cart').modal) {
+        try {
+          jQuery('#modal-cart').modal('show');
+          return;
+        } catch(e) {}
+      }
+      
+      // Fallback: click the trigger
+      var cartTrigger = document.querySelector('[data-store="header-cart"] button, .js-cart-widget, .js-open-cart, [data-toggle="modal"][data-target="#modal-cart"]');
+      if (cartTrigger) {
+        cartTrigger.click();
+      }
+    }
+
     if (!window.selkaNativeAjaxListenerAttached) {
       window.selkaNativeAjaxListenerAttached = true;
       
@@ -875,10 +940,21 @@ body.pdp-pink-collagen-cream .selka-benefit-item strong {
         this.addEventListener('load', function() {
           try {
             var url = self.selkaRequestUrl || '';
-            if (typeof url === 'string' && url.indexOf('/cart') !== -1) {
+            var urlStr = (typeof url === 'string') ? url : (url.toString ? url.toString() : '');
+            if (urlStr && (urlStr.indexOf('/cart') !== -1 || urlStr.indexOf('/carrito') !== -1 || urlStr.indexOf('/comprar') !== -1)) {
               var responseData = JSON.parse(self.responseText);
-              if (responseData && responseData.items && typeof LS !== 'undefined') {
-                LS.cart = responseData;
+              if (responseData && typeof LS !== 'undefined') {
+                var cartData = responseData.cart || responseData;
+                if (LS.cart) {
+                  Object.assign(LS.cart, cartData);
+                } else {
+                  LS.cart = cartData;
+                }
+                syncLSCart();
+              }
+              // If it's an add to cart, open modal
+              if (urlStr.indexOf('/carrito/agregar') !== -1 || urlStr.indexOf('/comprar') !== -1) {
+                setTimeout(openCartModal, 150);
               }
             }
           } catch(e) {}
@@ -895,12 +971,22 @@ body.pdp-pink-collagen-cream .selka-benefit-item strong {
         var origFetch = window.fetch;
         window.fetch = function() {
           var url = arguments[0] || '';
+          var urlStr = (typeof url === 'string') ? url : (url.url || '');
           return origFetch.apply(this, arguments).then(function(response) {
             try {
-              if (typeof url === 'string' && url.indexOf('/cart') !== -1) {
+              if (urlStr && (urlStr.indexOf('/cart') !== -1 || urlStr.indexOf('/carrito') !== -1 || urlStr.indexOf('/comprar') !== -1)) {
                 response.clone().json().then(function(data) {
-                  if (data && data.items && typeof LS !== 'undefined') {
-                    LS.cart = data;
+                  if (data && typeof LS !== 'undefined') {
+                    var cartData = data.cart || data;
+                    if (LS.cart) {
+                      Object.assign(LS.cart, cartData);
+                    } else {
+                      LS.cart = cartData;
+                    }
+                    syncLSCart();
+                  }
+                  if (urlStr.indexOf('/carrito/agregar') !== -1 || urlStr.indexOf('/comprar') !== -1) {
+                    setTimeout(openCartModal, 150);
                   }
                   setTimeout(updateCartAndStock, 50);
                   setTimeout(updateCartAndStock, 250);
@@ -929,7 +1015,7 @@ body.pdp-pink-collagen-cream .selka-benefit-item strong {
       });
     }
     
-    var qtyInput = document.querySelector('.js-quantity-input') || document.querySelector('[data-component="adding-amount.value"]');
+    var qtyInput = getProductQtyInput();
     if (qtyInput && !qtyInput.dataset.selkaListener) {
       qtyInput.dataset.selkaListener = "true";
       ['input', 'change', 'keyup', 'blur'].forEach(function(evName) {
@@ -957,7 +1043,7 @@ body.pdp-pink-collagen-cream .selka-benefit-item strong {
     if (addToCartBtn && !addToCartBtn.dataset.stockListener) {
       addToCartBtn.dataset.stockListener = "true";
       addToCartBtn.addEventListener('click', function() {
-        var qi = document.querySelector('.js-quantity-input') || document.querySelector('[data-component="adding-amount.value"]');
+        var qi = getProductQtyInput();
         var qty = qi ? parseInt(qi.value, 10) : 1;
         if (isNaN(qty) || qty < 1) qty = 1;
         if (window.selkaCurrentStock !== undefined) {
@@ -1026,9 +1112,7 @@ body.pdp-pink-collagen-cream .selka-benefit-item strong {
     }
     if (!nativeRow) return;
 
-    var qi = document.querySelector('[data-component="product.adding-amount"] input')
-      || document.querySelector('.js-quantity-input')
-      || document.querySelector('input[name="quantity"]');
+    var qi = getProductQtyInput();
 
     function fmt(n) {
       return '$\u00a0' + Math.round(n).toLocaleString('es-AR');
@@ -1133,51 +1217,70 @@ body.pdp-pink-collagen-cream .selka-benefit-item strong {
         self.disabled = true;
         self.style.opacity = '0.7';
 
-        // Update native quantity input
+        // Set native quantity input silently (NO event dispatch - avoid theme auto-add)
+        var qi = getProductQtyInput();
         if (qi) {
           qi.value = selectedQty;
-          ['input','change'].forEach(function(ev) { qi.dispatchEvent(new Event(ev, {bubbles:true})); });
         }
 
-        // Find the product form
-        var submitBtn = document.querySelector('[data-store="product-buy-button"]');
-        var form = submitBtn ? submitBtn.closest('form') : null;
-
-        function afterAdd() {
-          self.style.opacity = '1';
-          self.disabled = false;
-          // Open cart widget/modal
-          var cartTrigger = document.querySelector('[data-store="header-cart"] button, .js-cart-widget, .js-open-cart, [data-toggle="modal"][data-target="#modal-cart"]');
-          if (cartTrigger) cartTrigger.click();
-          // Dispatch cart updated events for TN theme
-          ['cart:updated','nuvemshop:cart:updated','cart-item:added'].forEach(function(name) {
-            try { document.dispatchEvent(new CustomEvent(name, {bubbles:true})); } catch(e) {}
-            try { window.dispatchEvent(new CustomEvent(name, {bubbles:true})); } catch(e) {}
-          });
+        // Update stock badge immediately (before fetch completes)
+        if (window.selkaCurrentStock !== undefined) {
+          window.selkaCurrentStock = Math.max(0, window.selkaCurrentStock - selectedQty);
+          window.selkaIgnoreCartUpdate = true;
+          if (window.selkaCooldownTimeout) clearTimeout(window.selkaCooldownTimeout);
+          window.selkaCooldownTimeout = setTimeout(function() {
+            window.selkaIgnoreCartUpdate = false;
+            updateCartAndStock();
+          }, 2000);
+          var customBadge = document.querySelector('.selka-stock-badge');
+          if (customBadge) {
+            customBadge.innerHTML = window.selkaCurrentStock > 0
+              ? '¡Últimas ' + window.selkaCurrentStock + ' unidades!'
+              : '¡Sin stock disponible!';
+          }
         }
 
-        if (form && window.fetch) {
+        // Find product form for direct fetch (bypasses theme's native handler entirely)
+        var form = document.querySelector('.js-product-form') || document.querySelector('#product_form') || document.querySelector('form[action*="/carrito/agregar"]') || document.querySelector('form[action*="/comprar"]') || document.querySelector('[data-component="product.form"]');
+
+        if (form) {
           var fd = new FormData(form);
           fd.set('quantity', selectedQty);
-          fetch(form.getAttribute('action') || '/carrito/agregar', {
+          var actionUrl = form.getAttribute('action') || '/carrito/agregar';
+
+          // Use window.fetch (our interceptor will handle LS.cart + openCartModal)
+          window.fetch(actionUrl, {
             method: 'POST',
             body: fd,
             headers: {'X-Requested-With': 'XMLHttpRequest'}
           }).then(function(r) {
-            return r.ok ? r.json().catch(function(){ return {}; }) : Promise.reject(r.status);
+            return r.json().catch(function(){ return {}; });
           }).then(function(data) {
-            try { if (window.LS && data) LS.cart = data; } catch(e) {}
-            afterAdd();
+            try {
+              if (data && typeof LS !== 'undefined') {
+                var cartData = data.cart || data;
+                if (LS.cart) { Object.assign(LS.cart, cartData); } else { LS.cart = cartData; }
+                syncLSCart();
+              }
+            } catch(e) {}
+            setTimeout(openCartModal, 150);
+            setTimeout(updateCartAndStock, 300);
+            self.style.opacity = '1';
+            self.disabled = false;
           }).catch(function() {
-            // Fallback: native click (may redirect, but at least it works)
-            if (submitBtn) submitBtn.click();
+            setTimeout(openCartModal, 200);
             self.style.opacity = '1';
             self.disabled = false;
           });
-        } else if (submitBtn) {
-          submitBtn.click();
-          self.style.opacity = '1';
-          self.disabled = false;
+        } else {
+          // No form found: last-resort fallback without dispatchEvent
+          var submitBtn = document.querySelector('.js-addtocart') || document.querySelector('[data-component="product.add-to-cart"]') || document.querySelector('[data-store="product-buy-button"]');
+          if (submitBtn) submitBtn.click();
+          setTimeout(function() {
+            self.style.opacity = '1';
+            self.disabled = false;
+            openCartModal();
+          }, 1500);
         }
       });
     }
