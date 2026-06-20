@@ -1279,13 +1279,16 @@ body.pdp-pink-collagen-cream .selka-benefit-item strong {
         self.disabled = true;
         self.style.opacity = '0.7';
 
-        // Set native quantity input silently (NO event dispatch - avoid theme auto-add)
+        // 1. Sincronizar la cantidad seleccionada con el input nativo de la tienda
         var qi = getProductQtyInput();
         if (qi) {
           qi.value = selectedQty;
+          // Disparamos eventos nativos por si la plantilla los escucha
+          qi.dispatchEvent(new Event('change', { bubbles: true }));
+          qi.dispatchEvent(new Event('input', { bubbles: true }));
         }
 
-        // Update stock badge immediately (before fetch completes)
+        // 2. Actualización visual instantánea de tu stock badge (Tu lógica actual)
         if (window.selkaCurrentStock !== undefined) {
           window.selkaCurrentStock = Math.max(0, window.selkaCurrentStock - selectedQty);
           window.selkaIgnoreCartUpdate = true;
@@ -1302,61 +1305,30 @@ body.pdp-pink-collagen-cream .selka-benefit-item strong {
           }
         }
 
-        // Find product form for direct fetch (bypasses theme's native handler entirely)
-        var form = document.querySelector('.js-product-form') || document.querySelector('#product_form') || document.querySelector('form[action*="/carrito/agregar"]') || document.querySelector('form[action*="/comprar"]') || document.querySelector('[data-component="product.form"]');
+        // 3. Buscar el botón de compra original de Tienda Nube que ocultamos
+        var nativeSubmitBtn = document.querySelector('.js-addtocart') || 
+                              document.querySelector('[data-component="product.add-to-cart"]') || 
+                              document.querySelector('input[type="submit"].cart') ||
+                              document.querySelector('.js-prod-submit-form');
 
-        if (form) {
-          var fd = new FormData(form);
-          fd.set('quantity', selectedQty);
-          var actionUrl = form.getAttribute('action') || '/carrito/agregar';
-
-          // Add sections to formData so server returns the updated cart sections HTML
-          var cartWidget = document.querySelector('cart-notification') || document.querySelector('cart-drawer');
-          if (cartWidget && typeof cartWidget.getSectionsToRender === 'function') {
-            var sections = cartWidget.getSectionsToRender().map(function(s) { return s.id; }).join(',');
-            fd.append('sections', sections);
-            fd.append('sections_url', window.location.pathname);
-          }
-
-          // Use window.fetch (our interceptor will handle LS.cart + openCartModal)
-          window.fetch(actionUrl, {
-            method: 'POST',
-            body: fd,
-            headers: {'X-Requested-With': 'XMLHttpRequest'}
-          }).then(function(r) {
-            return r.json().catch(function(){ return {}; });
-          }).then(function(data) {
-            try {
-              if (data && typeof LS !== 'undefined') {
-                var cartData = data.cart || data;
-                if (LS.cart) { Object.assign(LS.cart, cartData); } else { LS.cart = cartData; }
-                syncLSCart();
-              }
-            } catch(e) {}
-            
-            // Render the cart sections dynamically so the cart items update in the drawer without reload!
-            if (data && cartWidget && typeof cartWidget.renderContents === 'function') {
-              cartWidget.renderContents(data);
-            } else {
-              setTimeout(refreshCartUI, 150);
-            }
-            setTimeout(updateCartAndStock, 300);
-            self.style.opacity = '1';
-            self.disabled = false;
-          }).catch(function() {
-            setTimeout(refreshCartUI, 200);
-            self.style.opacity = '1';
-            self.disabled = false;
-          });
-        } else {
-          // No form found: last-resort fallback without dispatchEvent
-          var submitBtn = document.querySelector('.js-addtocart') || document.querySelector('[data-component="product.add-to-cart"]') || document.querySelector('[data-store="product-buy-button"]');
-          if (submitBtn) submitBtn.click();
+        if (nativeSubmitBtn) {
+          // Simulamos el clic real. Esto activa el AJAX nativo de Tienda Nube
+          nativeSubmitBtn.click();
+          
+          // Devolvemos el estado al botón del selector después de un momento
           setTimeout(function() {
             self.style.opacity = '1';
             self.disabled = false;
-            refreshCartUI();
-          }, 1500);
+          }, 1000);
+        } else {
+          // Fallback por si la estructura del form cambia: enviar el formulario directamente
+          var form = document.querySelector('.js-product-form') || document.querySelector('#product_form') || document.querySelector('form[action*="/carrito/agregar"]');
+          if (form) {
+            form.submit();
+          } else {
+            self.style.opacity = '1';
+            self.disabled = false;
+          }
         }
       });
     }
