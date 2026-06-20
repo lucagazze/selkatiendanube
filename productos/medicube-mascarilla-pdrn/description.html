@@ -725,6 +725,14 @@
     }
 
     function openCartModal() {
+      // 1. Try modern theme cart-drawer or cart-notification
+      var cartWidget = document.querySelector('cart-notification') || document.querySelector('cart-drawer');
+      if (cartWidget && typeof cartWidget.open === 'function') {
+        cartWidget.open();
+        return;
+      }
+
+      // 2. Try legacy modal-cart
       var modal = document.getElementById('modal-cart');
       var isOpen = modal && (modal.classList.contains('show') || modal.classList.contains('in') || window.getComputedStyle(modal).display !== 'none');
       if (isOpen) {
@@ -740,7 +748,7 @@
       }
       
       // Fallback: click the trigger
-      var cartTrigger = document.querySelector('[data-store="header-cart"] button, .js-cart-widget, .js-open-cart, [data-toggle="modal"][data-target="#modal-cart"]');
+      var cartTrigger = document.querySelector('#cart-icon-bubble, [data-store="header-cart"] button, .js-cart-widget, .js-open-cart, [data-toggle="modal"][data-target="#modal-cart"]');
       if (cartTrigger) {
         cartTrigger.click();
       }

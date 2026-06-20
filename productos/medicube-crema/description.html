@@ -910,6 +910,14 @@ body.pdp-pink-collagen-cream .selka-benefit-item strong {
     }
 
     function openCartModal() {
+      // 1. Try modern theme cart-drawer or cart-notification
+      var cartWidget = document.querySelector('cart-notification') || document.querySelector('cart-drawer');
+      if (cartWidget && typeof cartWidget.open === 'function') {
+        cartWidget.open();
+        return;
+      }
+
+      // 2. Try legacy modal-cart
       var modal = document.getElementById('modal-cart');
       var isOpen = modal && (modal.classList.contains('show') || modal.classList.contains('in') || window.getComputedStyle(modal).display !== 'none');
       if (isOpen) {
@@ -925,7 +933,7 @@ body.pdp-pink-collagen-cream .selka-benefit-item strong {
       }
       
       // Fallback: click the trigger
-      var cartTrigger = document.querySelector('[data-store="header-cart"] button, .js-cart-widget, .js-open-cart, [data-toggle="modal"][data-target="#modal-cart"]');
+      var cartTrigger = document.querySelector('#cart-icon-bubble, [data-store="header-cart"] button, .js-cart-widget, .js-open-cart, [data-toggle="modal"][data-target="#modal-cart"]');
       if (cartTrigger) {
         cartTrigger.click();
       }
@@ -1248,6 +1256,14 @@ body.pdp-pink-collagen-cream .selka-benefit-item strong {
           fd.set('quantity', selectedQty);
           var actionUrl = form.getAttribute('action') || '/carrito/agregar';
 
+          // Add sections to formData so server returns the updated cart sections HTML
+          var cartWidget = document.querySelector('cart-notification') || document.querySelector('cart-drawer');
+          if (cartWidget && typeof cartWidget.getSectionsToRender === 'function') {
+            var sections = cartWidget.getSectionsToRender().map(function(s) { return s.id; }).join(',');
+            fd.append('sections', sections);
+            fd.append('sections_url', window.location.pathname);
+          }
+
           // Use window.fetch (our interceptor will handle LS.cart + openCartModal)
           window.fetch(actionUrl, {
             method: 'POST',
@@ -1263,7 +1279,13 @@ body.pdp-pink-collagen-cream .selka-benefit-item strong {
                 syncLSCart();
               }
             } catch(e) {}
-            setTimeout(openCartModal, 150);
+            
+            // Render the cart sections dynamically so the cart items update in the drawer without reload!
+            if (data && cartWidget && typeof cartWidget.renderContents === 'function') {
+              cartWidget.renderContents(data);
+            } else {
+              setTimeout(openCartModal, 150);
+            }
             setTimeout(updateCartAndStock, 300);
             self.style.opacity = '1';
             self.disabled = false;
