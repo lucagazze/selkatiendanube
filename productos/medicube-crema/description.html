@@ -1275,114 +1275,74 @@ body.pdp-pink-collagen-cream .selka-benefit-item strong {
       pb.addEventListener('mouseenter', function() { this.style.background = '#c78a86'; });
       pb.addEventListener('mouseleave', function() { this.style.background = '#d99a95'; });
       pb.addEventListener('click', function(e) {
-        e.preventDefault(); // Previene cualquier comportamiento extraño
+        e.preventDefault();
         
         var self = this;
         self.disabled = true;
         self.style.opacity = '0.7';
         self.innerText = 'AGREGANDO...';
 
-        // 1. Obtener el ID de la variante seleccionada actual
-        var variantIdEl = document.querySelector('input[name="variant_id"]') || 
-                          document.querySelector('.js-variant-id') || 
-                          document.querySelector('[name="variant"]');
-        var variantId = variantIdEl ? variantIdEl.value : null;
+        // 1. Buscamos el input de cantidad nativo de tu plantilla de Tienda Nube
+        var qi = getProductQtyInput() || 
+                 document.querySelector('.js-product-quantity') || 
+                 document.querySelector('input[name="quantity"]');
 
-        // 2. Intentar usar la API nativa de Tienda Nube (El método más seguro para cantidades)
-        if (typeof Tiendanube !== 'undefined' && Tiendanube.cart && typeof Tiendanube.cart.add === 'function' && variantId) {
-          
-          Tiendanube.cart.add({
-            variant_id: variantId,
-            quantity: selectedQty
-          }).then(function(response) {
-            // Éxito: Actualizamos badge de stock
-            executeStockBadgeUpdate(selectedQty);
-            
-            // Forzamos a la plantilla a refrescar la interfaz del carrito lateral
-            if (typeof refreshCartUI === 'function') {
-              refreshCartUI();
-            } else {
-              // Si no existe refreshCartUI, abrimos el modal buscando el trigger nativo
-              var cartTrigger = document.querySelector('#cart-icon-bubble, [data-store="header-cart"] button, .js-cart-widget, .js-open-cart');
-              if (cartTrigger) cartTrigger.click();
-            }
-            
-            // Restaurar botón
+        if (qi) {
+          // Le asignamos la cantidad elegida (2 o 3)
+          qi.value = selectedQty;
+          qi.setAttribute('value', selectedQty);
+
+          // ¡CLAVE! Tienda Nube usa jQuery para guardar el estado del formulario.
+          // Si no gatillamos el evento change a través de jQuery, la plantilla sigue creyendo que es 1.
+          if (typeof jQuery !== 'undefined') {
+            jQuery(qi).val(selectedQty).trigger('change');
+          } else {
+            qi.dispatchEvent(new Event('change', { bubbles: true }));
+            qi.dispatchEvent(new Event('input', { bubbles: true }));
+          }
+        }
+
+        // 2. Actualización de tu Stock Badge visual
+        if (window.selkaCurrentStock !== undefined) {
+          window.selkaCurrentStock = Math.max(0, window.selkaCurrentStock - selectedQty);
+          window.selkaIgnoreCartUpdate = true;
+          if (window.selkaCooldownTimeout) clearTimeout(window.selkaCooldownTimeout);
+          window.selkaCooldownTimeout = setTimeout(function() {
+            window.selkaIgnoreCartUpdate = false;
+            updateCartAndStock();
+          }, 2000);
+          var customBadge = document.querySelector('.selka-stock-badge');
+          if (customBadge) {
+            customBadge.innerHTML = window.selkaCurrentStock > 0
+              ? '¡Últimas ' + window.selkaCurrentStock + ' unidades!'
+              : '¡Sin stock disponible!';
+          }
+        }
+
+        // 3. Dejar pasar un milisegundo para que la plantilla asimile el cambio de cantidad y hacer click nativo
+        setTimeout(function() {
+          var nativeSubmitBtn = document.querySelector('.js-addtocart') || 
+                                document.querySelector('[data-component="product.add-to-cart"]') || 
+                                document.querySelector('.js-prod-submit-form') ||
+                                document.querySelector('input[type="submit"].cart');
+
+          if (nativeSubmitBtn) {
+            // Simulamos el click real. Esto va a disparar el AJAX nativo de la plantilla
+            // que agrega las 2/3 unidades y abre el modal/drawer al instante.
+            nativeSubmitBtn.click();
+          } else {
+            // Si no encuentra el botón por alguna razón rara, envía el form
+            var form = document.querySelector('.js-product-form') || document.querySelector('#product_form');
+            if (form) form.submit();
+          }
+
+          // Restauramos el botón de los packs
+          setTimeout(function() {
             self.style.opacity = '1';
             self.disabled = false;
             self.innerText = 'CONTINUAR';
-          }).catch(function(error) {
-            // Si falla la API por alguna razón, usamos el Plan B alternativo (Envío AJAX Directo)
-            fallbackAjaxSubmit(variantId, selectedQty, self);
-          });
-
-        } else {
-          // 3. PLAN B: Si la tienda no tiene expuesta la API global, forzamos un envío AJAX manual al endpoint nativo
-          var form = document.querySelector('.js-product-form') || 
-                     document.querySelector('#product_form') || 
-                     document.querySelector('form[action*="/carrito/agregar"]');
-          var actionUrl = form ? form.getAttribute('action') : '/carrito/agregar';
-          
-          if (variantId) {
-            fallbackAjaxSubmit(variantId, selectedQty, self, actionUrl);
-          } else {
-            // PLAN C: Último recurso, modificar de manera agresiva y hacer click
-            var qi = getProductQtyInput();
-            if (qi) { qi.value = selectedQty; qi.setAttribute('value', selectedQty); }
-            var nativeSubmitBtn = document.querySelector('.js-addtocart') || document.querySelector('[data-component="product.add-to-cart"]');
-            if (nativeSubmitBtn) nativeSubmitBtn.click();
-            
-            setTimeout(function() {
-              self.style.opacity = '1';
-              self.disabled = false;
-              self.innerText = 'CONTINUAR';
-            }, 1000);
-          }
-        }
-      });
-    }
-
-    // Funciones auxiliares internas para no repetir código:
-    function executeStockBadgeUpdate(qty) {
-      if (window.selkaCurrentStock !== undefined) {
-        window.selkaCurrentStock = Math.max(0, window.selkaCurrentStock - qty);
-        window.selkaIgnoreCartUpdate = true;
-        if (window.selkaCooldownTimeout) clearTimeout(window.selkaCooldownTimeout);
-        window.selkaCooldownTimeout = setTimeout(function() {
-          window.selkaIgnoreCartUpdate = false;
-          updateCartAndStock();
-        }, 2000);
-        var customBadge = document.querySelector('.selka-stock-badge');
-        if (customBadge) {
-          customBadge.innerHTML = window.selkaCurrentStock > 0
-            ? '¡Últimas ' + window.selkaCurrentStock + ' unidades!'
-            : '¡Sin stock disponible!';
-        }
-      }
-    }
-
-    function fallbackAjaxSubmit(variantId, qty, buttonEl, url) {
-      var targetUrl = url || '/carrito/agregar';
-      var params = new URLSearchParams();
-      params.append('variant_id', variantId);
-      params.append('quantity', qty);
-
-      window.fetch(targetUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-          'X-Requested-With': 'XMLHttpRequest'
-        },
-        body: params.toString()
-      })
-      .then(function() {
-        executeStockBadgeUpdate(qty);
-        if (typeof refreshCartUI === 'function') refreshCartUI();
-      })
-      .finally(function() {
-        buttonEl.style.opacity = '1';
-        buttonEl.disabled = false;
-        buttonEl.innerText = 'CONTINUAR';
+          }, 1000);
+        }, 100); // Pequeña pausa técnica para asegurar la sincronización
       });
     }
   }
