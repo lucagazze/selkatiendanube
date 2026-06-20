@@ -1279,16 +1279,36 @@ body.pdp-pink-collagen-cream .selka-benefit-item strong {
         self.disabled = true;
         self.style.opacity = '0.7';
 
-        // 1. Sincronizar la cantidad seleccionada con el input nativo de la tienda
+        // 1. Forzar el valor en todos los posibles inputs de cantidad que tenga la plantilla
         var qi = getProductQtyInput();
         if (qi) {
           qi.value = selectedQty;
-          // Disparamos eventos nativos por si la plantilla los escucha
+          qi.setAttribute('value', selectedQty);
+          
+          // Disparamos una ráfaga de eventos nativos para despertar los scripts de la plantilla
           qi.dispatchEvent(new Event('change', { bubbles: true }));
           qi.dispatchEvent(new Event('input', { bubbles: true }));
+          if (typeof jQuery !== 'undefined') {
+            jQuery(qi).trigger('change');
+          }
         }
 
-        // 2. Actualización visual instantánea de tu stock badge (Tu lógica actual)
+        // 2. Interceptor nativo en el FormData (Cazador definitivo de cantidad)
+        // Buscamos el formulario de compra
+        var form = document.querySelector('.js-product-form') || 
+                   document.querySelector('#product_form') || 
+                   document.querySelector('form[action*="/carrito/agregar"]') || 
+                   document.querySelector('[data-component="product.form"]');
+        
+        if (form) {
+          // Buscamos si ya existe un input hidden de cantidad interno para clonados, o nos aseguramos con el existente
+          var hiddenQty = form.querySelector('input[name="quantity"]');
+          if (hiddenQty) {
+            hiddenQty.value = selectedQty;
+          }
+        }
+
+        // 3. Actualización visual de tu stock badge
         if (window.selkaCurrentStock !== undefined) {
           window.selkaCurrentStock = Math.max(0, window.selkaCurrentStock - selectedQty);
           window.selkaIgnoreCartUpdate = true;
@@ -1305,24 +1325,21 @@ body.pdp-pink-collagen-cream .selka-benefit-item strong {
           }
         }
 
-        // 3. Buscar el botón de compra original de Tienda Nube que ocultamos
+        // 4. Ejecutar el botón de compra nativo
         var nativeSubmitBtn = document.querySelector('.js-addtocart') || 
                               document.querySelector('[data-component="product.add-to-cart"]') || 
                               document.querySelector('input[type="submit"].cart') ||
                               document.querySelector('.js-prod-submit-form');
 
         if (nativeSubmitBtn) {
-          // Simulamos el clic real. Esto activa el AJAX nativo de Tienda Nube
           nativeSubmitBtn.click();
           
-          // Devolvemos el estado al botón del selector después de un momento
           setTimeout(function() {
             self.style.opacity = '1';
             self.disabled = false;
           }, 1000);
         } else {
-          // Fallback por si la estructura del form cambia: enviar el formulario directamente
-          var form = document.querySelector('.js-product-form') || document.querySelector('#product_form') || document.querySelector('form[action*="/carrito/agregar"]');
+          // Si por alguna razón la plantilla no tiene el botón accesible, enviamos el form de manera nativa
           if (form) {
             form.submit();
           } else {
