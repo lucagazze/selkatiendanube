@@ -47,10 +47,10 @@ html,body{overflow-x:hidden !important;touch-action:pan-x pan-y !important;-ms-t
 .template-product [data-component="product.quantity.plus"]:active svg{color:#ffffff !important;fill:#ffffff !important}
 .template-product .js-quantity-input{color:#1a1410 !important;background:#ffffff !important;font-weight:800 !important}
 
-.selka-stock-badge{background:#fff3f3 !important;color:#c0392b !important;border:1.5px solid #e74c3c !important}
-.selka-stock-badge::before{background:#e74c3c !important}
-.selka-stock-badge.out-of-stock{background:#f8f8f8 !important;color:#888888 !important;border:1.5px solid #dddddd !important}
-.selka-stock-badge.out-of-stock::before{background:#aaaaaa !important;animation:none !important}
+.selka-stock-badge{background:#1a1410 !important;color:#ffe5e5 !important;border:1.5px solid #1a1410 !important;font-weight:800 !important;letter-spacing:1.5px !important;box-shadow:0 4px 14px rgba(26,20,16,0.18) !important}
+.selka-stock-badge::before{background:#ff5252 !important;box-shadow:0 0 0 0 rgba(255,82,82,0.6) !important}
+.selka-stock-badge.out-of-stock{background:#3a3a3a !important;color:#cccccc !important;border:1.5px solid #3a3a3a !important;box-shadow:none !important}
+.selka-stock-badge.out-of-stock::before{background:#888888 !important;animation:none !important;box-shadow:none !important}
 
 @media (max-width:1024px){
   .template-product .js-product-form .form-row.mb-2{display:flex !important;flex-direction:column !important;flex-wrap:nowrap !important;gap:14px !important;margin:0 0 18px !important;align-items:stretch !important;background:transparent !important}
@@ -77,7 +77,7 @@ html,body{overflow-x:hidden !important;touch-action:pan-x pan-y !important;-ms-t
   .template-product [data-component="product.quantity.minus"] svg,
   .template-product [data-component="product.quantity.plus"] svg{width:18px !important;height:18px !important;color:#b86258 !important;fill:#b86258 !important}
   .template-product .form-quantity .form-control-container,
-  .template-product [data-component="product.adding-amount"]{flex:1 1 0 !important;width:auto !important;max-width:none !important;min-width:0 !important;padding:0 !important;display:flex !important;align-items:center !important;justify-content:center !important;background:transparent !important}
+  .template-product [data-component="product.adding-amount"]{flex:1 1 0 !important;width:auto !important;max-width:none !important;min-width:0 !important;padding:0 !important;display:flex !important;align-items:stretch !important;justify-content:center !important;background:transparent !important;border:0 !important;box-shadow:none !important;height:54px !important;border-radius:14px !important;overflow:hidden !important}
   .template-product .form-quantity .js-quantity-down,
   .template-product .form-quantity .js-quantity-up,
   .template-product [data-component="product.quantity.minus"],
@@ -86,7 +86,8 @@ html,body{overflow-x:hidden !important;touch-action:pan-x pan-y !important;-ms-t
   .template-product .form-quantity .js-quantity-up svg,
   .template-product [data-component="product.quantity.minus"] svg,
   .template-product [data-component="product.quantity.plus"] svg{width:16px !important;height:16px !important}
-  .template-product .js-quantity-input{height:54px !important;font-size:18px !important;font-weight:800 !important;border-radius:14px !important;text-align:center !important;width:100% !important;border:1.5px solid #d99a96 !important;background:#fff5f6 !important;color:#1a1410 !important;padding:0 !important;-moz-appearance:textfield !important;box-shadow:none !important;outline:none !important}
+  .template-product .js-quantity-input{height:54px !important;min-height:54px !important;line-height:54px !important;font-size:18px !important;font-weight:800 !important;border-radius:14px !important;text-align:center !important;width:100% !important;border:1.5px solid #d99a96 !important;background:#fff5f6 !important;color:#1a1410 !important;padding:0 !important;margin:0 !important;display:block !important;-moz-appearance:textfield !important;box-shadow:0 2px 6px rgba(217,154,150,0.12) !important;outline:none !important;box-sizing:border-box !important}
+  .template-product .js-quantity-input:focus{border-color:#b86258 !important;background:#fff0f2 !important;box-shadow:0 0 0 3px rgba(217,154,150,0.2) !important;outline:none !important}
   .template-product .js-quantity-input::-webkit-outer-spin-button,
   .template-product .js-quantity-input::-webkit-inner-spin-button{-webkit-appearance:none !important;margin:0 !important}
   .template-product .js-addtocart.btn-primary,
