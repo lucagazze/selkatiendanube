@@ -22,6 +22,9 @@ html,body{overflow-x:hidden !important;touch-action:pan-x pan-y !important;-ms-t
 .template-product [data-component="product.adding-amount"]{flex:0 0 auto !important;width:46px !important;max-width:46px !important;padding:0 !important;background:transparent !important}
 .template-product .js-quantity-input{height:34px !important;text-align:center !important;font-size:13px !important;font-weight:700 !important;padding:0 !important;border:1.5px solid #d99a96 !important;border-radius:8px !important;background:#fff5f6 !important;width:100% !important;color:#1a1410 !important;box-shadow:none !important;outline:none !important}
 .template-product .js-quantity-input:focus{border-color:#b86258 !important;background:#fff0f2 !important;box-shadow:0 0 0 3px rgba(217,154,150,0.18) !important;outline:none !important}
+.template-product .form-group.js-quantity,
+.template-product .form-quantity.form-quantity-product,
+.template-product .form-row[data-component="product.quantity"]{background:transparent !important;border:0 !important;box-shadow:none !important}
 .template-product .form-quantity .js-quantity-down,
 .template-product .form-quantity .js-quantity-up,
 .template-product [data-component="product.quantity.minus"],
@@ -49,12 +52,14 @@ html,body{overflow-x:hidden !important;touch-action:pan-x pan-y !important;-ms-t
 .selka-stock-badge.out-of-stock{background:#f8f8f8 !important;color:#888888 !important;border:1.5px solid #dddddd !important}
 .selka-stock-badge.out-of-stock::before{background:#aaaaaa !important;animation:none !important}
 
-@media (max-width:767px){
-  .template-product .js-product-form .form-row.mb-2{display:flex !important;flex-direction:row !important;flex-wrap:nowrap !important;gap:10px !important;margin:0 0 16px !important;align-items:stretch !important}
-  .template-product .js-product-form .form-row.mb-2 > .col-4{flex:0 0 auto !important;max-width:none !important;width:auto !important;padding:0 !important}
-  .template-product .js-product-form .form-row.mb-2 > .col-8{flex:1 1 auto !important;max-width:none !important;width:auto !important;padding:0 !important}
+@media (max-width:1024px){
+  .template-product .js-product-form .form-row.mb-2{display:flex !important;flex-direction:column !important;flex-wrap:nowrap !important;gap:14px !important;margin:0 0 18px !important;align-items:stretch !important;background:transparent !important}
+  .template-product .js-product-form .form-row.mb-2 > .col-4,
+  .template-product .js-product-form .form-row.mb-2 > .col-8{flex:0 0 auto !important;max-width:100% !important;width:100% !important;padding:0 !important;background:transparent !important}
+  .template-product .form-group.js-quantity,
+  .template-product .form-quantity.form-quantity-product{background:transparent !important;border:0 !important;padding:0 !important;margin:0 !important;box-shadow:none !important}
   .template-product .form-quantity[data-component="product.quantity"],
-  .template-product .form-row[data-component="product.quantity"]{justify-content:flex-start !important;gap:0 !important;display:flex !important;align-items:center !important;flex-wrap:nowrap !important;height:100% !important}
+  .template-product .form-row[data-component="product.quantity"]{justify-content:flex-start !important;gap:0 !important;display:flex !important;align-items:center !important;flex-wrap:nowrap !important;background:transparent !important;border:0 !important;padding:0 !important;margin:0 !important;box-shadow:none !important}
   .template-product .form-quantity .js-quantity-down,
   .template-product .form-quantity .js-quantity-up,
   .template-product [data-component="product.quantity.minus"],
