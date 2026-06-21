@@ -57,7 +57,7 @@ html,body{overflow-x:hidden !important;touch-action:pan-x pan-y !important;-ms-t
 
 .section-welcome-home .js-welcome-message-text,.section-welcome-home p{font-family:'Inter','Helvetica Neue',Helvetica,Arial,sans-serif !important;font-size:14px !important;font-weight:500 !important;line-height:1.7 !important;letter-spacing:0.2px !important;max-width:650px !important;margin:0 auto !important;opacity:1 !important;color:#f8e8e8 !important}
 
-.section-single-product{max-width:1200px !important;margin-left:auto !important;margin-right:auto !important}
+.section-single-product{max-width:1300px !important;margin-left:auto !important;margin-right:auto !important}
 
 @media (min-width:768px){.template-product #single-product,.template-product .js-product-container{margin-top:40px !important}}
 
@@ -185,7 +185,7 @@ html,body{overflow-x:hidden !important;touch-action:pan-x pan-y !important;-ms-t
 
 .js-offer-label .label-offer-percentage,.js-offer-label .label-offer-percentage-text,.label.label-accent .label-offer-percentage,.label.label-accent .label-offer-percentage-text{font-size:calc(1em + 2px) !important}
 
-@media(min-width:768px){.template-product .section-single-product{max-width:1400px !important;margin-left:auto !important;margin-right:auto !important}.template-product .section-single-product .row{display:flex !important;flex-direction:row !important;flex-wrap:wrap !important}.template-product .section-single-product .col-12.col-md-8,.template-product .section-single-product .col-md-8{flex:0 0 50% !important;max-width:50% !important}.template-product .section-single-product .col[data-store^="product-info"],.template-product .section-single-product [data-store^="product-info"]{flex:0 0 50% !important;max-width:50% !important}}
+@media(min-width:768px){.template-product .section-single-product{max-width:1300px !important;margin-left:auto !important;margin-right:auto !important}.template-product .section-single-product .row{display:flex !important;flex-direction:row !important;flex-wrap:wrap !important}.template-product .section-single-product .col-12.col-md-8,.template-product .section-single-product .col-md-8{flex:0 0 50% !important;max-width:50% !important}.template-product .section-single-product .col[data-store^="product-info"],.template-product .section-single-product [data-store^="product-info"]{flex:0 0 50% !important;max-width:50% !important}}
 
 .template-product .product-image-container img,.template-product .js-product-slide-image,.template-product .product-slide img,.template-product .js-product-image-container img,.template-product .js-product-slide-image img{object-fit:contain !important}
 
