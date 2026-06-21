@@ -224,7 +224,7 @@ body.pdp-pink-collagen-cream .js-product-promo-container p.font-small {
 @media (max-width: 767px) {
   .selka-stock-badge {
     font-size: 10px !important;
-    padding: 6px 12px !important;
+    padding: 7px 12px !important;
     letter-spacing: 0.6px !important;
   }
   .selka-stock-badge::before {
@@ -582,7 +582,7 @@ body.pdp-pink-collagen-cream .selka-benefit-item strong {
   animation: none !important;
 }
 
-@media (max-width:767px){.selka-stock-badge{font-size:10px;padding:6px 12px;letter-spacing:0.6px}.selka-stock-badge::before{width:5px;height:5px;margin-right:5px}}
+@media (max-width:767px){.selka-stock-badge{font-size:10px;padding:7px 12px;letter-spacing:0.6px}.selka-stock-badge::before{width:5px;height:5px;margin-right:5px}}
 
 @media (max-width: 767px) {
   .template-product .selka-stock-badge {
@@ -2601,13 +2601,61 @@ body.pdp-pink-collagen-cream .selka-benefit-item strong {
       try { el.remove(); } catch(e) { el.style.cssText = 'display:none !important;visibility:hidden !important;height:0 !important;overflow:hidden !important'; }
     });
   }
+  function setViewport(){
+    var meta = document.querySelector('meta[name="viewport"]');
+    if (!meta) { meta = document.createElement('meta'); meta.setAttribute('name','viewport'); (document.head || document.documentElement).appendChild(meta); }
+    meta.setAttribute('content','width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover');
+  }
+  setViewport();
+  document.addEventListener('gesturestart', function(e){ e.preventDefault(); }, {passive:false});
+  document.addEventListener('gesturechange', function(e){ e.preventDefault(); }, {passive:false});
+  document.addEventListener('gestureend', function(e){ e.preventDefault(); }, {passive:false});
+  var _lastTouchEnd = 0;
+  document.addEventListener('touchend', function(e){
+    var now = Date.now();
+    if (now - _lastTouchEnd < 350) { e.preventDefault(); }
+    _lastTouchEnd = now;
+  }, {passive:false});
+
+  function hidePaymentMethodsAccordion(){
+    var subs = document.querySelectorAll('.template-product .js-accordion-toggle .subtitle, .template-product .subtitle');
+    subs.forEach(function(sp){
+      var t = (sp.textContent || '').trim().toLowerCase();
+      if (t === 'medios de pago' || t === 'medios de pagos') {
+        var acc = sp.closest('.js-accordion-container');
+        if (acc) { acc.style.cssText = 'display:none !important;visibility:hidden !important;height:0 !important;overflow:hidden !important;margin:0 !important;padding:0 !important'; }
+      }
+    });
+  }
+
+  function cleanLabels(){
+    var labels = document.querySelectorAll('.item-floating-elements .label, .item-floating-elements .js-offer-label, .item-floating-elements .js-offer-label-private, .item-floating-elements .js-promo-label, .item-floating-elements [class*="offer-label"]');
+    labels.forEach(function(lbl){
+      var txt = (lbl.textContent || '').trim().toUpperCase();
+      if (/(^|\b)0\s*%\s*OFF($|\b)/.test(txt) && !/[1-9]\d*\s*%/.test(txt)) {
+        lbl.style.display = 'none';
+        return;
+      }
+      var m = txt.match(/HASTA\s*(\d+)\s*%\s*OFF\s*COMPRANDO\s*(EN\s*CANTIDAD|MULTIPLE|MAS)?/);
+      if (m) {
+        lbl.innerHTML = '';
+        var span = document.createElement('span');
+        span.textContent = 'HASTA ' + m[1] + '% OFF';
+        span.style.cssText = 'font-weight:700;letter-spacing:1px;white-space:nowrap;';
+        lbl.appendChild(span);
+      }
+    });
+  }
+
   function start(){
     removeNativeReviews();
-    setTimeout(removeNativeReviews, 300);
-    setTimeout(removeNativeReviews, 1000);
-    setTimeout(removeNativeReviews, 2500);
-    setTimeout(removeNativeReviews, 5000);
-    var mo = new MutationObserver(function(){ removeNativeReviews(); });
+    hidePaymentMethodsAccordion();
+    cleanLabels();
+    setTimeout(function(){ removeNativeReviews(); hidePaymentMethodsAccordion(); cleanLabels(); }, 300);
+    setTimeout(function(){ removeNativeReviews(); hidePaymentMethodsAccordion(); cleanLabels(); }, 1000);
+    setTimeout(function(){ removeNativeReviews(); hidePaymentMethodsAccordion(); cleanLabels(); }, 2500);
+    setTimeout(function(){ removeNativeReviews(); hidePaymentMethodsAccordion(); cleanLabels(); }, 5000);
+    var mo = new MutationObserver(function(){ removeNativeReviews(); hidePaymentMethodsAccordion(); cleanLabels(); });
     try { mo.observe(document.body, { childList:true, subtree:true }); } catch(e){}
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start);

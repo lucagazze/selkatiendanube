@@ -1,6 +1,9 @@
 html,body,.template-home,.template-category,.template-product,.template-page{margin-top:0 !important;padding-top:0 !important}
 
-html,body{overflow-x:hidden !important;touch-action:pan-x pan-y !important;-ms-touch-action:pan-x pan-y !important}
+html,body{overflow-x:hidden !important;touch-action:pan-x pan-y !important;-ms-touch-action:pan-x pan-y !important;-webkit-user-select:none;user-select:none;-webkit-text-size-adjust:100%;text-size-adjust:100%;-webkit-touch-callout:none}
+
+@-ms-viewport{width:device-width;user-zoom:fixed;max-zoom:1;min-zoom:1}
+@viewport{width:device-width;user-zoom:fixed;max-zoom:1;min-zoom:1}
 
 .template-product [data-store="product-payment-methods"],
 .template-product .js-accordion-container:has(use[*|href="#credit-card"]),
@@ -39,15 +42,15 @@ html,body{overflow-x:hidden !important;touch-action:pan-x pan-y !important;-ms-t
 .template-product .form-quantity .js-quantity-down:hover,
 .template-product .form-quantity .js-quantity-up:hover,
 .template-product [data-component="product.quantity.minus"]:hover,
-.template-product [data-component="product.quantity.plus"]:hover{background:#fce0e0 !important;border-color:#c78581 !important}
+.template-product [data-component="product.quantity.plus"]:hover,
 .template-product .form-quantity .js-quantity-down:active,
 .template-product .form-quantity .js-quantity-up:active,
 .template-product [data-component="product.quantity.minus"]:active,
-.template-product [data-component="product.quantity.plus"]:active{background:#d99a96 !important;border-color:#b86258 !important}
-.template-product .form-quantity .js-quantity-down:active svg,
-.template-product .form-quantity .js-quantity-up:active svg,
-.template-product [data-component="product.quantity.minus"]:active svg,
-.template-product [data-component="product.quantity.plus"]:active svg{color:#ffffff !important;fill:#ffffff !important}
+.template-product [data-component="product.quantity.plus"]:active,
+.template-product .form-quantity .js-quantity-down:focus,
+.template-product .form-quantity .js-quantity-up:focus,
+.template-product [data-component="product.quantity.minus"]:focus,
+.template-product [data-component="product.quantity.plus"]:focus{background:transparent !important;border-color:transparent !important;outline:none !important;box-shadow:none !important;-webkit-tap-highlight-color:transparent !important}
 
 .selka-stock-badge{background:#191410 !important;color:#f8e8e8 !important;border:1.5px solid #191410 !important;font-weight:800 !important;letter-spacing:1.5px !important;box-shadow:0 4px 14px rgba(25,20,16,0.18) !important}
 .selka-stock-badge::before{background:#f8e8e8 !important;box-shadow:0 0 0 0 rgba(248,232,232,0.6) !important}
@@ -69,15 +72,15 @@ html,body{overflow-x:hidden !important;touch-action:pan-x pan-y !important;-ms-t
   .template-product .form-quantity .js-quantity-down:hover,
   .template-product .form-quantity .js-quantity-up:hover,
   .template-product [data-component="product.quantity.minus"]:hover,
-  .template-product [data-component="product.quantity.plus"]:hover{background:#fce0e0 !important;transform:none !important;padding:0 !important;margin:0 !important;border:0 !important;box-shadow:none !important}
+  .template-product [data-component="product.quantity.plus"]:hover,
   .template-product .form-quantity .js-quantity-down:active,
   .template-product .form-quantity .js-quantity-up:active,
   .template-product [data-component="product.quantity.minus"]:active,
-  .template-product [data-component="product.quantity.plus"]:active{background:#d99a96 !important;transform:none !important;padding:0 !important;margin:0 !important;border:0 !important}
-  .template-product .form-quantity .js-quantity-down:active svg,
-  .template-product .form-quantity .js-quantity-up:active svg,
-  .template-product [data-component="product.quantity.minus"]:active svg,
-  .template-product [data-component="product.quantity.plus"]:active svg{color:#ffffff !important;fill:#ffffff !important}
+  .template-product [data-component="product.quantity.plus"]:active,
+  .template-product .form-quantity .js-quantity-down:focus,
+  .template-product .form-quantity .js-quantity-up:focus,
+  .template-product [data-component="product.quantity.minus"]:focus,
+  .template-product [data-component="product.quantity.plus"]:focus{background:transparent !important;transform:none !important;padding:0 !important;margin:0 !important;border:0 !important;box-shadow:none !important;outline:none !important;-webkit-tap-highlight-color:transparent !important}
   .template-product .form-quantity .js-quantity-down svg,
   .template-product .form-quantity .js-quantity-up svg,
   .template-product [data-component="product.quantity.minus"] svg,
