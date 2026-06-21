@@ -708,31 +708,88 @@ body.pdp-pink-collagen-cream .selka-quiero-mio-btn:hover{background:#c78581 !imp
       productTitle.parentNode.insertBefore(proof, productTitle.nextSibling);
     }
     
-    function getQuantityInCart() {
+        function getQuantityInCart() {
       var variantIdEl = document.querySelector('input[name="variant_id"]') || document.querySelector('.js-variant-id') || document.querySelector('[name="variant"]');
       var selectedVariantId = variantIdEl ? parseInt(variantIdEl.value, 10) : null;
       var productTitle = document.querySelector('h1') || document.querySelector('.js-product-name');
       var targetName = productTitle ? productTitle.textContent.trim().toLowerCase() : '';
-
-      if (typeof LS !== 'undefined' && LS.cart) {
-        var items = null;
-        if (LS.cart.items) {
-          items = LS.cart.items;
-        } else if (LS.cart.cart && LS.cart.cart.products) {
-          items = LS.cart.cart.products;
-        } else if (LS.cart.products) {
-          items = LS.cart.products;
+      
+      // 1. Try DOM check first (real-time ajax cart state)
+      var cartModal = document.getElementById('modal-cart') || document.querySelector('#modal-cart') || document.querySelector('.js-ajax-cart-panel') || document.querySelector('.ajax-cart-container') || document.querySelector('.js-ajax-cart-container');
+      if (cartModal) {
+        var cartItems = cartModal.querySelectorAll('.js-cart-item, .cart-item, .cart-row');
+        if (cartItems.length > 0) {
+          var domQty = 0;
+          var foundProduct = false;
+          cartItems.forEach(function(item) {
+            if (item.style.display === 'none' || item.classList.contains('opacity-0') || item.style.opacity === '0') {
+              return;
+            }
+            var nameEl = item.querySelector('.cart-item-name, .js-cart-item-name, h3, a');
+            var nm = nameEl ? nameEl.textContent.trim().toLowerCase() : '';
+            var isMatch = false;
+            
+            if (targetName && nm && nm.indexOf(targetName) !== -1) {
+              isMatch = true;
+            }
+            
+            if (isMatch) {
+              var qtyInput = item.querySelector('input[type="number"], .js-cart-quantity-input, .cart-item-quantity, .js-cart-item-quantity');
+              if (qtyInput) {
+                var val = qtyInput.tagName === 'INPUT' ? parseInt(qtyInput.value, 10) : parseInt(qtyInput.textContent, 10);
+                domQty += (val || 0);
+                foundProduct = true;
+              }
+            }
+          });
+          
+          if (foundProduct) {
+            // Keep localStorage in sync
+            try {
+              var vid = selectedVariantId || 'default';
+              window.localStorage.setItem('selka_cart_qty_' + vid, JSON.stringify({ qty: domQty, ts: Date.now() }));
+            } catch(e) {}
+            return domQty;
+          } else {
+            try {
+              var vid = selectedVariantId || 'default';
+              window.localStorage.setItem('selka_cart_qty_' + vid, JSON.stringify({ qty: 0, ts: Date.now() }));
+            } catch(e) {}
+            return 0;
+          }
         }
-        
+      }
+      
+      // 2. Check the header cart counter badge. If 0, the cart is empty.
+      var cartBadge = document.querySelector('.js-cart-widget-amount');
+      if (cartBadge) {
+        var badgeText = cartBadge.textContent.trim();
+        var badgeVal = parseInt(badgeText, 10) || 0;
+        if (badgeVal === 0) {
+          try {
+            var vid = selectedVariantId || 'default';
+            window.localStorage.setItem('selka_cart_qty_' + vid, JSON.stringify({ qty: 0, ts: Date.now() }));
+          } catch(e) {}
+          return 0;
+        }
+      }
+      
+      // 3. Fallback: LS.cart static object
+      if (typeof LS !== 'undefined' && LS.cart) {
+        var items = LS.cart.items
+                 || (LS.cart.cart && LS.cart.cart.products)
+                 || LS.cart.products
+                 || LS.cart.line_items;
         if (items && items.length > 0) {
           var qty = 0;
           var found = false;
           items.forEach(function(item) {
             var itemId = item.variant_id || item.id;
-            if (selectedVariantId && itemId === selectedVariantId) {
+            var nm = (item.name || item.title || '').toLowerCase();
+            if (selectedVariantId && itemId && parseInt(itemId, 10) === selectedVariantId) {
               qty += parseInt(item.quantity, 10) || 0;
               found = true;
-            } else if (targetName && item.name && item.name.toLowerCase().includes(targetName)) {
+            } else if (targetName && nm && nm.indexOf(targetName) !== -1) {
               qty += parseInt(item.quantity, 10) || 0;
               found = true;
             }
@@ -742,34 +799,23 @@ body.pdp-pink-collagen-cream .selka-quiero-mio-btn:hover{background:#c78581 !imp
           }
         }
       }
-
-      var cartModal = document.getElementById('modal-cart') || document.querySelector('.js-ajax-cart-panel') || document.querySelector('.ajax-cart-container');
-      if (cartModal) {
-        var cartItems = cartModal.querySelectorAll('.js-cart-item, .cart-item, .cart-row');
-        if (cartItems.length > 0) {
-          var domQty = 0;
-          var foundInDOM = false;
-          cartItems.forEach(function(item) {
-            if (item.style.display === 'none' || item.classList.contains('opacity-0') || item.style.opacity === '0') {
-              return;
-            }
-            var nameEl = item.querySelector('.cart-item-name, .js-cart-item-name, h3');
-            if (nameEl && nameEl.textContent.trim().toLowerCase().includes(targetName)) {
-              var qtyInput = item.querySelector('input[type="number"], .js-cart-quantity-input, .cart-item-quantity, .js-cart-item-quantity');
-              if (qtyInput) {
-                var val = qtyInput.tagName === 'INPUT' ? parseInt(qtyInput.value, 10) : parseInt(qtyInput.textContent, 10);
-                domQty += val || 0;
-                foundInDOM = true;
-              }
-            }
-          });
-          if (foundInDOM) {
-            return domQty;
+      
+      // 4. LocalStorage Fallback (cached qty)
+      try {
+        var vid = selectedVariantId || 'default';
+        var raw = window.localStorage.getItem('selka_cart_qty_' + vid);
+        if (raw) {
+          var obj = JSON.parse(raw);
+          if (obj && typeof obj.qty === 'number' && (Date.now() - obj.ts < 24*60*60*1000)) {
+            return obj.qty;
           }
         }
-      }
+      } catch(e) {}
+      
       return 0;
     }
+
+    
 
     function getRealStock() {
       var variants = (typeof LS !== 'undefined') ? (LS.variants || (LS.product && LS.product.variants)) : null;
@@ -1267,13 +1313,14 @@ body.pdp-pink-collagen-cream .selka-quiero-mio-btn:hover{background:#c78581 !imp
           var cartQty = getQuantityInCart();
           var allowedQty = Math.max(0, realStock - cartQty);
           
-          if (qtyToAdd > allowedQty) {
+                    if (qtyToAdd > allowedQty) {
+            e.preventDefault();
+            e.stopPropagation();
             if (allowedQty > 0) {
+              alert('Solo podés agregar ' + allowedQty + ' unidad' + (allowedQty > 1 ? 'es' : '') + ' más (quedan ' + realStock + ' en total y ya tenés ' + cartQty + ' en el carrito).');
               qtyInput.value = allowedQty;
               qtyInput.dispatchEvent(new Event('change', { bubbles: true }));
             } else {
-              e.preventDefault();
-              e.stopPropagation();
               alert('Ya tenés el máximo de stock disponible en tu carrito (' + realStock + ' unidades).');
             }
           }
@@ -1293,13 +1340,14 @@ body.pdp-pink-collagen-cream .selka-quiero-mio-btn:hover{background:#c78581 !imp
           var cartQty = getQuantityInCart();
           var allowedQty = Math.max(0, realStock - cartQty);
           
-          if (qtyToAdd > allowedQty) {
+                    if (qtyToAdd > allowedQty) {
+            e.preventDefault();
+            e.stopPropagation();
             if (allowedQty > 0) {
+              alert('Solo podés agregar ' + allowedQty + ' unidad' + (allowedQty > 1 ? 'es' : '') + ' más (quedan ' + realStock + ' en total y ya tenés ' + cartQty + ' en el carrito).');
               qtyInput.value = allowedQty;
               qtyInput.dispatchEvent(new Event('change', { bubbles: true }));
             } else {
-              e.preventDefault();
-              e.stopPropagation();
               alert('Ya tenés el máximo de stock disponible en tu carrito (' + realStock + ' unidades).');
             }
           }

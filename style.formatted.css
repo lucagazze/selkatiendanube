@@ -270,24 +270,6 @@ html{overflow-x:clip !important;-webkit-text-size-adjust:100%;text-size-adjust:1
 
 .js-item-product strong,.js-item-product b{font-weight:700 !important}
 
-.js-item-product .item-image {
-  aspect-ratio: 3/4 !important;
-  width: 100% !important;
-  height: auto !important;
-  overflow: hidden !important;
-  position: relative !important;
-  background: transparent !important;
-}
-
-.js-item-product .item-image img {
-  position: absolute !important;
-  top: 0 !important;
-  left: 0 !important;
-  width: 100% !important;
-  height: 100% !important;
-  object-fit: contain !important;
-}
-
 
 
 
