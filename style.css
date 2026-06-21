@@ -7,7 +7,7 @@ html,body{overflow-x:hidden !important;touch-action:pan-x pan-y !important;-ms-t
 .template-product .form-quantity .js-quantity-down,
 .template-product .form-quantity .js-quantity-up,
 .template-product [data-component="product.quantity.minus"],
-.template-product [data-component="product.quantity.plus"]{display:inline-flex !important;align-items:center !important;justify-content:center !important;width:44px !important;height:44px !important;min-width:44px !important;min-height:44px !important;border:1.5px solid #ede5e5 !important;border-radius:10px !important;background:#ffffff !important;cursor:pointer !important;flex-shrink:0 !important;padding:0 !important;margin:0 4px !important;transition:background-color .15s ease,border-color .15s ease !important;-webkit-tap-highlight-color:transparent !important;touch-action:manipulation !important}
+.template-product [data-component="product.quantity.plus"]{display:inline-flex !important;align-items:center !important;justify-content:center !important;width:34px !important;height:34px !important;min-width:34px !important;min-height:34px !important;border:1px solid #ede5e5 !important;border-radius:8px !important;background:#ffffff !important;cursor:pointer !important;flex-shrink:0 !important;padding:0 !important;margin:0 2px !important;transition:background-color .15s ease,border-color .15s ease !important;-webkit-tap-highlight-color:transparent !important;touch-action:manipulation !important}
 .template-product .form-quantity .js-quantity-down:active,
 .template-product .form-quantity .js-quantity-up:active,
 .template-product [data-component="product.quantity.minus"]:active,
@@ -15,12 +15,12 @@ html,body{overflow-x:hidden !important;touch-action:pan-x pan-y !important;-ms-t
 .template-product .form-quantity .js-quantity-down svg,
 .template-product .form-quantity .js-quantity-up svg,
 .template-product [data-component="product.quantity.minus"] svg,
-.template-product [data-component="product.quantity.plus"] svg{width:14px !important;height:14px !important;pointer-events:none !important}
+.template-product [data-component="product.quantity.plus"] svg{width:11px !important;height:11px !important;pointer-events:none !important}
 .template-product .form-quantity[data-component="product.quantity"],
 .template-product .form-row[data-component="product.quantity"]{display:flex !important;align-items:center !important;justify-content:flex-start !important;gap:0 !important;flex-wrap:nowrap !important}
 .template-product .form-quantity .form-control-container,
-.template-product [data-component="product.adding-amount"]{flex:0 0 auto !important;width:64px !important;max-width:64px !important;padding:0 !important}
-.template-product .js-quantity-input{height:44px !important;text-align:center !important;font-size:15px !important;font-weight:700 !important;padding:0 !important;border:1.5px solid #ede5e5 !important;border-radius:10px !important;background:#ffffff !important;width:100% !important}
+.template-product [data-component="product.adding-amount"]{flex:0 0 auto !important;width:46px !important;max-width:46px !important;padding:0 !important}
+.template-product .js-quantity-input{height:34px !important;text-align:center !important;font-size:13px !important;font-weight:700 !important;padding:0 !important;border:1px solid #ede5e5 !important;border-radius:8px !important;background:#ffffff !important;width:100% !important}
 .template-product .form-quantity .js-quantity-down,
 .template-product .form-quantity .js-quantity-up,
 .template-product [data-component="product.quantity.minus"],
