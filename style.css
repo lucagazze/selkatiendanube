@@ -2,8 +2,6 @@ body{overflow-x:clip !important;touch-action:pan-x pan-y !important;-ms-touch-ac
 html{overflow-x:clip !important;-webkit-text-size-adjust:100%;text-size-adjust:100%}
 @-ms-viewport{width:device-width;user-zoom:fixed;max-zoom:1;min-zoom:1}
 @viewport{width:device-width;user-zoom:fixed;max-zoom:1;min-zoom:1}
-.item-floating-elements .label,.item-floating-elements .js-offer-label,.item-floating-elements .js-offer-label-private,.item-floating-elements .js-promo-label{max-width:140px !important;white-space:normal !important;line-height:1.25 !important;text-align:center !important;word-break:break-word !important}
-.js-item-product .label-offer-percentage[data-value="0"],.js-item-product .js-offer-label[data-offer-percentage="0"],.item-floating-elements .label[data-percentage="0"]{display:none !important}
 .section-adbar{padding:12px 0 !important;letter-spacing:1.5px !important;text-transform:uppercase !important;font-size:12.5px !important;font-weight:800 !important;margin-bottom:0 !important}
 .adbar-message{font-size:.65rem !important;font-weight:600 !important;letter-spacing:1px !important;text-transform:uppercase !important;text-decoration:none !important;display:inline-block !important;padding-top:5px !important;padding-bottom:4px !important;transition:opacity 0.3s ease !important}
 .adbar-message:hover{opacity:0.8 !important}
@@ -45,19 +43,12 @@ html{overflow-x:clip !important;-webkit-text-size-adjust:100%;text-size-adjust:1
 #modal-cart .cart-item img,#modal-cart .js-cart-item img{display:block !important;width:100% !important;height:auto !important;max-width:100% !important;object-fit:cover !important}
 #modal-cart .cart-item a,#modal-cart .js-cart-item a{display:inline-block !important}
 .item-floating-elements{position:static !important;pointer-events:none !important}
-.item-floating-elements .labels,.item-floating-elements .js-labels-floating-group{position:absolute !important;top:12px !important;left:12px !important;z-index:5 !important;display:flex !important;flex-direction:column !important;align-items:flex-start !important;gap:6px !important;margin:0 !important;padding:0 !important;pointer-events:none !important}
-.item-floating-elements .label{font-size:9.5px !important;font-weight:600 !important;letter-spacing:1.4px !important;text-transform:uppercase !important;padding:5px 11px !important;border-radius:999px !important;line-height:1.2 !important;display:inline-flex !important;align-items:center !important;pointer-events:none !important;cursor:pointer !important}
-.item-floating-elements .js-offer-label,.item-floating-elements .js-offer-label-private{font-size:10.5px !important;font-weight:700 !important;letter-spacing:1.6px !important;padding:6px 13px !important;border-radius:999px !important}
-.item-floating-elements .js-offer-label .label-offer-percentage,.item-floating-elements .js-offer-label-private .label-offer-percentage{font-weight:800 !important;font-size:11.5px !important}
-.item-floating-elements .js-offer-label .label-offer-percentage-text,.item-floating-elements .js-offer-label-private .label-offer-percentage-text{font-weight:600 !important;opacity:1 !important;letter-spacing:1.8px !important}
-.item-floating-elements .js-shipping-label-private,.item-floating-elements .js-free-shipping-minimum-label,.js-shipping-label-private,.js-free-shipping-minimum-label{display:none !important;visibility:hidden !important;width:0 !important;height:0 !important;padding:0 !important;margin:0 !important;overflow:hidden !important}
 #modal-cart .text-accent,#modal-cart .js-cart-item-subtotal-compare-price-container .text-accent{font-size:12px !important;font-weight:800 !important;letter-spacing:0.3px !important;padding:2px 7px !important;border-radius:4px !important;margin-right:6px !important;display:inline-block !important}
 #modal-cart .price-compare,#modal-cart .js-cart-item-subtotal-compare-price{opacity:0.7 !important;font-size:12px !important}
 .js-item-product .price,.js-item-product .js-price-display,.js-item-product .product-item-price,.js-item-product .js-price{font-size:17px !important;font-weight:700 !important;letter-spacing:-0.01em !important;line-height:1.3 !important}
 .js-item-product [class*="compare"]{text-decoration:line-through !important;font-size:13px !important;font-weight:500 !important;margin-right:6px !important;letter-spacing:-0.01em !important}
 .js-item-product .js-item-installments-price,.js-item-product .js-installments,.js-item-product [data-component*="installments"],.js-item-product .js-payment-discount,.js-item-product .item-payment-discount{font-size:12.5px !important;font-weight:500 !important;line-height:1.5 !important;margin-top:4px !important;letter-spacing:0 !important;opacity:1 !important}
 .js-item-product strong,.js-item-product b{font-weight:700 !important}
-.js-stock-label,.js-stock-label-private,[data-store*="label-stock"]{display:none !important;visibility:hidden !important;opacity:0 !important;width:0 !important;height:0 !important;max-width:0 !important;max-height:0 !important;padding:0 !important;margin:0 !important;overflow:hidden !important;position:absolute !important;pointer-events:none !important;clip:rect(0 0 0 0) !important;clip-path:inset(50%) !important}
 @keyframes selkaPulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.5;transform:scale(1.3)}}
 .zl{max-width:1200px;margin:0 auto 40px;width:100%;box-sizing:border-box}
 #modal-cart,#modal-cart *{font-family:'Inter','Helvetica Neue',Helvetica,Arial,sans-serif !important}
@@ -78,7 +69,6 @@ html{overflow-x:clip !important;-webkit-text-size-adjust:100%;text-size-adjust:1
 .js-adbar,.section-adbar{padding-top:0 !important;padding-bottom:0 !important}
 .js-adbar .container-fluid,.section-adbar .container-fluid{padding-top:0 !important;padding-bottom:0 !important}
 .js-adbar .adbar-message,.section-adbar .adbar-message{padding-top:8px !important;padding-bottom:8px !important;line-height:1.3 !important;display:inline-block !important}
-.js-offer-label .label-offer-percentage,.js-offer-label .label-offer-percentage-text,.label.label-accent .label-offer-percentage,.label.label-accent .label-offer-percentage-text{font-size:calc(1em + 2px) !important}
 @keyframes skFaqSlide{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
 .social-share{display:none !important}
 .adbar-message{margin-right:48px !important}
@@ -121,10 +111,6 @@ html{overflow-x:clip !important;-webkit-text-size-adjust:100%;text-size-adjust:1
   .section-featured-home .container-fluid,.section-new-home .container-fluid,.section-sale-home .container-fluid{padding-left:0 !important;padding-right:0 !important;max-width:100% !important;width:100% !important}
   .section-featured-home .row,.section-new-home .row,.section-sale-home .row{margin-left:0 !important;margin-right:0 !important}
   .section-featured-home .row>[class*="col-"],.section-new-home .row>[class*="col-"],.section-sale-home .row>[class*="col-"]{padding-left:4px !important;padding-right:4px !important}
-  .item-floating-elements .labels,.item-floating-elements .js-labels-floating-group{top:8px !important;left:8px !important;gap:4px !important}
-  .item-floating-elements [class*="label"]{font-size:8px !important;letter-spacing:0.8px !important;padding:2.5px 7px !important;white-space:nowrap !important}
-  .item-floating-elements .js-offer-label .label-offer-percentage,.item-floating-elements .js-offer-label-private .label-offer-percentage{font-size:8.5px !important}
-  .item-floating-elements .js-offer-label .label-offer-percentage-text,.item-floating-elements .js-offer-label-private .label-offer-percentage-text{letter-spacing:0.8px !important}
   .js-informative-banners-pagination,.service-pagination{display:block !important;visibility:visible !important;position:relative !important;text-align:center !important;margin-top:0 !important;padding:32px 0 20px !important;background:transparent !important}
   .section-informative-banners{padding:32px 0 16px !important}
   .section-informative-banners .service-item-container{border-right:none !important;border-bottom:none !important;flex:0 0 100% !important;max-width:100% !important}
