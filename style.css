@@ -63,11 +63,15 @@ html,body{overflow-x:hidden !important;touch-action:pan-x pan-y !important;-ms-t
   .template-product .form-quantity .js-quantity-down,
   .template-product .form-quantity .js-quantity-up,
   .template-product [data-component="product.quantity.minus"],
-  .template-product [data-component="product.quantity.plus"]{flex:1 1 0 !important;width:auto !important;min-width:0 !important;height:100% !important;min-height:0 !important;border-radius:0 !important;margin:0 !important;background:transparent !important;border:0 !important;display:flex !important;align-items:center !important;justify-content:center !important;padding:0 !important;cursor:pointer !important;box-shadow:none !important;transition:background .15s ease !important}
+  .template-product [data-component="product.quantity.plus"]{flex:1 1 0 !important;width:auto !important;min-width:0 !important;height:100% !important;min-height:0 !important;border-radius:0 !important;margin:0 !important;padding:0 !important;background:transparent !important;border:0 !important;display:flex !important;align-items:center !important;justify-content:center !important;align-self:stretch !important;vertical-align:middle !important;line-height:0 !important;cursor:pointer !important;box-shadow:none !important;transition:background .15s ease !important;box-sizing:border-box !important;text-decoration:none !important}
+  .template-product .form-quantity .js-quantity-down:hover,
+  .template-product .form-quantity .js-quantity-up:hover,
+  .template-product [data-component="product.quantity.minus"]:hover,
+  .template-product [data-component="product.quantity.plus"]:hover{background:#fce0e0 !important;transform:none !important;padding:0 !important;margin:0 !important;border:0 !important;box-shadow:none !important}
   .template-product .form-quantity .js-quantity-down:active,
   .template-product .form-quantity .js-quantity-up:active,
   .template-product [data-component="product.quantity.minus"]:active,
-  .template-product [data-component="product.quantity.plus"]:active{background:#d99a96 !important;transform:none !important}
+  .template-product [data-component="product.quantity.plus"]:active{background:#d99a96 !important;transform:none !important;padding:0 !important;margin:0 !important;border:0 !important}
   .template-product .form-quantity .js-quantity-down:active svg,
   .template-product .form-quantity .js-quantity-up:active svg,
   .template-product [data-component="product.quantity.minus"]:active svg,
@@ -75,7 +79,7 @@ html,body{overflow-x:hidden !important;touch-action:pan-x pan-y !important;-ms-t
   .template-product .form-quantity .js-quantity-down svg,
   .template-product .form-quantity .js-quantity-up svg,
   .template-product [data-component="product.quantity.minus"] svg,
-  .template-product [data-component="product.quantity.plus"] svg{width:18px !important;height:18px !important;color:#b86258 !important;fill:#b86258 !important}
+  .template-product [data-component="product.quantity.plus"] svg{width:18px !important;height:18px !important;color:#b86258 !important;fill:#b86258 !important;display:block !important;vertical-align:middle !important;margin:0 !important;padding:0 !important;flex-shrink:0 !important}
   .template-product .form-quantity .form-control-container,
   .template-product [data-component="product.adding-amount"]{flex:1 1 0 !important;width:auto !important;max-width:none !important;min-width:0 !important;padding:0 !important;margin:0 !important;display:flex !important;align-items:center !important;justify-content:center !important;background:transparent !important;border:0 !important;border-left:1px solid rgba(217,154,150,0.35) !important;border-right:1px solid rgba(217,154,150,0.35) !important;box-shadow:none !important;height:100% !important;border-radius:0 !important;overflow:hidden !important;text-align:center !important}
   .template-product .form-quantity .js-quantity-down,
