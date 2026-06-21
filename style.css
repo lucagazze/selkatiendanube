@@ -52,7 +52,7 @@ html,body{overflow-x:hidden !important;touch-action:pan-x pan-y !important;-ms-t
 .selka-stock-badge.out-of-stock{background:#3a3a3a !important;color:#cccccc !important;border:1.5px solid #3a3a3a !important;box-shadow:none !important}
 .selka-stock-badge.out-of-stock::before{background:#888888 !important;animation:none !important;box-shadow:none !important}
 
-@media (max-width:1024px){
+@media (min-width:0px){
   .template-product .js-product-form .form-row.mb-2{display:flex !important;flex-direction:column !important;flex-wrap:nowrap !important;gap:14px !important;margin:0 0 18px !important;align-items:stretch !important;background:transparent !important}
   .template-product .js-product-form .form-row.mb-2 > .col-4,
   .template-product .js-product-form .form-row.mb-2 > .col-8{flex:0 0 auto !important;max-width:100% !important;width:100% !important;padding:0 !important;background:transparent !important}
