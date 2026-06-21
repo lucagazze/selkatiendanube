@@ -1124,4 +1124,79 @@ body.pdp-pink-collagen-cream .selka-quiero-mio-btn:hover {
   padding: 0 !important;
 }
 
+/* Position product image thumbnails below the main image, wrapped and all visible */
+html body.template-product .row[data-store^="product-image"] {
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+html body.template-product .row[data-store^="product-image"] > .product-image-container {
+  order: 1 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  flex: 0 0 100% !important;
+}
+
+html body.template-product .row[data-store^="product-image"] > .d-none.d-md-block,
+html body.template-product .row[data-store^="product-image"] > .col-2 {
+  display: flex !important;
+  order: 2 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  flex: 0 0 100% !important;
+  flex-direction: row !important;
+  flex-wrap: wrap !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  margin-top: 15px !important;
+  padding: 0 15px !important;
+  max-height: none !important;
+  overflow: visible !important;
+  height: auto !important;
+}
+
+html body.template-product .row[data-store^="product-image"] > .d-none.d-md-block::-webkit-scrollbar,
+html body.template-product .row[data-store^="product-image"] > .col-2::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+html body.template-product .row[data-store^="product-image"] a.js-product-thumb {
+  width: 54px !important;
+  height: 72px !important;
+  flex: 0 0 54px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border-radius: 6px !important;
+  overflow: hidden !important;
+  position: relative !important;
+  aspect-ratio: 3/4 !important;
+  display: inline-block !important;
+}
+
+html body.template-product .row[data-store^="product-image"] a.js-product-thumb img {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: none !important;
+  max-height: none !important;
+  transform: none !important;
+  -webkit-transform: none !important;
+  -ms-transform: none !important;
+  object-fit: cover !important;
+}
+
+/* Force promo labels (e.g. HASTA 20% OFF) to display at top-left of the image container */
+.template-product .labels-product-slider,
+.template-product .js-labels-floating-group {
+  top: 15px !important;
+  bottom: auto !important;
+  left: 15px !important;
+  right: auto !important;
+  position: absolute !important;
+}
+
 
