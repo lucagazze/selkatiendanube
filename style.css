@@ -82,7 +82,7 @@ html,body{overflow-x:hidden !important;touch-action:pan-x pan-y !important;-ms-t
   .template-product .form-group.js-quantity,
   .template-product .form-quantity.form-quantity-product{background:transparent !important;border:0 !important;padding:0 !important;margin:0 !important;box-shadow:none !important;width:100% !important}
   .template-product .form-quantity[data-component="product.quantity"],
-  .template-product .form-row[data-component="product.quantity"]{justify-content:space-between !important;gap:0 !important;display:flex !important;align-items:stretch !important;flex-wrap:nowrap !important;background:#fff5f6 !important;border:1.5px solid #d99a96 !important;border-radius:14px !important;padding:0 !important;margin:0 !important;box-shadow:0 2px 6px rgba(217,154,150,0.12) !important;width:100% !important;height:54px !important;overflow:hidden !important}
+  .template-product .form-row[data-component="product.quantity"]{justify-content:space-between !important;gap:0 !important;display:flex !important;align-items:stretch !important;flex-wrap:nowrap !important;background:#fff5f6 !important;border:1.5px solid #d99a96 !important;border-radius:14px !important;padding:0 !important;margin:0 !important;box-shadow:0 2px 6px rgba(217,154,150,0.12) !important;width:100% !important;height:40px !important;overflow:hidden !important}
   .template-product .form-quantity .js-quantity-down,
   .template-product .form-quantity .js-quantity-up,
   .template-product [data-component="product.quantity.minus"],
@@ -120,7 +120,7 @@ html,body{overflow-x:hidden !important;touch-action:pan-x pan-y !important;-ms-t
   .template-product .form-quantity .js-quantity-down,
   .template-product .form-quantity .js-quantity-up,
   .template-product [data-component="product.quantity.minus"],
-  .template-product [data-component="product.quantity.plus"]{width:40px !important;height:48px !important;min-width:40px !important;min-height:48px !important;border-radius:10px !important;margin:0 4px !important;flex-shrink:0 !important;padding:0 !important;opacity:1 !important;cursor:pointer !important}
+  .template-product [data-component="product.quantity.plus"]{width:40px !important;height:40px !important;min-width:40px !important;min-height:40px !important;border-radius:10px !important;margin:0 4px !important;flex-shrink:0 !important;padding:0 !important;opacity:1 !important;cursor:pointer !important}
   .template-product .form-quantity .js-quantity-down svg,
   .template-product .form-quantity .js-quantity-up svg,
   .template-product [data-component="product.quantity.minus"] svg,
@@ -132,7 +132,7 @@ html,body{overflow-x:hidden !important;touch-action:pan-x pan-y !important;-ms-t
   .template-product input.js-quantity-input.form-control-ios,
   .template-product input.js-quantity-input.form-control-inline,
   .template-product input.js-quantity-input.form-control.form-control-ios,
-  .template-product input.js-quantity-input.form-control.form-control-inline{height:54px !important;min-height:54px !important;max-height:54px !important;line-height:normal !important;font-size:18px !important;font-weight:800 !important;border-radius:0 !important;text-align:center !important;text-align-last:center !important;width:100% !important;border:0 !important;background:transparent !important;color:#1a1410 !important;padding:0 !important;padding-left:0 !important;padding-right:0 !important;padding-top:0 !important;padding-bottom:0 !important;padding-inline-start:0 !important;padding-inline-end:0 !important;margin:0 !important;display:block !important;-moz-appearance:textfield !important;-webkit-appearance:none !important;appearance:none !important;box-shadow:none !important;outline:none !important;box-sizing:border-box !important;text-indent:0 !important;direction:ltr !important;font:inherit !important;font-size:18px !important;font-weight:800 !important;font-family:inherit !important;font-style:normal !important}
+  .template-product input.js-quantity-input.form-control.form-control-inline{height:40px !important;min-height:40px !important;max-height:40px !important;line-height:normal !important;font-size:15px !important;font-weight:800 !important;border-radius:0 !important;text-align:center !important;text-align-last:center !important;width:100% !important;border:0 !important;background:transparent !important;color:#1a1410 !important;padding:0 !important;padding-left:0 !important;padding-right:0 !important;padding-top:0 !important;padding-bottom:0 !important;padding-inline-start:0 !important;padding-inline-end:0 !important;margin:0 !important;display:block !important;-moz-appearance:textfield !important;-webkit-appearance:none !important;appearance:none !important;box-shadow:none !important;outline:none !important;box-sizing:border-box !important;text-indent:0 !important;direction:ltr !important;font:inherit !important;font-size:15px !important;font-weight:800 !important;font-family:inherit !important;font-style:normal !important}
   .template-product .js-quantity-input:focus,
   .template-product input[name="quantity"]:focus{background:transparent !important;box-shadow:none !important;outline:none !important;border:0 !important;padding:0 !important}
   .template-product .js-quantity-input::-webkit-inner-spin-button,
@@ -144,7 +144,7 @@ html,body{overflow-x:hidden !important;touch-action:pan-x pan-y !important;-ms-t
   .template-product .js-quantity-input::-webkit-outer-spin-button,
   .template-product .js-quantity-input::-webkit-inner-spin-button{-webkit-appearance:none !important;margin:0 !important}
   .template-product .js-addtocart.btn-primary,
-  .template-product .js-prod-submit-form{width:100% !important;height:54px !important;font-size:14px !important;font-weight:800 !important;letter-spacing:1.5px !important;border-radius:14px !important;margin:0 !important;padding:0 16px !important;box-shadow:0 4px 14px rgba(217,154,150,0.25) !important}
+  .template-product .js-prod-submit-form{width:100% !important;height:40px !important;font-size:12px !important;font-weight:800 !important;letter-spacing:1px !important;border-radius:14px !important;margin:0 !important;padding:0 12px !important;box-shadow:0 4px 14px rgba(217,154,150,0.25) !important}
 }
 .js-item-product .label-offer-percentage[data-value="0"],.js-item-product .js-offer-label[data-offer-percentage="0"],.item-floating-elements .label[data-percentage="0"]{display:none !important}
 
