@@ -87,12 +87,7 @@ body.pdp-pink-collagen-cream .selka-quiero-mio-btn:hover{background:#c78581 !imp
 .selka-promo-transfer-price{font-size:10.5px !important;font-weight:700 !important;color:#b86258 !important;margin-top:1px !important;line-height:1.1 !important}
 .selka-promo-save-badge{font-size:9.5px !important;font-weight:700 !important;color:#2e7d32 !important;background:#e8f5e9 !important;border-radius:4px !important;padding:2px 6px !important;margin-top:2px !important;letter-spacing:0.2px !important;text-transform:uppercase !important}
 .template-product .js-added-to-cart-product-message,.template-product .js-product-added-message,.template-product .form-row.mb-2 > .col-12{display:none !important;visibility:hidden !important;height:0 !important;overflow:hidden !important;margin:0 !important;padding:0 !important}
-html body.template-product .row[data-store^="product-image"]{display:flex !important;flex-direction:column !important}
-html body.template-product .row[data-store^="product-image"] > .product-image-container{order:1 !important;width:100% !important;max-width:100% !important;flex:0 0 100% !important}
-html body.template-product .row[data-store^="product-image"] > .d-none.d-md-block,html body.template-product .row[data-store^="product-image"] > .col-2{display:flex !important;order:2 !important;width:100% !important;max-width:100% !important;flex:0 0 100% !important;flex-direction:row !important;flex-wrap:wrap !important;justify-content:center !important;gap:8px !important;margin-top:15px !important;padding:0 15px !important;max-height:none !important;overflow:visible !important;height:auto !important}
-html body.template-product .row[data-store^="product-image"] > .d-none.d-md-block::-webkit-scrollbar,html body.template-product .row[data-store^="product-image"] > .col-2::-webkit-scrollbar{display:none !important;width:0 !important;height:0 !important}
-html body.template-product .row[data-store^="product-image"] a.js-product-thumb{width:54px !important;height:72px !important;flex:0 0 54px !important;padding:0 !important;margin:0 !important;border-radius:6px !important;overflow:hidden !important;position:relative !important;aspect-ratio:3/4 !important;display:inline-block !important}
-html body.template-product .row[data-store^="product-image"] a.js-product-thumb img{position:absolute !important;top:0 !important;left:0 !important;width:100% !important;height:100% !important;max-width:none !important;max-height:none !important;transform:none !important;-webkit-transform:none !important;-ms-transform:none !important;object-fit:cover !important}
+.template-product .thumb-see-more{display:none !important;visibility:hidden !important;opacity:0 !important;pointer-events:none !important}
 .template-product .labels-product-slider,.template-product .js-labels-floating-group{top:15px !important;bottom:auto !important;left:15px !important;right:auto !important;position:absolute !important}
 @media (min-width:0px) {
   .template-product .js-product-form .form-row.mb-2{display:grid !important;grid-template-columns:35fr 65fr !important;grid-auto-flow:column !important;flex-direction:initial !important;flex-wrap:initial !important;align-items:stretch !important;gap:10px !important;width:100% !important;max-width:100% !important;margin:0 0 18px !important;box-sizing:border-box !important;background:transparent !important}
@@ -173,6 +168,12 @@ html body.template-product .row[data-store^="product-image"] a.js-product-thumb 
   .selka-promo-new-price{font-size:13.5px !important}
   .selka-promo-transfer-price{font-size:9.5px !important}
   .selka-promo-save-badge{font-size:8.5px !important;padding:1px 4px !important}
+  html body.template-product .row[data-store^="product-image"]{display:flex !important;flex-direction:column !important}
+  html body.template-product .row[data-store^="product-image"] > .product-image-container{order:1 !important;width:100% !important;max-width:100% !important;flex:0 0 100% !important}
+  html body.template-product .row[data-store^="product-image"] > .d-none.d-md-block,html body.template-product .row[data-store^="product-image"] > .col-2{display:flex !important;order:2 !important;width:100% !important;max-width:100% !important;flex:0 0 100% !important;flex-direction:row !important;flex-wrap:nowrap !important;justify-content:flex-start !important;gap:8px !important;margin-top:15px !important;padding:0 15px !important;max-height:none !important;overflow-x:auto !important;overflow-y:hidden !important;height:auto !important;-webkit-overflow-scrolling:touch !important}
+  html body.template-product .row[data-store^="product-image"] > .d-none.d-md-block::-webkit-scrollbar,html body.template-product .row[data-store^="product-image"] > .col-2::-webkit-scrollbar{display:none !important;width:0 !important;height:0 !important}
+  html body.template-product .row[data-store^="product-image"] a.js-product-thumb{width:60px !important;height:80px !important;flex:0 0 60px !important;padding:0 !important;margin:0 !important;border-radius:6px !important;overflow:hidden !important;position:relative !important;aspect-ratio:3/4 !important;display:inline-block !important}
+  html body.template-product .row[data-store^="product-image"] a.js-product-thumb img{position:absolute !important;top:0 !important;left:0 !important;width:100% !important;height:100% !important;max-width:none !important;max-height:none !important;transform:none !important;-webkit-transform:none !important;-ms-transform:none !important;object-fit:cover !important}
 }
   `));
   document.head.appendChild(pStyle);
@@ -1325,10 +1326,94 @@ body.pdp-pink-collagen-cream .selka-benefit-item strong {
       ].join('');
     }
 
+    function generateMissingThumbnails() {
+      var thumbContainer = document.querySelector('.template-product .row[data-store^="product-image"] > .d-none.d-md-block') 
+                        || document.querySelector('.template-product .row[data-store^="product-image"] > .col-2')
+                        || document.querySelector('.template-product .col-2.d-none.d-md-block')
+                        || document.querySelector('.template-product .col-2');
+      if (!thumbContainer) return;
+      
+      var modalThumb = thumbContainer.querySelector('.js-product-thumb-modal');
+      if (modalThumb) {
+        modalThumb.classList.remove('js-product-thumb-modal');
+      }
+
+      var slides = document.querySelectorAll('.js-swiper-product .js-product-slide, .swiper-container .js-product-slide, .js-swiper-product .swiper-slide, [data-component="product.slider"] .swiper-slide');
+      if (!slides.length) return;
+      
+      var existingThumbs = thumbContainer.querySelectorAll('.js-product-thumb');
+      var maxLoop = -1;
+      existingThumbs.forEach(function(t) {
+        var loopVal = parseInt(t.getAttribute('data-thumb-loop'), 10);
+        if (loopVal > maxLoop) maxLoop = loopVal;
+      });
+      
+      for (var i = maxLoop + 1; i < slides.length; i++) {
+        var slide = slides[i];
+        var img = slide.querySelector('img');
+        if (!img) continue;
+        var src = img.getAttribute('data-srcset') || img.getAttribute('srcset') || img.src || img.getAttribute('data-src');
+        if (src && src.indexOf(' ') !== -1) {
+          src = src.split(' ')[0].trim();
+        }
+        if (!src) continue;
+        
+        var a = document.createElement('a');
+        a.href = '#';
+        a.className = 'js-product-thumb product-thumb d-block position-relative mb-3';
+        a.style.paddingBottom = '133.33333333333%';
+        a.setAttribute('data-thumb-loop', String(i));
+        
+        var newImg = document.createElement('img');
+        newImg.src = src;
+        newImg.className = 'img-absolute img-absolute-centered lazyautosizes lazyload';
+        newImg.setAttribute('data-sizes', 'auto');
+        
+        a.appendChild(newImg);
+        thumbContainer.appendChild(a);
+      }
+      
+      var allThumbs = thumbContainer.querySelectorAll('.js-product-thumb');
+      allThumbs.forEach(function(t) {
+        if (!t.dataset.listenerAttached) {
+          t.dataset.listenerAttached = 'true';
+          t.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            var loopVal = parseInt(this.getAttribute('data-thumb-loop'), 10);
+            allThumbs.forEach(function(th) { th.classList.remove('selected'); });
+            t.classList.add('selected');
+            var swiperEl = document.querySelector('.js-swiper-product') || document.querySelector('[data-component="product.slider"]');
+            if (swiperEl && swiperEl.swiper) {
+              swiperEl.swiper.slideTo(loopVal);
+            } else if (typeof jQuery !== 'undefined') {
+              var link = document.querySelector('.js-swiper-product [data-image-position="' + loopVal + '"] .js-product-slide-link')
+                      || document.querySelector('[data-component="product.slider"] [data-image-position="' + loopVal + '"] .js-product-slide-link');
+              if (link) jQuery(link).trigger('click');
+            }
+          });
+        }
+      });
+
+      var swiperEl = document.querySelector('.js-swiper-product') || document.querySelector('[data-component="product.slider"]');
+      if (swiperEl && swiperEl.swiper) {
+        var activeIdx = swiperEl.swiper.activeIndex;
+        allThumbs.forEach(function(th) {
+          var loopVal = parseInt(th.getAttribute('data-thumb-loop'), 10);
+          if (loopVal === activeIdx) {
+            th.classList.add('selected');
+          } else {
+            th.classList.remove('selected');
+          }
+        });
+      }
+    }
+
     function updateCartAndStock() {
       syncLSCart();
       updateStockBadge();
       updateCartTransferPrice();
+      generateMissingThumbnails();
     }
 
     updateCartAndStock();
