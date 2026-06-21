@@ -1,5 +1,10 @@
 html,body,.template-home,.template-category,.template-product,.template-page{margin-top:0 !important;padding-top:0 !important}
 
+html,body{overflow-x:hidden !important;touch-action:pan-x pan-y !important;-ms-touch-action:pan-x pan-y !important}
+
+.item-floating-elements .label,.item-floating-elements .js-offer-label,.item-floating-elements .js-offer-label-private,.item-floating-elements .js-promo-label{max-width:140px !important;white-space:normal !important;line-height:1.25 !important;text-align:center !important;word-break:break-word !important}
+.js-item-product .label-offer-percentage[data-value="0"],.js-item-product .js-offer-label[data-offer-percentage="0"],.item-floating-elements .label[data-percentage="0"]{display:none !important}
+
 .section-adbar{padding:12px 0 !important;letter-spacing:1.5px !important;text-transform:uppercase !important;font-size:12.5px !important;font-weight:800 !important;margin-bottom:0 !important}
 
 .adbar-message{font-size:.65rem !important;font-weight:600 !important;letter-spacing:1px !important;text-transform:uppercase !important;text-decoration:none !important;display:inline-block !important;padding-top:5px !important;padding-bottom:4px !important;transition:opacity 0.3s ease !important}
@@ -470,4 +475,30 @@ html,body,.template-home,.template-category,.template-product,.template-page{mar
   visibility: visible !important;
   opacity: 1 !important;
   pointer-events: auto !important;
+}
+
+/* Ocultar la seccion nativa de Opiniones de clientes de Tiendanube (usamos nuestra propia seccion de resenas en la descripcion) */
+.template-product .section-product-comments,
+.template-product [data-store="product-comments"],
+.template-product [data-store="product-reviews"],
+.template-product [data-store="product-reviews-container"],
+.template-product .product-reviews-section,
+.template-product .product-reviews-container,
+.template-product .js-product-comments,
+.template-product .js-product-reviews,
+.template-product .js-product-reviews-container,
+.template-product .js-reviews-container,
+.template-product #product_comments,
+.template-product #product-comments,
+.template-product #product-reviews,
+.template-product .nube-product-reviews,
+.template-product [class*="section-reviews"],
+.template-product [class*="section-comments"],
+.template-product [class*="product-comments"]:not(#selka-reviews-section):not(#selka-reviews-section *) {
+  display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+  overflow: hidden !important;
+  margin: 0 !important;
+  padding: 0 !important;
 }

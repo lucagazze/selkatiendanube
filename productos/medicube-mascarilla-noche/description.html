@@ -1,6 +1,5 @@
 <script>
 (function(){
-  // Inject style overrides for social proof and landing page components
   var style = document.createElement('style');
   style.type = 'text/css';
   style.appendChild(document.createTextNode(`
@@ -337,7 +336,6 @@
 
 @media (max-width:767px){.template-product .sk-product h4{font-size:14.5px !important}}
 
-/* --- Stock badge centrado solo en mobile --- */
 @media (max-width: 767px) {
   .template-product .selka-stock-badge {
     display: block !important;
@@ -348,29 +346,24 @@
   }
 }
 
-/* Ocultar info de descuentos por cantidad (manejado por pack selector) */
 [data-store="product-promotion-info"],
 .js-product-promo-container {
   display: none !important;
 }
 
-/* Ocultar header "Medios de pago" con ícono de tarjeta */
 .template-product [data-store="product-payment-methods"] {
   display: none !important;
 }
 
-/* Ocultar el contenedor nativo de cantidad + agregar al carrito (reemplazado por pack selector) */
 .template-product .js-accordion-container {
   display: none !important;
 }
 
-/* Reducir espacio debajo del stock badge en computadora */
 @media (min-width: 768px) {
   .template-product .selka-stock-badge {
     margin-bottom: 2px !important;
   }
-  
-  /* Iconos y textos de confianza más grandes en computadora */
+
   #selka-pack-selector .selka-trust-container {
     margin-top: 28px !important;
     padding-top: 20px !important;
@@ -425,7 +418,6 @@
       section.appendChild(desc);
     }
     
-            // Inject social proof badge above the product name
     var productTitle = document.querySelector('h1') || document.querySelector('.js-product-name');
     if (productTitle && !document.querySelector('.selka-social-proof')) {
       var proof = document.createElement('div');
@@ -446,14 +438,12 @@
       productTitle.parentNode.insertBefore(proof, productTitle);
     }
     
-    // Inject and update stock badge dynamically (reads real stock, syncs with cart, handles variants)
     function getQuantityInCart() {
       var variantIdEl = document.querySelector('input[name="variant_id"]') || document.querySelector('.js-variant-id') || document.querySelector('[name="variant"]');
       var selectedVariantId = variantIdEl ? parseInt(variantIdEl.value, 10) : null;
       var productTitle = document.querySelector('h1') || document.querySelector('.js-product-name');
       var targetName = productTitle ? productTitle.textContent.trim().toLowerCase() : '';
 
-      // 1. Try to read from LS.cart first (source of truth in JS)
       if (typeof LS !== 'undefined' && LS.cart) {
         var items = null;
         if (LS.cart.items) {
@@ -483,7 +473,6 @@
         }
       }
 
-      // 2. Fallback to DOM parsing of the cart modal
       var cartModal = document.getElementById('modal-cart') || document.querySelector('.js-ajax-cart-panel') || document.querySelector('.ajax-cart-container');
       if (cartModal) {
         var cartItems = cartModal.querySelectorAll('.js-cart-item, .cart-item, .cart-row');
@@ -714,7 +703,6 @@
       window.selkaStockInterval = setInterval(updateCartAndStock, 500);
     }
 
-    // Intercept cart updates (AJAX complete & clicks on cart elements) to sync stock badge instantly
     if (typeof jQuery !== 'undefined' && !window.selkaAjaxListenerAttached) {
       window.selkaAjaxListenerAttached = true;
       jQuery(document).ajaxComplete(function() {
@@ -725,21 +713,18 @@
     }
 
     function openCartModal() {
-      // 1. Try modern theme cart-drawer or cart-notification
       var cartWidget = document.querySelector('cart-notification') || document.querySelector('cart-drawer');
       if (cartWidget && typeof cartWidget.open === 'function') {
         cartWidget.open();
         return;
       }
 
-      // 2. Try legacy modal-cart
       var modal = document.getElementById('modal-cart');
       var isOpen = modal && (modal.classList.contains('show') || modal.classList.contains('in') || window.getComputedStyle(modal).display !== 'none');
       if (isOpen) {
-        return; // already open, do nothing!
+        return;
       }
       
-      // Try using jQuery Bootstrap modal show if available
       if (typeof jQuery !== 'undefined' && jQuery('#modal-cart').modal) {
         try {
           jQuery('#modal-cart').modal('show');
@@ -747,7 +732,6 @@
         } catch(e) {}
       }
       
-      // Fallback: click the trigger
       var cartTrigger = document.querySelector('#cart-icon-bubble, [data-store="header-cart"] button, .js-cart-widget, .js-open-cart, [data-toggle="modal"][data-target="#modal-cart"]');
       if (cartTrigger) {
         cartTrigger.click();
@@ -771,7 +755,6 @@
         var parser = new DOMParser();
         var doc = parser.parseFromString(htmlText, 'text/html');
         
-        // 1. Update the cart modal form content
         var newPanel = doc.querySelector('.js-ajax-cart-panel');
         var currentPanel = document.querySelector('.js-ajax-cart-panel');
         if (newPanel && currentPanel) {
@@ -784,7 +767,6 @@
           }
         }
         
-        // 2. Update the cart widget amount counters in the header
         var newAmounts = doc.querySelectorAll('.js-cart-widget-amount');
         var currentAmounts = document.querySelectorAll('.js-cart-widget-amount');
         if (newAmounts.length > 0 && currentAmounts.length > 0) {
@@ -797,10 +779,8 @@
           });
         }
         
-        // 3. Open the cart modal
         setTimeout(openCartModal, 50);
         
-        // 4. Update the cart transfer price and stock badge
         setTimeout(updateCartAndStock, 100);
       }).catch(function(err) {
         console.error("Error refreshing cart:", err);
@@ -829,7 +809,6 @@
                 }
                 syncLSCart();
               }
-              // If it's an add to cart, open modal
               if (urlStr.indexOf('/carrito/agregar') !== -1 || urlStr.indexOf('/comprar') !== -1) {
                 setTimeout(refreshCartUI, 150);
               }
@@ -839,7 +818,6 @@
           setTimeout(updateCartAndStock, 250);
           setTimeout(updateCartAndStock, 600);
         });
-        // Save the URL to read it on load
         this.selkaRequestUrl = arguments[1];
         return origOpen.apply(this, arguments);
       };
@@ -1198,7 +1176,6 @@
 
   <div style="border:none;border-top:1px solid #ede5e5;margin:44px 0;">&nbsp;</div>
 
-
   <div style="margin-bottom:40px;">
     <h3 style="font-size:1.45rem;font-weight:900;color:#000000;margin:0 0 24px;line-height:1.2;">Cómo usarla <span style="color:#000000;">&rarr;</span></h3>
     <div style="background:#f8e8e8;border-radius:16px;padding:36px 32px;box-sizing:border-box;">
@@ -1270,14 +1247,13 @@
     </details>
   </div>
 
-  <!-- Client Reviews Section -->
   <div style="border:none;border-top:1px solid #ede5e5;margin:44px 0;">&nbsp;</div>
 
   <div id="selka-reviews-section" style="margin-bottom:40px; font-family:'Inter','Helvetica Neue',Helvetica,Arial,sans-serif;">
     <h3 style="font-size:1.45rem;font-weight:900;color:#000000;margin:0 0 24px;line-height:1.2;">Opiniones de clientes <span style="color:#000000;">&rarr;</span></h3>
     
     <div style="display:flex; gap:24px; padding:28px 24px; border:1px solid #ede5e5; border-radius:16px; background:#fafafa; margin-bottom:28px; align-items:center; flex-wrap:wrap; box-sizing:border-box;">
-      <!-- Avg rating -->
+      
       <div style="text-align:center; flex:1; min-width:140px;">
         <div style="font-size:3.2rem; font-weight:900; color:#111; line-height:1;">4.8</div>
         <div style="margin:8px 0 4px; display:inline-flex; gap:3px;">
@@ -1289,8 +1265,7 @@
         </div>
         <div style="font-size:12.5px; color:#555; font-weight:600;">195 opiniones</div>
       </div>
-      
-      <!-- Progress Bars -->
+
       <div style="flex:2; min-width:240px; display:flex; flex-direction:column; gap:6px;">
         <div style="display:flex; align-items:center; gap:8px; font-size:11.5px; color:#555;">
           <span style="width:70px; text-align:right; font-weight:600;">5 estrellas</span>
@@ -1328,14 +1303,12 @@
           <span style="width:30px; font-weight:600;">1%</span>
         </div>
       </div>
-      
-      <!-- Action Button -->
+
       <div style="flex:1; min-width:140px; text-align:center;">
         <button onclick="toggleSelkaReviewForm()" style="background:#000; color:#fff; border:none; font-weight:700; font-size:0.82rem; letter-spacing:0.5px; padding:12px 20px; border-radius:999px; cursor:pointer; width:100%; max-width:180px;">Escribir opinión</button>
       </div>
     </div>
-    
-    <!-- Review Form (hidden by default) -->
+
     <div id="selka-review-form-container" style="display:none; border:1px solid #ede5e5; border-radius:16px; padding:24px; background:#fff; margin-bottom:24px; box-sizing:border-box;">
       <h4 style="font-size:1.05rem; font-weight:800; color:#111; margin:0 0 16px;">Dejanos tu reseña</h4>
       <form onsubmit="submitSelkaReview(event)">
@@ -1367,17 +1340,15 @@
         </div>
       </form>
     </div>
-    
-    <!-- Success Notification -->
+
     <div id="selka-review-success-msg" style="display:none; border:1.5px solid #c3e6cb; background:#d4edda; color:#155724; border-radius:16px; padding:20px; margin-bottom:24px; text-align:center; box-sizing:border-box;">
       <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin:0 auto 10px; color:#28a745;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
       <h4 style="font-weight:800; font-size:1.05rem; margin:0 0 6px; color:#155724;">¡Reseña enviada con éxito!</h4>
       <p style="margin:0; font-size:13px; line-height:1.5; color:#155724;">Muchas gracias por tu comentario. Tu opinión está siendo procesada por moderación para verificar la compra y aparecerá activa en el sitio a la brevedad.</p>
     </div>
-    
-    <!-- Review List -->
+
     <div id="selka-reviews-list" style="display:flex; flex-direction:column; gap:20px;">
-      <!-- Static Reviews -->
+      
       <div style="border-bottom:1px solid #ede5e5; padding-bottom:18px;">
         <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:6px; flex-wrap:wrap; gap:8px;">
           <div style="display:flex; align-items:center; gap:8px;">
