@@ -22,17 +22,28 @@ html,body{overflow-x:hidden !important;touch-action:pan-x pan-y !important;-ms-t
 .template-product [data-component="product.adding-amount"]{flex:0 0 auto !important;width:64px !important;max-width:64px !important;padding:0 !important}
 .template-product .js-quantity-input{height:44px !important;text-align:center !important;font-size:15px !important;font-weight:700 !important;padding:0 !important;border:1.5px solid #ede5e5 !important;border-radius:10px !important;background:#ffffff !important;width:100% !important}
 @media (max-width:767px){
+  .template-product .js-product-form .form-row.mb-2{display:flex !important;flex-direction:column !important;gap:14px !important;margin:0 0 18px !important}
+  .template-product .js-product-form .form-row.mb-2 > .col-4,
+  .template-product .js-product-form .form-row.mb-2 > .col-8{flex:0 0 100% !important;max-width:100% !important;width:100% !important;padding:0 !important}
+  .template-product .form-quantity[data-component="product.quantity"],
+  .template-product .form-row[data-component="product.quantity"]{justify-content:center !important;gap:0 !important;display:flex !important;align-items:center !important;flex-wrap:nowrap !important}
   .template-product .form-quantity .js-quantity-down,
   .template-product .form-quantity .js-quantity-up,
   .template-product [data-component="product.quantity.minus"],
-  .template-product [data-component="product.quantity.plus"]{width:48px !important;height:48px !important;min-width:48px !important;min-height:48px !important;border-radius:12px !important;margin:0 6px !important}
+  .template-product [data-component="product.quantity.plus"]{width:52px !important;height:52px !important;min-width:52px !important;min-height:52px !important;border-radius:12px !important;margin:0 10px !important;flex-shrink:0 !important;background:#ffffff !important;border:1.5px solid #ede5e5 !important;display:inline-flex !important;align-items:center !important;justify-content:center !important;padding:0 !important;opacity:1 !important;cursor:pointer !important}
+  .template-product .form-quantity .js-quantity-down[style*="opacity: 0.3"],
+  .template-product .form-quantity .js-quantity-up[style*="opacity: 0.3"]{opacity:0.4 !important}
   .template-product .form-quantity .js-quantity-down svg,
   .template-product .form-quantity .js-quantity-up svg,
   .template-product [data-component="product.quantity.minus"] svg,
-  .template-product [data-component="product.quantity.plus"] svg{width:16px !important;height:16px !important}
-  .template-product .js-quantity-input{height:48px !important;font-size:16px !important;border-radius:12px !important}
+  .template-product [data-component="product.quantity.plus"] svg{width:18px !important;height:18px !important;color:#111 !important;fill:#111 !important}
+  .template-product .js-quantity-input{height:52px !important;font-size:17px !important;font-weight:800 !important;border-radius:12px !important;text-align:center !important;width:74px !important;border:1.5px solid #ede5e5 !important;padding:0 !important;background:#ffffff !important;-moz-appearance:textfield !important;color:#111 !important}
+  .template-product .js-quantity-input::-webkit-outer-spin-button,
+  .template-product .js-quantity-input::-webkit-inner-spin-button{-webkit-appearance:none !important;margin:0 !important}
   .template-product .form-quantity .form-control-container,
-  .template-product [data-component="product.adding-amount"]{width:56px !important;max-width:56px !important}
+  .template-product [data-component="product.adding-amount"]{flex:0 0 auto !important;width:74px !important;max-width:74px !important;padding:0 !important}
+  .template-product .js-addtocart.btn-primary,
+  .template-product .js-prod-submit-form{width:100% !important;height:54px !important;font-size:14px !important;font-weight:800 !important;letter-spacing:1.5px !important;border-radius:12px !important;margin:0 !important;padding:0 16px !important}
 }
 .js-item-product .label-offer-percentage[data-value="0"],.js-item-product .js-offer-label[data-offer-percentage="0"],.item-floating-elements .label[data-percentage="0"]{display:none !important}
 
