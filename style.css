@@ -77,7 +77,7 @@ html,body{overflow-x:hidden !important;touch-action:pan-x pan-y !important;-ms-t
   .template-product .form-quantity .js-quantity-down,
   .template-product .form-quantity .js-quantity-up,
   .template-product [data-component="product.quantity.minus"],
-  .template-product [data-component="product.quantity.plus"]{flex:1 1 0 !important;width:auto !important;min-width:0 !important;height:100% !important;min-height:0 !important;border-radius:0 !important;margin:0 !important;padding:0 !important;background:transparent !important;border:0 !important;display:flex !important;align-items:center !important;justify-content:center !important;align-self:stretch !important;vertical-align:middle !important;line-height:0 !important;cursor:pointer !important;box-shadow:none !important;transition:background .15s ease !important;box-sizing:border-box !important;text-decoration:none !important}
+  .template-product [data-component="product.quantity.plus"]{flex:1 1 0 !important;width:auto !important;min-width:0 !important;height:100% !important;min-height:0 !important;border-radius:0 !important;margin:0 !important;padding:0 !important;background:transparent !important;border:0 !important;display:flex !important;align-items:center !important;justify-content:center !important;align-self:stretch !important;vertical-align:middle !important;line-height:0 !important;cursor:pointer !important;box-shadow:none !important;transition:none !important;transform:none !important;animation:none !important;box-sizing:border-box !important;text-decoration:none !important;-webkit-tap-highlight-color:transparent !important;-webkit-user-select:none !important;user-select:none !important}
   .template-product .form-quantity .js-quantity-down:hover,
   .template-product .form-quantity .js-quantity-up:hover,
   .template-product [data-component="product.quantity.minus"]:hover,
@@ -89,7 +89,19 @@ html,body{overflow-x:hidden !important;touch-action:pan-x pan-y !important;-ms-t
   .template-product .form-quantity .js-quantity-down:focus,
   .template-product .form-quantity .js-quantity-up:focus,
   .template-product [data-component="product.quantity.minus"]:focus,
-  .template-product [data-component="product.quantity.plus"]:focus{background:transparent !important;transform:none !important;padding:0 !important;margin:0 !important;border:0 !important;box-shadow:none !important;outline:none !important;-webkit-tap-highlight-color:transparent !important}
+  .template-product [data-component="product.quantity.plus"]:focus,
+  .template-product .form-quantity .js-quantity-down:focus-visible,
+  .template-product .form-quantity .js-quantity-up:focus-visible,
+  .template-product [data-component="product.quantity.minus"]:focus-visible,
+  .template-product [data-component="product.quantity.plus"]:focus-visible{background:transparent !important;transform:none !important;scale:1 !important;translate:0 0 !important;padding:0 !important;margin:0 !important;border:0 !important;box-shadow:none !important;outline:none !important;animation:none !important;transition:none !important;-webkit-tap-highlight-color:transparent !important;filter:none !important}
+  .template-product .form-quantity .js-quantity-down:hover svg,
+  .template-product .form-quantity .js-quantity-up:hover svg,
+  .template-product [data-component="product.quantity.minus"]:hover svg,
+  .template-product [data-component="product.quantity.plus"]:hover svg,
+  .template-product .form-quantity .js-quantity-down:active svg,
+  .template-product .form-quantity .js-quantity-up:active svg,
+  .template-product [data-component="product.quantity.minus"]:active svg,
+  .template-product [data-component="product.quantity.plus"]:active svg{transform:none !important;scale:1 !important;color:#b86258 !important;fill:#b86258 !important}
   .template-product .form-quantity .js-quantity-down svg,
   .template-product .form-quantity .js-quantity-up svg,
   .template-product [data-component="product.quantity.minus"] svg,
@@ -111,7 +123,7 @@ html,body{overflow-x:hidden !important;touch-action:pan-x pan-y !important;-ms-t
   .template-product input.js-quantity-input.form-control-ios,
   .template-product input.js-quantity-input.form-control-inline,
   .template-product input.js-quantity-input.form-control.form-control-ios,
-  .template-product input.js-quantity-input.form-control.form-control-inline{height:54px !important;min-height:54px !important;max-height:54px !important;line-height:54px !important;font-size:18px !important;font-weight:800 !important;border-radius:0 !important;text-align:center !important;text-align-last:center !important;width:100% !important;border:0 !important;background:transparent !important;color:#1a1410 !important;padding:0 0 0 0 !important;padding-left:0 !important;padding-right:0 !important;padding-top:0 !important;padding-bottom:0 !important;padding-inline-start:0 !important;padding-inline-end:0 !important;margin:0 !important;display:block !important;-moz-appearance:textfield !important;-webkit-appearance:none !important;appearance:none !important;box-shadow:none !important;outline:none !important;box-sizing:border-box !important;text-indent:0 !important;direction:ltr !important;vertical-align:middle !important;font-family:inherit !important}
+  .template-product input.js-quantity-input.form-control.form-control-inline{height:54px !important;min-height:54px !important;max-height:54px !important;line-height:normal !important;font-size:18px !important;font-weight:800 !important;border-radius:0 !important;text-align:center !important;text-align-last:center !important;width:100% !important;border:0 !important;background:transparent !important;color:#1a1410 !important;padding:0 !important;padding-left:0 !important;padding-right:0 !important;padding-top:0 !important;padding-bottom:0 !important;padding-inline-start:0 !important;padding-inline-end:0 !important;margin:0 !important;display:block !important;-moz-appearance:textfield !important;-webkit-appearance:none !important;appearance:none !important;box-shadow:none !important;outline:none !important;box-sizing:border-box !important;text-indent:0 !important;direction:ltr !important;vertical-align:middle !important;font:inherit !important;font-size:18px !important;font-weight:800 !important;font-family:inherit !important;font-style:normal !important}
   .template-product .js-quantity-input:focus,
   .template-product input[name="quantity"]:focus{background:transparent !important;box-shadow:none !important;outline:none !important;border:0 !important;padding:0 !important}
   .template-product .js-quantity-input::-webkit-inner-spin-button,
