@@ -375,13 +375,13 @@ html{overflow-x:clip !important;-webkit-text-size-adjust:100%;text-size-adjust:1
 
 .template-product #price_display,.template-product .js-price-display{position:static !important;display:inline-block !important;font-size:2.35rem !important;font-weight:900 !important;color:#000000 !important;letter-spacing:-1px !important;line-height:1.1 !important;margin:0 !important}
 
-.template-product .js-payment-discount-price-product-container,.template-product .payment-discount-price-product-container{position:static !important;display:inline-flex !important;margin-top:0 !important;padding:8px 16px !important;background:#f8e8e8 !important;border:1px solid #d99a96 !important;border-radius:8px !important;align-items:center !important;flex-wrap:wrap !important;gap:8px !important;font-size:0.88rem !important;color:rgba(17,17,17,0.75) !important;font-weight:600 !important;line-height:1.3 !important}
+.template-product .js-payment-discount-price-product-container,.template-product .payment-discount-price-product-container{position:static !important;display:flex !important;align-items:baseline !important;gap:4px !important;margin-top:6px !important;padding:0 !important;background:transparent !important;border:0 !important;border-radius:0 !important;box-shadow:none !important;color:#b86258 !important;font-weight:600 !important;line-height:1.3 !important}
 
-.template-product .js-payment-discount-price-product,.template-product .payment-discount-price-product{font-weight:800 !important;color:#111111 !important;font-size:1.05rem !important}
+.template-product .js-payment-discount-price-product,.template-product .payment-discount-price-product{font-weight:800 !important;color:#b86258 !important;font-size:17px !important}
 
-.template-product .js-payment-discount-name-product{font-weight:700 !important;color:#111111 !important}
+.template-product .js-payment-discount-name-product{font-weight:600 !important;color:#b86258 !important;font-size:14px !important}
 
-@media (max-width:767px){.template-product #price_display,.template-product .js-price-display{font-size:2.0rem !important}.template-product #compare_price_display,.template-product .js-compare-price-display,.template-product .price-compare{font-size:1.1rem !important}.template-product .js-payment-discount-price-product-container,.template-product .payment-discount-price-product-container{padding:8px 12px !important;font-size:0.82rem !important}.template-product .js-payment-discount-price-product,.template-product .payment-discount-price-product{font-size:0.95rem !important}}
+@media (max-width:767px){.template-product #price_display,.template-product .js-price-display{font-size:2.0rem !important}.template-product #compare_price_display,.template-product .js-compare-price-display,.template-product .price-compare{font-size:1.1rem !important}.template-product .js-payment-discount-price-product-container,.template-product .payment-discount-price-product-container{padding:0 !important;font-size:14px !important}.template-product .js-payment-discount-price-product,.template-product .payment-discount-price-product{font-size:16px !important}}
 
 .fancybox__nav .svg-square,.fancybox__nav .swiper-button-next,.fancybox__nav .swiper-button-prev{width:48px !important;height:48px !important;border-radius:50% !important;background:rgba(248,232,232,0.82) !important;backdrop-filter:blur(8px) !important;-webkit-backdrop-filter:blur(8px) !important;border:1px solid #d99a96 !important;box-shadow:0 4px 20px rgba(0,0,0,0.1) !important;display:flex !important;align-items:center !important;justify-content:center !important;cursor:pointer !important;transition:background 0.2s ease,transform 0.2s ease,box-shadow 0.2s ease !important;color:#111111 !important}
 
@@ -506,31 +506,31 @@ html{overflow-x:clip !important;-webkit-text-size-adjust:100%;text-size-adjust:1
   text-transform: uppercase !important;
 }
 
-/* --- Descuento transferencia: texto más pequeño en producto individual --- */
+/* --- Descuento transferencia: texto en producto individual --- */
 .template-product .payment-discount-price-product-container,
 .template-product .js-payment-discount-price-product-container {
-  font-size: 12px !important;
+  font-size: 15px !important;
 }
 
 .template-product .js-payment-discount-price-product {
-  font-size: 13px !important;
-  font-weight: 700 !important;
+  font-size: 17px !important;
+  font-weight: 800 !important;
 }
 
 .template-product .js-payment-discount-name-product {
-  font-size: 11.5px !important;
+  font-size: 14px !important;
 }
 
 @media (max-width: 767px) {
   .template-product .payment-discount-price-product-container,
   .template-product .js-payment-discount-price-product-container {
-    font-size: 11px !important;
+    font-size: 14px !important;
   }
   .template-product .js-payment-discount-price-product {
-    font-size: 12px !important;
+    font-size: 16px !important;
   }
   .template-product .js-payment-discount-name-product {
-    font-size: 10.5px !important;
+    font-size: 13px !important;
   }
 }
 

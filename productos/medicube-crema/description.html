@@ -721,7 +721,7 @@ body.pdp-pink-collagen-cream .selka-benefit-item strong {
           revSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
       });
-      productTitle.parentNode.insertBefore(proof, productTitle);
+      productTitle.parentNode.insertBefore(proof, productTitle.nextSibling);
     }
     
     var discountContainer = document.querySelector('.js-payment-discount-price-product-container') || document.querySelector('.payment-discount-price-product-container') || document.querySelector('.price-container');
