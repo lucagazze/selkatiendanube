@@ -87,6 +87,17 @@
     });
   }
 
+  function hidePaymentMethodsAccordion(){
+    var subs = document.querySelectorAll('.template-product .js-accordion-toggle .subtitle, .template-product .subtitle');
+    subs.forEach(function(sp){
+      var t = (sp.textContent || '').trim().toLowerCase();
+      if (t === 'medios de pago' || t === 'medios de pagos') {
+        var acc = sp.closest('.js-accordion-container');
+        if (acc) { acc.style.cssText = 'display:none !important;visibility:hidden !important;height:0 !important;overflow:hidden !important;margin:0 !important;padding:0 !important'; }
+      }
+    });
+  }
+
   function cleanLabels(){
     var labels = document.querySelectorAll('.item-floating-elements .label, .item-floating-elements .js-offer-label, .item-floating-elements .js-offer-label-private, .item-floating-elements .js-promo-label, .item-floating-elements [class*="offer-label"]');
     labels.forEach(function(lbl){
@@ -106,7 +117,7 @@
     });
   }
 
-  function run(){ removeNativeReviews(); cleanLabels(); }
+  function run(){ removeNativeReviews(); cleanLabels(); hidePaymentMethodsAccordion(); }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', run);
   else run();
   window.addEventListener('load', run);

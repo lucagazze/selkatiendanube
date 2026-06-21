@@ -2,6 +2,11 @@ html,body,.template-home,.template-category,.template-product,.template-page{mar
 
 html,body{overflow-x:hidden !important;touch-action:pan-x pan-y !important;-ms-touch-action:pan-x pan-y !important}
 
+.template-product [data-store="product-payment-methods"],
+.template-product .js-accordion-container:has(use[*|href="#credit-card"]),
+.template-product #btn-installments,
+.template-product .js-product-payments-container{display:none !important;visibility:hidden !important;height:0 !important;overflow:hidden !important;margin:0 !important;padding:0 !important}
+
 .item-floating-elements .label,.item-floating-elements .js-offer-label,.item-floating-elements .js-offer-label-private,.item-floating-elements .js-promo-label{max-width:140px !important;white-space:normal !important;line-height:1.25 !important;text-align:center !important;word-break:break-word !important}
 
 .template-product .form-quantity .js-quantity-down,
