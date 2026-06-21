@@ -62,6 +62,7 @@ html{overflow-x:clip !important;-webkit-text-size-adjust:100%;text-size-adjust:1
   .template-product .js-product-form .form-row.mb-2{display:grid !important;grid-template-columns:35fr 65fr !important;grid-auto-flow:column !important;flex-direction:initial !important;flex-wrap:initial !important;align-items:stretch !important;gap:10px !important;width:100% !important;max-width:100% !important;margin:0 0 18px !important;box-sizing:border-box !important;background:transparent !important}
   .template-product .js-product-form .form-row.mb-2 > .col-4,
   .template-product .js-product-form .form-row.mb-2 > .col-8{flex:initial !important;max-width:none !important;width:auto !important;min-width:0 !important;padding:0 !important;margin:0 !important;background:transparent !important}
+  .template-product .js-product-form .form-row.mb-2 > .col-12{grid-column:1 / -1 !important;width:100% !important;margin-top:10px !important}
   .template-product .form-group.js-quantity,
   .template-product .form-quantity.form-quantity-product{width:100% !important;height:40px !important;display:block !important;min-width:0 !important}
   .template-product .form-quantity[data-component="product.quantity"],
