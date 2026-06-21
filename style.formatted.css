@@ -1068,6 +1068,14 @@ body.pdp-pink-collagen-cream .selka-quiero-mio-btn:hover {
   line-height: 1.1 !important;
 }
 
+.selka-promo-transfer-price {
+  font-size: 10.5px !important;
+  font-weight: 700 !important;
+  color: #b86258 !important;
+  margin-top: 1px !important;
+  line-height: 1.1 !important;
+}
+
 .selka-promo-save-badge {
   font-size: 9.5px !important;
   font-weight: 700 !important;
@@ -1094,6 +1102,9 @@ body.pdp-pink-collagen-cream .selka-quiero-mio-btn:hover {
   }
   .selka-promo-new-price {
     font-size: 13.5px !important;
+  }
+  .selka-promo-transfer-price {
+    font-size: 9.5px !important;
   }
   .selka-promo-save-badge {
     font-size: 8.5px !important;
