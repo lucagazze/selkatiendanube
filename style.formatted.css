@@ -1064,6 +1064,7 @@ body.pdp-pink-collagen-cream .selka-quiero-mio-btn:hover {
   display: flex !important;
   gap: 2px !important;
   align-items: center !important;
+  text-decoration: line-through !important;
 }
 
 .selka-promo-old-price-label {
