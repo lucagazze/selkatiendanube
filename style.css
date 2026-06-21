@@ -61,6 +61,15 @@ html,body{overflow-x:hidden !important;touch-action:pan-x pan-y !important;-ms-t
   .template-product .js-product-form .form-row.mb-2{display:flex !important;flex-direction:column !important;flex-wrap:nowrap !important;gap:14px !important;margin:0 0 18px !important;align-items:stretch !important;background:transparent !important}
   .template-product .js-product-form .form-row.mb-2 > .col-4,
   .template-product .js-product-form .form-row.mb-2 > .col-8{flex:0 0 auto !important;max-width:100% !important;width:100% !important;padding:0 !important;background:transparent !important}
+}
+
+@media (min-width:768px){
+  .template-product .js-product-form .form-row.mb-2{flex-direction:row !important;align-items:stretch !important;gap:12px !important}
+  .template-product .js-product-form .form-row.mb-2 > .col-4{flex:1 1 50% !important;max-width:50% !important;width:50% !important}
+  .template-product .js-product-form .form-row.mb-2 > .col-8{flex:1 1 50% !important;max-width:50% !important;width:50% !important}
+}
+
+@media (min-width:0px){
   .template-product .form-group.js-quantity,
   .template-product .form-quantity.form-quantity-product{background:transparent !important;border:0 !important;padding:0 !important;margin:0 !important;box-shadow:none !important;width:100% !important}
   .template-product .form-quantity[data-component="product.quantity"],
