@@ -19,8 +19,9 @@ html,body{overflow-x:hidden !important;touch-action:pan-x pan-y !important;-ms-t
 .template-product .form-quantity[data-component="product.quantity"],
 .template-product .form-row[data-component="product.quantity"]{display:flex !important;align-items:center !important;justify-content:flex-start !important;gap:0 !important;flex-wrap:nowrap !important}
 .template-product .form-quantity .form-control-container,
-.template-product [data-component="product.adding-amount"]{flex:0 0 auto !important;width:46px !important;max-width:46px !important;padding:0 !important}
-.template-product .js-quantity-input{height:34px !important;text-align:center !important;font-size:13px !important;font-weight:700 !important;padding:0 !important;border:1px solid #ede5e5 !important;border-radius:8px !important;background:#ffffff !important;width:100% !important}
+.template-product [data-component="product.adding-amount"]{flex:0 0 auto !important;width:46px !important;max-width:46px !important;padding:0 !important;background:transparent !important}
+.template-product .js-quantity-input{height:34px !important;text-align:center !important;font-size:13px !important;font-weight:700 !important;padding:0 !important;border:1.5px solid #d99a96 !important;border-radius:8px !important;background:#fff5f6 !important;width:100% !important;color:#1a1410 !important;box-shadow:none !important;outline:none !important}
+.template-product .js-quantity-input:focus{border-color:#b86258 !important;background:#fff0f2 !important;box-shadow:0 0 0 3px rgba(217,154,150,0.18) !important;outline:none !important}
 .template-product .form-quantity .js-quantity-down,
 .template-product .form-quantity .js-quantity-up,
 .template-product [data-component="product.quantity.minus"],
@@ -62,7 +63,7 @@ html,body{overflow-x:hidden !important;touch-action:pan-x pan-y !important;-ms-t
   .template-product .form-quantity .js-quantity-up svg,
   .template-product [data-component="product.quantity.minus"] svg,
   .template-product [data-component="product.quantity.plus"] svg{width:16px !important;height:16px !important}
-  .template-product .js-quantity-input{height:48px !important;font-size:16px !important;border-radius:10px !important;text-align:center !important;width:48px !important;border:1.5px solid #ede5e5 !important;padding:0 !important;-moz-appearance:textfield !important}
+  .template-product .js-quantity-input{height:48px !important;font-size:16px !important;border-radius:10px !important;text-align:center !important;width:48px !important;border:1.5px solid #d99a96 !important;background:#fff5f6 !important;color:#1a1410 !important;padding:0 !important;-moz-appearance:textfield !important;box-shadow:none !important;outline:none !important}
   .template-product .js-quantity-input::-webkit-outer-spin-button,
   .template-product .js-quantity-input::-webkit-inner-spin-button{-webkit-appearance:none !important;margin:0 !important}
   .template-product .form-quantity .form-control-container,
