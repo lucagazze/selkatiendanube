@@ -1,6 +1,7 @@
 html,body,.template-home,.template-category,.template-product,.template-page{margin-top:0 !important;padding-top:0 !important}
 
-html,body{overflow-x:hidden !important;touch-action:pan-x pan-y !important;-ms-touch-action:pan-x pan-y !important;-webkit-user-select:none;user-select:none;-webkit-text-size-adjust:100%;text-size-adjust:100%;-webkit-touch-callout:none}
+body{overflow-x:clip !important;touch-action:pan-x pan-y !important;-ms-touch-action:pan-x pan-y !important;-webkit-text-size-adjust:100%;text-size-adjust:100%;-webkit-touch-callout:none}
+html{overflow-x:clip !important;-webkit-text-size-adjust:100%;text-size-adjust:100%}
 
 @-ms-viewport{width:device-width;user-zoom:fixed;max-zoom:1;min-zoom:1}
 @viewport{width:device-width;user-zoom:fixed;max-zoom:1;min-zoom:1}
@@ -58,7 +59,7 @@ html,body{overflow-x:hidden !important;touch-action:pan-x pan-y !important;-ms-t
 .selka-stock-badge.out-of-stock::before{background:#888888 !important;animation:none !important;box-shadow:none !important}
 
 @media (min-width:0px){
-  .template-product .js-product-form .form-row.mb-2{display:grid !important;grid-template-columns:1fr 1fr !important;grid-auto-flow:column !important;flex-direction:initial !important;flex-wrap:initial !important;align-items:stretch !important;gap:10px !important;width:100% !important;max-width:100% !important;margin:0 0 18px !important;box-sizing:border-box !important;background:transparent !important}
+  .template-product .js-product-form .form-row.mb-2{display:grid !important;grid-template-columns:35fr 65fr !important;grid-auto-flow:column !important;flex-direction:initial !important;flex-wrap:initial !important;align-items:stretch !important;gap:10px !important;width:100% !important;max-width:100% !important;margin:0 0 18px !important;box-sizing:border-box !important;background:transparent !important}
   .template-product .js-product-form .form-row.mb-2 > .col-4,
   .template-product .js-product-form .form-row.mb-2 > .col-8{flex:initial !important;max-width:none !important;width:auto !important;min-width:0 !important;padding:0 !important;margin:0 !important;background:transparent !important}
   .template-product .form-group.js-quantity,
