@@ -646,3 +646,43 @@ html{overflow-x:clip !important;-webkit-text-size-adjust:100%;text-size-adjust:1
   margin: 0 !important;
   padding: 0 !important;
 }
+
+/* Estilo premium para el boton 'Quiero el mio' */
+.selka-quiero-mio-btn {
+  display: inline-block !important;
+  background: #111111 !important;
+  color: #ffffff !important;
+  font-weight: 700 !important;
+  font-size: 0.85rem !important;
+  letter-spacing: 1px !important;
+  text-transform: uppercase !important;
+  padding: 15px 46px !important;
+  border-radius: 999px !important;
+  text-decoration: none !important;
+  border: 2px solid #111111 !important;
+  transition: all 0.3s ease !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) !important;
+  cursor: pointer !important;
+}
+
+.selka-quiero-mio-btn:hover {
+  background: #333333 !important;
+  border-color: #333333 !important;
+  color: #ffffff !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18) !important;
+}
+
+/* Adaptacion al color de la crema rosa si aplica */
+body.pdp-pink-collagen-cream .selka-quiero-mio-btn {
+  background: #d99a96 !important;
+  border-color: #d99a96 !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 15px rgba(217, 154, 150, 0.2) !important;
+}
+
+body.pdp-pink-collagen-cream .selka-quiero-mio-btn:hover {
+  background: #c78581 !important;
+  border-color: #c78581 !important;
+  box-shadow: 0 6px 20px rgba(217, 154, 150, 0.35) !important;
+}
