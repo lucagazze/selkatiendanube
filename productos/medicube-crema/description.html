@@ -2591,9 +2591,28 @@ body.pdp-pink-collagen-cream .selka-benefit-item strong {
           counterEl.textContent = (i+1) + ' / ' + items.length + ' · Fotos de reseñas';
         }
 
+        var activeOverlayIdx = 0;
+        function showOverlayImg(idx) {
+          if (idx < 0) idx = items.length - 1;
+          if (idx >= items.length) idx = 0;
+          activeOverlayIdx = idx;
+          var it = items[idx];
+          if (it && it.url) {
+            var overlayImg = document.getElementById('selka-img-overlay-img');
+            if (overlayImg) {
+              overlayImg.style.opacity = '0';
+              setTimeout(function() {
+                overlayImg.src = it.url;
+                overlayImg.style.opacity = '1';
+              }, 120);
+            }
+          }
+        }
+
         function openAt(i){
           var it = items[i];
           if (!it || !it.url) return;
+          activeOverlayIdx = i;
           
           var overlay = document.getElementById('selka-img-overlay');
           if (!overlay) {
@@ -2603,16 +2622,90 @@ body.pdp-pink-collagen-cream .selka-benefit-item strong {
             
             var img = document.createElement('img');
             img.id = 'selka-img-overlay-img';
-            img.style.cssText = 'max-width:90%;max-height:90%;object-fit:contain;border-radius:10px;box-shadow:0 10px 40px rgba(0,0,0,0.5);transition:transform 0.25s ease;transform:scale(0.95);';
+            img.style.cssText = 'max-width:90%;max-height:90%;object-fit:contain;border-radius:10px;box-shadow:0 10px 40px rgba(0,0,0,0.5);transition:transform 0.25s ease, opacity 0.15s ease;transform:scale(0.95);opacity:1;';
             overlay.appendChild(img);
             
-            overlay.addEventListener('click', function() {
+            overlay.addEventListener('click', function(e) {
+              if (e.target === overlay) {
+                overlay.style.opacity = '0';
+                img.style.transform = 'scale(0.95)';
+                setTimeout(function() {
+                  overlay.style.display = 'none';
+                }, 250);
+              }
+            });
+
+            // Close button
+            var closeBtn = document.createElement('div');
+            closeBtn.innerHTML = '&times;';
+            closeBtn.style.cssText = 'position:absolute;top:20px;right:20px;color:#fff;font-size:40px;cursor:pointer;user-select:none;z-index:1000000;width:50px;height:50px;display:flex;align-items:center;justify-content:center;';
+            closeBtn.addEventListener('click', function(e) {
+              e.stopPropagation();
               overlay.style.opacity = '0';
               img.style.transform = 'scale(0.95)';
               setTimeout(function() {
                 overlay.style.display = 'none';
               }, 250);
             });
+            overlay.appendChild(closeBtn);
+
+            // Navigation arrows
+            var prevArrow = document.createElement('div');
+            prevArrow.innerHTML = '&#10094;';
+            prevArrow.style.cssText = 'position:absolute;left:20px;color:#fff;font-size:36px;cursor:pointer;user-select:none;z-index:1000000;width:50px;height:50px;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);border-radius:50%;transition:background 0.2s;';
+            prevArrow.addEventListener('click', function(e) {
+              e.stopPropagation();
+              showOverlayImg(activeOverlayIdx - 1);
+            });
+            prevArrow.addEventListener('mouseover', function() { prevArrow.style.background = 'rgba(0,0,0,0.6)'; });
+            prevArrow.addEventListener('mouseout', function() { prevArrow.style.background = 'rgba(0,0,0,0.3)'; });
+            overlay.appendChild(prevArrow);
+            
+            var nextArrow = document.createElement('div');
+            nextArrow.innerHTML = '&#10095;';
+            nextArrow.style.cssText = 'position:absolute;right:20px;color:#fff;font-size:36px;cursor:pointer;user-select:none;z-index:1000000;width:50px;height:50px;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);border-radius:50%;transition:background 0.2s;';
+            nextArrow.addEventListener('click', function(e) {
+              e.stopPropagation();
+              showOverlayImg(activeOverlayIdx + 1);
+            });
+            nextArrow.addEventListener('mouseover', function() { nextArrow.style.background = 'rgba(0,0,0,0.6)'; });
+            nextArrow.addEventListener('mouseout', function() { nextArrow.style.background = 'rgba(0,0,0,0.3)'; });
+            overlay.appendChild(nextArrow);
+
+            // Swiping events
+            var startX = 0;
+            overlay.addEventListener('touchstart', function(e) {
+              startX = e.touches[0].clientX;
+            }, { passive: true });
+            
+            overlay.addEventListener('touchend', function(e) {
+              var diffX = e.changedTouches[0].clientX - startX;
+              if (Math.abs(diffX) > 50) {
+                if (diffX > 0) {
+                  showOverlayImg(activeOverlayIdx - 1);
+                } else {
+                  showOverlayImg(activeOverlayIdx + 1);
+                }
+              }
+            }, { passive: true });
+
+            // Keyboard navigation
+            document.addEventListener('keydown', function(e) {
+              if (overlay.style.display === 'flex' && overlay.style.opacity === '1') {
+                if (e.key === 'ArrowLeft') {
+                  showOverlayImg(activeOverlayIdx - 1);
+                } else if (e.key === 'ArrowRight') {
+                  showOverlayImg(activeOverlayIdx + 1);
+                } else if (e.key === 'Escape') {
+                  overlay.style.opacity = '0';
+                  img.style.transform = 'scale(0.95)';
+                  setTimeout(function() {
+                    overlay.style.display = 'none';
+                  }, 250);
+                }
+              }
+            });
+
             document.body.appendChild(overlay);
           }
           
@@ -2621,7 +2714,7 @@ body.pdp-pink-collagen-cream .selka-benefit-item strong {
           overlay.style.display = 'flex';
           overlay.offsetHeight; // force reflow
           overlay.style.opacity = '1';
-          overlayImg.style.transform = 'scale(1)';
+          img.style.transform = 'scale(1)';
         }
         function closeM(){
           modal.style.display = 'none';
