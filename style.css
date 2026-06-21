@@ -64,19 +64,21 @@ html,body{overflow-x:hidden !important;touch-action:pan-x pan-y !important;-ms-t
 }
 
 @media (min-width:768px){
-  .template-product .js-product-form .form-row.mb-2{flex-direction:row !important;align-items:stretch !important;gap:12px !important;width:100% !important;max-width:100% !important;margin-left:0 !important;margin-right:0 !important}
+  .template-product .js-product-form .form-row.mb-2{display:grid !important;grid-template-columns:1fr 1fr !important;grid-auto-flow:column !important;flex-direction:initial !important;flex-wrap:initial !important;align-items:stretch !important;gap:12px !important;width:100% !important;max-width:100% !important;margin:0 0 18px !important;box-sizing:border-box !important}
   .template-product .js-product-form .form-row.mb-2 > .col-4,
-  .template-product .js-product-form .form-row.mb-2 > .col-8{flex:1 1 0 !important;max-width:none !important;width:50% !important;min-width:0 !important;padding:0 !important}
+  .template-product .js-product-form .form-row.mb-2 > .col-8{flex:initial !important;max-width:none !important;width:auto !important;min-width:0 !important;padding:0 !important;margin:0 !important}
+  .template-product .form-group.js-quantity,
+  .template-product .form-quantity.form-quantity-product{width:100% !important;height:46px !important;display:block !important}
   .template-product .form-quantity[data-component="product.quantity"],
-  .template-product .form-row[data-component="product.quantity"]{height:46px !important}
+  .template-product .form-row[data-component="product.quantity"]{height:46px !important;width:100% !important}
   .template-product .js-quantity-input,
-  .template-product input[name="quantity"]{height:46px !important;min-height:46px !important;max-height:46px !important;font-size:16px !important}
+  .template-product input[name="quantity"]{height:46px !important;min-height:46px !important;max-height:46px !important;font-size:16px !important;line-height:normal !important}
   .template-product .form-quantity .js-quantity-down svg,
   .template-product .form-quantity .js-quantity-up svg,
   .template-product [data-component="product.quantity.minus"] svg,
   .template-product [data-component="product.quantity.plus"] svg{width:16px !important;height:16px !important}
   .template-product .js-addtocart.btn-primary,
-  .template-product .js-prod-submit-form{height:46px !important;font-size:12.5px !important;letter-spacing:1.2px !important;border-radius:14px !important;padding:0 12px !important;white-space:nowrap !important}
+  .template-product .js-prod-submit-form{display:block !important;width:100% !important;height:46px !important;font-size:12.5px !important;letter-spacing:1.2px !important;border-radius:14px !important;padding:0 12px !important;white-space:nowrap !important;overflow:hidden !important;text-overflow:ellipsis !important;box-sizing:border-box !important;min-width:0 !important}
 }
 
 @media (min-width:0px){
