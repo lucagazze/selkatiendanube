@@ -686,3 +686,147 @@ body.pdp-pink-collagen-cream .selka-quiero-mio-btn:hover {
   border-color: #c78581 !important;
   box-shadow: 0 6px 20px rgba(217, 154, 150, 0.35) !important;
 }
+
+/* Modal de reseña individual con imagen */
+#selka-rev-modal {
+  background: rgba(0, 0, 0, 0.65) !important;
+}
+
+#selka-rev-modal-content {
+  background: #ffffff !important;
+  border-radius: 16px !important;
+  max-width: 760px !important;
+  width: 100% !important;
+  max-height: calc(100vh - 48px) !important;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.25) !important;
+  overflow: hidden !important;
+}
+
+#selka-rev-modal-content > div:first-child {
+  background: #ffffff !important; /* Fondo blanco para la imagen */
+}
+
+/* Botones de navegacion del modal de imagenes */
+#selka-rev-modal-prev,
+#selka-rev-modal-next {
+  position: absolute !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  background: #ffffff !important;
+  color: #111111 !important;
+  border: 1px solid #ede5e5 !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15) !important;
+  width: 46px !important;
+  height: 46px !important;
+  border-radius: 50% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  font-size: 26px !important;
+  line-height: 1 !important;
+  z-index: 10000 !important;
+  transition: all 0.2s ease !important;
+  opacity: 1 !important;
+}
+
+#selka-rev-modal-prev {
+  left: 20px !important;
+}
+
+#selka-rev-modal-next {
+  right: 20px !important;
+}
+
+#selka-rev-modal-prev:hover,
+#selka-rev-modal-next:hover {
+  background: #fafafa !important;
+  transform: translateY(-50%) scale(1.08) !important;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.22) !important;
+}
+
+/* Boton cerrar modal de reseña */
+#selka-rev-modal-close {
+  background: #ffffff !important;
+  color: #111111 !important;
+  border: 1px solid #ede5e5 !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+  transition: all 0.2s ease !important;
+}
+
+#selka-rev-modal-close:hover {
+  background: #fafafa !important;
+  transform: scale(1.08) !important;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Responsividad para moviles */
+@media (max-width: 767px) {
+  #selka-rev-modal {
+    padding: 0 !important;
+    align-items: stretch !important;
+  }
+  
+  #selka-rev-modal-content {
+    flex-direction: column !important;
+    max-width: 100% !important;
+    width: 100% !important;
+    max-height: 100vh !important;
+    height: 100vh !important;
+    border-radius: 0 !important;
+  }
+  
+  #selka-rev-modal-content > div:first-child {
+    flex: 0 0 auto !important;
+    width: 100% !important;
+    max-height: 50vh !important;
+    min-height: 200px !important;
+    background: #ffffff !important;
+  }
+  
+  #selka-rev-modal-content > div:first-child img {
+    max-height: 50vh !important;
+    width: 100% !important;
+    height: auto !important;
+    object-fit: contain !important;
+  }
+  
+  #selka-rev-modal-content > div:last-child {
+    flex: 1 1 auto !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    padding: 16px 18px 22px !important;
+    max-height: 50vh !important;
+    overflow-y: auto !important;
+  }
+  
+  #selka-rev-modal-prev,
+  #selka-rev-modal-next {
+    width: 38px !important;
+    height: 38px !important;
+    font-size: 22px !important;
+    background: rgba(255, 255, 255, 0.9) !important;
+    border: 1px solid rgba(0, 0, 0, 0.08) !important;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15) !important;
+  }
+  
+  #selka-rev-modal-prev {
+    left: 8px !important;
+  }
+  
+  #selka-rev-modal-next {
+    right: 8px !important;
+  }
+  
+  #selka-rev-modal-close {
+    top: 10px !important;
+    right: 10px !important;
+    left: auto !important;
+    width: 38px !important;
+    height: 38px !important;
+    font-size: 18px !important;
+    background: #ffffff !important;
+    color: #111111 !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18) !important;
+  }
+}
