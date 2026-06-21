@@ -395,7 +395,7 @@ html{overflow-x:clip !important;-webkit-text-size-adjust:100%;text-size-adjust:1
 
 .selka-proof-stars{display:inline-flex !important;align-items:center !important;gap:3px !important;line-height:1 !important}
 
-.selka-star-svg{width:18px !important;height:18px !important;fill:#ffcf2a !important;display:inline-block !important;flex-shrink:0 !important;transition:transform 0.2s ease !important}
+.selka-star-svg{width:21px !important;height:21px !important;fill:#eaa300 !important;display:inline-block !important;flex-shrink:0 !important;transition:transform 0.2s ease !important}
 
 .selka-star-svg.gray{fill:#dcdcdc !important}
 
@@ -410,8 +410,8 @@ html{overflow-x:clip !important;-webkit-text-size-adjust:100%;text-size-adjust:1
     font-size: 13.5px !important;
   }
   .selka-star-svg {
-    width: 22px !important;
-    height: 22px !important;
+    width: 25px !important;
+    height: 25px !important;
   }
 }
 
