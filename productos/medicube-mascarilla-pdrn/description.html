@@ -39,7 +39,8 @@ html,body,.template-home,.template-category,.template-product,.template-page{mar
 .template-product #price_display,.template-product .js-price-display{position:static !important;display:inline-block !important;font-size:2.35rem !important;font-weight:900 !important;color:#000000 !important;letter-spacing:-1px !important;line-height:1.1 !important;margin:0 !important}
 .template-product .js-payment-discount-price-product-container,.template-product .payment-discount-price-product-container{position:static !important;display:flex !important;align-items:baseline !important;gap:4px !important;margin-top:6px !important;padding:0 !important;background:transparent !important;border:0 !important;border-radius:0 !important;box-shadow:none !important;color:#b86258 !important;font-weight:600 !important;line-height:1.3 !important}
 .template-product .js-payment-discount-price-product,.template-product .payment-discount-price-product{font-weight:800 !important;color:#b86258 !important;font-size:17px !important}
-.template-product .js-payment-discount-name-product{font-weight:600 !important;color:#b86258 !important;font-size:14px !important}
+.template-product .js-payment-discount-name-product{font-weight:600 !important;color:#b86258 !important;font-size:0 !important;line-height:1 !important}
+.template-product .js-payment-discount-name-product::before{content:"Transferencia" !important;font-size:14px !important;font-weight:inherit !important;color:inherit !important;line-height:1.3 !important;text-transform:none !important}
 .fancybox__nav .svg-square,.fancybox__nav .swiper-button-next,.fancybox__nav .swiper-button-prev{width:48px !important;height:48px !important;border-radius:50% !important;background:rgba(248,232,232,0.82) !important;backdrop-filter:blur(8px) !important;-webkit-backdrop-filter:blur(8px) !important;border:1px solid #c98aa8 !important;box-shadow:0 4px 20px rgba(0,0,0,0.1) !important;display:flex !important;align-items:center !important;justify-content:center !important;cursor:pointer !important;transition:background 0.2s ease,transform 0.2s ease,box-shadow 0.2s ease !important;color:#111111 !important}
 .fancybox__nav .svg-square:hover,.fancybox__nav .swiper-button-next:hover,.fancybox__nav .swiper-button-prev:hover{background:rgba(248,232,232,1) !important;border:1px solid #c98aa8 !important;transform:scale(1.08) !important;box-shadow:0 6px 28px rgba(0,0,0,0.15) !important}
 .fancybox__nav .svg-square svg,.fancybox__nav .swiper-button-next svg,.fancybox__nav .swiper-button-prev svg{width:18px !important;height:18px !important;color:#111111 !important;stroke:#111111 !important;fill:none !important}
@@ -58,7 +59,7 @@ html,body,.template-home,.template-category,.template-product,.template-page{mar
 .template-product .js-addtocart,.template-product [data-store="product-buy-button"]{text-transform:uppercase !important}
 .template-product .payment-discount-price-product-container,.template-product .js-payment-discount-price-product-container{font-size:15px !important}
 .template-product .js-payment-discount-price-product{font-size:17px !important;font-weight:800 !important}
-.template-product .js-payment-discount-name-product{font-size:14px !important}
+.template-product .js-payment-discount-name-product{font-size:0 !important}
 .template-product .section-product-comments,.template-product [data-store="product-comments"],.template-product [data-store="product-reviews"],.template-product [data-store="product-reviews-container"],.template-product .product-reviews-section,.template-product .product-reviews-container,.template-product .js-product-comments,.template-product .js-product-reviews,.template-product .js-product-reviews-container,.template-product .js-reviews-container,.template-product #product_comments,.template-product #product-comments,.template-product #product-reviews,.template-product .nube-product-reviews,.template-product [class*="section-reviews"],.template-product [class*="section-comments"],.template-product [class*="product-comments"]:not(#selka-reviews-section):not(#selka-reviews-section *){display:none !important;visibility:hidden !important;height:0 !important;overflow:hidden !important;margin:0 !important;padding:0 !important}
 .selka-quiero-mio-btn{display:inline-block !important;background:#111111 !important;color:#ffffff !important;font-weight:700 !important;font-size:0.85rem !important;letter-spacing:1px !important;text-transform:uppercase !important;padding:15px 46px !important;border-radius:999px !important;text-decoration:none !important;border:2px solid #111111 !important;transition:all 0.3s ease !important;box-shadow:0 4px 15px rgba(0, 0, 0, 0.1) !important;cursor:pointer !important}
 .selka-quiero-mio-btn:hover{background:#333333 !important;border-color:#333333 !important;color:#ffffff !important;transform:translateY(-2px) !important;box-shadow:0 6px 20px rgba(0, 0, 0, 0.18) !important}
@@ -121,7 +122,8 @@ body.pdp-pdrn-mask .selka-quiero-mio-btn:hover{background:#b87598 !important;bor
   .template-product #compare_price_display,.template-product .js-compare-price-display,.template-product .price-compare{font-size:1.05rem !important}
   .template-product .js-payment-discount-price-product-container,.template-product .payment-discount-price-product-container{margin-top:4px !important}
   .template-product .js-payment-discount-price-product,.template-product .payment-discount-price-product{font-size:14px !important}
-  .template-product .js-payment-discount-name-product{font-size:12px !important}
+  .template-product .js-payment-discount-name-product{font-size:0 !important}
+  .template-product .js-payment-discount-name-product::before{font-size:12px !important}
   body.pdp-pdrn-mask .selka-stock-badge,.selka-stock-badge{font-size:11.5px !important;padding:5px 12px !important;margin-bottom:14px !important;letter-spacing:1px !important}
   body.pdp-pdrn-mask .selka-stock-badge::before,.selka-stock-badge::before{width:5px !important;height:5px !important;margin-right:6px !important}
   .template-product .js-product-form .form-row.mb-2{margin-bottom:12px !important;max-width:100% !important}
@@ -138,7 +140,8 @@ body.pdp-pdrn-mask .selka-quiero-mio-btn:hover{background:#b87598 !important;bor
   .fancybox__nav .svg-square,.fancybox__nav .swiper-button-next,.fancybox__nav .swiper-button-prev{width:40px !important;height:40px !important}
   .template-product .payment-discount-price-product-container,.template-product .js-payment-discount-price-product-container{font-size:14px !important}
   .template-product .js-payment-discount-price-product{font-size:16px !important}
-  .template-product .js-payment-discount-name-product{font-size:13px !important}
+  .template-product .js-payment-discount-name-product{font-size:0 !important}
+  .template-product .js-payment-discount-name-product::before{font-size:13px !important}
   #selka-rev-modal{padding:0 !important;align-items:stretch !important}
   #selka-rev-modal-content{flex-direction:column !important;max-width:100% !important;width:100% !important;max-height:100vh !important;height:100vh !important;border-radius:0 !important}
   #selka-rev-modal-content > div:first-child{flex:0 0 auto !important;width:100% !important;max-height:50vh !important;min-height:200px !important;background:#ffffff !important}
