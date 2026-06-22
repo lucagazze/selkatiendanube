@@ -922,7 +922,10 @@ body.pdp-pink-collagen-cream .selka-benefit-item strong {
             '<div class="selka-promo-new-price-container">',
               '<span class="selka-promo-new-price">' + formatCurrency(discTotal) + '</span>',
             '</div>',
-            '<div class="selka-promo-transfer-price">' + formatCurrency(transferTotal) + ' con transferencia</div>',
+                        '<div class="selka-promo-transfer-price">',
+              '<span class="selka-promo-transfer-val">' + formatCurrency(transferTotal) + '</span>',
+              '<span class="selka-promo-transfer-lbl">con transferencia</span>',
+            '</div>',
             '<div class="selka-promo-save-badge">Ahorrás ' + formatCurrency(savings) + '</div>',
           '</div>',
         '</div>'

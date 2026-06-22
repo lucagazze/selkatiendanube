@@ -1070,6 +1070,7 @@ body.pdp-pink-collagen-cream .selka-quiero-mio-btn:hover {
   display: flex !important;
   flex-direction: column !important;
   align-items: flex-end !important;
+  text-align: right !important;
   gap: 3px !important;
 }
 
@@ -1096,14 +1097,28 @@ body.pdp-pink-collagen-cream .selka-quiero-mio-btn:hover {
   font-weight: 800 !important;
   color: #111111 !important;
   line-height: 1.1 !important;
+  text-align: right !important;
 }
 
 .selka-promo-transfer-price {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-end !important;
+  text-align: right !important;
+  margin-top: 2px !important;
+  line-height: 1.2 !important;
+}
+
+.selka-promo-transfer-val {
   font-size: 13px !important;
   font-weight: 700 !important;
   color: #b86258 !important;
-  margin-top: 2px !important;
-  line-height: 1.1 !important;
+}
+
+.selka-promo-transfer-lbl {
+  font-size: 10px !important;
+  color: #888888 !important;
+  text-transform: lowercase !important;
 }
 
 .selka-promo-save-badge {
@@ -1145,8 +1160,11 @@ body.pdp-pink-collagen-cream .selka-quiero-mio-btn:hover {
   .selka-promo-new-price {
     font-size: 16px !important;
   }
-  .selka-promo-transfer-price {
+  .selka-promo-transfer-val {
     font-size: 11px !important;
+  }
+  .selka-promo-transfer-lbl {
+    font-size: 9px !important;
   }
   .selka-promo-save-badge {
     font-size: 9.5px !important;
