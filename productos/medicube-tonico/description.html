@@ -72,7 +72,6 @@ body.pdp-pink-collagen-cream .selka-quiero-mio-btn:hover{background:#c78581 !imp
 .template-product .js-added-to-cart-product-message,.template-product .js-product-added-message,.template-product .form-row.mb-2 > .col-12{display:none !important;visibility:hidden !important;height:0 !important;overflow:hidden !important;margin:0 !important;padding:0 !important}
 .template-product .thumb-see-more{display:none !important;visibility:hidden !important;opacity:0 !important;pointer-events:none !important}
 .template-product .labels-product-slider,.template-product .js-labels-floating-group{top:15px !important;bottom:auto !important;left:15px !important;right:auto !important;position:absolute !important}
-.selka-stock-badge{display:none !important}
 .template-product .form-quantity,.template-product .form-quantity *,.template-product .js-quantity-down,.template-product .js-quantity-up,.template-product .js-quantity-input,.template-product [data-component="product.quantity.minus"],.template-product [data-component="product.quantity.plus"]{transition:none !important;transform:none !important;animation:none !important;box-shadow:none !important;outline:none !important}
 @media (min-width:0px) {
   .template-product .js-product-form .form-row.mb-2{display:grid !important;grid-template-columns:35fr 65fr !important;grid-auto-flow:column !important;flex-direction:initial !important;flex-wrap:initial !important;align-items:stretch !important;gap:10px !important;width:100% !important;max-width:100% !important;margin:0 0 18px !important;box-sizing:border-box !important;background:transparent !important}
@@ -657,6 +656,99 @@ body.pdp-pink-collagen-cream .selka-quiero-mio-btn:hover{background:#c78581 !imp
     ].join('');
     promoContainer.innerHTML = html;
   }
+
+/* START SELKA GLOBAL GRID CARD PROCESSOR */
+(function() {
+  function processProductCards() {
+    var cards = document.querySelectorAll('.js-product-container, .js-item-product');
+    cards.forEach(function(card) {
+      if (card.dataset.processed) return;
+      card.dataset.processed = "true";
+
+      // 1. Get Product Name
+      var nameEl = card.querySelector('.js-item-name, .item-name');
+      if (!nameEl) return;
+      var name = nameEl.textContent.trim();
+
+      // 2. Map Review Data
+      var reviewHtml = '';
+      if (name.includes('Cream') || name.includes('Capsule') || name.includes('Crema')) {
+        reviewHtml = '<span class="selka-grid-rating">★ 4.7 <span class="selka-grid-count">(114)</span></span>';
+      } else if (name.includes('Toner') || name.includes('Tónico') || name.includes('Milky')) {
+        reviewHtml = '<span class="selka-grid-rating">★ 4.8 <span class="selka-grid-count">(248)</span></span>';
+      } else if (name.includes('Gel Mask') || name.includes('Mascarilla Gel') || name.includes('Gel')) {
+        reviewHtml = '<span class="selka-grid-rating">★ 4.9 <span class="selka-grid-count">(186)</span></span>';
+      } else if (name.includes('Night') || name.includes('Noche') || name.includes('Wrapping')) {
+        reviewHtml = '<span class="selka-grid-rating">★ 4.8 <span class="selka-grid-count">(195)</span></span>';
+      }
+
+      // Insert reviews count below product name
+      if (reviewHtml) {
+        var ratingDiv = card.querySelector('.selka-grid-rating-container');
+        if (!ratingDiv) {
+          ratingDiv = document.createElement('div');
+          ratingDiv.className = 'selka-grid-rating-container';
+          ratingDiv.innerHTML = reviewHtml;
+          nameEl.parentNode.insertBefore(ratingDiv, nameEl.nextSibling);
+        }
+      }
+
+      // 3. Get Stock Quantity
+      var stockVal = null;
+      var stockSpan = card.querySelector('[data-store^="stock-product-"]');
+      if (stockSpan) {
+        var ds = stockSpan.getAttribute('data-store');
+        var parts = ds.split('-');
+        var lastPart = parseInt(parts[parts.length - 1], 10);
+        if (!isNaN(lastPart)) {
+          stockVal = lastPart;
+        }
+      }
+      if (stockVal === null) {
+        var variantsAttr = card.getAttribute('data-variants');
+        if (variantsAttr) {
+          try {
+            var variants = JSON.parse(variantsAttr);
+            stockVal = 0;
+            variants.forEach(function(v) {
+              stockVal += (v.stock !== undefined ? v.stock : 0);
+            });
+          } catch(e) {}
+        }
+      }
+
+      // Insert stock display above normal price
+      if (stockVal !== null) {
+        var priceEl = card.querySelector('.js-price-display');
+        if (priceEl) {
+          var stockIndicator = card.querySelector('.selka-grid-stock');
+          if (!stockIndicator) {
+            stockIndicator = document.createElement('div');
+            stockIndicator.className = 'selka-grid-stock';
+            priceEl.parentNode.insertBefore(stockIndicator, priceEl);
+          }
+          if (stockVal > 0) {
+            stockIndicator.textContent = 'últimas, ' + stockVal;
+            stockIndicator.style.display = 'block';
+          } else {
+            stockIndicator.textContent = 'sin stock';
+            stockIndicator.style.display = 'block';
+          }
+        }
+      }
+    });
+  }
+
+  processProductCards();
+  document.addEventListener('DOMContentLoaded', processProductCards);
+  window.addEventListener('load', processProductCards);
+  if (typeof MutationObserver !== 'undefined') {
+    var observer = new MutationObserver(processProductCards);
+    observer.observe(document.body, { childList: true, subtree: true });
+  }
+})();
+/* END SELKA GLOBAL GRID CARD PROCESSOR */
+
 /* END SELKA PROMO HELPERS */
   function adjustPDP() {
     if (!document.body.classList.contains('template-product')) return;
@@ -895,7 +987,7 @@ body.pdp-pink-collagen-cream .selka-quiero-mio-btn:hover{background:#c78581 !imp
       qtyInput.setAttribute('max', maxStock);
     }
 
-        function updateStockBadge() {
+            function updateStockBadge() {
       var customBadge = document.querySelector('.selka-stock-badge');
       if (customBadge) {
         customBadge.style.display = 'none'; // always hide the old black pill
@@ -911,23 +1003,6 @@ body.pdp-pink-collagen-cream .selka-quiero-mio-btn:hover{background:#c78581 !imp
       
       var cartQty = getQuantityInCart();
       window.selkaCurrentStock = Math.max(0, window.selkaInitialStock - cartQty);
-      
-      var inlineStock = document.querySelector('.selka-inline-stock');
-      var priceEl = document.querySelector('.js-price-display') || document.querySelector('#price_display');
-      if (priceEl) {
-        if (!inlineStock) {
-          inlineStock = document.createElement('div');
-          inlineStock.className = 'selka-inline-stock';
-          priceEl.parentNode.insertBefore(inlineStock, priceEl);
-        }
-        if (window.selkaCurrentStock > 0) {
-          inlineStock.style.display = 'block';
-          inlineStock.innerHTML = 'últimas, ' + window.selkaCurrentStock;
-        } else {
-          inlineStock.style.display = 'block';
-          inlineStock.innerHTML = 'sin stock disponible';
-        }
-      }
       
       if (typeof enforceQuantityLimit === 'function') {
         enforceQuantityLimit();

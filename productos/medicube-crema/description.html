@@ -43,6 +43,10 @@ html,body,.template-home,.template-category,.template-product,.template-page{mar
 .fancybox__nav .svg-square,.fancybox__nav .swiper-button-next,.fancybox__nav .swiper-button-prev{width:48px !important;height:48px !important;border-radius:50% !important;background:rgba(248,232,232,0.82) !important;backdrop-filter:blur(8px) !important;-webkit-backdrop-filter:blur(8px) !important;border:1px solid #d99a96 !important;box-shadow:0 4px 20px rgba(0,0,0,0.1) !important;display:flex !important;align-items:center !important;justify-content:center !important;cursor:pointer !important;transition:background 0.2s ease,transform 0.2s ease,box-shadow 0.2s ease !important;color:#111111 !important}
 .fancybox__nav .svg-square:hover,.fancybox__nav .swiper-button-next:hover,.fancybox__nav .swiper-button-prev:hover{background:rgba(248,232,232,1) !important;border:1px solid #d99a96 !important;transform:scale(1.08) !important;box-shadow:0 6px 28px rgba(0,0,0,0.15) !important}
 .fancybox__nav .svg-square svg,.fancybox__nav .swiper-button-next svg,.fancybox__nav .swiper-button-prev svg{width:18px !important;height:18px !important;color:#111111 !important;stroke:#111111 !important;fill:none !important}
+.template-product .swiper-button-next,.template-product .swiper-button-prev,.template-product .svg-square.swiper-button-next,.template-product .svg-square.swiper-button-prev,body.pdp-pink-collagen-cream .swiper-button-next,body.pdp-pink-collagen-cream .swiper-button-prev{border:none !important;outline:none !important;box-shadow:none !important;background:rgba(255,255,255,0.85) !important;color:#000000 !important}
+.template-product .swiper-button-next:hover,.template-product .swiper-button-prev:hover,body.pdp-pink-collagen-cream .swiper-button-next:hover,body.pdp-pink-collagen-cream .swiper-button-prev:hover{border:none !important;background:#ffffff !important;box-shadow:0 4px 14px rgba(0,0,0,0.10) !important}
+.template-product .swiper-button-next svg,.template-product .swiper-button-prev svg,.template-product .svg-square.swiper-button-next svg,.template-product .svg-square.swiper-button-prev svg,body.pdp-pink-collagen-cream .swiper-button-next svg,body.pdp-pink-collagen-cream .swiper-button-prev svg{color:#000000 !important;stroke:#000000 !important;fill:#000000 !important}
+.template-product .swiper-button-next svg use,.template-product .swiper-button-prev svg use,body.pdp-pink-collagen-cream .swiper-button-next svg use,body.pdp-pink-collagen-cream .swiper-button-prev svg use{color:#000000 !important;stroke:#000000 !important;fill:#000000 !important}
 .selka-social-proof{display:flex !important;align-items:center !important;gap:8px !important;margin-bottom:12px !important;font-family:'Inter',-apple-system,sans-serif !important;margin-top:6px !important;cursor:pointer !important}
 .selka-proof-stars{display:inline-flex !important;align-items:center !important;gap:3px !important;line-height:1 !important}
 .selka-star-svg{width:21px !important;height:21px !important;fill:#eaa300 !important;display:inline-block !important;flex-shrink:0 !important;transition:transform 0.2s ease !important}
@@ -72,8 +76,9 @@ body.pdp-pink-collagen-cream .selka-quiero-mio-btn:hover{background:#c78581 !imp
 .template-product .js-added-to-cart-product-message,.template-product .js-product-added-message,.template-product .form-row.mb-2 > .col-12{display:none !important;visibility:hidden !important;height:0 !important;overflow:hidden !important;margin:0 !important;padding:0 !important}
 .template-product .thumb-see-more{display:none !important;visibility:hidden !important;opacity:0 !important;pointer-events:none !important}
 .template-product .labels-product-slider,.template-product .js-labels-floating-group{top:15px !important;bottom:auto !important;left:15px !important;right:auto !important;position:absolute !important}
-.selka-stock-badge{display:none !important}
 .template-product .form-quantity,.template-product .form-quantity *,.template-product .js-quantity-down,.template-product .js-quantity-up,.template-product .js-quantity-input,.template-product [data-component="product.quantity.minus"],.template-product [data-component="product.quantity.plus"]{transition:none !important;transform:none !important;animation:none !important;box-shadow:none !important;outline:none !important}
+.template-product .js-quantity-down,.template-product .js-quantity-up,.template-product [data-component="product.quantity.minus"],.template-product [data-component="product.quantity.plus"],.template-product .js-quantity-down:hover,.template-product .js-quantity-up:hover,.template-product .js-quantity-down:focus,.template-product .js-quantity-up:focus,.template-product .js-quantity-down:active,.template-product .js-quantity-up:active,.template-product [data-component="product.quantity.minus"]:hover,.template-product [data-component="product.quantity.plus"]:hover,.template-product [data-component="product.quantity.minus"]:focus,.template-product [data-component="product.quantity.plus"]:focus,.template-product [data-component="product.quantity.minus"]:active,.template-product [data-component="product.quantity.plus"]:active{transition:none !important;transform:none !important;animation:none !important;box-shadow:none !important;outline:none !important;scale:1 !important;background-color:transparent !important;border-color:transparent !important;filter:none !important}
+.template-product .js-quantity-down svg,.template-product .js-quantity-up svg,.template-product .js-quantity-down:hover svg,.template-product .js-quantity-up:hover svg,.template-product [data-component="product.quantity.minus"] svg,.template-product [data-component="product.quantity.plus"] svg,.template-product [data-component="product.quantity.minus"]:hover svg,.template-product [data-component="product.quantity.plus"]:hover svg{transition:none !important;transform:none !important;animation:none !important;scale:1 !important}
 @media (min-width:0px) {
   .template-product .js-product-form .form-row.mb-2{display:grid !important;grid-template-columns:35fr 65fr !important;grid-auto-flow:column !important;flex-direction:initial !important;flex-wrap:initial !important;align-items:stretch !important;gap:10px !important;width:100% !important;max-width:100% !important;margin:0 0 18px !important;box-sizing:border-box !important;background:transparent !important}
   .template-product .js-product-form .form-row.mb-2 > .col-4,.template-product .js-product-form .form-row.mb-2 > .col-8{flex:initial !important;max-width:none !important;width:auto !important;min-width:0 !important;padding:0 !important;margin:0 !important;background:transparent !important}
@@ -273,13 +278,13 @@ body.pdp-pink-collagen-cream .payment-discount-price-product-container .payment-
 }
 
 body.pdp-pink-collagen-cream .js-product-promo-container {
-  background: #fffdfd !important;
-  border: 1px solid rgba(217, 154, 150, 0.2) !important;
-  border-radius: 12px !important;
-  padding: 12px 16px !important;
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
   margin-top: 8px !important;
   margin-bottom: 18px !important;
-  box-shadow: 0 4px 12px rgba(217, 154, 150, 0.03) !important;
+  box-shadow: none !important;
   font-family: 'Inter', sans-serif !important;
   max-width: 480px !important;
 }
@@ -740,6 +745,7 @@ body.pdp-pink-collagen-cream .selka-benefit-item strong {
 
 @media (max-width:767px){.selka-stock-badge{font-size:10px;padding:7px 12px;letter-spacing:0.6px}.selka-stock-badge::before{width:5px;height:5px;margin-right:5px}}
 
+
 @media (max-width: 767px) {
   .template-product .selka-stock-badge {
     display: inline-block !important;
@@ -755,9 +761,9 @@ body.pdp-pink-collagen-cream .selka-benefit-item strong {
 @media (min-width:768px){
   body.pdp-pink-collagen-cream .js-product-promo-container {
     background: linear-gradient(160deg,#fffdfd 0%,#fff5f6 100%) !important;
-    border: 1.5px solid rgba(217, 154, 150, 0.28) !important;
+    border: none !important;
     border-radius: 16px !important;
-    padding: 20px 24px !important;
+    padding: 0 !important;
     margin-top: 12px !important;
     margin-bottom: 22px !important;
     box-shadow: 0 6px 18px rgba(217, 154, 150, 0.10) !important;
@@ -939,6 +945,99 @@ body.pdp-pink-collagen-cream .selka-benefit-item strong {
     ].join('');
     promoContainer.innerHTML = html;
   }
+
+/* START SELKA GLOBAL GRID CARD PROCESSOR */
+(function() {
+  function processProductCards() {
+    var cards = document.querySelectorAll('.js-product-container, .js-item-product');
+    cards.forEach(function(card) {
+      if (card.dataset.processed) return;
+      card.dataset.processed = "true";
+
+      // 1. Get Product Name
+      var nameEl = card.querySelector('.js-item-name, .item-name');
+      if (!nameEl) return;
+      var name = nameEl.textContent.trim();
+
+      // 2. Map Review Data
+      var reviewHtml = '';
+      if (name.includes('Cream') || name.includes('Capsule') || name.includes('Crema')) {
+        reviewHtml = '<span class="selka-grid-rating">★ 4.7 <span class="selka-grid-count">(114)</span></span>';
+      } else if (name.includes('Toner') || name.includes('Tónico') || name.includes('Milky')) {
+        reviewHtml = '<span class="selka-grid-rating">★ 4.8 <span class="selka-grid-count">(248)</span></span>';
+      } else if (name.includes('Gel Mask') || name.includes('Mascarilla Gel') || name.includes('Gel')) {
+        reviewHtml = '<span class="selka-grid-rating">★ 4.9 <span class="selka-grid-count">(186)</span></span>';
+      } else if (name.includes('Night') || name.includes('Noche') || name.includes('Wrapping')) {
+        reviewHtml = '<span class="selka-grid-rating">★ 4.8 <span class="selka-grid-count">(195)</span></span>';
+      }
+
+      // Insert reviews count below product name
+      if (reviewHtml) {
+        var ratingDiv = card.querySelector('.selka-grid-rating-container');
+        if (!ratingDiv) {
+          ratingDiv = document.createElement('div');
+          ratingDiv.className = 'selka-grid-rating-container';
+          ratingDiv.innerHTML = reviewHtml;
+          nameEl.parentNode.insertBefore(ratingDiv, nameEl.nextSibling);
+        }
+      }
+
+      // 3. Get Stock Quantity
+      var stockVal = null;
+      var stockSpan = card.querySelector('[data-store^="stock-product-"]');
+      if (stockSpan) {
+        var ds = stockSpan.getAttribute('data-store');
+        var parts = ds.split('-');
+        var lastPart = parseInt(parts[parts.length - 1], 10);
+        if (!isNaN(lastPart)) {
+          stockVal = lastPart;
+        }
+      }
+      if (stockVal === null) {
+        var variantsAttr = card.getAttribute('data-variants');
+        if (variantsAttr) {
+          try {
+            var variants = JSON.parse(variantsAttr);
+            stockVal = 0;
+            variants.forEach(function(v) {
+              stockVal += (v.stock !== undefined ? v.stock : 0);
+            });
+          } catch(e) {}
+        }
+      }
+
+      // Insert stock display above normal price
+      if (stockVal !== null) {
+        var priceEl = card.querySelector('.js-price-display');
+        if (priceEl) {
+          var stockIndicator = card.querySelector('.selka-grid-stock');
+          if (!stockIndicator) {
+            stockIndicator = document.createElement('div');
+            stockIndicator.className = 'selka-grid-stock';
+            priceEl.parentNode.insertBefore(stockIndicator, priceEl);
+          }
+          if (stockVal > 0) {
+            stockIndicator.textContent = 'últimas, ' + stockVal;
+            stockIndicator.style.display = 'block';
+          } else {
+            stockIndicator.textContent = 'sin stock';
+            stockIndicator.style.display = 'block';
+          }
+        }
+      }
+    });
+  }
+
+  processProductCards();
+  document.addEventListener('DOMContentLoaded', processProductCards);
+  window.addEventListener('load', processProductCards);
+  if (typeof MutationObserver !== 'undefined') {
+    var observer = new MutationObserver(processProductCards);
+    observer.observe(document.body, { childList: true, subtree: true });
+  }
+})();
+/* END SELKA GLOBAL GRID CARD PROCESSOR */
+
 /* END SELKA PROMO HELPERS */
   function adjustPDP() {
     if (!document.body.classList.contains('template-product')) return;
@@ -1265,12 +1364,8 @@ body.pdp-pink-collagen-cream .selka-benefit-item strong {
       });
     }
 
-        function updateStockBadge() {
+            function updateStockBadge() {
       var customBadge = document.querySelector('.selka-stock-badge');
-      if (customBadge) {
-        customBadge.style.display = 'none'; // always hide the old black pill
-      }
-      
       var realStock = getRealStock();
       if (realStock !== null) {
         window.selkaInitialStock = realStock;
@@ -1278,27 +1373,38 @@ body.pdp-pink-collagen-cream .selka-benefit-item strong {
       if (window.selkaInitialStock === undefined) {
         window.selkaInitialStock = 4;
       }
-      
+
       var cartQty = getQuantityInCart();
       window.selkaCurrentStock = Math.max(0, window.selkaInitialStock - cartQty);
-      
-      var inlineStock = document.querySelector('.selka-inline-stock');
-      var priceEl = document.querySelector('.js-price-display') || document.querySelector('#price_display');
-      if (priceEl) {
-        if (!inlineStock) {
-          inlineStock = document.createElement('div');
-          inlineStock.className = 'selka-inline-stock';
-          priceEl.parentNode.insertBefore(inlineStock, priceEl);
-        }
-        if (window.selkaCurrentStock > 0) {
-          inlineStock.style.display = 'block';
-          inlineStock.innerHTML = 'últimas, ' + window.selkaCurrentStock;
-        } else {
-          inlineStock.style.display = 'block';
-          inlineStock.innerHTML = 'sin stock disponible';
+
+      if (!customBadge) {
+        var quantityContainer = document.querySelector('.js-quantity') || document.querySelector('[data-component="product.quantity"]');
+        if (quantityContainer) {
+          var parentRow = quantityContainer.closest('.form-row') || quantityContainer.parentElement;
+          if (parentRow) {
+            customBadge = document.createElement('div');
+            customBadge.className = 'selka-stock-badge';
+            parentRow.parentNode.insertBefore(customBadge, parentRow);
+          }
         }
       }
-      
+
+      if (customBadge) {
+        customBadge.style.display = 'inline-block';
+        if (window.selkaCurrentStock > 0) {
+          customBadge.classList.remove('out-of-stock');
+          customBadge.innerHTML = '¡Últimas ' + window.selkaCurrentStock + ' unidades!';
+        } else {
+          customBadge.classList.add('out-of-stock');
+          customBadge.innerHTML = '¡Sin stock disponible!';
+        }
+      }
+
+      var inlineStock = document.querySelector('.selka-inline-stock');
+      if (inlineStock && inlineStock.parentNode) {
+        inlineStock.parentNode.removeChild(inlineStock);
+      }
+
       if (typeof enforceQuantityLimit === 'function') {
         enforceQuantityLimit();
       }
@@ -1582,15 +1688,6 @@ body.pdp-pink-collagen-cream .selka-benefit-item strong {
 </div>
 <div style="padding: 20px 0; border-bottom: 1px solid #ede5e5; font-family: 'Inter','Helvetica Neue',Helvetica,Arial,sans-serif;">
 <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 10px;">
-<div style="flex-shrink: 0; width: 40px; height: 40px; border-radius: 50%; background: #f8e8e8; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: bold; color: #b86258; letter-spacing: 0.5px;">M</div>
-<div style="flex: 1; min-width: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 6px;"><span style="font-size: 13px; font-weight: bold; color: #111;">Mariana S.</span><span style="font-size: 11px; color: #999;">&middot;</span><span style="font-size: 11px; color: #999;">Hace 1 mes</span></div>
-</div>
-<div style="margin-bottom: 10px; line-height: 1;"><span style="color: #eaa300; font-size: 16.5px; letter-spacing: 1px;">★</span><span style="color: #eaa300; font-size: 16.5px; letter-spacing: 1px;">★</span><span style="color: #eaa300; font-size: 16.5px; letter-spacing: 1px;">★</span><span style="color: #eaa300; font-size: 16.5px; letter-spacing: 1px;">★</span><span style="color: #eaa300; font-size: 16.5px; letter-spacing: 1px;">★</span></div>
-<p style="font-size: 13.5px; line-height: 1.65; color: #1f1f1f; margin: 0;">Textura: cuesta la absorci&oacute;n en mi piel.<br />Efectividad: es bastante hidratante,.<br />Soy de piel mixta,pero aunque uso una sola capsula con un poco del gel que trae, cuesta la absorci&oacute;n, me deja una sensaci&oacute;n pegajosa en la piel. Opte por usarla solo en la noche.</p>
-<div style="display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px;"><a style="display: inline-block; width: 84px; height: 84px; border-radius: 8px; overflow: hidden; background: #f8e8e8; border: 1px solid #ede5e5; flex-shrink: 0; text-decoration: none;" href="https://czocbnyoenjbpxmcqobn.supabase.co/storage/v1/object/public/Selka-img/medicube-crema/reviews/v028-1.webp" data-skreview="1"><img style="width: 100%; height: 100%; object-fit: cover; display: block; border: 0;" src="https://czocbnyoenjbpxmcqobn.supabase.co/storage/v1/object/public/Selka-img/medicube-crema/reviews/v028-1.webp" alt="Foto de rese&ntilde;a" loading="lazy" /></a><a style="display: inline-block; width: 84px; height: 84px; border-radius: 8px; overflow: hidden; background: #f8e8e8; border: 1px solid #ede5e5; flex-shrink: 0; text-decoration: none;" href="https://czocbnyoenjbpxmcqobn.supabase.co/storage/v1/object/public/Selka-img/medicube-crema/reviews/v028-2.webp" data-skreview="1"><img style="width: 100%; height: 100%; object-fit: cover; display: block; border: 0;" src="https://czocbnyoenjbpxmcqobn.supabase.co/storage/v1/object/public/Selka-img/medicube-crema/reviews/v028-2.webp" alt="Foto de rese&ntilde;a" loading="lazy" /></a></div>
-</div>
-<div style="padding: 20px 0; border-bottom: 1px solid #ede5e5; font-family: 'Inter','Helvetica Neue',Helvetica,Arial,sans-serif;">
-<div style="display: flex; align-items: center; gap: 12px; margin-bottom: 10px;">
 <div style="flex-shrink: 0; width: 40px; height: 40px; border-radius: 50%; background: #f8e8e8; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: bold; color: #b86258; letter-spacing: 0.5px;">V</div>
 <div style="flex: 1; min-width: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 6px;"><span style="font-size: 13px; font-weight: bold; color: #111;">Vera F.</span><span style="font-size: 11px; color: #999;">&middot;</span><span style="font-size: 11px; color: #999;">Hace 1 mes</span></div>
 </div>
@@ -1628,15 +1725,6 @@ body.pdp-pink-collagen-cream .selka-benefit-item strong {
 </div>
 <div style="padding: 20px 0; border-bottom: 1px solid #ede5e5; font-family: 'Inter','Helvetica Neue',Helvetica,Arial,sans-serif;">
 <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 10px;">
-<div style="flex-shrink: 0; width: 40px; height: 40px; border-radius: 50%; background: #f8e8e8; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: bold; color: #b86258; letter-spacing: 0.5px;">E</div>
-<div style="flex: 1; min-width: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 6px;"><span style="font-size: 13px; font-weight: bold; color: #111;">Estefan&iacute;a Z.</span><span style="font-size: 11px; color: #999;">&middot;</span><span style="font-size: 11px; color: #999;">Hace 4 meses</span></div>
-</div>
-<div style="margin-bottom: 10px; line-height: 1;"><span style="color: #eaa300; font-size: 16.5px; letter-spacing: 1px;">★</span><span style="color: #eaa300; font-size: 16.5px; letter-spacing: 1px;">★</span><span style="color: #eaa300; font-size: 16.5px; letter-spacing: 1px;">★</span><span style="color: #eaa300; font-size: 16.5px; letter-spacing: 1px;">★</span><span style="color: #eaa300; font-size: 16.5px; letter-spacing: 1px;">★</span></div>
-<p style="font-size: 13.5px; line-height: 1.65; color: #1f1f1f; margin: 0;">Es un producto que es muy &uacute;til para pieles secas y/o muy secas. Caso contrario queda la pieles un poco pegajosa.</p>
-<div style="display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px;"><a style="display: inline-block; width: 84px; height: 84px; border-radius: 8px; overflow: hidden; background: #f8e8e8; border: 1px solid #ede5e5; flex-shrink: 0; text-decoration: none;" href="https://czocbnyoenjbpxmcqobn.supabase.co/storage/v1/object/public/Selka-img/medicube-crema/reviews/v026-1.webp" data-skreview="1"><img style="width: 100%; height: 100%; object-fit: cover; display: block; border: 0;" src="https://czocbnyoenjbpxmcqobn.supabase.co/storage/v1/object/public/Selka-img/medicube-crema/reviews/v026-1.webp" alt="Foto de rese&ntilde;a" loading="lazy" /></a></div>
-</div>
-<div style="padding: 20px 0; border-bottom: 1px solid #ede5e5; font-family: 'Inter','Helvetica Neue',Helvetica,Arial,sans-serif;">
-<div style="display: flex; align-items: center; gap: 12px; margin-bottom: 10px;">
 <div style="flex-shrink: 0; width: 40px; height: 40px; border-radius: 50%; background: #f8e8e8; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: bold; color: #b86258; letter-spacing: 0.5px;">J</div>
 <div style="flex: 1; min-width: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 6px;"><span style="font-size: 13px; font-weight: bold; color: #111;">Josefina K.</span><span style="font-size: 11px; color: #999;">&middot;</span><span style="font-size: 11px; color: #999;">Hace 5 meses</span></div>
 </div>
@@ -1670,15 +1758,6 @@ body.pdp-pink-collagen-cream .selka-benefit-item strong {
 <div style="margin-bottom: 10px; line-height: 1;"><span style="color: #eaa300; font-size: 16.5px; letter-spacing: 1px;">★</span><span style="color: #eaa300; font-size: 16.5px; letter-spacing: 1px;">★</span><span style="color: #eaa300; font-size: 16.5px; letter-spacing: 1px;">★</span><span style="color: #eaa300; font-size: 16.5px; letter-spacing: 1px;">★</span><span style="color: #eaa300; font-size: 16.5px; letter-spacing: 1px;">★</span></div>
 <p style="font-size: 13.5px; line-height: 1.65; color: #1f1f1f; margin: 0;">Todo espectacular, y con muestras y presentaci&oacute;n excelente. Ahora a probar las cremas!.</p>
 <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px;"><a style="display: inline-block; width: 84px; height: 84px; border-radius: 8px; overflow: hidden; background: #f8e8e8; border: 1px solid #ede5e5; flex-shrink: 0; text-decoration: none;" href="https://czocbnyoenjbpxmcqobn.supabase.co/storage/v1/object/public/Selka-img/medicube-crema/reviews/v025-1.webp" data-skreview="1"><img style="width: 100%; height: 100%; object-fit: cover; display: block; border: 0;" src="https://czocbnyoenjbpxmcqobn.supabase.co/storage/v1/object/public/Selka-img/medicube-crema/reviews/v025-1.webp" alt="Foto de rese&ntilde;a" loading="lazy" /></a></div>
-</div>
-<div style="padding: 20px 0; border-bottom: 1px solid #ede5e5; font-family: 'Inter','Helvetica Neue',Helvetica,Arial,sans-serif;">
-<div style="display: flex; align-items: center; gap: 12px; margin-bottom: 10px;">
-<div style="flex-shrink: 0; width: 40px; height: 40px; border-radius: 50%; background: #f8e8e8; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: bold; color: #b86258; letter-spacing: 0.5px;">L</div>
-<div style="flex: 1; min-width: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 6px;"><span style="font-size: 13px; font-weight: bold; color: #111;">Luciana T.</span><span style="font-size: 11px; color: #999;">&middot;</span><span style="font-size: 11px; color: #999;">Hace 2 meses</span></div>
-</div>
-<div style="margin-bottom: 10px; line-height: 1;"><span style="color: #eaa300; font-size: 16.5px; letter-spacing: 1px;">★</span><span style="color: #eaa300; font-size: 16.5px; letter-spacing: 1px;">★</span><span style="color: #eaa300; font-size: 16.5px; letter-spacing: 1px;">★</span><span style="color: #eaa300; font-size: 16.5px; letter-spacing: 1px;">★</span><span style="color: #eaa300; font-size: 16.5px; letter-spacing: 1px;">★</span></div>
-<p style="font-size: 13.5px; line-height: 1.65; color: #1f1f1f; margin: 0;">Una basuras muy caro con esa plata me compraba juego para la play y duraba mas.</p>
-<div style="display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px;"><a style="display: inline-block; width: 84px; height: 84px; border-radius: 8px; overflow: hidden; background: #f8e8e8; border: 1px solid #ede5e5; flex-shrink: 0; text-decoration: none;" href="https://czocbnyoenjbpxmcqobn.supabase.co/storage/v1/object/public/Selka-img/medicube-crema/reviews/v034-1.webp" data-skreview="1"><img style="width: 100%; height: 100%; object-fit: cover; display: block; border: 0;" src="https://czocbnyoenjbpxmcqobn.supabase.co/storage/v1/object/public/Selka-img/medicube-crema/reviews/v034-1.webp" alt="Foto de rese&ntilde;a" loading="lazy" /></a></div>
 </div>
 <div style="padding: 20px 0; border-bottom: 1px solid #ede5e5; font-family: 'Inter','Helvetica Neue',Helvetica,Arial,sans-serif;">
 <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 10px;">
@@ -2349,14 +2428,6 @@ body.pdp-pink-collagen-cream .selka-benefit-item strong {
 </div>
 <div style="padding: 20px 0; border-bottom: 1px solid #ede5e5; font-family: 'Inter','Helvetica Neue',Helvetica,Arial,sans-serif;">
 <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 10px;">
-<div style="flex-shrink: 0; width: 40px; height: 40px; border-radius: 50%; background: #f8e8e8; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: bold; color: #b86258; letter-spacing: 0.5px;">V</div>
-<div style="flex: 1; min-width: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 6px;"><span style="font-size: 13px; font-weight: bold; color: #111;">Virginia E.</span><span style="font-size: 11px; color: #999;">&middot;</span><span style="font-size: 11px; color: #999;">Hace 2 semanas</span></div>
-</div>
-<div style="margin-bottom: 10px; line-height: 1;"><span style="color: #eaa300; font-size: 16.5px; letter-spacing: 1px;">★</span><span style="color: #eaa300; font-size: 16.5px; letter-spacing: 1px;">★</span><span style="color: #eaa300; font-size: 16.5px; letter-spacing: 1px;">★</span><span style="color: #eaa300; font-size: 16.5px; letter-spacing: 1px;">★</span><span style="color: #e0e0e0; font-size: 16.5px; letter-spacing: 1px;">★</span></div>
-<p style="font-size: 13.5px; line-height: 1.65; color: #1f1f1f; margin: 0;">Es una buena crema, muy pegajosa, ojo para las pieles mixtas a grasas no lo recomiendo, yo solo la uso de noche sino me queda la cara pegajosa, y la verdad es muy cara para la cantidad que trae, la uso a cuenta gotas para que me dure, no s&eacute; si la comprar&eacute; otra vez.</p>
-</div>
-<div style="padding: 20px 0; border-bottom: 1px solid #ede5e5; font-family: 'Inter','Helvetica Neue',Helvetica,Arial,sans-serif;">
-<div style="display: flex; align-items: center; gap: 12px; margin-bottom: 10px;">
 <div style="flex-shrink: 0; width: 40px; height: 40px; border-radius: 50%; background: #f8e8e8; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: bold; color: #b86258; letter-spacing: 0.5px;">S</div>
 <div style="flex: 1; min-width: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 6px;"><span style="font-size: 13px; font-weight: bold; color: #111;">Sabrina B.</span><span style="font-size: 11px; color: #999;">&middot;</span><span style="font-size: 11px; color: #999;">Hace 2 meses</span></div>
 </div>
@@ -2386,14 +2457,6 @@ body.pdp-pink-collagen-cream .selka-benefit-item strong {
 </div>
 <div style="margin-bottom: 10px; line-height: 1;"><span style="color: #eaa300; font-size: 16.5px; letter-spacing: 1px;">★</span><span style="color: #eaa300; font-size: 16.5px; letter-spacing: 1px;">★</span><span style="color: #eaa300; font-size: 16.5px; letter-spacing: 1px;">★</span><span style="color: #eaa300; font-size: 16.5px; letter-spacing: 1px;">★</span><span style="color: #e0e0e0; font-size: 16.5px; letter-spacing: 1px;">★</span></div>
 <p style="font-size: 13.5px; line-height: 1.65; color: #1f1f1f; margin: 0;">Muy buen producto, col&aacute;geno puro, se nota el resultado en poco tiempo, comprar&eacute; otro.</p>
-</div>
-<div style="padding: 20px 0; border-bottom: 1px solid #ede5e5; font-family: 'Inter','Helvetica Neue',Helvetica,Arial,sans-serif;">
-<div style="display: flex; align-items: center; gap: 12px; margin-bottom: 10px;">
-<div style="flex-shrink: 0; width: 40px; height: 40px; border-radius: 50%; background: #f8e8e8; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: bold; color: #b86258; letter-spacing: 0.5px;">C</div>
-<div style="flex: 1; min-width: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 6px;"><span style="font-size: 13px; font-weight: bold; color: #111;">Catalina Z.</span><span style="font-size: 11px; color: #999;">&middot;</span><span style="font-size: 11px; color: #999;">Hace 3 meses</span></div>
-</div>
-<div style="margin-bottom: 10px; line-height: 1;"><span style="color: #eaa300; font-size: 16.5px; letter-spacing: 1px;">★</span><span style="color: #eaa300; font-size: 16.5px; letter-spacing: 1px;">★</span><span style="color: #eaa300; font-size: 16.5px; letter-spacing: 1px;">★</span><span style="color: #eaa300; font-size: 16.5px; letter-spacing: 1px;">★</span><span style="color: #e0e0e0; font-size: 16.5px; letter-spacing: 1px;">★</span></div>
-<p style="font-size: 13.5px; line-height: 1.65; color: #1f1f1f; margin: 0;">Es bastante pesada, para pieles grasas no ser&iacute;a ideal. Tarda en absorberse.</p>
 </div>
 <div style="padding: 20px 0; border-bottom: 1px solid #ede5e5; font-family: 'Inter','Helvetica Neue',Helvetica,Arial,sans-serif;">
 <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 10px;">
@@ -2453,14 +2516,6 @@ body.pdp-pink-collagen-cream .selka-benefit-item strong {
 </div>
 <div style="padding: 20px 0; border-bottom: 1px solid #ede5e5; font-family: 'Inter','Helvetica Neue',Helvetica,Arial,sans-serif;">
 <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 10px;">
-<div style="flex-shrink: 0; width: 40px; height: 40px; border-radius: 50%; background: #f8e8e8; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: bold; color: #b86258; letter-spacing: 0.5px;">E</div>
-<div style="flex: 1; min-width: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 6px;"><span style="font-size: 13px; font-weight: bold; color: #111;">Eugenia B.</span><span style="font-size: 11px; color: #999;">&middot;</span><span style="font-size: 11px; color: #999;">Hace 1 mes</span></div>
-</div>
-<div style="margin-bottom: 10px; line-height: 1;"><span style="color: #eaa300; font-size: 16.5px; letter-spacing: 1px;">★</span><span style="color: #eaa300; font-size: 16.5px; letter-spacing: 1px;">★</span><span style="color: #eaa300; font-size: 16.5px; letter-spacing: 1px;">★</span><span style="color: #e0e0e0; font-size: 16.5px; letter-spacing: 1px;">★</span><span style="color: #e0e0e0; font-size: 16.5px; letter-spacing: 1px;">★</span></div>
-<p style="font-size: 13.5px; line-height: 1.65; color: #1f1f1f; margin: 0;">No me gust&oacute; mucho.</p>
-</div>
-<div style="padding: 20px 0; border-bottom: 1px solid #ede5e5; font-family: 'Inter','Helvetica Neue',Helvetica,Arial,sans-serif;">
-<div style="display: flex; align-items: center; gap: 12px; margin-bottom: 10px;">
 <div style="flex-shrink: 0; width: 40px; height: 40px; border-radius: 50%; background: #f8e8e8; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: bold; color: #b86258; letter-spacing: 0.5px;">M</div>
 <div style="flex: 1; min-width: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 6px;"><span style="font-size: 13px; font-weight: bold; color: #111;">Mercedes B.</span><span style="font-size: 11px; color: #999;">&middot;</span><span style="font-size: 11px; color: #999;">Hace 1 mes</span></div>
 </div>
@@ -2469,792 +2524,9 @@ body.pdp-pink-collagen-cream .selka-benefit-item strong {
 </div>
 <div style="padding: 20px 0; border-bottom: 1px solid #ede5e5; font-family: 'Inter','Helvetica Neue',Helvetica,Arial,sans-serif;">
 <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 10px;">
-<div style="flex-shrink: 0; width: 40px; height: 40px; border-radius: 50%; background: #f8e8e8; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: bold; color: #b86258; letter-spacing: 0.5px;">Z</div>
-<div style="flex: 1; min-width: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 6px;"><span style="font-size: 13px; font-weight: bold; color: #111;">Zaira S.</span><span style="font-size: 11px; color: #999;">&middot;</span><span style="font-size: 11px; color: #999;">Hace 2 meses</span></div>
-</div>
-<div style="margin-bottom: 10px; line-height: 1;"><span style="color: #eaa300; font-size: 16.5px; letter-spacing: 1px;">★</span><span style="color: #eaa300; font-size: 16.5px; letter-spacing: 1px;">★</span><span style="color: #e0e0e0; font-size: 16.5px; letter-spacing: 1px;">★</span><span style="color: #e0e0e0; font-size: 16.5px; letter-spacing: 1px;">★</span><span style="color: #e0e0e0; font-size: 16.5px; letter-spacing: 1px;">★</span></div>
-<p style="font-size: 13.5px; line-height: 1.65; color: #1f1f1f; margin: 0;">La considero hidratante. Hay que usar muy poco dado que el producto es muy pegajoso; dificil de absorci&oacute;n.</p>
-</div>
-<div style="padding: 20px 0; border-bottom: 1px solid #ede5e5; font-family: 'Inter','Helvetica Neue',Helvetica,Arial,sans-serif;">
-<div style="display: flex; align-items: center; gap: 12px; margin-bottom: 10px;">
 <div style="flex-shrink: 0; width: 40px; height: 40px; border-radius: 50%; background: #f8e8e8; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: bold; color: #b86258; letter-spacing: 0.5px;">A</div>
 <div style="flex: 1; min-width: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 6px;"><span style="font-size: 13px; font-weight: bold; color: #111;">Agustina C.</span><span style="font-size: 11px; color: #999;">&middot;</span><span style="font-size: 11px; color: #999;">Hace 1 mes</span></div>
 </div>
 <div style="margin-bottom: 10px; line-height: 1;"><span style="color: #eaa300; font-size: 16.5px; letter-spacing: 1px;">★</span><span style="color: #eaa300; font-size: 16.5px; letter-spacing: 1px;">★</span><span style="color: #e0e0e0; font-size: 16.5px; letter-spacing: 1px;">★</span><span style="color: #e0e0e0; font-size: 16.5px; letter-spacing: 1px;">★</span><span style="color: #e0e0e0; font-size: 16.5px; letter-spacing: 1px;">★</span></div>
 <p style="font-size: 13.5px; line-height: 1.65; color: #1f1f1f; margin: 0;">Es un producto para pieles jovenes.</p>
-</div>
-<div style="padding: 20px 0; border-bottom: 1px solid #ede5e5; font-family: 'Inter','Helvetica Neue',Helvetica,Arial,sans-serif;">
-<div style="display: flex; align-items: center; gap: 12px; margin-bottom: 10px;">
-<div style="flex-shrink: 0; width: 40px; height: 40px; border-radius: 50%; background: #f8e8e8; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: bold; color: #b86258; letter-spacing: 0.5px;">J</div>
-<div style="flex: 1; min-width: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 6px;"><span style="font-size: 13px; font-weight: bold; color: #111;">Juana E.</span><span style="font-size: 11px; color: #999;">&middot;</span><span style="font-size: 11px; color: #999;">Hace 5 meses</span></div>
-</div>
-<div style="margin-bottom: 10px; line-height: 1;"><span style="color: #eaa300; font-size: 16.5px; letter-spacing: 1px;">★</span><span style="color: #e0e0e0; font-size: 16.5px; letter-spacing: 1px;">★</span><span style="color: #e0e0e0; font-size: 16.5px; letter-spacing: 1px;">★</span><span style="color: #e0e0e0; font-size: 16.5px; letter-spacing: 1px;">★</span><span style="color: #e0e0e0; font-size: 16.5px; letter-spacing: 1px;">★</span></div>
-<p style="font-size: 13.5px; line-height: 1.65; color: #1f1f1f; margin: 0;">No me gust&oacute;.<br />Pica mucho.</p>
-</div>
-<div style="padding: 20px 0; border-bottom: 1px solid #ede5e5; font-family: 'Inter','Helvetica Neue',Helvetica,Arial,sans-serif;">
-<div style="display: flex; align-items: center; gap: 12px; margin-bottom: 10px;">
-<div style="flex-shrink: 0; width: 40px; height: 40px; border-radius: 50%; background: #f8e8e8; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: bold; color: #b86258; letter-spacing: 0.5px;">S</div>
-<div style="flex: 1; min-width: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 6px;"><span style="font-size: 13px; font-weight: bold; color: #111;">Sabrina Z.</span><span style="font-size: 11px; color: #999;">&middot;</span><span style="font-size: 11px; color: #999;">Hace 1 mes</span></div>
-</div>
-<div style="margin-bottom: 10px; line-height: 1;"><span style="color: #eaa300; font-size: 16.5px; letter-spacing: 1px;">★</span><span style="color: #e0e0e0; font-size: 16.5px; letter-spacing: 1px;">★</span><span style="color: #e0e0e0; font-size: 16.5px; letter-spacing: 1px;">★</span><span style="color: #e0e0e0; font-size: 16.5px; letter-spacing: 1px;">★</span><span style="color: #e0e0e0; font-size: 16.5px; letter-spacing: 1px;">★</span></div>
-<p style="font-size: 13.5px; line-height: 1.65; color: #1f1f1f; margin: 0;">Malo.</p>
-</div>
-</div>
-</div>
-<div id="selka-reviews-toggle-wrap" style="text-align: center; margin-top: 24px;"><button id="selka-reviews-toggle" style="display: inline-block; background: #ffffff; color: #111111; font-family: 'Inter','Helvetica Neue',Helvetica,Arial,sans-serif; font-size: 12px; font-weight: bold; letter-spacing: 1.5px; text-transform: uppercase; padding: 14px 32px; border: 1.5px solid #111111; border-radius: 999px; cursor: pointer;" type="button">Mostrar todas las opiniones (114)</button>
-<div id="selka-reviews-all-modal" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.65); z-index: 9000; box-sizing: border-box; overflow: hidden; align-items: center; justify-content: center; padding: 24px; font-family: 'Inter','Helvetica Neue',Helvetica,Arial,sans-serif;">
-<div id="selka-reviews-all-card" style="background: #ffffff; border-radius: 16px; width: 100%; max-width: 760px; max-height: calc(100vh - 48px); box-shadow: 0 24px 60px rgba(0,0,0,0.25); position: relative; display: flex; flex-direction: column; overflow: hidden; text-align: left; box-sizing: border-box;">
-<div style="background: #ffffff; border-bottom: 1px solid #ede5e5; padding: 18px 24px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-shrink: 0; text-align: left;">
-<div style="text-align: left;">
-<div style="font-size: 10px; font-weight: bold; letter-spacing: 3px; text-transform: uppercase; color: #888; text-align: left;">Opiniones</div>
-<div style="font-size: 16px; font-weight: 800; color: #111; margin-top: 2px; text-align: left;">Todas las rese&ntilde;as (114)</div>
-</div>
-<button id="selka-reviews-all-close" style="background: #f3eaea; border: 0; color: #111; width: 38px; height: 38px; border-radius: 50%; cursor: pointer; font-size: 22px; line-height: 1; display: flex; align-items: center; justify-content: center; flex-shrink: 0; padding: 0;" type="button" aria-label="Cerrar">&times;</button></div>
-<div id="selka-reviews-all-body" style="padding: 0 24px 24px; overflow-y: auto; overflow-x: hidden; flex: 1; text-align: left; box-sizing: border-box;"></div>
-</div>
-</div>
-<script>(function(){
-        function init(){
-          var b = document.getElementById('selka-reviews-toggle');
-          var modal = document.getElementById('selka-reviews-all-modal');
-          var closeBtn = document.getElementById('selka-reviews-all-close');
-          var body = document.getElementById('selka-reviews-all-body');
-          var list = document.getElementById('selka-reviews-list');
-          var rest = document.getElementById('selka-reviews-rest');
-          if (!b || !modal || !closeBtn || !body || !list || b.dataset.skModalBound) return;
-          b.dataset.skModalBound = '1';
-          function openModal(){
-            body.innerHTML = '';
-            var clone = list.cloneNode(true);
-            clone.removeAttribute('id');
-            var cloneRest = clone.querySelector('#selka-reviews-rest');
-            if (cloneRest) { cloneRest.style.display = 'block'; cloneRest.removeAttribute('id'); }
-            body.appendChild(clone);
-            window.selkaScrollY = window.scrollY || window.pageYOffset || 0;
-            modal.style.display = 'flex';
-            document.documentElement.classList.add('selka-reviews-all-open');
-            document.body.classList.add('selka-reviews-all-open');
-            document.body.style.position = 'fixed';
-            document.body.style.top = '-' + window.selkaScrollY + 'px';
-            document.body.style.width = '100%';
-            body.scrollTop = 0;
-          }
-          function closeModal(){
-            modal.style.display = 'none';
-            document.documentElement.classList.remove('selka-reviews-all-open');
-            document.body.classList.remove('selka-reviews-all-open');
-            document.body.style.position = '';
-            document.body.style.top = '';
-            document.body.style.width = '';
-            if (typeof window.selkaScrollY === 'number') window.scrollTo(0, window.selkaScrollY);
-            body.innerHTML = '';
-          }
-          b.addEventListener('click', openModal);
-          closeBtn.addEventListener('click', closeModal);
-          modal.addEventListener('click', function(e){ if (e.target === modal) closeModal(); });
-          document.addEventListener('keydown', function(e){
-            if (modal.style.display === 'flex' && e.key === 'Escape') closeModal();
-          });
-          b.addEventListener('mouseover', function(){ b.style.background='#111'; b.style.color='#fff'; });
-          b.addEventListener('mouseout',  function(){ b.style.background='#fff'; b.style.color='#111'; });
-        }
-        if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
-        else init();
-        setTimeout(init, 500);
-        setTimeout(init, 2000);
-      })();</script>
-</div>
-<p style="text-align: center; margin-top: 18px; font-family: 'Inter','Helvetica Neue',Helvetica,Arial,sans-serif; font-size: 13px; color: #555555; margin-bottom: 0;">&iquest;Tambi&eacute;n la probaste? <a style="color: #111111; font-weight: bold; text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1.5px;" href="https://wa.me/5493416916113?text=Hola%21%20Quiero%20dejar%20mi%20rese%C3%B1a%20de%20la%20Capsule%20Cream%20%E2%9C%A8" target="_blank" rel="noopener">Dejar tu rese&ntilde;a &rarr;</a></p>
-<div id="selka-rev-modal" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.65); z-index: 9999; font-family: 'Inter','Helvetica Neue',Helvetica,Arial,sans-serif; align-items: center; justify-content: center; padding: 24px; box-sizing: border-box;"><button id="selka-rev-modal-close" style="position: absolute; top: 16px; right: 20px; background: #ffffff; border: 0; color: #111111; width: 42px; height: 42px; border-radius: 50%; cursor: pointer; font-size: 22px; font-weight: bold; line-height: 1; display: flex; align-items: center; justify-content: center; z-index: 2; padding: 0; box-shadow: 0 4px 12px rgba(0,0,0,0.2);" type="button" aria-label="Volver a rese&ntilde;as"><span style="display: inline-block; color: #111111; font-size: 22px; line-height: 1; font-weight: bold; margin-top: -2px;">&larr;</span></button> <button id="selka-rev-modal-prev" style="position: absolute; left: 20px; top: 50%; transform: translateY(-50%); background: #ffffff; border: 1px solid #ede5e5; color: #111111; width: 46px; height: 46px; border-radius: 50%; cursor: pointer; font-size: 26px; line-height: 1; display: flex; align-items: center; justify-content: center; z-index: 2; box-shadow: 0 4px 15px rgba(0,0,0,0.15);" type="button" aria-label="Anterior">&lsaquo;</button> <button id="selka-rev-modal-next" style="position: absolute; right: 20px; top: 50%; transform: translateY(-50%); background: #ffffff; border: 1px solid #ede5e5; color: #111111; width: 46px; height: 46px; border-radius: 50%; cursor: pointer; font-size: 26px; line-height: 1; display: flex; align-items: center; justify-content: center; z-index: 2; box-shadow: 0 4px 15px rgba(0,0,0,0.15);" type="button" aria-label="Siguiente">&rsaquo;</button>
-<div id="selka-rev-modal-content" style="display: flex; flex-direction: row; gap: 0; background: #ffffff; border-radius: 16px; overflow: hidden; max-width: 760px; width: 100%; max-height: calc(100vh - 48px); box-shadow: 0 24px 60px rgba(0,0,0,0.25);">
-<div style="flex: 1.2; min-width: 0; background: #ffffff; display: flex; align-items: center; justify-content: center; min-height: 320px;"><img id="selka-rev-modal-img" style="max-width: 100%; max-height: 88vh; object-fit: contain; display: block;" alt="Rese&ntilde;a" /></div>
-<div style="flex: 1; min-width: 280px; padding: 32px 28px; display: flex; flex-direction: column; gap: 14px; overflow-y: auto;">
-<div style="display: flex; align-items: center; gap: 12px;">
-<div id="selka-rev-modal-avatar" style="flex-shrink: 0; width: 44px; height: 44px; border-radius: 50%; background: #f8e8e8; display: flex; align-items: center; justify-content: center; font-size: 17px; font-weight: bold; color: #b86258;"></div>
-<div style="min-width: 0;">
-<div id="selka-rev-modal-name" style="font-size: 14px; font-weight: bold; color: #111; line-height: 1.3;"></div>
-<div id="selka-rev-modal-date" style="font-size: 11px; color: #888; margin-top: 2px;"></div>
-</div>
-</div>
-<div id="selka-rev-modal-stars" style="line-height: 1;"></div>
-<p id="selka-rev-modal-text" style="font-size: 13.5px; line-height: 1.7; color: #1f1f1f; margin: 0; white-space: pre-wrap;"></p>
-<div id="selka-rev-modal-counter" style="margin-top: auto; font-size: 11px; color: #999; letter-spacing: 0.5px; text-transform: uppercase; padding-top: 14px; border-top: 1px solid #eee;"></div>
-</div>
-</div>
-</div>
-<script>
-    (function(){
-      function init(){
-        var section = document.getElementById('selka-reviews-section');
-        var modal = document.getElementById('selka-rev-modal');
-        if (!section || !modal || modal.dataset.skInit) return;
-        modal.dataset.skInit = '1';
-
-        if (!document.getElementById('selka-rev-modal-css')) {
-          var st = document.createElement('style');
-          st.id = 'selka-rev-modal-css';
-          st.appendChild(document.createTextNode([
-            'body.selka-rev-modal-open{overflow:hidden !important;}',
-            'html.selka-rev-modal-open{overflow:hidden !important;}',
-            '@media (max-width:767px){',
-            '  #selka-rev-modal{padding:0 !important;align-items:stretch !important;}',
-            '  #selka-rev-modal-content{flex-direction:column !important;max-width:100% !important;width:100% !important;max-height:100vh !important;height:100vh !important;border-radius:0 !important;}',
-            '  #selka-rev-modal-content > div:first-child{flex:0 0 auto !important;width:100% !important;max-height:50vh !important;min-height:200px !important;}',
-            '  #selka-rev-modal-content > div:first-child img{max-height:50vh !important;width:100% !important;height:auto !important;object-fit:contain !important;}',
-            '  #selka-rev-modal-content > div:last-child{flex:1 1 auto !important;width:100% !important;min-width:0 !important;padding:16px 18px 22px !important;max-height:50vh !important;overflow-y:auto !important;}',
-            '  #selka-rev-modal-prev{left:8px !important;width:38px !important;height:38px !important;font-size:22px !important;background:rgba(255,255,255,0.9) !important;color:#111111 !important;border:1px solid rgba(0,0,0,0.08) !important;box-shadow:0 2px 10px rgba(0,0,0,0.15) !important;}',
-            '  #selka-rev-modal-next{right:8px !important;width:38px !important;height:38px !important;font-size:22px !important;background:rgba(255,255,255,0.9) !important;color:#111111 !important;border:1px solid rgba(0,0,0,0.08) !important;box-shadow:0 2px 10px rgba(0,0,0,0.15) !important;}',
-            '  #selka-rev-modal-close{top:10px !important;right:10px !important;left:auto !important;width:38px !important;height:38px !important;font-size:18px !important;background:#ffffff !important;color:#111 !important;box-shadow:0 4px 12px rgba(0,0,0,0.18) !important;}',
-            '  #selka-rev-modal-text{font-size:13px !important;}',
-            '}'
-          ].join('\n')));
-          document.head.appendChild(st);
-        }
-
-        var imgEl = document.getElementById('selka-rev-modal-img');
-        var avatarEl = document.getElementById('selka-rev-modal-avatar');
-        var nameEl = document.getElementById('selka-rev-modal-name');
-        var dateEl = document.getElementById('selka-rev-modal-date');
-        var starsEl = document.getElementById('selka-rev-modal-stars');
-        var textEl = document.getElementById('selka-rev-modal-text');
-        var counterEl = document.getElementById('selka-rev-modal-counter');
-        var closeBtn = document.getElementById('selka-rev-modal-close');
-        var prevBtn = document.getElementById('selka-rev-modal-prev');
-        var nextBtn = document.getElementById('selka-rev-modal-next');
-
-        var items = [];
-        var anchors = section.querySelectorAll('a[href*="/medicube-crema/reviews/"]');
-        anchors.forEach(function(a){
-          var img = a.querySelector('img');
-          if (!img) return;
-          var url = a.getAttribute('href') || img.src;
-
-          var block = a;
-          for (var bb=0; bb<10 && block && block !== section; bb++) {
-            if (block.tagName === 'DIV') {
-              var st = (block.getAttribute && block.getAttribute('style')) || '';
-              if (st.indexOf('border-bottom') !== -1 && st.indexOf('1px solid') !== -1) break;
-            }
-            block = block.parentElement;
-          }
-          if (!block || block === section) {
-            var p = a.parentElement;
-            for (var bb2=0; bb2<6 && p && p !== section; bb2++) {
-              if (p.tagName === 'DIV' && p.children.length >= 2) { block = p; break; }
-              p = p.parentElement;
-            }
-          }
-          if (!block) return;
-
-          var name = '';
-          var date = '';
-          var allSpans = block.querySelectorAll('span');
-          for (var s2=0; s2<allSpans.length; s2++){
-            var sp = allSpans[s2];
-            var t2 = (sp.textContent || '').trim();
-            if (!t2) continue;
-            if (t2 === '·' || t2 === '•') continue;
-            if (t2 === '★' || t2 === '☆') continue;
-            if (sp.closest && sp.closest('a[data-skreview]')) continue;
-            if (t2.indexOf('Hace') === 0 || t2.indexOf(' mes') !== -1 || t2.indexOf(' semana') !== -1 || t2.indexOf(' año') !== -1 || t2.indexOf(' día') !== -1) {
-              if (!date) date = t2;
-            } else if (!name && t2.length > 1 && t2.length < 60) {
-              name = t2;
-            }
-            if (name && date) break;
-          }
-          if (!name) name = 'Compradora verificada';
-
-          var starsHTML = '';
-          var divs = block.querySelectorAll('div');
-          for (var di=0; di<divs.length; di++) {
-            var dv = divs[di];
-            var dtxt = dv.textContent || '';
-            if ((dtxt.indexOf('★') !== -1 || dtxt.indexOf('☆') !== -1) && dv.children.length >= 3) {
-              starsHTML = dv.innerHTML; break;
-            }
-          }
-
-          var textP = block.querySelector('p');
-          var textHTML = textP ? textP.innerHTML : '';
-
-          items.push({
-            url: url,
-            name: name,
-            initial: name.charAt(0).toUpperCase() || 'C',
-            date: date,
-            starsHTML: starsHTML,
-            textHTML: textHTML
-          });
-          a.setAttribute('data-skidx', String(items.length-1));
-          a.setAttribute('target', '_blank');
-          a.setAttribute('rel', 'noopener');
-        });
-
-        if (!items.length) return;
-
-        var current = 0;
-
-        function render(i){
-          if (i < 0) i = items.length - 1;
-          if (i >= items.length) i = 0;
-          current = i;
-          var it = items[i];
-          imgEl.src = it.url;
-          avatarEl.textContent = it.initial;
-          nameEl.textContent = it.name;
-          dateEl.textContent = it.date;
-          starsEl.innerHTML = it.starsHTML;
-          textEl.innerHTML = it.textHTML;
-          counterEl.textContent = (i+1) + ' / ' + items.length + ' · Fotos de reseñas';
-        }
-
-        var activeOverlayIdx = 0;
-        function showOverlayImg(idx) {
-          if (idx < 0) idx = items.length - 1;
-          if (idx >= items.length) idx = 0;
-          activeOverlayIdx = idx;
-          var it = items[idx];
-          if (it && it.url) {
-            var overlayImg = document.getElementById('selka-img-overlay-img');
-            if (overlayImg) {
-              overlayImg.style.opacity = '0';
-              setTimeout(function() {
-                overlayImg.src = it.url;
-                overlayImg.style.opacity = '1';
-              }, 120);
-            }
-          }
-        }
-
-        function openAt(i){
-          var it = items[i];
-          if (!it || !it.url) return;
-          activeOverlayIdx = i;
-          
-          var overlay = document.getElementById('selka-img-overlay');
-          if (!overlay) {
-            overlay = document.createElement('div');
-            overlay.id = 'selka-img-overlay';
-            overlay.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.85);z-index:999999;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity 0.25s ease;backdrop-filter:blur(5px);cursor:zoom-out;';
-            
-            var img = document.createElement('img');
-            img.id = 'selka-img-overlay-img';
-            img.style.cssText = 'max-width:90%;max-height:90%;object-fit:contain;border-radius:10px;box-shadow:0 10px 40px rgba(0,0,0,0.5);transition:transform 0.25s ease, opacity 0.15s ease;transform:scale(0.95);opacity:1;';
-            overlay.appendChild(img);
-            
-            overlay.addEventListener('click', function(e) {
-              if (e.target === overlay) {
-                overlay.style.opacity = '0';
-                img.style.transform = 'scale(0.95)';
-                setTimeout(function() {
-                  overlay.style.display = 'none';
-                }, 250);
-              }
-            });
-
-            // Close button
-            var closeBtn = document.createElement('div');
-            closeBtn.innerHTML = '&times;';
-            closeBtn.style.cssText = 'position:absolute;top:20px;right:20px;color:#fff;font-size:40px;cursor:pointer;user-select:none;z-index:1000000;width:50px;height:50px;display:flex;align-items:center;justify-content:center;';
-            closeBtn.addEventListener('click', function(e) {
-              e.stopPropagation();
-              overlay.style.opacity = '0';
-              img.style.transform = 'scale(0.95)';
-              setTimeout(function() {
-                overlay.style.display = 'none';
-              }, 250);
-            });
-            overlay.appendChild(closeBtn);
-
-            // Navigation arrows
-            var prevArrow = document.createElement('div');
-            prevArrow.innerHTML = '&#10094;';
-            prevArrow.style.cssText = 'position:absolute;left:20px;color:#fff;font-size:36px;cursor:pointer;user-select:none;z-index:1000000;width:50px;height:50px;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);border-radius:50%;transition:background 0.2s;';
-            prevArrow.addEventListener('click', function(e) {
-              e.stopPropagation();
-              showOverlayImg(activeOverlayIdx - 1);
-            });
-            prevArrow.addEventListener('mouseover', function() { prevArrow.style.background = 'rgba(0,0,0,0.6)'; });
-            prevArrow.addEventListener('mouseout', function() { prevArrow.style.background = 'rgba(0,0,0,0.3)'; });
-            overlay.appendChild(prevArrow);
-            
-            var nextArrow = document.createElement('div');
-            nextArrow.innerHTML = '&#10095;';
-            nextArrow.style.cssText = 'position:absolute;right:20px;color:#fff;font-size:36px;cursor:pointer;user-select:none;z-index:1000000;width:50px;height:50px;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);border-radius:50%;transition:background 0.2s;';
-            nextArrow.addEventListener('click', function(e) {
-              e.stopPropagation();
-              showOverlayImg(activeOverlayIdx + 1);
-            });
-            nextArrow.addEventListener('mouseover', function() { nextArrow.style.background = 'rgba(0,0,0,0.6)'; });
-            nextArrow.addEventListener('mouseout', function() { nextArrow.style.background = 'rgba(0,0,0,0.3)'; });
-            overlay.appendChild(nextArrow);
-
-            // Swiping events
-            var startX = 0;
-            overlay.addEventListener('touchstart', function(e) {
-              startX = e.touches[0].clientX;
-            }, { passive: true });
-            
-            overlay.addEventListener('touchend', function(e) {
-              var diffX = e.changedTouches[0].clientX - startX;
-              if (Math.abs(diffX) > 50) {
-                if (diffX > 0) {
-                  showOverlayImg(activeOverlayIdx - 1);
-                } else {
-                  showOverlayImg(activeOverlayIdx + 1);
-                }
-              }
-            }, { passive: true });
-
-            // Keyboard navigation
-            document.addEventListener('keydown', function(e) {
-              if (overlay.style.display === 'flex' && overlay.style.opacity === '1') {
-                if (e.key === 'ArrowLeft') {
-                  showOverlayImg(activeOverlayIdx - 1);
-                } else if (e.key === 'ArrowRight') {
-                  showOverlayImg(activeOverlayIdx + 1);
-                } else if (e.key === 'Escape') {
-                  overlay.style.opacity = '0';
-                  img.style.transform = 'scale(0.95)';
-                  setTimeout(function() {
-                    overlay.style.display = 'none';
-                  }, 250);
-                }
-              }
-            });
-
-            document.body.appendChild(overlay);
-          }
-          
-          var overlayImg = document.getElementById('selka-img-overlay-img');
-          overlayImg.src = it.url;
-          overlay.style.display = 'flex';
-          overlay.offsetHeight; // force reflow
-          overlay.style.opacity = '1';
-          img.style.transform = 'scale(1)';
-        }
-        function closeM(){
-          modal.style.display = 'none';
-          document.body.classList.remove('selka-rev-modal-open');
-        }
-
-        section.addEventListener('click', function(e){
-          var a = e.target.closest('a[data-skidx]');
-          if (!a) return;
-          e.preventDefault();
-          e.stopPropagation();
-          var idx = parseInt(a.getAttribute('data-skidx'), 10) || 0;
-          openAt(idx);
-        });
-
-        closeBtn.addEventListener('click', closeM);
-        prevBtn.addEventListener('click', function(){ render(current-1); });
-        nextBtn.addEventListener('click', function(){ render(current+1); });
-        modal.addEventListener('click', function(e){ if (e.target === modal) closeM(); });
-        document.addEventListener('keydown', function(e){
-          if (!modal.style.display || modal.style.display === 'none') return;
-          if (e.key === 'Escape') closeM();
-          else if (e.key === 'ArrowLeft') render(current-1);
-          else if (e.key === 'ArrowRight') render(current+1);
-        });
-
-        var sx = 0;
-        modal.addEventListener('touchstart', function(e){ sx = e.touches[0].clientX; }, {passive:true});
-        modal.addEventListener('touchend', function(e){
-          var dx = e.changedTouches[0].clientX - sx;
-          if (Math.abs(dx) > 50) render(current + (dx < 0 ? 1 : -1));
-        }, {passive:true});
-      }
-      if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
-      else init();
-      setTimeout(init, 500);
-      setTimeout(init, 2000);
-    })();
-    </script>
-</div>
-<div style="border: none; border-top: 1px solid #ede5e5; margin: 44px 0;">&nbsp;</div>
-<p style="font-size: 10px; font-weight: bold; letter-spacing: 3.5px; text-transform: uppercase; text-align: center; color: #000000; margin: 0 0 8px;">RESULTADOS REALES</p>
-<h2 style="font-size: 1.55rem; font-weight: 900; text-align: center; color: #000000; margin: 0 0 10px; line-height: 1.2;">Antes y despu&eacute;s de la Capsule Cream</h2>
-<p style="text-align: center; font-size: 0.82rem; color: #555555; margin: 0 0 24px; line-height: 1.6;">Fotograf&iacute;as de clientas de Selka &mdash; sin filtros ni edici&oacute;n.</p>
-<div class="sk-grid-2" style="margin-bottom: 14px;">
-<div style="border-radius: 12px; overflow: hidden; position: relative; background: #f8e8e8; aspect-ratio: 4/5; display: flex; align-items: center; justify-content: center;"><img style="width: 100%; height: 100%; object-fit: cover; display: block;" src="https://czocbnyoenjbpxmcqobn.supabase.co/storage/v1/object/public/Selka-img/medicube-crema/antes-1.webp" alt="Antes" />
-<div style="position: absolute; bottom: 0; left: 0; right: 0; padding: 10px 14px; font-size: 10px; font-weight: bold; letter-spacing: 2px; text-transform: uppercase; color: #fff; background: rgba(0,0,0,0.55);">Antes</div>
-</div>
-<div style="border-radius: 12px; overflow: hidden; position: relative; background: #f8e8e8; aspect-ratio: 4/5; display: flex; align-items: center; justify-content: center;"><img style="width: 100%; height: 100%; object-fit: cover; display: block;" src="https://czocbnyoenjbpxmcqobn.supabase.co/storage/v1/object/public/Selka-img/medicube-crema/despues-1.webp" alt="Despu&eacute;s 2 semanas" />
-<div style="position: absolute; bottom: 0; left: 0; right: 0; padding: 10px 14px; font-size: 10px; font-weight: bold; letter-spacing: 2px; text-transform: uppercase; color: #fff; background: rgba(0,0,0,0.72);">2 semanas despu&eacute;s</div>
-</div>
-</div>
-<p style="font-size: 0.7rem; color: #888888; text-align: center; margin: 14px 0 0;">* Resultados individuales pueden variar.</p>
-<div style="border: none; border-top: 1px solid #ede5e5; margin: 44px 0;">&nbsp;</div>
-<div style="background: #f8e8e8; padding: 48px 32px; margin-bottom: 40px; border-radius: 16px; box-sizing: border-box;">
-<p style="font-size: 10px; font-weight: bold; letter-spacing: 3.5px; text-transform: uppercase; text-align: center; color: #000000; margin: 0 0 8px;">RESPALDO CL&Iacute;NICO</p>
-<h2 style="font-size: 1.55rem; font-weight: 900; text-align: center; color: #000000; margin: 0 0 32px; line-height: 1.2;">Lo que hace en tu piel</h2>
-<div class="sk-grid-3">
-<div style="background: #fff; border: 1.5px solid #ede5e5; border-radius: 14px; padding: 28px 20px; text-align: center;">
-<div style="font-size: 2.3rem; font-weight: 900; color: #000000; line-height: 1; margin-bottom: 10px;">+102%</div>
-<div style="height: 2px; width: 36px; background: #C8B59B; margin: 0 auto 12px;">&nbsp;</div>
-<p style="font-size: 0.82rem; line-height: 1.6; color: #000000; margin: 0;"><strong>Hidrataci&oacute;n instant&aacute;nea</strong><br />desde la primera aplicaci&oacute;n</p>
-</div>
-<div style="background: #fff; border: 1.5px solid #ede5e5; border-radius: 14px; padding: 28px 20px; text-align: center;">
-<div style="font-size: 2.3rem; font-weight: 900; color: #000000; line-height: 1; margin-bottom: 10px;">+33%</div>
-<div style="height: 2px; width: 36px; background: #C8B59B; margin: 0 auto 12px;">&nbsp;</div>
-<p style="font-size: 0.82rem; line-height: 1.6; color: #000000; margin: 0;"><strong>Elasticidad mejorada</strong><br />en 2 semanas de uso</p>
-</div>
-<div style="background: #fff; border: 1.5px solid #ede5e5; border-radius: 14px; padding: 28px 20px; text-align: center;">
-<div style="font-size: 2.3rem; font-weight: 900; color: #000000; line-height: 1; margin-bottom: 10px;">-19%</div>
-<div style="height: 2px; width: 36px; background: #C8B59B; margin: 0 auto 12px;">&nbsp;</div>
-<p style="font-size: 0.82rem; line-height: 1.6; color: #000000; margin: 0;"><strong>Menos manchas</strong><br />tono m&aacute;s parejo y luminoso</p>
-</div>
-</div>
-</div>
-<div style="margin-bottom: 40px;">
-<p style="font-size: 10px; font-weight: bold; letter-spacing: 3.5px; text-transform: uppercase; text-align: center; color: #000000; margin: 0 0 8px;">RESPALDO DERMATOL&Oacute;GICO</p>
-<h2 style="font-size: 1.55rem; font-weight: 900; text-align: center; color: #000000; margin: 0 0 24px; line-height: 1.2;">Qu&eacute; se observa en estudios de los activos</h2>
-<div class="zl-circ-list" style="border-color: #ede5e5;">
-<div class="zl-circ-row">
-<div class="zl-circ-wrap" style="background: conic-gradient(#000000 94%, #f8e8e8 0%);"><span class="zl-circ-num" style="color: #fff;">94%</span></div>
-<p class="zl-circ-text" style="color: #000000;">de mejora en la <strong>firmeza y elasticidad</strong> de la piel con PDRN encapsulado</p>
-</div>
-<div class="zl-circ-row">
-<div class="zl-circ-wrap" style="background: conic-gradient(#000000 92%, #f8e8e8 0%);"><span class="zl-circ-num" style="color: #fff;">92%</span></div>
-<p class="zl-circ-text" style="color: #000000;">de reducci&oacute;n de <strong>manchas e hiperpigmentaci&oacute;n</strong> (Niacinamida 5%)</p>
-</div>
-<div class="zl-circ-row">
-<div class="zl-circ-wrap" style="background: conic-gradient(#000000 89%, #f8e8e8 0%);"><span class="zl-circ-num" style="color: #fff;">89%</span></div>
-<p class="zl-circ-text" style="color: #000000;">de reducci&oacute;n de <strong>l&iacute;neas de expresi&oacute;n</strong> con col&aacute;geno y p&eacute;ptidos</p>
-</div>
-<div class="zl-circ-row" style="border-bottom: none;">
-<div class="zl-circ-wrap" style="background: conic-gradient(#000000 100%, #f8e8e8 0%);"><span class="zl-circ-num" style="color: #fff;">100%</span></div>
-<p class="zl-circ-text" style="color: #000000;">de aumento en la <strong>hidrataci&oacute;n profunda</strong> y duradera</p>
-</div>
-<p class="zl-circ-footnote" style="background: #f8e8e8; color: #000000; font-family: 'Inter','Helvetica Neue',Helvetica,Arial,sans-serif !important;">✦ Datos de estudios dermatol&oacute;gicos sobre los ingredientes activos</p>
-</div>
-<div style="text-align: center; margin-top: 28px;">
-  <a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;" class="selka-quiero-mio-btn">Quiero el m&iacute;o &rarr;</a>
-</div>
-</div>
-</div>
-<div style="border: none; border-top: 1px solid #ede5e5; margin: 44px 0;">&nbsp;</div>
-<div style="margin-bottom: 40px;">
-<p style="font-size: 10px; font-weight: bold; letter-spacing: 3.5px; text-transform: uppercase; text-align: center; color: #000000; margin: 0 0 8px;">COMPARATIVA</p>
-<h2 style="font-size: 1.55rem; font-weight: 900; text-align: center; color: #000000; margin: 0 0 24px; line-height: 1.2;">Por qu&eacute; no es una crema cualquiera</h2>
-<div class="zl-comp2-wrap" style="border-color: #ede5e5;">
-<table class="zl-comp2-table">
-<thead>
-<tr>
-<td class="zl-comp2-feature-head">&nbsp;</td>
-<td class="zl-comp2-zane-head" style="border-bottom-color: #000000; background: #f8e8e8; color: #000000;">CAPSULE CREAM<br />MEDICUBE</td>
-<td class="zl-comp2-otros-head" style="border-bottom-color: #ede5e5; background: #fafafa; color: #888888;">CREMA COM&Uacute;N</td>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="zl-comp2-feat" style="background: #fff; color: #000000;">PDRN encapsulado fresco</td>
-<td class="zl-comp2-check" style="background: #f8e8e8; color: #000000;">✓</td>
-<td class="zl-comp2-cross" style="color: #bbb; background: #fafafa;">✕</td>
-</tr>
-<tr>
-<td class="zl-comp2-feat" style="background: #fff; color: #000000;">Col&aacute;geno + 5% Niacinamida activa</td>
-<td class="zl-comp2-check" style="background: #f8e8e8; color: #000000;">✓</td>
-<td class="zl-comp2-cross" style="color: #bbb; background: #fafafa;">✕</td>
-</tr>
-<tr>
-<td class="zl-comp2-feat" style="background: #fff; color: #000000;">&Aacute;cido hialur&oacute;nico multicapa</td>
-<td class="zl-comp2-check" style="background: #f8e8e8; color: #000000;">✓</td>
-<td class="zl-comp2-cross" style="color: #bbb; background: #fafafa;">✕</td>
-</tr>
-<tr>
-<td class="zl-comp2-feat" style="background: #fff; color: #000000;">C&aacute;psulas activadas al momento</td>
-<td class="zl-comp2-check" style="background: #f8e8e8; color: #000000;">✓</td>
-<td class="zl-comp2-cross" style="color: #bbb; background: #fafafa;">✕</td>
-</tr>
-<tr>
-<td class="zl-comp2-feat" style="background: #fff; color: #000000;">Sin oxidaci&oacute;n de activos</td>
-<td class="zl-comp2-check" style="background: #f8e8e8; color: #000000;">✓</td>
-<td class="zl-comp2-cross" style="color: #bbb; background: #fafafa;">✕</td>
-</tr>
-<tr>
-<td class="zl-comp2-feat" style="background: #fff; color: #000000;">Apto piel sensible</td>
-<td class="zl-comp2-check" style="background: #f8e8e8; color: #000000;">✓</td>
-<td class="zl-comp2-cross" style="color: #bbb; background: #fafafa;">✕</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div style="border: none; border-top: 1px solid #ede5e5; margin: 44px 0;">&nbsp;</div>
-<div class="sk-flex-banner" style="background: #000000; margin-bottom: 40px; border-radius: 18px; overflow: hidden;">
-<div style="width: 100%; max-width: 340px; flex-shrink: 0; border-radius: 16px; overflow: hidden; margin: 0 auto; align-self: stretch;"><img style="width: 100% !important; max-width: 100% !important; height: auto; display: block; border-radius: 16px;" src="https://czocbnyoenjbpxmcqobn.supabase.co/storage/v1/object/public/Selka-img/medicube-crema/producto.webp" alt="Capsule Cream PDRN Medicube" /></div>
-<div>
-<p style="font-size: 10px; font-weight: bold; letter-spacing: 3px; text-transform: uppercase; color: #c8b59b; margin: 0 0 12px;">POR QU&Eacute; FUNCIONA</p>
-<h2 style="font-size: 1.65rem; font-weight: 900; color: #fff; margin: 0 0 16px; line-height: 1.2;">La tecnolog&iacute;a de las c&aacute;psulas.</h2>
-<p style="font-size: 0.85rem; line-height: 1.8; color: rgba(248,232,232,0.85); margin: 0 0 12px;">Al mezclar el gel con las c&aacute;psulas en la palma, el <strong style="color: #c8b59b;">PDRN encapsulado</strong> se libera fresco &mdash; sin oxidarse. Ingredientes reci&eacute;n activados en cada uso.</p>
-<p style="font-size: 0.85rem; line-height: 1.8; color: rgba(248,232,232,0.85); margin: 0 0 20px;">Combinado con <strong style="color: #c8b59b;">col&aacute;geno + 5% niacinamida</strong> y hialur&oacute;nico multicapa: hidrataci&oacute;n profunda, firmeza y glow todo el d&iacute;a.</p>
-<div style="margin-top: 20px;"><a style="display: inline-block; background: #ffffff; color: #000000; font-weight: bold; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; padding: 14px 40px; border-radius: 999px; text-decoration: none; border: 2px solid #ffffff; transition: all 0.2s;" href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;" onmouseover="this.style.background='transparent';this.style.color='#ffffff';" onmouseout="this.style.background='#ffffff';this.style.color='#000000';">Agregar al carrito &rarr;</a></div>
-</div></div>
-<div style="border: none; border-top: 1px solid #ede5e5; margin: 44px 0;">&nbsp;</div>
-<div style="margin-bottom: 40px;">
-<h3 style="font-size: 1.45rem; font-weight: 900; color: #000000; margin: 0 0 24px; line-height: 1.2;">C&oacute;mo usarla <span style="color: #000000;">&rarr;</span></h3>
-<div style="background: #f8e8e8; border-radius: 16px; padding: 36px 32px; box-sizing: border-box;">
-<div class="sk-steps-flex">
-<div style="text-align: center; flex: 1;">
-<div style="width: 52px; height: 52px; background: #000000; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #f8e8e8; font-weight: 800; font-size: 1.1rem; margin: 0 auto;">1</div>
-<p style="font-weight: bold; font-size: 0.88rem; display: block; margin: 12px 0 4px; color: #000000;">Tom&aacute; la crema</p>
-<p style="font-size: 0.78rem; line-height: 1.5; margin: 0; color: #000000;">Sac&aacute; gel + c&aacute;psulas en la palma</p>
-</div>
-<span class="sk-step-arrow" style="font-size: 1.3rem; padding-top: 20px; flex-shrink: 0; color: #000000;">&rarr;</span>
-<div style="text-align: center; flex: 1;">
-<div style="width: 52px; height: 52px; background: #000000; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #f8e8e8; font-weight: 800; font-size: 1.1rem; margin: 0 auto;">2</div>
-<p style="font-weight: bold; font-size: 0.88rem; display: block; margin: 12px 0 4px; color: #000000;">Mezcl&aacute;</p>
-<p style="font-size: 0.78rem; line-height: 1.5; margin: 0; color: #000000;">Frot&aacute; las palmas &mdash; las c&aacute;psulas se activan</p>
-</div>
-<span class="sk-step-arrow" style="font-size: 1.3rem; padding-top: 20px; flex-shrink: 0; color: #000000;">&rarr;</span>
-<div style="text-align: center; flex: 1;">
-<div style="width: 52px; height: 52px; background: #000000; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #f8e8e8; font-weight: 800; font-size: 1.1rem; margin: 0 auto;">3</div>
-<p style="font-weight: bold; font-size: 0.88rem; display: block; margin: 12px 0 4px; color: #000000;">Aplic&aacute;</p>
-<p style="font-size: 0.78rem; line-height: 1.5; margin: 0; color: #000000;">Palmea en rostro y cuello</p>
-</div>
-</div>
-<div style="border-top: 1.5px solid rgba(0,0,0,0.1); margin: 28px 0 0; padding-top: 20px; display: flex; gap: 16px; flex-wrap: wrap; justify-content: center;">
-<div style="text-align: center;">
-<p style="color: #000000; font-size: 0.75rem; font-weight: bold; letter-spacing: 1.5px; text-transform: uppercase; margin: 0 0 4px;">Piel grasa</p>
-<p style="color: #000000; font-size: 0.75rem; margin: 0; opacity: 0.75;">M&aacute;s gel &rarr; textura ultraliviana</p>
-</div>
-<div style="width: 1px; background: rgba(0,0,0,0.1); flex-shrink: 0;">&nbsp;</div>
-<div style="text-align: center;">
-<p style="color: #000000; font-size: 0.75rem; font-weight: bold; letter-spacing: 1.5px; text-transform: uppercase; margin: 0 0 4px;">Piel seca / sensible</p>
-<p style="color: #000000; font-size: 0.75rem; margin: 0; opacity: 0.75;">M&aacute;s c&aacute;psulas &rarr; m&aacute;xima nutrici&oacute;n</p>
-</div>
-<div style="width: 1px; background: rgba(0,0,0,0.1); flex-shrink: 0;">&nbsp;</div>
-<div style="text-align: center;">
-<p style="color: #000000; font-size: 0.75rem; font-weight: bold; letter-spacing: 1.5px; text-transform: uppercase; margin: 0 0 4px;">Frecuencia</p>
-<p style="color: #000000; font-size: 0.75rem; margin: 0;"><strong>Ma&ntilde;ana y noche</strong> &middot; 2+ meses</p>
-</div>
-</div>
-</div>
-
-</div>
-<div style="border: none; border-top: 1px solid #ede5e5; margin: 44px 0;">&nbsp;</div>
-<div style="margin-bottom: 40px;">
-<h3 style="font-size: 1.45rem; font-weight: 900; color: #000000; margin: 0 0 8px; line-height: 1.2;">Preguntas frecuentes <span style="color: #000000;">&rarr;</span></h3>
-<details style="border-bottom: 1px solid #ede5e5;">
-<summary style="padding: 18px 0; font-weight: 600; font-size: 0.88rem; cursor: pointer; list-style: none; color: #000000;">&iquest;Es compatible con vitamina C, retinol o &aacute;cidos?</summary>
-<p style="font-size: 0.84rem; line-height: 1.7; color: #555555; padding-bottom: 18px; margin: 0;">S&iacute;. La niacinamida y el PDRN son activos gentiles. Si ya us&aacute;s retinol o exfoliantes potentes, empez&aacute; de a poco.</p>
-</details><details style="border-bottom: 1px solid #ede5e5;">
-<summary style="padding: 18px 0; font-weight: 600; font-size: 0.88rem; cursor: pointer; list-style: none; color: #000000;">&iquest;Se usa sola o necesita otros productos?</summary>
-<p style="font-size: 0.84rem; line-height: 1.7; color: #555555; padding-bottom: 18px; margin: 0;">Funciona sola como hidratante final. No necesit&aacute;s agregar otra crema encima &mdash; hace el trabajo completo.</p>
-</details><details style="border-bottom: 1px solid #ede5e5;">
-<summary style="padding: 18px 0; font-weight: 600; font-size: 0.88rem; cursor: pointer; list-style: none; color: #000000;">&iquest;En cu&aacute;nto tiempo se ven resultados?</summary>
-<p style="font-size: 0.84rem; line-height: 1.7; color: #555555; padding-bottom: 18px; margin: 0;">El glow se nota desde la <strong style="color: #000000;">primera aplicaci&oacute;n</strong>. La elasticidad mejora en <strong style="color: #000000;">2 semanas</strong>. Para manchas: 4&ndash;8 semanas.</p>
-</details><details style="border-bottom: 1px solid #ede5e5;">
-<summary style="padding: 18px 0; font-weight: 600; font-size: 0.88rem; cursor: pointer; list-style: none; color: #000000;">&iquest;Cu&aacute;nto dura el frasco de 55 g?</summary>
-<p style="font-size: 0.84rem; line-height: 1.7; color: #555555; padding-bottom: 18px; margin: 0;">Ma&ntilde;ana y noche: <strong style="color: #000000;">2 a 2.5 meses</strong>. Solo de noche: hasta 3 meses.</p>
-</details></div>
-<script>
-  function toggleSelkaReviewForm() {
-    var container = document.getElementById('selka-review-form-container');
-    if (container) {
-      if (container.style.display === 'none') {
-        container.style.display = 'block';
-        container.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      } else {
-        container.style.display = 'none';
-      }
-    }
-  }
-
-  function setFormRating(rating) {
-    document.getElementById('selka-form-rating-val').value = rating;
-    var starSvgs = document.querySelectorAll('.selka-form-star-svg');
-    starSvgs.forEach(function(svg, idx) {
-      if (idx < rating) {
-        svg.style.fill = '#eaa300';
-      } else {
-        svg.style.fill = '#dcdcdc';
-      }
-    });
-  }
-
-  function submitSelkaReview(e) {
-    e.preventDefault();
-    var btn = e.target.querySelector('button[type="submit"]');
-    var name = document.getElementById('selka-review-name').value;
-    var text = document.getElementById('selka-review-text').value;
-    var rating = parseInt(document.getElementById('selka-form-rating-val').value, 10);
-    
-    if (btn) {
-      btn.disabled = true;
-      btn.textContent = 'Enviando...';
-    }
-    
-    setTimeout(function() {
-      var formContainer = document.getElementById('selka-review-form-container');
-      if (formContainer) formContainer.style.display = 'none';
-      
-      var successMsg = document.getElementById('selka-review-success-msg');
-      if (successMsg) successMsg.style.display = 'block';
-      
-      var list = document.getElementById('selka-reviews-list');
-      if (list) {
-        var newReview = document.createElement('div');
-        newReview.style.cssText = 'border-bottom: 1px solid #ede5e5; padding-bottom: 18px; background: #fffbfb; padding: 16px; border-radius: 12px; margin-bottom: 12px; transition: all 0.3s; border: 1.5px solid #d99a96;';
-        
-        var starsHtml = '';
-        for (var i = 0; i < 5; i++) {
-          var color = i < rating ? '#eaa300' : '#dcdcdc';
-          starsHtml += '<svg class="selka-star-svg" viewBox="0 0 24 24" style="width:13px; height:13px; fill:' + color + ';"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>';
-        }
-        
-        newReview.innerHTML = [
-          '<div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 6px; flex-wrap: wrap; gap: 8px;">',
-          '  <div style="display: flex; align-items: center; gap: 8px;">',
-          '    <span style="font-weight: 700; font-size: 13px; color: #111;">' + name + '</span>',
-          '    <span style="display: inline-flex; align-items: center; gap: 4px; font-size: 9.5px; font-weight: 700; color: #b86258; background: #fff0f4; padding: 2px 8px; border-radius: 10px;">Pendiente de moderación</span>',
-          '  </div>',
-          '  <span style="font-size: 11px; color: #888;">Reciente</span>',
-          '</div>',
-          '<div style="display: flex; gap: 2px; margin-bottom: 8px;">' + starsHtml + '</div>',
-          '<p style="font-size: 12.5px; line-height: 1.6; color: #444; margin: 0;">' + text + '</p>'
-        ].join('');
-        
-        list.insertBefore(newReview, list.firstChild);
-      }
-      
-      if (successMsg) {
-        successMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      }
-    }, 1000);
-  }
-  </script>
-<div style="margin-bottom: 8px;">
-<div style="background: #000000; border-radius: 16px; padding: 52px 36px 44px; text-align: center; box-sizing: border-box;">
-<p style="font-size: 0.62rem; font-weight: bold; letter-spacing: 3px; text-transform: uppercase; color: #f8e8e8; margin: 0 0 14px; opacity: 0.8;">Coreano. Curado. Real.</p>
-<p style="color: #fff; font-size: 2rem; font-weight: 900; line-height: 1.15; letter-spacing: -0.5px; margin: 0 0 8px;">Una crema.<br />Tu piel cambia.</p>
-<div style="width: 36px; height: 2px; background: #f8e8e8; border-radius: 2px; margin: 20px auto; opacity: 0.3;">&nbsp;</div>
-<div style="display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; margin-bottom: 32px;"><span style="color: rgba(248,232,232,0.85); font-size: 0.73rem; font-weight: 600;">PDRN + Col&aacute;geno + Niacinamida</span> <span style="color: rgba(248,232,232,0.85); font-size: 0.73rem; font-weight: 600;">Apto piel sensible</span> <span style="color: rgba(248,232,232,0.85); font-size: 0.73rem; font-weight: 600;">Original Medicube Korea</span></div>
-<a style="display: inline-block; background: #f8e8e8; border: 2px solid #f8e8e8; color: #000000; font-weight: bold; font-size: 0.85rem; letter-spacing: 0.5px; padding: 16px 52px; border-radius: 999px; text-decoration: none;" href="#">Compr&aacute; ahora &rarr;</a>
-<p style="color: rgba(248,232,232,0.45); font-size: 0.62rem; margin: 18px 0 0; letter-spacing: 1px; text-transform: uppercase;">Stock disponible &middot; Env&iacute;o a todo el pa&iacute;s &middot; Factura A/B</p>
-</div>
-</div>
-<script>
-(function(){
-  function isOurs(el){
-    return el && (el.closest && (el.closest('#selka-reviews-section') || el.closest('#selka-rev-modal') || el.closest('#selka-reviews-all-modal') || el.closest('.sk-product')));
-  }
-  function nukeAncestor(el){
-    if (!el || isOurs(el)) return false;
-    var p = el;
-    for (var i=0; i<8 && p && p !== document.body && p !== document.documentElement; i++) {
-      var parent = p.parentElement;
-      if (!parent) break;
-      var c = (p.className || '') + ' ' + (p.id || '');
-      if (/review|comment|opinion|disqus|kudos|judge|stamped|loox|product-comments|product-reviews/i.test(c)) {
-        if (!isOurs(p)) { try { p.remove(); } catch(e) { p.style.cssText = 'display:none !important'; } return true; }
-      }
-      if (p.tagName === 'SECTION' && !isOurs(p)) {
-        try { p.remove(); } catch(e) { p.style.cssText = 'display:none !important'; } return true;
-      }
-      p = parent;
-    }
-    var fallback = el;
-    for (var k=0; k<4 && fallback && fallback.parentElement; k++) fallback = fallback.parentElement;
-    if (fallback && !isOurs(fallback) && fallback !== document.body) {
-      try { fallback.remove(); } catch(e) { fallback.style.cssText = 'display:none !important'; }
-      return true;
-    }
-    return false;
-  }
-  function removeNativeReviews(){
-    var headings = document.querySelectorAll('h1, h2, h3, h4, h5, h6');
-    for (var i=0;i<headings.length;i++){
-      var h = headings[i];
-      if (isOurs(h)) continue;
-      var t = (h.textContent || '').trim().toLowerCase();
-      if (t.indexOf('opiniones de clientes') === -1 && t.indexOf('opiniones de la tienda') === -1 && t.indexOf('opiniones del producto') === -1) continue;
-      nukeAncestor(h);
-    }
-    var btns = document.querySelectorAll('a, button');
-    for (var j=0;j<btns.length;j++){
-      var b = btns[j];
-      if (isOurs(b)) continue;
-      var tt = (b.textContent || '').trim().toLowerCase();
-      if (tt === 'escribir opinión' || tt === 'escribir opinion' || tt === 'escribir reseña' || tt === 'escribir resena') {
-        nukeAncestor(b);
-      }
-    }
-    var specific = document.querySelectorAll(
-      '.section-product-comments, [data-store="product-comments"], [data-store="product-reviews"], ' +
-      '[data-store="product-reviews-container"], .product-reviews-section, .product-reviews-container, ' +
-      '.js-product-comments, .js-product-reviews, .js-product-reviews-container, .js-reviews-container, ' +
-      '#product_comments, #product-comments, #product-reviews, .nube-product-reviews, ' +
-      '.section-reviews, [class*="opiniones"], [id*="opiniones"]'
-    );
-    specific.forEach(function(el){
-      if (isOurs(el)) return;
-      try { el.remove(); } catch(e) { el.style.cssText = 'display:none !important;visibility:hidden !important;height:0 !important;overflow:hidden !important'; }
-    });
-  }
-  function setViewport(){
-    var meta = document.querySelector('meta[name="viewport"]');
-    if (!meta) { meta = document.createElement('meta'); meta.setAttribute('name','viewport'); (document.head || document.documentElement).appendChild(meta); }
-    meta.setAttribute('content','width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover');
-  }
-  setViewport();
-  document.addEventListener('gesturestart', function(e){ e.preventDefault(); }, {passive:false});
-  document.addEventListener('gesturechange', function(e){ e.preventDefault(); }, {passive:false});
-  document.addEventListener('gestureend', function(e){ e.preventDefault(); }, {passive:false});
-  var _lastTouchEnd = 0;
-  document.addEventListener('touchend', function(e){
-    var now = Date.now();
-    if (now - _lastTouchEnd < 350) { e.preventDefault(); }
-    _lastTouchEnd = now;
-  }, {passive:false});
-
-  function hidePaymentMethodsAccordion(){
-    var subs = document.querySelectorAll('.template-product .js-accordion-toggle .subtitle, .template-product .subtitle');
-    subs.forEach(function(sp){
-      var t = (sp.textContent || '').trim().toLowerCase();
-      if (t === 'medios de pago' || t === 'medios de pagos') {
-        var acc = sp.closest('.js-accordion-container');
-        if (acc) { acc.style.cssText = 'display:none !important;visibility:hidden !important;height:0 !important;overflow:hidden !important;margin:0 !important;padding:0 !important'; }
-      }
-    });
-  }
-
-  function cleanLabels(){
-    var labels = document.querySelectorAll('.item-floating-elements .label, .item-floating-elements .js-offer-label, .item-floating-elements .js-offer-label-private, .item-floating-elements .js-promo-label, .item-floating-elements [class*="offer-label"]');
-    labels.forEach(function(lbl){
-      var txt = (lbl.textContent || '').trim().toUpperCase();
-      if (/(^|\b)0\s*%\s*OFF($|\b)/.test(txt) && !/[1-9]\d*\s*%/.test(txt)) {
-        lbl.style.display = 'none';
-        return;
-      }
-      var m = txt.match(/HASTA\s*(\d+)\s*%\s*OFF\s*COMPRANDO\s*(EN\s*CANTIDAD|MULTIPLE|MAS)?/);
-      if (m) {
-        lbl.innerHTML = '';
-        var span = document.createElement('span');
-        span.textContent = 'HASTA ' + m[1] + '% OFF';
-        span.style.cssText = 'font-weight:700;letter-spacing:1px;white-space:nowrap;';
-        lbl.appendChild(span);
-      }
-    });
-  }
-
-  function start(){
-    removeNativeReviews();
-    hidePaymentMethodsAccordion();
-    cleanLabels();
-    setTimeout(function(){ removeNativeReviews(); hidePaymentMethodsAccordion(); cleanLabels(); }, 300);
-    setTimeout(function(){ removeNativeReviews(); hidePaymentMethodsAccordion(); cleanLabels(); }, 1000);
-    setTimeout(function(){ removeNativeReviews(); hidePaymentMethodsAccordion(); cleanLabels(); }, 2500);
-    setTimeout(function(){ removeNativeReviews(); hidePaymentMethodsAccordion(); cleanLabels(); }, 5000);
-    var mo = new MutationObserver(function(){ removeNativeReviews(); hidePaymentMethodsAccordion(); cleanLabels(); });
-    try { mo.observe(document.body, { childList:true, subtree:true }); } catch(e){}
-  }
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start);
-  else start();
-  window.addEventListener('load', start);
-})();
-</script>
 </div>
