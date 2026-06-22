@@ -1273,23 +1273,41 @@ body.pdp-pink-collagen-cream .selka-quiero-mio-btn:hover {
   position: absolute !important;
 }
 
-/* Custom styles for inline remaining stock count */
-.selka-inline-stock {
-  font-family: 'Inter', sans-serif !important;
-  font-size: 11.5px !important;
-  font-weight: 700 !important;
-  color: #b86258 !important;
-  margin-top: 0 !important;
+/* Custom styles for grid card rating (reviews count) */
+.selka-grid-rating-container {
+  display: block !important;
+  margin-top: 4px !important;
   margin-bottom: 6px !important;
+  line-height: 1.1 !important;
+  text-align: left !important;
+}
+
+.selka-grid-rating {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  color: #eaa300 !important; /* Gold star color */
+  letter-spacing: 0.1px !important;
+}
+
+.selka-grid-count {
+  font-weight: 500 !important;
+  color: #666666 !important;
+  margin-left: 3px !important;
+}
+
+/* Custom styles for grid card stock indicator */
+.selka-grid-stock {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 10px !important;
+  font-weight: 700 !important;
+  color: #b86258 !important; /* Brand pink */
+  margin-top: 0 !important;
+  margin-bottom: 4px !important;
   text-transform: lowercase !important;
   display: block !important;
   text-align: left !important;
-  letter-spacing: 0.3px !important;
-}
-
-/* Hide the old black stock badge to avoid duplicate info */
-.selka-stock-badge {
-  display: none !important;
+  letter-spacing: 0.2px !important;
 }
 
 /* Disable transitions and active transforms on quantity selector buttons to prevent clicking animations */
