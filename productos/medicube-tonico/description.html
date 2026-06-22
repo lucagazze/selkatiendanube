@@ -72,6 +72,8 @@ body.pdp-pink-collagen-cream .selka-quiero-mio-btn:hover{background:#c78581 !imp
 .template-product .js-added-to-cart-product-message,.template-product .js-product-added-message,.template-product .form-row.mb-2 > .col-12{display:none !important;visibility:hidden !important;height:0 !important;overflow:hidden !important;margin:0 !important;padding:0 !important}
 .template-product .thumb-see-more{display:none !important;visibility:hidden !important;opacity:0 !important;pointer-events:none !important}
 .template-product .labels-product-slider,.template-product .js-labels-floating-group{top:15px !important;bottom:auto !important;left:15px !important;right:auto !important;position:absolute !important}
+.selka-stock-badge{display:none !important}
+.template-product .form-quantity,.template-product .form-quantity *,.template-product .js-quantity-down,.template-product .js-quantity-up,.template-product .js-quantity-input,.template-product [data-component="product.quantity.minus"],.template-product [data-component="product.quantity.plus"]{transition:none !important;transform:none !important;animation:none !important;box-shadow:none !important;outline:none !important}
 @media (min-width:0px) {
   .template-product .js-product-form .form-row.mb-2{display:grid !important;grid-template-columns:35fr 65fr !important;grid-auto-flow:column !important;flex-direction:initial !important;flex-wrap:initial !important;align-items:stretch !important;gap:10px !important;width:100% !important;max-width:100% !important;margin:0 0 18px !important;box-sizing:border-box !important;background:transparent !important}
   .template-product .js-product-form .form-row.mb-2 > .col-4,.template-product .js-product-form .form-row.mb-2 > .col-8{flex:initial !important;max-width:none !important;width:auto !important;min-width:0 !important;padding:0 !important;margin:0 !important;background:transparent !important}
@@ -890,27 +892,16 @@ body.pdp-pink-collagen-cream .selka-quiero-mio-btn:hover{background:#c78581 !imp
       qtyInput.setAttribute('max', maxStock);
     }
 
-    function updateStockBadge() {
+        function updateStockBadge() {
       var customBadge = document.querySelector('.selka-stock-badge');
-      if (window.selkaIgnoreCartUpdate) {
-        if (customBadge) {
-          if (window.selkaCurrentStock > 0) {
-            customBadge.style.display = 'inline-block';
-            customBadge.innerHTML = '¡Últimas ' + window.selkaCurrentStock + ' unidades!';
-          } else {
-            customBadge.style.display = 'inline-block';
-            customBadge.innerHTML = '¡Sin stock disponible!';
-          }
-        }
-        validateQuantity();
-        return;
+      if (customBadge) {
+        customBadge.style.display = 'none'; // always hide the old black pill
       }
       
       var realStock = getRealStock();
       if (realStock !== null) {
         window.selkaInitialStock = realStock;
       }
-      
       if (window.selkaInitialStock === undefined) {
         window.selkaInitialStock = 4;
       }
@@ -918,40 +909,32 @@ body.pdp-pink-collagen-cream .selka-quiero-mio-btn:hover{background:#c78581 !imp
       var cartQty = getQuantityInCart();
       window.selkaCurrentStock = Math.max(0, window.selkaInitialStock - cartQty);
       
-      if (window.selkaCurrentStock > 0) {
-        if (!customBadge) {
-          var quantityContainer = document.querySelector('.js-quantity') || document.querySelector('[data-component="product.quantity"]');
-          if (quantityContainer) {
-            var parentRow = quantityContainer.closest('.form-row') || quantityContainer.parentElement;
-            if (parentRow) {
-              customBadge = document.createElement('div');
-              customBadge.className = 'selka-stock-badge';
-              parentRow.parentNode.insertBefore(customBadge, parentRow);
-            }
-          }
+      var inlineStock = document.querySelector('.selka-inline-stock');
+      var priceEl = document.querySelector('.js-price-display') || document.querySelector('#price_display');
+      if (priceEl) {
+        if (!inlineStock) {
+          inlineStock = document.createElement('div');
+          inlineStock.className = 'selka-inline-stock';
+          priceEl.parentNode.insertBefore(inlineStock, priceEl);
         }
-        if (customBadge) {
-          customBadge.style.display = 'inline-block';
-          customBadge.innerHTML = '¡Últimas ' + window.selkaCurrentStock + ' unidades!';
-        }
-      } else {
-        if (!customBadge) {
-          var quantityContainer = document.querySelector('.js-quantity') || document.querySelector('[data-component="product.quantity"]');
-          if (quantityContainer) {
-            var parentRow = quantityContainer.closest('.form-row') || quantityContainer.parentElement;
-            if (parentRow) {
-              customBadge = document.createElement('div');
-              customBadge.className = 'selka-stock-badge';
-              parentRow.parentNode.insertBefore(customBadge, parentRow);
-            }
-          }
-        }
-        if (customBadge) {
-          customBadge.style.display = 'inline-block';
-          customBadge.innerHTML = '¡Sin stock disponible!';
+        if (window.selkaCurrentStock > 0) {
+          inlineStock.style.display = 'block';
+          inlineStock.innerHTML = 'últimas, ' + window.selkaCurrentStock;
+        } else {
+          inlineStock.style.display = 'block';
+          inlineStock.innerHTML = 'sin stock disponible';
         }
       }
-      validateQuantity();
+      
+      if (typeof enforceQuantityLimit === 'function') {
+        enforceQuantityLimit();
+      }
+      if (typeof updateBuyButtons === 'function') {
+        updateBuyButtons();
+      }
+      if (typeof validateQuantity === 'function') {
+        validateQuantity();
+      }
     }
 
     function parseArgentinePrice(priceStr) {

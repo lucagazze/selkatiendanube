@@ -271,7 +271,9 @@ html{overflow-x:clip !important;-webkit-text-size-adjust:100%;text-size-adjust:1
 .js-item-product strong,.js-item-product b{font-weight:700 !important}
 
 .js-item-product .item-image {
-  height: 280px !important;
+  aspect-ratio: 3 / 4 !important;
+  width: 100% !important;
+  height: auto !important;
   position: relative !important;
   overflow: hidden !important;
   background: transparent !important;
@@ -280,7 +282,9 @@ html{overflow-x:clip !important;-webkit-text-size-adjust:100%;text-size-adjust:1
 
 @media (max-width: 767px) {
   .js-item-product .item-image {
-    height: 170px !important;
+    aspect-ratio: 3 / 4 !important;
+    width: 100% !important;
+    height: auto !important;
   }
 }
 
@@ -1250,5 +1254,40 @@ body.pdp-pink-collagen-cream .selka-quiero-mio-btn:hover {
   right: auto !important;
   position: absolute !important;
 }
+
+/* Custom styles for inline remaining stock count */
+.selka-inline-stock {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 11.5px !important;
+  font-weight: 700 !important;
+  color: #b86258 !important;
+  margin-top: 0 !important;
+  margin-bottom: 6px !important;
+  text-transform: lowercase !important;
+  display: block !important;
+  text-align: left !important;
+  letter-spacing: 0.3px !important;
+}
+
+/* Hide the old black stock badge to avoid duplicate info */
+.selka-stock-badge {
+  display: none !important;
+}
+
+/* Disable transitions and active transforms on quantity selector buttons to prevent clicking animations */
+.template-product .form-quantity,
+.template-product .form-quantity *,
+.template-product .js-quantity-down,
+.template-product .js-quantity-up,
+.template-product .js-quantity-input,
+.template-product [data-component="product.quantity.minus"],
+.template-product [data-component="product.quantity.plus"] {
+  transition: none !important;
+  transform: none !important;
+  animation: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
 
 
