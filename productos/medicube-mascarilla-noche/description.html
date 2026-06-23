@@ -2143,11 +2143,17 @@ body.pdp-pink-collagen-cream .selka-benefit-item strong {
     next.style.cssText = 'position:fixed;right:20px;top:50%;transform:translateY(-50%);background:#fff;border:0;color:#111;width:46px;height:46px;border-radius:50%;cursor:pointer;font-size:28px;line-height:1;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 15px rgba(0,0,0,0.3);z-index:1;';
     prev.addEventListener('click', function(e){ e.stopPropagation(); render(current-1); });
     next.addEventListener('click', function(e){ e.stopPropagation(); render(current+1); });
+    var closeBtn = document.createElement('button');
+    closeBtn.type = 'button';
+    closeBtn.innerHTML = '&times;';
+    closeBtn.style.cssText = 'position:fixed;top:20px;right:20px;background:#fff;border:0;color:#111;width:42px;height:42px;border-radius:50%;cursor:pointer;font-size:24px;line-height:1;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(0,0,0,0.3);z-index:2;padding:0;';
+    closeBtn.addEventListener('click', function(e){ e.stopPropagation(); close(); });
     imgEl.addEventListener('click', function(e){ e.stopPropagation(); });
     overlay.addEventListener('click', close);
     overlay.appendChild(imgEl);
     overlay.appendChild(prev);
     overlay.appendChild(next);
+    overlay.appendChild(closeBtn);
   }
   function render(i){
     if (!imgs.length) return;

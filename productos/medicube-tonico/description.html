@@ -1757,6 +1757,7 @@ body.pdp-pink-collagen-cream .selka-benefit-item strong {
           var rest = document.getElementById('selka-reviews-rest');
           if (!b || !modal || !closeBtn || !body || !list || b.dataset.skModalBound) return;
           b.dataset.skModalBound = '1';
+          if (modal.parentNode !== document.body) document.body.appendChild(modal);
           function openModal(){
             body.innerHTML = '';
             var clone = list.cloneNode(true);
@@ -1800,232 +1801,6 @@ body.pdp-pink-collagen-cream .selka-benefit-item strong {
 </div>
 </div>
 <p style="text-align: center; margin-top: 18px; font-family: 'Inter','Helvetica Neue',Helvetica,Arial,sans-serif; font-size: 13px; color: #555555; margin-bottom: 0;">&iquest;Tambi&eacute;n la probaste? <a style="color: #111111; font-weight: bold; text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1.5px;" href="https://wa.me/5493416916113?text=Hola%21%20Quiero%20dejar%20mi%20rese%C3%B1a%20del%20PDRN%20Pink%20Niacinamide%20Milky%20T%C3%B3nico%20%E2%9C%A8" target="_blank" rel="noopener">Dejar tu rese&ntilde;a &rarr;</a></p>
-<div id="selka-rev-modal" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.65); z-index: 9999; font-family: 'Inter','Helvetica Neue',Helvetica,Arial,sans-serif; align-items: center; justify-content: center; padding: 24px; box-sizing: border-box;"><button id="selka-rev-modal-close" style="position: absolute; top: 16px; right: 20px; background: #ffffff; border: 0; color: #111111; width: 42px; height: 42px; border-radius: 50%; cursor: pointer; font-size: 22px; font-weight: bold; line-height: 1; display: flex; align-items: center; justify-content: center; z-index: 2; padding: 0; box-shadow: 0 4px 12px rgba(0,0,0,0.2);" type="button" aria-label="Volver a rese&ntilde;as"><span style="display: inline-block; color: #111111; font-size: 22px; line-height: 1; font-weight: bold; margin-top: -2px;">&larr;</span></button> <button id="selka-rev-modal-prev" style="position: absolute; left: 20px; top: 50%; transform: translateY(-50%); background: #ffffff; border: 1px solid #ede5e5; color: #111111; width: 46px; height: 46px; border-radius: 50%; cursor: pointer; font-size: 26px; line-height: 1; display: flex; align-items: center; justify-content: center; z-index: 2; box-shadow: 0 4px 15px rgba(0,0,0,0.15);" type="button" aria-label="Anterior">&lsaquo;</button> <button id="selka-rev-modal-next" style="position: absolute; right: 20px; top: 50%; transform: translateY(-50%); background: #ffffff; border: 1px solid #ede5e5; color: #111111; width: 46px; height: 46px; border-radius: 50%; cursor: pointer; font-size: 26px; line-height: 1; display: flex; align-items: center; justify-content: center; z-index: 2; box-shadow: 0 4px 15px rgba(0,0,0,0.15);" type="button" aria-label="Siguiente">&rsaquo;</button>
-<div id="selka-rev-modal-content" style="display: flex; flex-direction: row; gap: 0; background: #ffffff; border-radius: 16px; overflow: hidden; max-width: 760px; width: 100%; max-height: calc(100vh - 48px); box-shadow: 0 24px 60px rgba(0,0,0,0.25);">
-<div style="flex: 1.2; min-width: 0; background: #ffffff; display: flex; align-items: center; justify-content: center; min-height: 320px;"><img id="selka-rev-modal-img" style="max-width: 100%; max-height: 88vh; object-fit: contain; display: block;" alt="Rese&ntilde;a" /></div>
-<div style="flex: 1; min-width: 280px; padding: 32px 28px; display: flex; flex-direction: column; gap: 14px; overflow-y: auto;">
-<div style="display: flex; align-items: center; gap: 12px;">
-<div id="selka-rev-modal-avatar" style="flex-shrink: 0; width: 44px; height: 44px; border-radius: 50%; background: #f8e8e8; display: flex; align-items: center; justify-content: center; font-size: 17px; font-weight: bold; color: #b86258;"></div>
-<div style="min-width: 0;">
-<div id="selka-rev-modal-name" style="font-size: 14px; font-weight: bold; color: #111; line-height: 1.3;"></div>
-<div id="selka-rev-modal-date" style="font-size: 11px; color: #888; margin-top: 2px;"></div>
-</div>
-</div>
-<div id="selka-rev-modal-stars" style="line-height: 1;"></div>
-<p id="selka-rev-modal-text" style="font-size: 13.5px; line-height: 1.7; color: #1f1f1f; margin: 0; white-space: pre-wrap;"></p>
-<div id="selka-rev-modal-counter" style="margin-top: auto; font-size: 11px; color: #999; letter-spacing: 0.5px; text-transform: uppercase; padding-top: 14px; border-top: 1px solid #eee;"></div>
-</div>
-</div>
-</div>
-<script>
-    (function(){
-      var items = [];
-      var modalInitialized = false;
-      var imgEl, avatarEl, nameEl, dateEl, starsEl, textEl, counterEl, closeBtn, prevBtn, nextBtn;
-
-      function initZoom(){
-        if (modalInitialized) return;
-        var section = document.getElementById('selka-reviews-section');
-        var modal = document.getElementById('selka-rev-modal');
-        if (!section || !modal) return;
-
-        items = [];
-        var anchors = section.querySelectorAll('a[data-skreview="1"]');
-        anchors.forEach(function(a){
-          var img = a.querySelector('img');
-          if (!img) return;
-          var url = a.getAttribute('href') || img.src;
-
-          var block = a;
-          for (var bb=0; bb<10 && block && block !== section; bb++) {
-            if (block.tagName === 'DIV') {
-              var st = (block.getAttribute && block.getAttribute('style')) || '';
-              if (st.indexOf('border-bottom') !== -1 && st.indexOf('1px solid') !== -1) break;
-            }
-            block = block.parentElement;
-          }
-          if (!block || block === section) {
-            var p = a.parentElement;
-            for (var bb2=0; bb2<6 && p && p !== section; bb2++) {
-              if (p.tagName === 'DIV' && p.children.length >= 2) { block = p; break; }
-              p = p.parentElement;
-            }
-          }
-          if (!block) return;
-
-          var name = '';
-          var date = '';
-          var allSpans = block.querySelectorAll('span');
-          for (var s2=0; s2<allSpans.length; s2++){
-            var sp = allSpans[s2];
-            var t2 = (sp.textContent || '').trim();
-            if (!t2) continue;
-            if (t2 === '·' || t2 === '•') continue;
-            if (t2 === '★' || t2 === '☆') continue;
-            if (sp.closest && sp.closest('a[data-skreview]')) continue;
-            if (t2.indexOf('Hace') === 0 || t2.indexOf(' mes') !== -1 || t2.indexOf(' semana') !== -1 || t2.indexOf(' año') !== -1 || t2.indexOf(' día') !== -1) {
-              if (!date) date = t2;
-            } else if (!name && t2.length > 1 && t2.length < 60) {
-              name = t2;
-            }
-            if (name && date) break;
-          }
-          if (!name) name = 'Compradora verificada';
-
-          var starsHTML = '';
-          var divs = block.querySelectorAll('div');
-          for (var di=0; di<divs.length; di++) {
-            var dv = divs[di];
-            var dtxt = dv.textContent || '';
-            if ((dtxt.indexOf('★') !== -1 || dtxt.indexOf('☆') !== -1) && dv.children.length >= 3) {
-              starsHTML = dv.innerHTML; break;
-            }
-          }
-
-          var textP = block.querySelector('p');
-          var textHTML = textP ? textP.innerHTML : '';
-
-          items.push({
-            url: url,
-            name: name,
-            initial: name.charAt(0).toUpperCase() || 'C',
-            date: date,
-            starsHTML: starsHTML,
-            textHTML: textHTML
-          });
-        });
-
-        if (!items.length) return;
-
-        imgEl = document.getElementById('selka-rev-modal-img');
-        avatarEl = document.getElementById('selka-rev-modal-avatar');
-        nameEl = document.getElementById('selka-rev-modal-name');
-        dateEl = document.getElementById('selka-rev-modal-date');
-        starsEl = document.getElementById('selka-rev-modal-stars');
-        textEl = document.getElementById('selka-rev-modal-text');
-        counterEl = document.getElementById('selka-rev-modal-counter');
-        closeBtn = document.getElementById('selka-rev-modal-close');
-        prevBtn = document.getElementById('selka-rev-modal-prev');
-        nextBtn = document.getElementById('selka-rev-modal-next');
-
-        if (!document.getElementById('selka-rev-modal-css')) {
-          var st = document.createElement('style');
-          st.id = 'selka-rev-modal-css';
-          st.appendChild(document.createTextNode([
-            'body.selka-rev-modal-open{overflow:hidden !important;}',
-            'html.selka-rev-modal-open{overflow:hidden !important;}',
-            '@media (max-width:767px){',
-            '  #selka-rev-modal{padding:0 !important;align-items:stretch !important;}',
-            '  #selka-rev-modal-content{flex-direction:column !important;max-width:100% !important;width:100% !important;max-height:100vh !important;height:100vh !important;border-radius:0 !important;}',
-            '  #selka-rev-modal-content > div:first-child{flex:0 0 auto !important;width:100% !important;max-height:50vh !important;min-height:200px !important;}',
-            '  #selka-rev-modal-content > div:first-child img{max-height:50vh !important;width:100% !important;height:auto !important;object-fit:contain !important;}',
-            '  #selka-rev-modal-content > div:last-child{flex:1 1 auto !important;width:100% !important;min-width:0 !important;padding:16px 18px 22px !important;max-height:50vh !important;overflow-y:auto !important;}',
-            '  #selka-rev-modal-prev{left:8px !important;width:38px !important;height:38px !important;font-size:22px !important;background:rgba(255,255,255,0.9) !important;color:#111111 !important;border:1px solid rgba(0,0,0,0.08) !important;box-shadow:0 2px 10px rgba(0,0,0,0.15) !important;}',
-            '  #selka-rev-modal-next{right:8px !important;width:38px !important;height:38px !important;font-size:22px !important;background:rgba(255,255,255,0.9) !important;color:#111111 !important;border:1px solid rgba(0,0,0,0.08) !important;box-shadow:0 2px 10px rgba(0,0,0,0.15) !important;}',
-            '  #selka-rev-modal-close{top:10px !important;right:10px !important;left:auto !important;width:38px !important;height:38px !important;font-size:18px !important;background:#ffffff !important;color:#111 !important;box-shadow:0 4px 12px rgba(0,0,0,0.18) !important;}',
-            '  #selka-rev-modal-text{font-size:13px !important;}',
-            '}'
-          ].join('\n')));
-          document.head.appendChild(st);
-        }
-
-        closeBtn.addEventListener('click', closeM);
-        prevBtn.addEventListener('click', function(){ render(current-1); });
-        nextBtn.addEventListener('click', function(){ render(current+1); });
-        modal.addEventListener('click', function(e){ if (e.target === modal) closeM(); });
-        document.addEventListener('keydown', function(e){
-          if (!modal.style.display || modal.style.display === 'none') return;
-          if (e.key === 'Escape') closeM();
-          else if (e.key === 'ArrowLeft') render(current-1);
-          else if (e.key === 'ArrowRight') render(current+1);
-        });
-
-        var sx = 0;
-        modal.addEventListener('touchstart', function(e){ sx = e.touches[0].clientX; }, {passive:true});
-        modal.addEventListener('touchend', function(e){
-          var dx = e.changedTouches[0].clientX - sx;
-          if (Math.abs(dx) > 50) render(current + (dx < 0 ? 1 : -1));
-        }, {passive:true});
-
-        modalInitialized = true;
-      }
-
-      var current = 0;
-
-      function render(i){
-        if (!items || !items.length) return;
-        if (i < 0) i = items.length - 1;
-        if (i >= items.length) i = 0;
-        current = i;
-        var it = items[i];
-        imgEl.src = it.url;
-        avatarEl.textContent = it.initial;
-        nameEl.textContent = it.name;
-        dateEl.textContent = it.date;
-        starsEl.innerHTML = it.starsHTML;
-        textEl.innerHTML = it.textHTML;
-        counterEl.textContent = (i+1) + ' / ' + items.length + ' · Fotos de reseñas';
-      }
-
-      var activeOverlayIdx = 0;
-      function showOverlayImg(idx) {
-        if (!items || !items.length) return;
-        if (idx < 0) idx = items.length - 1;
-        if (idx >= items.length) idx = 0;
-        activeOverlayIdx = idx;
-        var it = items[idx];
-        if (it && it.url) {
-          var overlayImg = document.getElementById('selka-img-overlay-img');
-          if (overlayImg) {
-            overlayImg.style.opacity = '0';
-            setTimeout(function() {
-              overlayImg.src = it.url;
-              overlayImg.style.opacity = '1';
-            }, 120);
-          }
-        }
-      }
-
-      function openAt(i){
-        if (!items || !items[i]) return;
-        var modal = document.getElementById('selka-rev-modal');
-        if (!modal) return;
-        render(i);
-        modal.style.display = 'flex';
-        document.body.classList.add('selka-rev-modal-open');
-      }
-
-      function closeM(){
-        var modal = document.getElementById('selka-rev-modal');
-        if (!modal) return;
-        modal.style.display = 'none';
-        document.body.classList.remove('selka-rev-modal-open');
-      }
-
-      document.addEventListener('click', function(e){
-        var a = e.target.closest('a[data-skreview="1"]');
-        if (!a) return;
-        e.preventDefault();
-        e.stopPropagation();
-
-        initZoom();
-
-        var url = a.getAttribute('href');
-        var img = a.querySelector('img');
-        var src = img ? img.src : '';
-        var idx = -1;
-        for (var k = 0; k < items.length; k++) {
-          if (items[k].url === url || items[k].url === src) {
-            idx = k;
-            break;
-          }
-        }
-        if (idx !== -1) {
-          openAt(idx);
-        }
-      }, true);
-    })();
-  </script>
 <div style="border: none; border-top: 1px solid #ede5e5; margin: 44px 0;">&nbsp;</div>
 <p style="font-size: 10px; font-weight: bold; letter-spacing: 3.5px; text-transform: uppercase; text-align: center; color: #000000; margin: 0 0 8px;">RESULTADOS REALES</p>
 <h2 style="font-size: 1.55rem; font-weight: 900; text-align: center; color: #000000; margin: 0 0 10px; line-height: 1.2;">Antes y despu&eacute;s del PDRN Pink Niacinamide Milky T&oacute;nico</h2>
@@ -2413,6 +2188,75 @@ body.pdp-pink-collagen-cream .selka-benefit-item strong {
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start);
   else start();
   window.addEventListener('load', start);
+})();
+</script>
+<script>
+(function(){
+  var imgs = [], current = 0, overlay = null, imgEl = null;
+  function collect(){
+    var anchors = document.querySelectorAll('a[data-skreview="1"]');
+    imgs = [];
+    anchors.forEach(function(a){ imgs.push(a.getAttribute('href')); });
+  }
+  function build(){
+    overlay = document.createElement('div');
+    overlay.id = 'sk-img-zoom';
+    overlay.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;width:100vw;height:100vh;background:rgba(0,0,0,0.88);z-index:2147483647;display:flex;align-items:center;justify-content:center;cursor:zoom-out;';
+    imgEl = document.createElement('img');
+    imgEl.style.cssText = 'max-width:92vw;max-height:90vh;display:block;border-radius:6px;box-shadow:0 20px 60px rgba(0,0,0,0.5);user-select:none;';
+    imgEl.draggable = false;
+    var prev = document.createElement('button');
+    prev.type = 'button';
+    prev.innerHTML = '&lsaquo;';
+    prev.style.cssText = 'position:fixed;left:20px;top:50%;transform:translateY(-50%);background:#fff;border:0;color:#111;width:46px;height:46px;border-radius:50%;cursor:pointer;font-size:28px;line-height:1;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 15px rgba(0,0,0,0.3);z-index:1;';
+    var next = document.createElement('button');
+    next.type = 'button';
+    next.innerHTML = '&rsaquo;';
+    next.style.cssText = 'position:fixed;right:20px;top:50%;transform:translateY(-50%);background:#fff;border:0;color:#111;width:46px;height:46px;border-radius:50%;cursor:pointer;font-size:28px;line-height:1;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 15px rgba(0,0,0,0.3);z-index:1;';
+    prev.addEventListener('click', function(e){ e.stopPropagation(); render(current-1); });
+    next.addEventListener('click', function(e){ e.stopPropagation(); render(current+1); });
+    var closeBtn = document.createElement('button');
+    closeBtn.type = 'button';
+    closeBtn.innerHTML = '&times;';
+    closeBtn.style.cssText = 'position:fixed;top:20px;right:20px;background:#fff;border:0;color:#111;width:42px;height:42px;border-radius:50%;cursor:pointer;font-size:24px;line-height:1;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(0,0,0,0.3);z-index:2;padding:0;';
+    closeBtn.addEventListener('click', function(e){ e.stopPropagation(); close(); });
+    imgEl.addEventListener('click', function(e){ e.stopPropagation(); });
+    overlay.addEventListener('click', close);
+    overlay.appendChild(imgEl);
+    overlay.appendChild(prev);
+    overlay.appendChild(next);
+    overlay.appendChild(closeBtn);
+  }
+  function render(i){
+    if (!imgs.length) return;
+    current = ((i % imgs.length) + imgs.length) % imgs.length;
+    imgEl.src = imgs[current];
+  }
+  function open(i){
+    if (!overlay) build();
+    if (!overlay.parentNode) document.body.appendChild(overlay);
+    render(i);
+    document.documentElement.style.overflow = 'hidden';
+  }
+  function close(){
+    if (overlay && overlay.parentNode) overlay.parentNode.removeChild(overlay);
+    document.documentElement.style.overflow = '';
+  }
+  document.addEventListener('click', function(e){
+    var a = e.target.closest && e.target.closest('a[data-skreview="1"]');
+    if (!a) return;
+    e.preventDefault();
+    e.stopPropagation();
+    collect();
+    var idx = imgs.indexOf(a.getAttribute('href'));
+    open(idx >= 0 ? idx : 0);
+  }, true);
+  document.addEventListener('keydown', function(e){
+    if (!overlay || !overlay.parentNode) return;
+    if (e.key === 'Escape') close();
+    else if (e.key === 'ArrowLeft') render(current-1);
+    else if (e.key === 'ArrowRight') render(current+1);
+  });
 })();
 </script>
 </div>
